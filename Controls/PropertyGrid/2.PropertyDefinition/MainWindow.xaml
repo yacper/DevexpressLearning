@@ -1,0 +1,21 @@
+<dx:ThemedWindow
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxprg="http://schemas.devexpress.com/winfx/2008/xaml/propertygrid" 
+    x:Class="DXPropertyGrid.MainWindow"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    Title="MainWindow" Height="450" Width="800">
+	<Grid>
+	<dxprg:PropertyGridControl SelectedObject="{Binding}" ShowProperties="WithPropertyDefinitions">
+
+			<!--allow property with type of string-->
+			<dxprg:PropertyDefinition Type="sys:String" />
+			<!--allow property: Gender-->
+            <dxprg:PropertyDefinition Path="Gender" />
+			<!--allow property: BirthDate-->
+            <dxprg:PropertyDefinition Path="BirthDate" />
+
+		</dxprg:PropertyGridControl>
+	</Grid>
+</dx:ThemedWindow>

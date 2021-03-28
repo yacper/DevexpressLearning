@@ -1,0 +1,1 @@
+https://docs.devexpress.com/WPF/15610/controls-and-libraries/property-grid/getting-started/creating-property-definitions

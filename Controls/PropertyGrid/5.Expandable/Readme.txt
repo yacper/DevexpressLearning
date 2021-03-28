@@ -1,0 +1,1 @@
+https://docs.devexpress.com/WPF/117149/controls-and-libraries/property-grid/expandability-customization
