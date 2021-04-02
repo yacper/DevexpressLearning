@@ -1,0 +1,27 @@
+<dx:ThemedWindow 
+    x:Class="_1.DataGrid.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:viewModels="clr-namespace:ViewModels"
+    Title="MainWindow" Height="450" Width="800">
+	<dx:ThemedWindow.DataContext>
+		<viewModels:ViewModel/>
+	</dx:ThemedWindow.DataContext>
+	<dxg:GridControl ItemsSource="{Binding Customers}">
+		<dxg:GridControl.View>
+			<dxg:TableView ShowTotalSummary="True"/>
+		</dxg:GridControl.View>
+		<dxg:GridColumn FieldName="OrderID" IsSmart="True"/>
+		<dxg:GridColumn FieldName="CustomerID" IsSmart="True"/>
+		<dxg:GridColumn FieldName="OrderDate" IsSmart="True"/>
+		<dxg:GridColumn FieldName="ShipVia" IsSmart="True"/>
+		<dxg:GridColumn FieldName="Freight" IsSmart="True"/>
+		<dxg:GridColumn FieldName="ShipName" IsSmart="True"/>
+		<dxg:GridColumn FieldName="ShipCity" IsSmart="True"/>
+		<dxg:GridColumn FieldName="ShipCountry" IsSmart="True"/>
+
+	</dxg:GridControl>
+
+</dx:ThemedWindow>
