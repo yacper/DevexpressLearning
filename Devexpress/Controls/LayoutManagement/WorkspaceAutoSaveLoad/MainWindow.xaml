@@ -4,12 +4,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
     xmlns:dxdo="http://schemas.devexpress.com/winfx/2008/xaml/docking"
-    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" 
+    xmlns:dxSample="clr-namespace:DXSample"
     Title="MainWindow" Height="450" Width="800" 
     Closing="Window_Closing" Loaded="Window_Loaded"
     >
 	<Grid>
 		<dxdo:DockLayoutManager x:Name="dockLayoutManager" dx:DXSerializer.SerializationID="dockManagerID" dx:WorkspaceManager.IsEnabled="True" Margin="0,20,0,0">
+		<!--<dxdo:DockLayoutManager x:Name="dockLayoutManager"  dx:WorkspaceManager.IsEnabled="True" Margin="0,20,0,0">-->
 			<dxdo:LayoutGroup Name="root">
 				<dxdo:LayoutGroup Orientation="Vertical" Name="group1">
 					<dxdo:LayoutPanel Caption="Panel1" Name="panel1">
@@ -20,7 +22,10 @@
 							</dxg:GridControl.Columns>
 						</dxg:GridControl>
 					</dxdo:LayoutPanel>
-					<dxdo:LayoutPanel Caption="Panel2"  Name="panel2"/>
+					<dxdo:LayoutPanel Caption="Panel2"  Name="panel2">
+                        <!--<dxSample:MyUserControl dx:DXSerializer.SerializationID="uc1" />-->
+                        <dxSample:MyUserControl x:Name="uc1" />
+					</dxdo:LayoutPanel>
 				</dxdo:LayoutGroup>
 			</dxdo:LayoutGroup>
 		</dxdo:DockLayoutManager>
