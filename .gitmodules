@@ -1,0 +1,3 @@
+[submodule "DotEx"]
+	path = DotEx
+	url = https://github.com/yacper/DotEx.git

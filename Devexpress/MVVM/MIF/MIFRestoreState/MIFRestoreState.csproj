@@ -11,6 +11,7 @@
     <PackageReference Include="DevExpress.WindowsDesktop.Wpf" Version="20.2.*" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\DotEx\DotEx.Common\DotEx.Common.csproj" />
     <ProjectReference Include="..\MifCommon\MifCommon.csproj" />
     <ProjectReference Include="..\MifModules\MifModules.csproj" />
   </ItemGroup>    

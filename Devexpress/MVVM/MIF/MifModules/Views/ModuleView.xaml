@@ -4,9 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
-             xmlns:viewModels1="clr-namespace:MifModules.ViewModels"
+             xmlns:viewModels="clr-namespace:MifModules.ViewModels"
              mc:Ignorable="d" d:DesignHeight="500" d:DesignWidth="600"
-             d:DataContext="{dxmvvm:ViewModelSource viewModels1:ModuleViewModel}">
+             d:DataContext="{dxmvvm:ViewModelSource viewModels:ModuleViewModel}">
     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.FontSize="16">
         <TextBlock Text="Content: "/>
         <TextBox Text="{Binding Content, UpdateSourceTrigger=PropertyChanged}" Width="200"/>

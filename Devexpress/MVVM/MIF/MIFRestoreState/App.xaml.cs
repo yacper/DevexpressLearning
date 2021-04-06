@@ -12,6 +12,7 @@ using DevExpress.Mvvm.ModuleInjection;
 using DevExpress.Mvvm.ModuleInjection.Native;
 using DevExpress.Mvvm.UI;
 using DevExpress.Xpf.Core.MvvmSample;
+using DotEx.Common;
 using MifCommon.Common;
 using MifModules.ViewModels;
 using MIFRestoreState.ViewModels;
@@ -39,6 +40,13 @@ namespace MIFRestoreState
 		}
 
 	}
+	public class StateConfig
+	{
+		public string LogicalState { get; set; }
+		public string VisualState { get; set; }
+
+	}
+
 	public class Bootstrapper
 	{
 		const string StateVersion = "1.4";
@@ -73,22 +81,21 @@ namespace MIFRestoreState
 		}
 		protected virtual bool RestoreState()
 		{
+			StateConfig con = ("StateConfig.json").FileToJsonObj<StateConfig>();
+			if (con == null)
 				return false;
 
-			//if (Settings.Default.StateVersion != StateVersion)
-			//	return false;
-
-			//var logicalInfo = LogicalInfo.Deserialize(Settings.Default.LogicalState);
-			//foreach (var region in logicalInfo.Regions)
-			//{
-			//	foreach (var regionItem in region.Items)
-			//	{
-			//		if (Manager.GetModule(region.RegionName, regionItem.Key) != null)
-			//			continue;
-			//		Manager.Register(region.RegionName, new Module(regionItem.Key, regionItem.ViewModelName, regionItem.ViewName));
-			//	}
-			//}
-			//return Manager.Restore(Settings.Default.LogicalState, Settings.Default.VisualState);
+			var logicalInfo = LogicalInfo.Deserialize(con.LogicalState);
+			foreach (var region in logicalInfo.Regions)
+			{
+				foreach (var regionItem in region.Items)
+				{
+					if (Manager.GetModule(region.RegionName, regionItem.Key) != null)
+						continue;
+					Manager.Register(region.RegionName, new Module(regionItem.Key, regionItem.ViewModelName, regionItem.ViewName));
+				}
+			}
+			return Manager.Restore(con.LogicalState, con.VisualState);
 		}
 		protected virtual void InjectModules()
 		{
@@ -121,6 +128,13 @@ namespace MIFRestoreState
 			string logicalState;
 			string visualState;
 			Manager.Save(out logicalState, out visualState);
+
+			StateConfig con = new StateConfig();
+			con.LogicalState = logicalState;
+			con.VisualState = visualState;
+
+			con.ToJsonFile("StateConfig.json");
+
 
 			//Settings.Default.StateVersion = StateVersion;
 			//Settings.Default.LogicalState = logicalState;

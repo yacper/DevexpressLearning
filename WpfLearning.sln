@@ -78,6 +78,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MIFRestoreState", "Devexpre
 		{149C23A7-0B9D-40D7-A72E-114C0C7202BD} = {149C23A7-0B9D-40D7-A72E-114C0C7202BD}
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotEx.Common", "DotEx\DotEx.Common\DotEx.Common.csproj", "{171CC45B-6AEB-46E4-9E1D-C1F61CCE1A3E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -160,6 +162,10 @@ Global
 		{804BF097-6F9D-4DA9-9B1D-13AE98471648}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{804BF097-6F9D-4DA9-9B1D-13AE98471648}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{804BF097-6F9D-4DA9-9B1D-13AE98471648}.Release|Any CPU.Build.0 = Release|Any CPU
+		{171CC45B-6AEB-46E4-9E1D-C1F61CCE1A3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{171CC45B-6AEB-46E4-9E1D-C1F61CCE1A3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{171CC45B-6AEB-46E4-9E1D-C1F61CCE1A3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{171CC45B-6AEB-46E4-9E1D-C1F61CCE1A3E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
