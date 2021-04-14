@@ -7,7 +7,10 @@
              xmlns:viewModels="clr-namespace:MifModules.ViewModels"
              mc:Ignorable="d" d:DesignHeight="500" d:DesignWidth="600"
              d:DataContext="{dxmvvm:ViewModelSource viewModels:ModuleViewModel}">
-    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.FontSize="16">
+    <dxmvvm:Interaction.Behaviors>
+        <dxmvvm:VisualStateService/>
+    </dxmvvm:Interaction.Behaviors>
+	<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.FontSize="16">
         <TextBlock Text="Content: "/>
         <TextBox Text="{Binding Content, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
     </StackPanel>

@@ -1,5 +1,6 @@
 using DevExpress.Mvvm;
 using System;
+using DevExpress.Mvvm.DataAnnotations;
 using DevExpress.Mvvm.ModuleInjection;
 using DevExpress.Mvvm.POCO;
 using DevExpress.Xpf.Core.MvvmSample;
@@ -17,6 +18,7 @@ namespace MIFRestoreState.ViewModels
 			return ViewModelSource.Create(() => new MainViewModel());
 		}
 
+		[Command]
 		public void AddModule()
 		{
 			int x = 1;

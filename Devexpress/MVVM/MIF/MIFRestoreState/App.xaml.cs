@@ -53,9 +53,10 @@ namespace MIFRestoreState
 		public virtual void Run()
 		{
 			ConfigureTypeLocators();
+				RegisterModules();
+
 			if (!RestoreState())
 			{
-				RegisterModules();
 				InjectModules();
 			}
 			ShowMainWindow();
@@ -85,16 +86,16 @@ namespace MIFRestoreState
 			if (con == null)
 				return false;
 
-			var logicalInfo = LogicalInfo.Deserialize(con.LogicalState);
-			foreach (var region in logicalInfo.Regions)
-			{
-				foreach (var regionItem in region.Items)
-				{
-					if (Manager.GetModule(region.RegionName, regionItem.Key) != null)
-						continue;
-					Manager.Register(region.RegionName, new Module(regionItem.Key, regionItem.ViewModelName, regionItem.ViewName));
-				}
-			}
+			//var logicalInfo = LogicalInfo.Deserialize(con.LogicalState);
+			//foreach (var region in logicalInfo.Regions)
+			//{
+			//	foreach (var regionItem in region.Items)
+			//	{
+			//		if (Manager.GetModule(region.RegionName, regionItem.Key) != null)
+			//			continue;
+			//		Manager.Register(region.RegionName, new Module(regionItem.Key, regionItem.ViewModelName, regionItem.ViewName));
+			//	}
+			//}
 			return Manager.Restore(con.LogicalState, con.VisualState);
 		}
 		protected virtual void InjectModules()

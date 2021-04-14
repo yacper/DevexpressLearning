@@ -4,16 +4,16 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
     xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
-    xmlns:viewModels="clr-namespace:GridTest.ViewModels"
+    xmlns:viewModels1="clr-namespace:ViewModels"
     Title="MainWindow" Height="450" Width="800">
  <dx:ThemedWindow.DataContext>
-        <viewModels:ViewModel/>
+        <viewModels1:ViewModel/>
     </dx:ThemedWindow.DataContext>
     <dxg:GridControl AutoGenerateColumns="AddNew"
                      EnableSmartColumnsGeneration="True"
                      ItemsSource="{Binding Customers}">
-        <dxg:GridControl.View>
-            <dxg:TableView />
+        <dxg:GridControl.View  >
+            <dxg:TableView  />
         </dxg:GridControl.View>
     </dxg:GridControl>
  

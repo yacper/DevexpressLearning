@@ -1,0 +1,26 @@
+<Window x:Class="DataGrid2.Windows.RowDetailsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DataGrid2.Windows" 
+        xmlns:dataGrid="clr-namespace:DataGrid"
+        mc:Ignorable="d"
+        Title="RowDetailsWindow" Height="450" Width="800">
+
+	<Window.DataContext>
+		<dataGrid:MainWindowViewModel/>
+	</Window.DataContext>
+
+	<StackPanel>
+		<DataGrid ItemsSource="{Binding Customers}">
+			<DataGrid.RowDetailsTemplate>
+				<DataTemplate>
+					<Image Height="100" Source="{Binding Image}" />
+				</DataTemplate>
+			</DataGrid.RowDetailsTemplate>
+		</DataGrid>
+
+		<!--<Image Height="100" Source="/Images/betty.jpg" />-->
+	</StackPanel>
+</Window>

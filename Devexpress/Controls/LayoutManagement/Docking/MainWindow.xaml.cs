@@ -37,7 +37,6 @@ namespace Layout
 
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
-			return;
 			if (File.Exists(LayoutPath))
 				DXSerializer.Deserialize(this, LayoutPath, "app", null);
 		}

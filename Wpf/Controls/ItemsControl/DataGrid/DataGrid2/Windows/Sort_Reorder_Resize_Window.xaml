@@ -1,0 +1,26 @@
+<Window x:Class="DataGrid2.Windows.Sort_Reorder_Resize_Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DataGrid2.Windows"
+        xmlns:dataGrid="clr-namespace:DataGrid"
+        mc:Ignorable="d"
+        Title="Sort_Reorder_Resize_Window" Height="450" Width="800">
+	<Window.DataContext>
+		<dataGrid:MainWindowViewModel/>
+	</Window.DataContext>
+	<DockPanel>
+		<StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="8" >
+			<CheckBox x:Name="canUserReorder" Content="Allow Reorder" />  <!--reorder columns by mouse dragging-->
+			<CheckBox Margin="8,0,0,0" x:Name="canUserResizeRows" Content="Allow Row Resizing" />
+			<CheckBox Margin="8,0,0,0" x:Name="canUserResizeColumns" Content="Allow Column Resizing" />
+			<CheckBox Margin="8,0,0,0" x:Name="canUserSort" Content="Allow Sorting" />
+		</StackPanel>
+		<DataGrid DockPanel.Dock="Top" ItemsSource="{Binding Customers}" 
+                              CanUserReorderColumns="{Binding IsChecked, ElementName=canUserReorder}" 
+                              CanUserResizeColumns="{Binding IsChecked, ElementName=canUserResizeColumns}"
+                              CanUserResizeRows="{Binding IsChecked, ElementName=canUserResizeRows}"
+                              CanUserSortColumns="{Binding IsChecked, ElementName=canUserSort}"/>
+	</DockPanel>
+</Window>
