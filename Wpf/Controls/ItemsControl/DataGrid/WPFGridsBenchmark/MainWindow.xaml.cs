@@ -582,18 +582,36 @@ namespace WPFGridsBenchmark
 			}
 
 			{
+				if(_grid is MSDataGrid)
+				{
+					(_grid as MSDataGrid).Grid.SetValue(VirtualizingStackPanel.IsVirtualizingProperty, _IsVirtualizing);
+					(_grid as MSDataGrid).Grid.SetValue(VirtualizingStackPanel.VirtualizationModeProperty, _SelectedVirtualizationMode);
 
-				(_grid as MSDataGrid).Grid.SetValue(VirtualizingStackPanel.IsVirtualizingProperty, _IsVirtualizing);
-				(_grid as MSDataGrid).Grid.SetValue(VirtualizingStackPanel.VirtualizationModeProperty, _SelectedVirtualizationMode);
+					(_grid as MSDataGrid).Grid.SetValue(ScrollViewer.CanContentScrollProperty, CanContentScroll);
 
-				(_grid as MSDataGrid).Grid.SetValue(ScrollViewer.CanContentScrollProperty, CanContentScroll);
-
-				(_grid as MSDataGrid).Grid.SetValue(ScrollViewer.IsDeferredScrollingEnabledProperty, IsDeferredScrolling);
-				(_grid as MSDataGrid).Grid.SetValue(VirtualizingPanel.ScrollUnitProperty, SelectedScrollUnit);  // no use for performance
+					(_grid as MSDataGrid).Grid.SetValue(ScrollViewer.IsDeferredScrollingEnabledProperty, IsDeferredScrolling);
+					(_grid as MSDataGrid).Grid.SetValue(VirtualizingPanel.ScrollUnitProperty, SelectedScrollUnit);  // no use for performance
 
 
-				(_grid as MSDataGrid).Grid.EnableColumnVirtualization = _EnableColumnVirtualization;
-				(_grid as MSDataGrid).Grid.EnableRowVirtualization = _EnableRowVirtualization;
+					(_grid as MSDataGrid).Grid.EnableColumnVirtualization = _EnableColumnVirtualization;
+					(_grid as MSDataGrid).Grid.EnableRowVirtualization = _EnableRowVirtualization;
+				}
+				else
+				{
+
+					(_grid as DXGridControl).Grid.SetValue(VirtualizingStackPanel.IsVirtualizingProperty, _IsVirtualizing);
+					(_grid as DXGridControl).Grid.SetValue(VirtualizingStackPanel.VirtualizationModeProperty, _SelectedVirtualizationMode);
+
+					(_grid as DXGridControl).Grid.SetValue(ScrollViewer.CanContentScrollProperty, CanContentScroll);
+
+					(_grid as DXGridControl).Grid.SetValue(ScrollViewer.IsDeferredScrollingEnabledProperty, IsDeferredScrolling);
+					(_grid as DXGridControl).Grid.SetValue(VirtualizingPanel.ScrollUnitProperty, SelectedScrollUnit);  // no use for performance
+
+
+					//(_grid as DXGridControl).Grid.EnableColumnVirtualization = _EnableColumnVirtualization;
+					//(_grid as DXGridControl).Grid.EnableRowVirtualization = _EnableRowVirtualization;
+				}
+
 			}
 
 
