@@ -35,13 +35,21 @@ namespace WPFGridsBenchmark
 			get { return Enum.GetValues(typeof(BindingMode)); }
 		}
 
+		public Array		ScrollUnits
+		{
+			get { return Enum.GetValues(typeof(ScrollUnit)); }
+		}
+
 		protected bool               _IsVirtualizing;
 		protected VirtualizationMode _SelectedVirtualizationMode;
 		protected bool               _EnableColumnVirtualization;
 		protected bool               _EnableRowVirtualization;
 		protected bool               _CanContentScroll;
 
-		protected bool               _IsAsyncBinding;
+		protected bool       _IsAsyncBinding;
+		protected bool       _IsDeferredScrolling;
+		protected ScrollUnit _selectedScrollUnit;
+
 		protected BindingMode        _SelectedBindingMode;
 
 
@@ -172,6 +180,41 @@ namespace WPFGridsBenchmark
 		}
 
 
+		public bool IsDeferredScrolling
+		{
+			get
+			{
+				return _IsDeferredScrolling;
+			}
+			set
+			{
+				if (_IsDeferredScrolling == value)
+					return;
+
+				_IsDeferredScrolling = value;
+
+				RaisePropertyChanged(nameof(IsDeferredScrolling));
+			}
+		}
+
+		public ScrollUnit SelectedScrollUnit
+		{
+			get
+			{
+				return _selectedScrollUnit;
+			}
+			set
+			{
+				if (_selectedScrollUnit == value)
+					return;
+
+				_selectedScrollUnit = value;
+
+				RaisePropertyChanged(nameof(SelectedScrollUnit));
+			}
+		}
+
+
 		Dictionary<string, Type> _grids;
 
 		private bool _runningAllTests = false;
@@ -233,6 +276,9 @@ namespace WPFGridsBenchmark
 			IsVirtualizing = (bool)g.GetValue(VirtualizingStackPanel.IsVirtualizingProperty);
 			SelectedVirtualizationMode = (VirtualizationMode)g.GetValue(VirtualizingStackPanel.VirtualizationModeProperty);
 			CanContentScroll = (bool)(g.GetValue(ScrollViewer.CanContentScrollProperty));
+			IsDeferredScrolling = (bool)(g.GetValue(ScrollViewer.IsDeferredScrollingEnabledProperty));
+			SelectedScrollUnit = 
+				(ScrollUnit)g.GetValue(VirtualizingPanel.ScrollUnitProperty);  // no use for performance
 
 			EnableRowVirtualization = g.EnableRowVirtualization;
 			EnableColumnVirtualization = g.EnableColumnVirtualization;
@@ -541,6 +587,10 @@ namespace WPFGridsBenchmark
 				(_grid as MSDataGrid).Grid.SetValue(VirtualizingStackPanel.VirtualizationModeProperty, _SelectedVirtualizationMode);
 
 				(_grid as MSDataGrid).Grid.SetValue(ScrollViewer.CanContentScrollProperty, CanContentScroll);
+
+				(_grid as MSDataGrid).Grid.SetValue(ScrollViewer.IsDeferredScrollingEnabledProperty, IsDeferredScrolling);
+				(_grid as MSDataGrid).Grid.SetValue(VirtualizingPanel.ScrollUnitProperty, SelectedScrollUnit);  // no use for performance
+
 
 				(_grid as MSDataGrid).Grid.EnableColumnVirtualization = _EnableColumnVirtualization;
 				(_grid as MSDataGrid).Grid.EnableRowVirtualization = _EnableRowVirtualization;

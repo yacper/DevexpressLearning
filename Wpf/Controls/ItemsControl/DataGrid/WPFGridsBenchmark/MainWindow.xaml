@@ -79,6 +79,15 @@
 					<Label Content="BindMode:"></Label>
 					<ComboBox x:Name="BindingMode"  ItemsSource="{Binding BindingModes}" SelectedItem="{Binding SelectedBindingMode}" />
 				</StackPanel>
+
+
+                <GroupBox Header="Scroll">
+                    <StackPanel Margin="0" >
+						<CheckBox  Content="IsDeferredScrolling" HorizontalAlignment="Stretch" IsChecked="{Binding IsDeferredScrolling}" IsThreeState="False"/>
+	                    <ComboBox ItemsSource="{Binding ScrollUnits}" SelectedItem="{Binding SelectedScrollUnit}" />
+                    </StackPanel>
+
+                </GroupBox>
           
             </StackPanel>
         </Border>

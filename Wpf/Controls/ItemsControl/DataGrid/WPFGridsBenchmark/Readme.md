@@ -8,3 +8,10 @@ ALL DataGrid's are horrendously slow (even the ones you pay for). You need to tu
 VirtualizingStackPanel.IsVirtualizing = true as well as VirtualizingStackPanel.VirtualizationMode = recycling. 
 If you have a lot of columns, or start to do templates, it'll slow to a crawl again. Nothing you can do about that really. 
 I've tried every DataGrid out there (syncfusion, infragistics, etc). They are all very slow.
+
+
+启用UI虚拟化的两个附加属性：
+
+1、ScrollViewer.CanContentScroll="True"
+
+2、VirtualizingStackPanel.IsVirtualizing="True"
