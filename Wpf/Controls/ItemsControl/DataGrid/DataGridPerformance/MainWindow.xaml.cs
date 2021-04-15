@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace DataGrid_AutoGenColumns
+namespace DataGridPerformance
 {
 	/// <summary>
 	/// Interaction logic for MainWindow.xaml

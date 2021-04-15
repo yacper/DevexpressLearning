@@ -13,7 +13,7 @@
 	</Window.DataContext>
 
 	<StackPanel>
-		<DataGrid ItemsSource="{Binding Customers}">
+		<DataGrid ItemsSource="{Binding Customers}" >
 			<DataGrid.RowDetailsTemplate>
 				<DataTemplate>
 					<Image Height="100" Source="{Binding Image}" />

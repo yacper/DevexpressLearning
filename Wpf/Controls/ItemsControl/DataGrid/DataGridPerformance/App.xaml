@@ -1,7 +1,7 @@
-﻿<Application x:Class="DataGrid_ManualDefineColumns.App"
+﻿<Application x:Class="DataGridPerformance.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:DataGrid_ManualDefineColumns"
+             xmlns:local="clr-namespace:DataGridPerformance"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          

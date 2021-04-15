@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace DataGrid_ManualDefineColumns
+namespace DataGridPerformance.Windows
 {
 	/// <summary>
-	/// Interaction logic for MainWindow.xaml
+	/// NormalWindow.xaml 的交互逻辑
 	/// </summary>
-	public partial class MainWindow : Window
+	public partial class NormalWindow : Window
 	{
-		public MainWindow()
+		public NormalWindow()
 		{
 			InitializeComponent();
 		}

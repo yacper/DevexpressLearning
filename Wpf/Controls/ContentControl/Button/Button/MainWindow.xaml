@@ -6,9 +6,34 @@
         xmlns:local="clr-namespace:Button"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+	<StackPanel>
 
-        <Button Content="Button" Height="23" HorizontalAlignment="Left" Margin="166,197,0,0" Name="button1" VerticalAlignment="Top" Width="75" Click="button1_Click" />
+		<Button Name="btn1" Background="Pink"
+		        BorderBrush="Black" BorderThickness="1"
+		        Click="OnClick1" ClickMode="Hover">
+			ClickMe1
+		</Button>
 
-	</Grid>
+		<Button Name="btn2" Background="LightBlue"
+		        BorderBrush="Black" BorderThickness="1"
+		        Click="OnClick2" ClickMode="Press">
+			ClickMe2
+		</Button>
+
+		<Button Name="btn3"
+		        Click="OnClick3" ClickMode="Release">
+			Reset
+		</Button>
+
+
+		<Button Name="btn5" Width="50" Height="30" Click="OnClick5">
+			<Image Source="Images\betty.jpg" />
+		</Button>
+		<Button Name="btn6" BorderBrush="Black">Click the picture.</Button>
+
+
+		<Button Content="Button" Height="23" HorizontalAlignment="Left" Margin="166,197,0,0" Name="button1"
+		        VerticalAlignment="Top" Width="75" Click="button1_Click" />
+
+	</StackPanel>
 </Window>

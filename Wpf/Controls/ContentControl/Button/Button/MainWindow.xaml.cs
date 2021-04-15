@@ -24,17 +24,44 @@ namespace Button
 		{
 			InitializeComponent();
 		}
+
+
+		void OnClick1(object sender, RoutedEventArgs e)
+		{
+			btn1.Background = Brushes.LightBlue;
+		}
+
+		void OnClick2(object sender, RoutedEventArgs e)
+		{
+			btn2.Background = Brushes.Pink;
+		}
+
+		void OnClick3(object sender, RoutedEventArgs e)
+		{
+			btn1.Background = Brushes.Pink;
+			btn2.Background = Brushes.LightBlue;
+		}
+
+
+		void OnClick5(object sender, RoutedEventArgs e)
+		{
+			btn6.FontSize = 16;
+			btn6.Content = "This is my favorite photo.";
+			btn6.Background = Brushes.Red;
+		}
+
+
 		private void button1_Click(object sender, RoutedEventArgs e)
-        {
-            //ObjectDataProvider odp = new ObjectDataProvider();
-            //odp.ObjectInstance = new Caculate();
-            //odp.MethodName="Add";
-            //odp.MethodParameters.Add("100");
-            //odp.MethodParameters.Add("200");
-            //MessageBox.Show(odp.Data.ToString());
+		{
+			//ObjectDataProvider odp = new ObjectDataProvider();
+			//odp.ObjectInstance = new Caculate();
+			//odp.MethodName="Add";
+			//odp.MethodParameters.Add("100");
+			//odp.MethodParameters.Add("200");
+			//MessageBox.Show(odp.Data.ToString());
 
-            MessageBox.Show("hello, world");
+			MessageBox.Show("hello, world");
 
-        }
+		}
 	}
 }
