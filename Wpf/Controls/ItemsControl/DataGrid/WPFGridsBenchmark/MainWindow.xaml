@@ -106,6 +106,10 @@
             <StackPanel Orientation="Horizontal" x:Name="Load">
             <Button Content="Run test" Click="RunTest_Click"/>
             <Button Content="Run All Tests" Click="RunAllTests"/>
+
+            <Button Content="Start Changing" Click="StartDataChanging"/>
+            <Button Content="stop" Click="StopDataChanging"/>
+            <TextBox x:Name="UpdateTime" Width="120" Height="30"  >0.5</TextBox>
             </StackPanel>
             <TextBlock Foreground="Red" Grid.Column="1" x:Name="Info" TextWrapping="Wrap" />
         </Grid>

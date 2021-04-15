@@ -11,7 +11,10 @@ I've tried every DataGrid out there (syncfusion, infragistics, etc). They are al
 
 
 启用UI虚拟化的两个附加属性：
-
 1、ScrollViewer.CanContentScroll="True"
-
 2、VirtualizingStackPanel.IsVirtualizing="True"
+
+
+
+Wpf datagrid 在通过scrollbar scroll的时候，非常慢
+Devexpress gridcontrol 性能非常好，scroll速度很快
