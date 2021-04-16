@@ -8,6 +8,24 @@
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="DevExpress.WindowsDesktop.Wpf" Version="20.2.*"/>
-  </ItemGroup>    
+    <PackageReference Include="DevExpress.WindowsDesktop.Wpf" Version="20.2.*" />
+    <PackageReference Include="Fody" Version="6.5.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Google.Protobuf" Version="3.15.8" />
+    <PackageReference Include="Grpc.Core" Version="2.37.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.37.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="PropertyChanged.Fody" Version="3.3.3" />
+    <PackageReference Include="RandomGen" Version="1.1.4" />
+  </ItemGroup>
+<ItemGroup>
+		<Protobuf Include="Protos\*.proto" OutputDir="Messages" CompileOutputs="false" />
+
+	</ItemGroup>
+
+
 </Project>

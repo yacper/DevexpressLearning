@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+//package Models.Common;
+
+import "google/protobuf/timestamp.proto";
+
+
+message Security {
+  int32 ID = 9;
+  string Code = 1;
+  string Name = 2;
+
+  double Current = 3;
+
+  double Open = 4;                       // 开盘
+  double High = 5;                       // 最高
+  double Low =6;                       // 最低
+  double Close=7;                     // 最新
+  
+  google.protobuf.Timestamp UpdateTime = 10;                 // 价格更新时间
+
+  double Volume = 11;                     // 成交量
+  double TurnOver=12;                   // 成交额
+  double TurnOverRate=13;               // 换手率
+  double VolumeTotal=14;                // 日总成交量
+  double TurnOverTotal=15;              // 日总成交额
+
+  double Change=16;                     // 涨跌
+  double ChangePercent=17;              // 涨幅%
+  double ChangeRatioLimit=18;           // 涨跌停比例
+  double HighLimitPrice=19;             // 涨停价
+  double LowLimitPrice=20;              // 跌停价
+
+
+  double Amplitude=21;                  // 振幅%
+  double AvgPrice=22;                   // 平均价
+
+
+  double Ask=23;                        // 卖价
+  double Bid=24;                        // 买价
+  double Spread=25;                     // 价差
+  double AskVol=26;                     // 卖量
+  double BidVol= 27;                    // 买量
+
+  double BidAskRatio=28;                // 委比（该字段为百分比字段，默认不展示%，如20实际对应20%，如20实际对应20%）
+  double VolumeRatio=29;                // 量比
+
+  double Highest52WeeksPrice=30;        // 52周最高价
+  double Lowest52WeeksPrice=31;         // 52周最低价
+  double HighestHistoryPrice= 32;       // 历史最高价
+  double LowestHistoryPrice= 33;        // 历史最低价
+
+  double LotSize=34;                    // 每手数量  google.protobuf.Timestamp Birthday = 5;
+}
+

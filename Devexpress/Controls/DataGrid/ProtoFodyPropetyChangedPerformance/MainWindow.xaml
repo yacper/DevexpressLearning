@@ -1,9 +1,42 @@
-﻿<dx:ThemedWindow 
+<dx:ThemedWindow 
     x:Class="ProtoFodyPropetyChangedPerformance.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:viewModels="clr-namespace:DataGrid_ProtoFodyPropetyChanged.ViewModels"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" 
+    xmlns:global="clr-namespace:"
     Title="MainWindow" Height="450" Width="800">
-    <Grid>
-    </Grid>
+	<dx:ThemedWindow.DataContext>
+		<viewModels:MainViewModel/>
+	</dx:ThemedWindow.DataContext>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition />
+		</Grid.RowDefinitions>
+
+		<StackPanel Grid.Row="0" Orientation="Horizontal">
+			<Button Click="Gen_Click" >Generate</Button>
+			<TextBox x:Name="Num" Width="120" ></TextBox>
+
+			<Button Margin="20 0 0 0" Click="Start_Click"> Start</Button>
+			<Button Click="Stop_Click"> Stop</Button>
+			<Label Margin="20 0 0 0"> Interval:</Label>
+			<TextBox x:Name="Interval" Width="120"> 0.5</TextBox>
+
+		</StackPanel>
+		<dxg:GridControl Grid.Row="1" AutoGenerateColumns="AddNew"
+                     EnableSmartColumnsGeneration="True"
+                     ItemsSource="{Binding Securities}">
+			<dxg:GridControl.View  >
+				<dxg:TableView  />
+
+			</dxg:GridControl.View>
+
+			<dxg:GridColumn Header="UpdateTime" AllowEditing="True"  Binding="{Binding UpdateTime, Converter={global:TimestampConverter}}" Width="150" />
+			<!--<dxg:GridColumn Header="Birthday" Binding="{Binding Birthday, Converter={global:TimestampConverter}}" UnboundType="DateTime" CellTemplate="{StaticResource DateTimeCellTemplate}" Width="150"/>-->
+		</dxg:GridControl>
+	</Grid>
+
 </dx:ThemedWindow>
