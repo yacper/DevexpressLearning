@@ -11,5 +11,6 @@ message Customer {
   string City = 2;
   int32 Visits = 3;
   double Salary = 4;
+  google.protobuf.Timestamp Birthday = 5;
 }
 

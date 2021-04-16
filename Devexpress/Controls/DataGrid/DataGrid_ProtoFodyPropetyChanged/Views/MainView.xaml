@@ -6,7 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" 
     xmlns:ViewModels="clr-namespace:DataGrid_ProtoFodyPropetyChanged.ViewModels"
-    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" 
+    xmlns:global="clr-namespace:"
     mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300">
 	<UserControl.DataContext>
 		<ViewModels:MainViewModel/>
@@ -16,6 +17,10 @@
                      ItemsSource="{Binding Customers}">
 		<dxg:GridControl.View  >
 			<dxg:TableView  />
+
 		</dxg:GridControl.View>
+
+            <dxg:GridColumn Header="Birthday" AllowEditing="True"  Binding="{Binding Birthday, Converter={global:TimestampConverter}}" Width="150" />
+            <!--<dxg:GridColumn Header="Birthday" Binding="{Binding Birthday, Converter={global:TimestampConverter}}" UnboundType="DateTime" CellTemplate="{StaticResource DateTimeCellTemplate}" Width="150"/>-->
 	</dxg:GridControl>
 </UserControl>

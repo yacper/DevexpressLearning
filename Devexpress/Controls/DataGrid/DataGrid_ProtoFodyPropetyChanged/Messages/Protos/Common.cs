@@ -23,12 +23,13 @@ public static partial class CommonReflection {
     byte[] descriptorData = global::System.Convert.FromBase64String(
         string.Concat(
           "ChNQcm90b3MvQ29tbW9uLnByb3RvGh9nb29nbGUvcHJvdG9idWYvdGltZXN0",
-          "YW1wLnByb3RvIkYKCEN1c3RvbWVyEgwKBE5hbWUYASABKAkSDAoEQ2l0eRgC",
-          "IAEoCRIOCgZWaXNpdHMYAyABKAUSDgoGU2FsYXJ5GAQgASgBYgZwcm90bzM="));
+          "YW1wLnByb3RvInQKCEN1c3RvbWVyEgwKBE5hbWUYASABKAkSDAoEQ2l0eRgC",
+          "IAEoCRIOCgZWaXNpdHMYAyABKAUSDgoGU2FsYXJ5GAQgASgBEiwKCEJpcnRo",
+          "ZGF5GAUgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcGIGcHJvdG8z"));
     descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
         new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.TimestampReflection.Descriptor, },
         new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-          new pbr::GeneratedClrTypeInfo(typeof(global::Customer), global::Customer.Parser, new[]{ "Name", "City", "Visits", "Salary" }, null, null, null, null)
+          new pbr::GeneratedClrTypeInfo(typeof(global::Customer), global::Customer.Parser, new[]{ "Name", "City", "Visits", "Salary", "Birthday" }, null, null, null, null)
         }));
   }
   #endregion
@@ -68,6 +69,7 @@ public sealed partial class Customer : pb::IMessage<Customer>
     city_ = other.city_;
     visits_ = other.visits_;
     salary_ = other.salary_;
+    birthday_ = other.birthday_ != null ? other.birthday_.Clone() : null;
     _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
   }
 
@@ -120,6 +122,17 @@ public sealed partial class Customer : pb::IMessage<Customer>
     }
   }
 
+  /// <summary>Field number for the "Birthday" field.</summary>
+  public const int BirthdayFieldNumber = 5;
+  private global::Google.Protobuf.WellKnownTypes.Timestamp birthday_;
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  public global::Google.Protobuf.WellKnownTypes.Timestamp Birthday {
+    get { return birthday_; }
+    set {
+      birthday_ = value;
+    }
+  }
+
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   public override bool Equals(object other) {
     return Equals(other as Customer);
@@ -137,6 +150,7 @@ public sealed partial class Customer : pb::IMessage<Customer>
     if (City != other.City) return false;
     if (Visits != other.Visits) return false;
     if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(Salary, other.Salary)) return false;
+    if (!object.Equals(Birthday, other.Birthday)) return false;
     return Equals(_unknownFields, other._unknownFields);
   }
 
@@ -147,6 +161,7 @@ public sealed partial class Customer : pb::IMessage<Customer>
     if (City.Length != 0) hash ^= City.GetHashCode();
     if (Visits != 0) hash ^= Visits.GetHashCode();
     if (Salary != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(Salary);
+    if (birthday_ != null) hash ^= Birthday.GetHashCode();
     if (_unknownFields != null) {
       hash ^= _unknownFields.GetHashCode();
     }
@@ -179,6 +194,10 @@ public sealed partial class Customer : pb::IMessage<Customer>
       output.WriteRawTag(33);
       output.WriteDouble(Salary);
     }
+    if (birthday_ != null) {
+      output.WriteRawTag(42);
+      output.WriteMessage(Birthday);
+    }
     if (_unknownFields != null) {
       _unknownFields.WriteTo(output);
     }
@@ -204,6 +223,10 @@ public sealed partial class Customer : pb::IMessage<Customer>
       output.WriteRawTag(33);
       output.WriteDouble(Salary);
     }
+    if (birthday_ != null) {
+      output.WriteRawTag(42);
+      output.WriteMessage(Birthday);
+    }
     if (_unknownFields != null) {
       _unknownFields.WriteTo(ref output);
     }
@@ -224,6 +247,9 @@ public sealed partial class Customer : pb::IMessage<Customer>
     }
     if (Salary != 0D) {
       size += 1 + 8;
+    }
+    if (birthday_ != null) {
+      size += 1 + pb::CodedOutputStream.ComputeMessageSize(Birthday);
     }
     if (_unknownFields != null) {
       size += _unknownFields.CalculateSize();
@@ -247,6 +273,12 @@ public sealed partial class Customer : pb::IMessage<Customer>
     }
     if (other.Salary != 0D) {
       Salary = other.Salary;
+    }
+    if (other.birthday_ != null) {
+      if (birthday_ == null) {
+        Birthday = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+      }
+      Birthday.MergeFrom(other.Birthday);
     }
     _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
   }
@@ -278,6 +310,13 @@ public sealed partial class Customer : pb::IMessage<Customer>
           Salary = input.ReadDouble();
           break;
         }
+        case 42: {
+          if (birthday_ == null) {
+            Birthday = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+          }
+          input.ReadMessage(Birthday);
+          break;
+        }
       }
     }
   #endif
@@ -306,6 +345,13 @@ public sealed partial class Customer : pb::IMessage<Customer>
         }
         case 33: {
           Salary = input.ReadDouble();
+          break;
+        }
+        case 42: {
+          if (birthday_ == null) {
+            Birthday = new global::Google.Protobuf.WellKnownTypes.Timestamp();
+          }
+          input.ReadMessage(Birthday);
           break;
         }
       }
