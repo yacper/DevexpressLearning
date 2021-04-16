@@ -216,6 +216,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataGridPerformance", "Wpf\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmoothPanelSample", "Wpf\Controls\Samples\SmoothPanelSample\SmoothPanelSample.csproj", "{D2488426-0340-45C6-B6AE-A10834233688}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataGrid_ConditionalFormating", "Devexpress\Controls\DataGrid\DataGrid_ConditionalFormating\DataGrid_ConditionalFormating.csproj", "{97A1B192-7DC7-4DB4-A839-F4A05CDD034F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataGrid_FodyPropetyChanged", "Devexpress\Controls\DataGrid\DataGrid_FodyPropetyChanged\DataGrid_FodyPropetyChanged.csproj", "{8614FDF9-97E9-46A8-BEB5-ED72565883B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataGrid_ProtoFodyPropetyChanged", "Devexpress\Controls\DataGrid\DataGrid_ProtoFodyPropetyChanged\DataGrid_ProtoFodyPropetyChanged.csproj", "{68B7264F-4F91-4EBB-9018-74D93C7EC2F8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -568,6 +574,30 @@ Global
 		{D2488426-0340-45C6-B6AE-A10834233688}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D2488426-0340-45C6-B6AE-A10834233688}.Release|x86.ActiveCfg = Release|x86
 		{D2488426-0340-45C6-B6AE-A10834233688}.Release|x86.Build.0 = Release|x86
+		{97A1B192-7DC7-4DB4-A839-F4A05CDD034F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97A1B192-7DC7-4DB4-A839-F4A05CDD034F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97A1B192-7DC7-4DB4-A839-F4A05CDD034F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{97A1B192-7DC7-4DB4-A839-F4A05CDD034F}.Debug|x86.Build.0 = Debug|Any CPU
+		{97A1B192-7DC7-4DB4-A839-F4A05CDD034F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97A1B192-7DC7-4DB4-A839-F4A05CDD034F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97A1B192-7DC7-4DB4-A839-F4A05CDD034F}.Release|x86.ActiveCfg = Release|Any CPU
+		{97A1B192-7DC7-4DB4-A839-F4A05CDD034F}.Release|x86.Build.0 = Release|Any CPU
+		{8614FDF9-97E9-46A8-BEB5-ED72565883B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8614FDF9-97E9-46A8-BEB5-ED72565883B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8614FDF9-97E9-46A8-BEB5-ED72565883B9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8614FDF9-97E9-46A8-BEB5-ED72565883B9}.Debug|x86.Build.0 = Debug|Any CPU
+		{8614FDF9-97E9-46A8-BEB5-ED72565883B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8614FDF9-97E9-46A8-BEB5-ED72565883B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8614FDF9-97E9-46A8-BEB5-ED72565883B9}.Release|x86.ActiveCfg = Release|Any CPU
+		{8614FDF9-97E9-46A8-BEB5-ED72565883B9}.Release|x86.Build.0 = Release|Any CPU
+		{68B7264F-4F91-4EBB-9018-74D93C7EC2F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68B7264F-4F91-4EBB-9018-74D93C7EC2F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68B7264F-4F91-4EBB-9018-74D93C7EC2F8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{68B7264F-4F91-4EBB-9018-74D93C7EC2F8}.Debug|x86.Build.0 = Debug|Any CPU
+		{68B7264F-4F91-4EBB-9018-74D93C7EC2F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68B7264F-4F91-4EBB-9018-74D93C7EC2F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68B7264F-4F91-4EBB-9018-74D93C7EC2F8}.Release|x86.ActiveCfg = Release|Any CPU
+		{68B7264F-4F91-4EBB-9018-74D93C7EC2F8}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -673,6 +703,9 @@ Global
 		{4579AD7C-1DFE-4775-843F-38604B5DD318} = {83F6EDDE-23BD-48A5-848D-9DD64C2ED6C1}
 		{2585A00E-72E4-47F4-80C6-146EEFC2B49B} = {83F6EDDE-23BD-48A5-848D-9DD64C2ED6C1}
 		{D2488426-0340-45C6-B6AE-A10834233688} = {1C958758-C73A-4F4F-A7DC-7E452F89B0FE}
+		{97A1B192-7DC7-4DB4-A839-F4A05CDD034F} = {2881B10E-18CE-4236-9090-3DF1F3D466C6}
+		{8614FDF9-97E9-46A8-BEB5-ED72565883B9} = {2881B10E-18CE-4236-9090-3DF1F3D466C6}
+		{68B7264F-4F91-4EBB-9018-74D93C7EC2F8} = {2881B10E-18CE-4236-9090-3DF1F3D466C6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A26D33EA-3064-49AC-AC3B-E5AB2383890D}

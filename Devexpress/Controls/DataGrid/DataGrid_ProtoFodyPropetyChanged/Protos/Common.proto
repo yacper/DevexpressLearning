@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+//package Models.Common;
+
+import "google/protobuf/timestamp.proto";
+
+
+message Customer {
+
+  string Name = 1;
+  string City = 2;
+  int32 Visits = 3;
+  double Salary = 4;
+}
+
