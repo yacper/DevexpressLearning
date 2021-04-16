@@ -6,7 +6,7 @@
     xmlns:viewModels="clr-namespace:DataGrid_ProtoFodyPropetyChanged.ViewModels"
     xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" 
     xmlns:global="clr-namespace:"
-    Title="MainWindow" Height="450" Width="800">
+    Title="MainWindow" Height="450" Width="800" Loaded="OnLoaded">
 	<dx:ThemedWindow.DataContext>
 		<viewModels:MainViewModel/>
 	</dx:ThemedWindow.DataContext>
@@ -29,12 +29,49 @@
 		<dxg:GridControl Grid.Row="1" AutoGenerateColumns="AddNew"
                      EnableSmartColumnsGeneration="True"
                      ItemsSource="{Binding Securities}">
-			<dxg:GridControl.View  >
-				<dxg:TableView  />
+			 <dxg:GridControl.Columns>
+                <dxg:GridColumn FieldName="ID" IsSmart="True" SortIndex="0" VisibleIndex="0"/>
+                <dxg:GridColumn FieldName="Name" IsSmart="True" />
+				<dxg:GridColumn Header="UpdateTime" AllowEditing="True"  Binding="{Binding UpdateTime, Converter={global:TimestampConverter}}" Width="150" />
+                <dxg:GridColumn FieldName="Current" IsSmart="True" />
 
-			</dxg:GridControl.View>
+                <dxg:GridColumn FieldName="Ask" IsSmart="True" />
+                <dxg:GridColumn FieldName="Bid" IsSmart="True" />
+                <dxg:GridColumn FieldName="Spread" IsSmart="True" />
+                <dxg:GridColumn FieldName="AskVol" IsSmart="True" />
+                <dxg:GridColumn FieldName="BidVol" IsSmart="True" />
 
-			<dxg:GridColumn Header="UpdateTime" AllowEditing="True"  Binding="{Binding UpdateTime, Converter={global:TimestampConverter}}" Width="150" />
+                <dxg:GridColumn FieldName="Change" IsSmart="True" FixedWidth="True" />
+                <dxg:GridColumn FieldName="ChangePercent" IsSmart="True" />
+
+                <dxg:GridColumn FieldName="Open" IsSmart="True" />
+                <dxg:GridColumn FieldName="High" IsSmart="True" />
+                <dxg:GridColumn FieldName="Low" IsSmart="True" />
+                <dxg:GridColumn FieldName="Close" IsSmart="True" />
+                <!--<dxg:GridColumn FieldName="Sales" IsSmart="True" VisibleIndex="1"/>
+                <dxg:GridColumn FieldName="SalesVsTarget" IsSmart="True" FixedWidth="True" VisibleIndex="2"/>
+                <dxg:GridColumn FieldName="Profit" IsSmart="True" VisibleIndex="3"/>
+                <dxg:GridColumn FieldName="CustomersSatisfaction" IsSmart="True" FixedWidth="True" VisibleIndex="4"/>
+                <dxg:GridColumn FieldName="MarketShare" IsSmart="True" FixedWidth="True" VisibleIndex="5"/>-->
+            </dxg:GridControl.Columns>
+            <dxg:GridControl.View>
+                <dxg:TableView AllowEditing="False" AllowConditionalFormattingMenu="True">
+                    <dxg:TableView.FormatConditions>
+                        <dxg:FormatCondition Expression="[ChangePercent] &lt; 0.0m" FieldName="ChangePercent" PredefinedFormatName="RedText"/>
+                        <dxg:FormatCondition Expression="[ChangePercent] &gt; 0.0m" FieldName="ChangePercent" PredefinedFormatName="GreenText"/>
+
+                        <!--<dxg:FormatCondition Expression="[Profit] &lt; 0.0" FieldName="Profit">
+                            <dx:Format Foreground="Red"/>
+                        </dxg:FormatCondition>
+                        <dxg:DataBarFormatCondition FieldName="Sales" PredefinedFormatName="RedGradientDataBar"/>
+                        <dxg:TopBottomRuleFormatCondition Expression="[Sales]" FieldName="{x:Null}" PredefinedFormatName="BoldText" Rule="TopPercent" Threshold="10"/>
+                        <dxg:DataBarFormatCondition FieldName="Profit" PredefinedFormatName="GreenGradientDataBar"/>
+                        <dxg:IconSetFormatCondition FieldName="MarketShare" PredefinedFormatName="Quarters5IconSet"/>
+                        <dxg:IconSetFormatCondition FieldName="CustomersSatisfaction" PredefinedFormatName="Stars3IconSet"/>-->
+                    </dxg:TableView.FormatConditions>
+                </dxg:TableView>
+            </dxg:GridControl.View>
+
 			<!--<dxg:GridColumn Header="Birthday" Binding="{Binding Birthday, Converter={global:TimestampConverter}}" UnboundType="DateTime" CellTemplate="{StaticResource DateTimeCellTemplate}" Width="150"/>-->
 		</dxg:GridControl>
 	</Grid>

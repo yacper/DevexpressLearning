@@ -59,5 +59,11 @@ namespace ProtoFodyPropetyChangedPerformance
 				timer = null;
 			}
 		}
+
+		private void OnLoaded(object sender, RoutedEventArgs e)
+		{
+			(DataContext as MainViewModel).Generate(100);
+
+		}
 	}
 }
