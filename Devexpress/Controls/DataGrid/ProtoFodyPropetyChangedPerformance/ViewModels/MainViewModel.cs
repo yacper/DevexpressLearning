@@ -7,16 +7,18 @@ using System.Linq;
 using DevExpress.DirectX.Common.Direct2D;
 using DevExpress.Internal.WinApi.Windows.UI.Notifications;
 using DevExpress.Mvvm.Native;
+using DevExpress.Xpf.CodeView;
 using Google.Protobuf.WellKnownTypes;
 using RandomGen;
+using System.Collections.Generic;
 
 public partial class Security : INotifyPropertyChanged
 {
 	public event PropertyChangedEventHandler PropertyChanged;
 
 	static Random _rnd = new Random();
-	static string[] _Names =
-				"Andy|Ben|Charlie|Dan|Ed|Fred|Gil|Herb|Jack|Karl|Larry|Mark|Noah|Oprah|Paul|Quince|Rich|Steve|Ted|Ulrich|Vic|Xavier|Zeb"
+	static string[] _Codes =
+				"MSFT|NEW|AMD|v|IBM|FB|GOCO|U|AMS|MOMO|HUYA|DOUYU|BA|CCL|DAL|AAL|ACE|MCE|ARKK|ARKW|POSH|MMM|BB"
 				   .Split('|');
 
 	// ** ctors
@@ -28,13 +30,13 @@ public partial class Security : INotifyPropertyChanged
 	public Security(int id)
 	{
 		ID = id;
-		Code = id.ToString();
+		Code = GetString(_Codes);
 
-		Name = GetString(_Names);
+		Name = Code;
 
-		Open    = Random(1, 2000);
-		High    = Open + Random(0, Open * 0.1);
-		Low     = Open - Random(0, Open * 0.1);
+		Open    = Gen.Random.Numbers.Doubles(1, 2000)();
+		High    = Open + Gen.Random.Numbers.Doubles(0, Open * 0.1)();
+		Low     = Open - Gen.Random.Numbers.Doubles(0, Open * 0.1)();
 		Close   = Open;
 		Current = Open;
 
@@ -42,12 +44,12 @@ public partial class Security : INotifyPropertyChanged
 
 		LotSize = 1;
 
-		Volume      = Random(1, 2000);
+		Volume      = Gen.Random.Numbers.Doubles(1, 2000)();
 		VolumeTotal = Volume;
 
 		TurnOver      = Volume * LotSize;
 		TurnOverTotal = TurnOver;
-		TurnOverRate = Random(1, 100) / 100;
+		TurnOverRate = Gen.Random.Numbers.Doubles(1, 100)() / 100;
 	}
 
 	public void ChangeRandom()
@@ -55,11 +57,11 @@ public partial class Security : INotifyPropertyChanged
 		int i = Gen.Random.Numbers.Integers(0, 2)();
 		if (i!=0) return;
 
-		double offset =  Current/100;
+		double offset =  Current/(double)100;
 		Change        = Gen.Random.Numbers.Doubles(-offset, offset)();
 		ChangePercent = Change / Current;
 
-		Current += offset;
+		Current += Change;
 
 		Ask    = Current + Gen.Random.Numbers.Doubles(0, 1)();
 		Bid    = Current - Gen.Random.Numbers.Doubles(0, 1)();
@@ -67,24 +69,14 @@ public partial class Security : INotifyPropertyChanged
 		AskVol = Gen.Random.Numbers.Doubles(0, 1000)();
 		BidVol = Gen.Random.Numbers.Doubles(0, 1000)();
 
+		Volume      = Gen.Random.Numbers.Doubles(1, 2000)();
+		VolumeTotal = Volume;
 
-
-
-
-
+		TurnOver      = Volume * LotSize;
+		TurnOverTotal = TurnOver;
+		TurnOverRate = Gen.Random.Numbers.Doubles(1, 100)() / 100;
 	}
 
-	public double Random(double min, double max)                        // 从包括min和不包括max中，获取一个随机的值
-	{
-		Debug.Assert(min <= max);
-
-		if (min == max)
-			return min;
-
-		int delay = _rnd.Next((int)min, (int)max);
-
-		return delay;
-	}
 
 	static string GetString(string[] arr) { return arr[_rnd.Next(arr.Length)]; }
 }
@@ -92,15 +84,17 @@ public partial class Security : INotifyPropertyChanged
 namespace DataGrid_ProtoFodyPropetyChanged.ViewModels
 {
 
-
-
-
 	public class MainViewModel : ViewModelBase
 	{
 		public void Generate(int num)
 		{
+			Securities.Clear();
+
+			List<Security> var = new List<Security>();
 			for(int i =0; i!= num; ++i)
-				Securities.Add(new Security(i));
+				var.Add(new Security(i));
+
+			Securities.AddRange(var);
 		}
 
 		public void Change()

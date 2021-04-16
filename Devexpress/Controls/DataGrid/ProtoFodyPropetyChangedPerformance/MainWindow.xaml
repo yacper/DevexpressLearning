@@ -1,14 +1,15 @@
-<dx:ThemedWindow 
-    x:Class="ProtoFodyPropetyChangedPerformance.MainWindow"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
-    xmlns:viewModels="clr-namespace:DataGrid_ProtoFodyPropetyChanged.ViewModels"
-    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" 
-    xmlns:global="clr-namespace:"
-    Title="MainWindow" Height="450" Width="800" Loaded="OnLoaded">
+<dx:ThemedWindow
+	x:Class="ProtoFodyPropetyChangedPerformance.MainWindow"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+	xmlns:viewModels="clr-namespace:DataGrid_ProtoFodyPropetyChanged.ViewModels"
+	xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+	xmlns:global="clr-namespace:"
+	xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+	Title="MainWindow" Height="450" Width="800" Loaded="OnLoaded">
 	<dx:ThemedWindow.DataContext>
-		<viewModels:MainViewModel/>
+		<viewModels:MainViewModel />
 	</dx:ThemedWindow.DataContext>
 	<Grid>
 		<Grid.RowDefinitions>
@@ -17,60 +18,134 @@
 		</Grid.RowDefinitions>
 
 		<StackPanel Grid.Row="0" Orientation="Horizontal">
-			<Button Click="Gen_Click" >Generate</Button>
-			<TextBox x:Name="Num" Width="120" ></TextBox>
+			<Button Click="Gen_Click">Generate Rows:</Button>
+			<TextBox x:Name="Num" Width="120" />
 
-			<Button Margin="20 0 0 0" Click="Start_Click"> Start</Button>
+			<Button Margin="20 0 0 0" Click="Start_Click"> Start Clock</Button>
 			<Button Click="Stop_Click"> Stop</Button>
 			<Label Margin="20 0 0 0"> Interval:</Label>
 			<TextBox x:Name="Interval" Width="120"> 0.5</TextBox>
 
 		</StackPanel>
 		<dxg:GridControl Grid.Row="1" AutoGenerateColumns="AddNew"
-                     EnableSmartColumnsGeneration="True"
-                     ItemsSource="{Binding Securities}">
-			 <dxg:GridControl.Columns>
-                <dxg:GridColumn FieldName="ID" IsSmart="True" SortIndex="0" VisibleIndex="0"/>
-                <dxg:GridColumn FieldName="Name" IsSmart="True" />
-				<dxg:GridColumn Header="UpdateTime" AllowEditing="True"  Binding="{Binding UpdateTime, Converter={global:TimestampConverter}}" Width="150" />
-                <dxg:GridColumn FieldName="Current" IsSmart="True" />
+		                 EnableSmartColumnsGeneration="True"
+		                 ItemsSource="{Binding Securities}">
+			<dxg:GridControl.Columns>
+				<dxg:GridColumn FieldName="ID" IsSmart="True" SortIndex="0" VisibleIndex="0" />
+				<dxg:GridColumn FieldName="Code" IsSmart="True" />
+				<dxg:GridColumn Header="UpdateTime" AllowEditing="True"
+				                Binding="{Binding UpdateTime, Converter={global:TimestampConverter}}" Width="150" />
+				<dxg:GridColumn FieldName="Current" IsSmart="True">
+					<dxg:GridColumn.EditSettings>
+						<dxe:TextEditSettings Mask="n" MaskType="Numeric" MaskUseAsDisplayFormat="True" />
+					</dxg:GridColumn.EditSettings>
+				</dxg:GridColumn>
 
-                <dxg:GridColumn FieldName="Ask" IsSmart="True" />
-                <dxg:GridColumn FieldName="Bid" IsSmart="True" />
-                <dxg:GridColumn FieldName="Spread" IsSmart="True" />
-                <dxg:GridColumn FieldName="AskVol" IsSmart="True" />
-                <dxg:GridColumn FieldName="BidVol" IsSmart="True" />
+				<dxg:GridColumn FieldName="Ask" IsSmart="True">
+					<dxg:GridColumn.EditSettings>
+						<dxe:TextEditSettings Mask="n" MaskType="Numeric" MaskUseAsDisplayFormat="True" />
+					</dxg:GridColumn.EditSettings>
+				</dxg:GridColumn>
+				<dxg:GridColumn FieldName="Bid" IsSmart="True">
+					<dxg:GridColumn.EditSettings>
+						<dxe:TextEditSettings Mask="n" MaskType="Numeric" MaskUseAsDisplayFormat="True" />
+					</dxg:GridColumn.EditSettings>
+				</dxg:GridColumn>
+				<dxg:GridColumn FieldName="Spread" IsSmart="True">
+					<dxg:GridColumn.EditSettings>
+						<dxe:TextEditSettings Mask="n" MaskType="Numeric" MaskUseAsDisplayFormat="True" />
+					</dxg:GridColumn.EditSettings>
 
-                <dxg:GridColumn FieldName="Change" IsSmart="True" FixedWidth="True" />
-                <dxg:GridColumn FieldName="ChangePercent" IsSmart="True" />
+				</dxg:GridColumn>
+				<dxg:GridColumn FieldName="AskVol" IsSmart="True">
+					<dxg:GridColumn.EditSettings>
+						<dxe:TextEditSettings Mask="n" MaskType="Numeric" MaskUseAsDisplayFormat="True" />
+					</dxg:GridColumn.EditSettings>
+				</dxg:GridColumn>
+				<dxg:GridColumn FieldName="BidVol" IsSmart="True">
+					<dxg:GridColumn.EditSettings>
+						<dxe:TextEditSettings Mask="n" MaskType="Numeric" MaskUseAsDisplayFormat="True" />
+					</dxg:GridColumn.EditSettings>
+				</dxg:GridColumn>
 
-                <dxg:GridColumn FieldName="Open" IsSmart="True" />
-                <dxg:GridColumn FieldName="High" IsSmart="True" />
-                <dxg:GridColumn FieldName="Low" IsSmart="True" />
-                <dxg:GridColumn FieldName="Close" IsSmart="True" />
-                <!--<dxg:GridColumn FieldName="Sales" IsSmart="True" VisibleIndex="1"/>
+				<dxg:GridColumn FieldName="Change" IsSmart="True" >
+					<dxg:GridColumn.EditSettings>
+						<dxe:TextEditSettings Mask="n" MaskType="Numeric" MaskUseAsDisplayFormat="True" />
+					</dxg:GridColumn.EditSettings>
+				</dxg:GridColumn>
+				<dxg:GridColumn FieldName="ChangePercent" IsSmart="True">
+					<dxg:GridColumn.EditSettings>
+						<dxe:TextEditSettings Mask="p" MaskType="Numeric" MaskUseAsDisplayFormat="True" />
+						<!--show as percentage-->
+					</dxg:GridColumn.EditSettings>
+				</dxg:GridColumn>
+
+				<dxg:GridColumn FieldName="VolumeTotal" IsSmart="True">
+					<dxg:GridColumn.EditSettings>
+						<dxe:TextEditSettings Mask="n" MaskType="Numeric" MaskUseAsDisplayFormat="True" />
+					</dxg:GridColumn.EditSettings>
+				</dxg:GridColumn>
+				<dxg:GridColumn FieldName="TurnOverTotal" IsSmart="True">
+					<dxg:GridColumn.EditSettings>
+						<dxe:TextEditSettings Mask="n" MaskType="Numeric" MaskUseAsDisplayFormat="True" />
+					</dxg:GridColumn.EditSettings>
+				</dxg:GridColumn>
+
+				<dxg:GridColumn FieldName="Open" IsSmart="True">
+					<dxg:GridColumn.EditSettings>
+						<dxe:TextEditSettings Mask="n" MaskType="Numeric" MaskUseAsDisplayFormat="True" />
+					</dxg:GridColumn.EditSettings>
+				</dxg:GridColumn>
+				<dxg:GridColumn FieldName="High" IsSmart="True">
+					<dxg:GridColumn.EditSettings>
+						<dxe:TextEditSettings Mask="n" MaskType="Numeric" MaskUseAsDisplayFormat="True" />
+					</dxg:GridColumn.EditSettings>
+				</dxg:GridColumn>
+				<dxg:GridColumn FieldName="Low" IsSmart="True">
+					<dxg:GridColumn.EditSettings>
+						<dxe:TextEditSettings Mask="n" MaskType="Numeric" MaskUseAsDisplayFormat="True" />
+					</dxg:GridColumn.EditSettings>
+				</dxg:GridColumn>
+				<dxg:GridColumn FieldName="Close" IsSmart="True">
+					<dxg:GridColumn.EditSettings>
+						<dxe:TextEditSettings Mask="n" MaskType="Numeric" MaskUseAsDisplayFormat="True" />
+					</dxg:GridColumn.EditSettings>
+				</dxg:GridColumn>
+				<!--<dxg:GridColumn FieldName="Sales" IsSmart="True" VisibleIndex="1"/>
                 <dxg:GridColumn FieldName="SalesVsTarget" IsSmart="True" FixedWidth="True" VisibleIndex="2"/>
                 <dxg:GridColumn FieldName="Profit" IsSmart="True" VisibleIndex="3"/>
                 <dxg:GridColumn FieldName="CustomersSatisfaction" IsSmart="True" FixedWidth="True" VisibleIndex="4"/>
                 <dxg:GridColumn FieldName="MarketShare" IsSmart="True" FixedWidth="True" VisibleIndex="5"/>-->
-            </dxg:GridControl.Columns>
-            <dxg:GridControl.View>
-                <dxg:TableView AllowEditing="False" AllowConditionalFormattingMenu="True">
-                    <dxg:TableView.FormatConditions>
-                        <dxg:FormatCondition Expression="[ChangePercent] &lt; 0.0m" FieldName="ChangePercent" PredefinedFormatName="RedText"/>
-                        <dxg:FormatCondition Expression="[ChangePercent] &gt; 0.0m" FieldName="ChangePercent" PredefinedFormatName="GreenText"/>
+			</dxg:GridControl.Columns>
+			<dxg:GridControl.View>
+				<dxg:TableView AllowEditing="False" AllowConditionalFormattingMenu="True">
+					<dxg:TableView.FormatConditions>
 
-                        <!--<dxg:FormatCondition Expression="[Profit] &lt; 0.0" FieldName="Profit">
+						<dxg:FormatCondition Expression="[ChangePercent] &lt; 0.0" FieldName="Current"
+						                     PredefinedFormatName="RedText" />
+						<dxg:FormatCondition Expression="[ChangePercent] &gt; 0.0" FieldName="Current"
+						                     PredefinedFormatName="GreenText" />
+
+						<dxg:DataBarFormatCondition FieldName="Change" PredefinedFormatName="GreenGradientDataBar"/>
+						<dxg:FormatCondition Expression="[Change] &lt; 0.0" FieldName="Change">
                             <dx:Format Foreground="Red"/>
                         </dxg:FormatCondition>
+						<dxg:FormatCondition Expression="[ChangePercent] &lt; 0.0" FieldName="ChangePercent"
+						                     PredefinedFormatName="RedText" />
+						<dxg:FormatCondition Expression="[ChangePercent] &gt; 0.0" FieldName="ChangePercent"
+						                     PredefinedFormatName="GreenText" />
+
+                        <dxg:TopBottomRuleFormatCondition Expression="[Current]" FieldName="{x:Null}" PredefinedFormatName="BoldText" Rule="TopPercent" Threshold="10"/>
+
+                        <dxg:DataBarFormatCondition FieldName="VolumeTotal" PredefinedFormatName="RedGradientDataBar"/>
+                        <dxg:DataBarFormatCondition FieldName="TurnOverTotal" PredefinedFormatName="RedGradientDataBar"/>
+						<!--
                         <dxg:DataBarFormatCondition FieldName="Sales" PredefinedFormatName="RedGradientDataBar"/>
-                        <dxg:TopBottomRuleFormatCondition Expression="[Sales]" FieldName="{x:Null}" PredefinedFormatName="BoldText" Rule="TopPercent" Threshold="10"/>
-                        <dxg:DataBarFormatCondition FieldName="Profit" PredefinedFormatName="GreenGradientDataBar"/>
                         <dxg:IconSetFormatCondition FieldName="MarketShare" PredefinedFormatName="Quarters5IconSet"/>
                         <dxg:IconSetFormatCondition FieldName="CustomersSatisfaction" PredefinedFormatName="Stars3IconSet"/>-->
-                    </dxg:TableView.FormatConditions>
-                </dxg:TableView>
-            </dxg:GridControl.View>
+					</dxg:TableView.FormatConditions>
+				</dxg:TableView>
+			</dxg:GridControl.View>
 
 			<!--<dxg:GridColumn Header="Birthday" Binding="{Binding Birthday, Converter={global:TimestampConverter}}" UnboundType="DateTime" CellTemplate="{StaticResource DateTimeCellTemplate}" Width="150"/>-->
 		</dxg:GridControl>
