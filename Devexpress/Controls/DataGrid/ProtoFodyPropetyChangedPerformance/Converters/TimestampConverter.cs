@@ -19,6 +19,6 @@ class TimestampConverter : MarkupExtension, IValueConverter
 	public object ConvertBack(object value, System.Type targetType, object parameter, System.Globalization.CultureInfo culture)
 	{
 		if (value == null) return null;
-		return  Timestamp.FromDateTime((DateTime)value);
+		return  Timestamp.FromDateTime(((DateTime)value).ToUniversalTime());
 	}
 }

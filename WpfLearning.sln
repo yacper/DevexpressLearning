@@ -228,7 +228,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConditionalFormatingCodeBeh
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConditionalFormatingAnimation", "Devexpress\Controls\DataGrid\ConditionalFormating\ConditionalFormatingAnimation\ConditionalFormatingAnimation.csproj", "{96EAD468-D381-4859-99F6-3A4762816715}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProtoFodyPropetyChangedPerformance", "Devexpress\Controls\DataGrid\ProtoFodyPropetyChangedPerformance\ProtoFodyPropetyChangedPerformance.csproj", "{9B2FAEDE-DDF3-4C1D-9D6F-43525091ECF8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProtoFodyPropetyChangedPerformance", "Devexpress\Controls\DataGrid\ProtoFodyPropetyChangedPerformance\ProtoFodyPropetyChangedPerformance.csproj", "{9B2FAEDE-DDF3-4C1D-9D6F-43525091ECF8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataGrid_CustomEditor", "Devexpress\Controls\DataGrid\DataGrid_CustomEditor\DataGrid_CustomEditor.csproj", "{266E9082-647B-4232-8434-CDB5B3534B06}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -630,6 +632,14 @@ Global
 		{9B2FAEDE-DDF3-4C1D-9D6F-43525091ECF8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9B2FAEDE-DDF3-4C1D-9D6F-43525091ECF8}.Release|x86.ActiveCfg = Release|Any CPU
 		{9B2FAEDE-DDF3-4C1D-9D6F-43525091ECF8}.Release|x86.Build.0 = Release|Any CPU
+		{266E9082-647B-4232-8434-CDB5B3534B06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{266E9082-647B-4232-8434-CDB5B3534B06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{266E9082-647B-4232-8434-CDB5B3534B06}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{266E9082-647B-4232-8434-CDB5B3534B06}.Debug|x86.Build.0 = Debug|Any CPU
+		{266E9082-647B-4232-8434-CDB5B3534B06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{266E9082-647B-4232-8434-CDB5B3534B06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{266E9082-647B-4232-8434-CDB5B3534B06}.Release|x86.ActiveCfg = Release|Any CPU
+		{266E9082-647B-4232-8434-CDB5B3534B06}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -742,6 +752,7 @@ Global
 		{41D49F99-9935-4A4A-8EF2-28CF1C498B03} = {0E80F548-C26A-4D92-BD25-DE375E8341A4}
 		{96EAD468-D381-4859-99F6-3A4762816715} = {0E80F548-C26A-4D92-BD25-DE375E8341A4}
 		{9B2FAEDE-DDF3-4C1D-9D6F-43525091ECF8} = {2881B10E-18CE-4236-9090-3DF1F3D466C6}
+		{266E9082-647B-4232-8434-CDB5B3534B06} = {2881B10E-18CE-4236-9090-3DF1F3D466C6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A26D33EA-3064-49AC-AC3B-E5AB2383890D}

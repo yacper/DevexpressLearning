@@ -13,14 +13,12 @@
 		<dxg:GridControl.View>
 			<dxg:TableView ShowTotalSummary="True"/>
 		</dxg:GridControl.View>
-		<dxg:GridColumn FieldName="OrderID" IsSmart="True"/>
-		<dxg:GridColumn FieldName="CustomerID" IsSmart="True"/>
-		<dxg:GridColumn FieldName="OrderDate" IsSmart="True"/>
-		<dxg:GridColumn FieldName="ShipVia" IsSmart="True"/>
-		<dxg:GridColumn FieldName="Freight" IsSmart="True"/>
-		<dxg:GridColumn FieldName="ShipName" IsSmart="True"/>
-		<dxg:GridColumn FieldName="ShipCity" IsSmart="True"/>
-		<dxg:GridColumn FieldName="ShipCountry" IsSmart="True"/>
+		<dxg:GridColumn FieldName="Name" IsSmart="True"/>
+		<dxg:GridColumn FieldName="City" IsSmart="True"/>
+		<dxg:GridColumn FieldName="City" IsSmart="True"/>
+		<dxg:GridColumn FieldName="Visits" IsSmart="True"/>
+		<dxg:GridColumn FieldName="Birthday" IsSmart="True"/>
+		<dxg:GridColumn FieldName="Salary" IsSmart="True"/>
 
 	</dxg:GridControl>
 

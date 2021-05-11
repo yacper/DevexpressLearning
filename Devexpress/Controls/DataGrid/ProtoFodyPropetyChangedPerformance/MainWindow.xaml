@@ -33,8 +33,13 @@
 			<dxg:GridControl.Columns>
 				<dxg:GridColumn FieldName="ID" IsSmart="True" SortIndex="0" VisibleIndex="0" />
 				<dxg:GridColumn FieldName="Code" IsSmart="True" />
-				<dxg:GridColumn Header="UpdateTime" AllowEditing="True"
-				                Binding="{Binding UpdateTime, Converter={global:TimestampConverter}}" Width="150" />
+				<dxg:GridColumn Header="UpdateTime" AllowEditing="True" IsSmart="True"
+				                Binding="{Binding UpdateTime, Mode=TwoWay, Converter={global:TimestampConverter}}" Width="150" >
+				                <!--Binding="{Binding UpdateTime}" Width="150" >-->
+					<dxg:GridColumn.EditSettings>
+						<dxe:DateEditSettings/>
+					</dxg:GridColumn.EditSettings>
+				</dxg:GridColumn>
 				<dxg:GridColumn FieldName="Current" IsSmart="True">
 					<dxg:GridColumn.EditSettings>
 						<dxe:TextEditSettings Mask="n" MaskType="Numeric" MaskUseAsDisplayFormat="True" />
@@ -118,7 +123,7 @@
                 <dxg:GridColumn FieldName="MarketShare" IsSmart="True" FixedWidth="True" VisibleIndex="5"/>-->
 			</dxg:GridControl.Columns>
 			<dxg:GridControl.View>
-				<dxg:TableView AllowEditing="False" AllowConditionalFormattingMenu="True">
+				<dxg:TableView AllowEditing="True" NavigationStyle="Cell" AllowConditionalFormattingMenu="True" AnimateConditionalFormattingTransition="True">
 					<dxg:TableView.FormatConditions>
 
 						<dxg:FormatCondition Expression="[ChangePercent] &lt; 0.0" FieldName="Current"
@@ -126,8 +131,8 @@
 						<dxg:FormatCondition Expression="[ChangePercent] &gt; 0.0" FieldName="Current"
 						                     PredefinedFormatName="GreenText" />
 
-						<dxg:DataBarFormatCondition FieldName="Change" PredefinedFormatName="GreenGradientDataBar"/>
-						<dxg:FormatCondition Expression="[Change] &lt; 0.0" FieldName="Change">
+						<dxg:DataBarFormatCondition FieldName="Change" PredefinedFormatName="GreenSolidDataBar" MaxValue="100"/>
+						<dxg:FormatCondition Expression="[Change] &lt; 0.0" FieldName="Change" >
                             <dx:Format Foreground="Red"/>
                         </dxg:FormatCondition>
 						<dxg:FormatCondition Expression="[ChangePercent] &lt; 0.0" FieldName="ChangePercent"
@@ -137,8 +142,8 @@
 
                         <dxg:TopBottomRuleFormatCondition Expression="[Current]" FieldName="{x:Null}" PredefinedFormatName="BoldText" Rule="TopPercent" Threshold="10"/>
 
-                        <dxg:DataBarFormatCondition FieldName="VolumeTotal" PredefinedFormatName="RedGradientDataBar"/>
-                        <dxg:DataBarFormatCondition FieldName="TurnOverTotal" PredefinedFormatName="RedGradientDataBar"/>
+                        <dxg:DataBarFormatCondition FieldName="VolumeTotal" PredefinedFormatName="GreenSolidDataBar"/>
+                        <dxg:DataBarFormatCondition FieldName="TurnOverTotal" PredefinedFormatName="GreenSolidDataBar"/>
 						<!--
                         <dxg:DataBarFormatCondition FieldName="Sales" PredefinedFormatName="RedGradientDataBar"/>
                         <dxg:IconSetFormatCondition FieldName="MarketShare" PredefinedFormatName="Quarters5IconSet"/>

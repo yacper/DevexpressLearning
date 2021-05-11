@@ -24,7 +24,7 @@
                     <dxg:TableView.FormatConditions>
                         <dxg:DataBarFormatCondition FieldName="OldPrice" PredefinedFormatName="GreenSolidDataBar" MaxValue="100" MinValue="0"/>
                         <dxg:DataBarFormatCondition FieldName="NewPrice" PredefinedFormatName="BlueSolidDataBar" MaxValue="1000" MinValue="0"/>
-                        <dxg:IconSetFormatCondition FieldName="DeltaPrice"  PredefinedFormatName="PositiveNegativeTrianglesIconSet"/>
+                        <!--<dxg:IconSetFormatCondition FieldName="DeltaPrice"  PredefinedFormatName="PositiveNegativeTrianglesIconSet"/>-->
                         <dxg:ColorScaleFormatCondition FieldName="DeltaPrice">
                             <dx:ColorScaleFormat ColorMin="Green" ColorMiddle="White" ColorMax="Red"/>
                         </dxg:ColorScaleFormatCondition>
