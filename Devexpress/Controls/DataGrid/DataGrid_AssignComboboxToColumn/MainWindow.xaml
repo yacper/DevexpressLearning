@@ -1,0 +1,30 @@
+<dx:ThemedWindow 
+    x:Class="DataGrid_AssignComboboxToColumn.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    Title="MainWindow" Height="450" Width="800">
+   <Grid>
+        <dxg:GridControl x:Name="grid" ItemsSource="{Binding PersonList}">
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn FieldName="ProductName" />
+                <dxg:GridColumn FieldName="UnitPrice">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:SpinEditSettings MaxValue="999" MinValue="1" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="Type" >
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:ComboBoxEditSettings ItemsSource="{Binding TypeList}" 
+                                                  DisplayMember="TypeName" ValueMember="Id"/>
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+            </dxg:GridControl.Columns>
+            <dxg:GridControl.View>
+                <dxg:TableView AutoWidth="True" />
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+    </Grid>
+</dx:ThemedWindow>

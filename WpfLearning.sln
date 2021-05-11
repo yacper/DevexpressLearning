@@ -234,6 +234,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataGrid_CustomEditor", "De
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "inplace editors", "inplace editors", "{D264A8D3-36EB-426E-B250-79F17BEC2187}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataGrid_AssignComboboxToColumn", "Devexpress\Controls\DataGrid\DataGrid_AssignComboboxToColumn\DataGrid_AssignComboboxToColumn.csproj", "{FA9FEFC7-D3F3-4129-AC15-5B469E360DA3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -642,6 +644,14 @@ Global
 		{266E9082-647B-4232-8434-CDB5B3534B06}.Release|Any CPU.Build.0 = Release|Any CPU
 		{266E9082-647B-4232-8434-CDB5B3534B06}.Release|x86.ActiveCfg = Release|Any CPU
 		{266E9082-647B-4232-8434-CDB5B3534B06}.Release|x86.Build.0 = Release|Any CPU
+		{FA9FEFC7-D3F3-4129-AC15-5B469E360DA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA9FEFC7-D3F3-4129-AC15-5B469E360DA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA9FEFC7-D3F3-4129-AC15-5B469E360DA3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FA9FEFC7-D3F3-4129-AC15-5B469E360DA3}.Debug|x86.Build.0 = Debug|Any CPU
+		{FA9FEFC7-D3F3-4129-AC15-5B469E360DA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA9FEFC7-D3F3-4129-AC15-5B469E360DA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA9FEFC7-D3F3-4129-AC15-5B469E360DA3}.Release|x86.ActiveCfg = Release|Any CPU
+		{FA9FEFC7-D3F3-4129-AC15-5B469E360DA3}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -756,6 +766,7 @@ Global
 		{9B2FAEDE-DDF3-4C1D-9D6F-43525091ECF8} = {2881B10E-18CE-4236-9090-3DF1F3D466C6}
 		{266E9082-647B-4232-8434-CDB5B3534B06} = {D264A8D3-36EB-426E-B250-79F17BEC2187}
 		{D264A8D3-36EB-426E-B250-79F17BEC2187} = {2881B10E-18CE-4236-9090-3DF1F3D466C6}
+		{FA9FEFC7-D3F3-4129-AC15-5B469E360DA3} = {D264A8D3-36EB-426E-B250-79F17BEC2187}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A26D33EA-3064-49AC-AC3B-E5AB2383890D}
