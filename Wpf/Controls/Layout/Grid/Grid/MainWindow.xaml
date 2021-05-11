@@ -6,22 +6,32 @@
         xmlns:local="clr-namespace:Grid"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+	<DockPanel >
+		<Menu DockPanel.Dock="Top">
+			<MenuItem Header="_File">
+				<MenuItem Header="_GridSplitter" Click="GridSplitter_Click" />
 
-		<Grid ShowGridLines="True">
-			<Grid.RowDefinitions>
-				<RowDefinition></RowDefinition>
-				<RowDefinition></RowDefinition>
-			</Grid.RowDefinitions>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition></ColumnDefinition>
-				<ColumnDefinition></ColumnDefinition>
-				<ColumnDefinition></ColumnDefinition>
-			</Grid.ColumnDefinitions>
-			<Button Grid.Row="0" Grid.Column="0">Top Left</Button>
-			<Button Grid.Row="0" Grid.Column="1">Middle Left</Button>
-			<Button Grid.Row="1" Grid.Column="2">Button Right</Button>
-			<Button Grid.Row="1" Grid.Column="1">Button Middle</Button>
+				<Separator />
+				<MenuItem Header="_Exit" />
+			</MenuItem>
+		</Menu>
+		<Grid>
+
+			<Grid ShowGridLines="True">
+				<Grid.RowDefinitions>
+					<RowDefinition></RowDefinition>
+					<RowDefinition></RowDefinition>
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition></ColumnDefinition>
+					<ColumnDefinition></ColumnDefinition>
+					<ColumnDefinition></ColumnDefinition>
+				</Grid.ColumnDefinitions>
+				<Button Grid.Row="0" Grid.Column="0">Top Left</Button>
+				<Button Grid.Row="0" Grid.Column="1">Middle Left</Button>
+				<Button Grid.Row="1" Grid.Column="2">Button Right</Button>
+				<Button Grid.Row="1" Grid.Column="1">Button Middle</Button>
+			</Grid>
 		</Grid>
-	</Grid>
+	</DockPanel>
 </Window>

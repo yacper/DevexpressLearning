@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +23,12 @@ namespace Grid
 		public MainWindow()
 		{
 			InitializeComponent();
+		}
+
+		private void GridSplitter_Click(object sender, RoutedEventArgs e)
+		{
+			GridSplitter window = new GridSplitter();
+			window.Show();
 		}
 	}
 }
