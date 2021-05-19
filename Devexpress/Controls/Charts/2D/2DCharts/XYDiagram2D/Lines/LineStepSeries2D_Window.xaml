@@ -1,0 +1,51 @@
+<Window x:Class="_2DCharts.XYDiagram2D.LineStepSeries2D_Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_2DCharts.XYDiagram2D"
+        xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+        mc:Ignorable="d"
+        Title="LineStepSeries2D_Window" Height="450" Width="800">
+	<Grid>
+		<dxc:ChartControl Name="chartControl1">
+			<dxc:ChartControl.Diagram>
+				<dxc:XYDiagram2D>
+					<dxc:XYDiagram2D.Series>
+						<dxc:LineStepSeries2D ColorEach="True" ArgumentScaleType="DateTime">
+							<dxc:LineStepSeries2D.Points>
+								<dxc:SeriesPoint Argument="1/1/2005" Value="138.7" />
+								<dxc:SeriesPoint Argument="2/1/2005" Value="141.4" />
+								<dxc:SeriesPoint Argument="3/1/2005" Value="159.5" />
+								<dxc:SeriesPoint Argument="4/1/2005" Value="160.7" />
+								<dxc:SeriesPoint Argument="5/1/2005" Value="148.8" />
+								<dxc:SeriesPoint Argument="6/1/2005" Value="166.6" />
+							</dxc:LineStepSeries2D.Points>
+						</dxc:LineStepSeries2D>
+					</dxc:XYDiagram2D.Series>
+					<dxc:XYDiagram2D.AxisY>
+						<dxc:AxisY2D>
+							<dxc:AxisY2D.Range>
+								<dxc:AxisRange dxc:AxisY2D.AlwaysShowZeroLevel="False" />
+							</dxc:AxisY2D.Range>
+							<dxc:AxisY2D.Title>
+								<dxc:AxisTitle Content="Cents per Gallon" />
+							</dxc:AxisY2D.Title>
+						</dxc:AxisY2D>
+					</dxc:XYDiagram2D.AxisY>
+					<dxc:XYDiagram2D.AxisX>
+						<dxc:AxisX2D GridLinesVisible="True" DateTimeMeasureUnit="Month" DateTimeGridAlignment="Month">
+							<dxc:AxisX2D.DateTimeOptions>
+								<dxc:DateTimeOptions Format="MonthAndYear" />
+							</dxc:AxisX2D.DateTimeOptions>
+						</dxc:AxisX2D>
+					</dxc:XYDiagram2D.AxisX>
+				</dxc:XYDiagram2D>
+			</dxc:ChartControl.Diagram>
+			<dxc:ChartControl.Titles>
+				<dxc:Title Dock="Top" HorizontalAlignment="Center" Content="U.S. Fuel Oil Prices" />
+			</dxc:ChartControl.Titles>
+		</dxc:ChartControl>
+	</Grid>
+
+</Window>

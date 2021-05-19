@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>_1_BindChartSeriesToData</RootNamespace>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="DevExpress.WindowsDesktop.Wpf" Version="20.2.*" />
+    <PackageReference Include="devexpress.windowsdesktop.wpf.dashboard" Version="20.2.6" />
+  </ItemGroup>    
+</Project>
