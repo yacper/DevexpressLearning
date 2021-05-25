@@ -1,5 +1,6 @@
 *.suo
 *.user
+*.asta.bak
 .vs/
 [Bb]in/
 [Oo]bj/
