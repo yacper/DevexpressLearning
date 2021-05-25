@@ -9,5 +9,16 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="DevExpress.WindowsDesktop.Wpf" Version="20.2.*" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Circular Gauges\CircularGauge_Window2.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Circular Gauges\CircularGauge_Window2.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>    
 </Project>

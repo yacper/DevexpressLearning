@@ -1,0 +1,62 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+	<Color x:Key="GreenColor">#FF43A047</Color>
+    <Color x:Key="WarnColor">#FFF2B32E</Color>
+    <Color x:Key="FatalColor">#FFB90D0D</Color>
+    <Color x:Key="NoneColor">#00FFFFFF</Color>
+    <SolidColorBrush x:Key="GreenColorBrush" Color="{DynamicResource GreenColor}" />
+    <SolidColorBrush x:Key="WarnColorBrush" Color="{DynamicResource WarnColor}" />
+    <SolidColorBrush x:Key="FatalColorBrush" Color="{DynamicResource FatalColor}" />
+
+
+	<EllipseGeometry x:Key="CircleGeo" Center="0,0" RadiusX="1" RadiusY="1" />
+
+	<DrawingImage x:Key="IconStateNone" >
+        <DrawingImage.Drawing>
+            <GeometryDrawing Geometry="{DynamicResource CircleGeo}" Brush="Gray"/>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+	<DrawingImage x:Key="IconStateGreen" >
+        <DrawingImage.Drawing>
+            <GeometryDrawing Geometry="{DynamicResource CircleGeo}" Brush="{DynamicResource GreenColorBrush}"/>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+	<DrawingImage x:Key="IconStateFatal" >
+        <DrawingImage.Drawing>
+            <GeometryDrawing Geometry="{DynamicResource CircleGeo}" Brush="{DynamicResource FatalColorBrush}"/>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+	<DrawingImage x:Key="IconStateWarn" >
+        <DrawingImage.Drawing>
+			<GeometryDrawing Brush="{DynamicResource WarnColorBrush}">
+				<GeometryDrawing.Geometry>
+					<EllipseGeometry Center="0,0" RadiusX="1" RadiusY="1" />
+				</GeometryDrawing.Geometry>
+			</GeometryDrawing>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+   
+
+
+
+
+	<Geometry x:Key="GearGeometry">F0 M12,12z M0,0z M11.006,4.999L9.897,4.999C9.801,4.619,9.656,4.258,9.461,3.928L10.227,3.163C10.616,2.775 10.616,2.146 10.227,1.757 9.838,1.369 9.209,1.369 8.821,1.757L8.06,2.519C7.727,2.318,7.367,2.156,6.98,2.057L6.98,0.994C6.979,0.445 6.535,0 5.985,0 5.435,0 4.991,0.445 4.991,0.994L4.991,2.052C4.607,2.148,4.248,2.304,3.917,2.501L3.168,1.752C2.779,1.363 2.149,1.363 1.762,1.752 1.373,2.141 1.373,2.77 1.762,3.158L2.515,3.911C2.315,4.246,2.16,4.61,2.064,4.999L0.994,4.999C0.445,4.999 0,5.444 0,5.993 0,6.542 0.445,6.988 0.994,6.988L2.075,6.988C2.178,7.365,2.33,7.723,2.53,8.049L1.742,8.836C1.353,9.225 1.353,9.854 1.742,10.243 2.131,10.631 2.76,10.631 3.148,10.243L3.955,9.436C4.277,9.623,4.621,9.776,4.991,9.87L4.991,11.005C4.991,11.554 5.436,12 5.985,12 6.534,12 6.979,11.554 6.979,11.005L6.979,9.865C7.354,9.769,7.705,9.618,8.029,9.427L8.84,10.238C9.229,10.627 9.859,10.627 10.247,10.238 10.635,9.849 10.635,9.219 10.247,8.832L9.437,8.022C9.626,7.703,9.777,7.357,9.875,6.989L11.006,6.989C11.555,6.988 12,6.542 12,5.993 12,5.444 11.555,4.999 11.006,4.999z M5.981,8.022C4.843,8.022 3.922,7.101 3.922,5.963 3.922,4.827 4.843,3.904 5.981,3.904 7.118,3.904 8.04,4.826 8.04,5.963 8.04,7.102 7.118,8.022 5.981,8.022z</Geometry>
+
+	<DrawingImage x:Key="CardBack" >
+        <DrawingImage.Drawing>
+            <GeometryDrawing Geometry="{DynamicResource GearGeometry}" Brush="IndianRed"/>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+
+
+    <SolidColorBrush x:Key="IconGearBrushColor" Color="{Binding Color, Source={StaticResource WhiteColor}}" />
+    <DrawingGroup x:Key="IconGearDrawingGroup" ClipGeometry="M0,0 V12 H12 V0 H0 Z">
+        <DrawingGroup>
+            <GeometryDrawing Brush="{DynamicResource IconGearBrushColor}" Geometry="{StaticResource IconGearGeometry}" />
+        </DrawingGroup>
+    </DrawingGroup>
+    <DrawingImage x:Key="IconGearDrawingImage" Drawing="{StaticResource IconGearDrawingGroup}"  />
+
+
+</ResourceDictionary>

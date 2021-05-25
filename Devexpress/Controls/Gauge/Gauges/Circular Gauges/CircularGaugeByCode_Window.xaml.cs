@@ -35,6 +35,8 @@ namespace Gauges.Circular_Gauges
                                  MajorIntervalCount = 12,
                                  MinorIntervalCount = 5
                              };
+            // mode
+            gauge.Model = new CircularThemeableModel();
 
             // needles
             scale.Needles.Add(new ArcScaleNeedle(){Value = 3});

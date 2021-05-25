@@ -34,7 +34,8 @@ namespace Gauges
 		}
 		public void LinearScaleByCode_Click(object sender, EventArgs e)
 		{
-			CircularGaugeByCode_Window win = new CircularGaugeByCode_Window();
+			//CircularGaugeByCode_Window win = new CircularGaugeByCode_Window();
+			LinearGaugeByCode_Window win = new LinearGaugeByCode_Window();
 				win.Show();
 		}
 

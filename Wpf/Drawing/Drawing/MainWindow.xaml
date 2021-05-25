@@ -1,0 +1,24 @@
+<Window x:Class="Drawing.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Drawing"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition/>
+			<RowDefinition/>
+		</Grid.RowDefinitions>
+        <Button Foreground="#FFECA0A0" Background="{x:Null}"  >
+			<Image Grid.Row="0" Source="{DynamicResource IconGearDrawingImage}"  ></Image>
+        </Button>
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+			<Image  Source="{DynamicResource IconGreen} " Width="50" Height="50" ></Image>
+			<Image  Source="{DynamicResource IconWarn} " Width="50" Height="50" ></Image>
+			<Image  Source="{DynamicResource IconFatal} " Width="50" Height="50" ></Image>
+		</StackPanel>
+
+	</Grid>
+</Window>
