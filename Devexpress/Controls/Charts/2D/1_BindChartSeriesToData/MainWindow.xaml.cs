@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DevExpress.Xpf.Charts;
 
 namespace _1_BindChartSeriesToData
 {
@@ -21,7 +22,15 @@ namespace _1_BindChartSeriesToData
 	/// </summary>
 	public partial class MainWindow
 	{
-		public MainWindow() { InitializeComponent(); }
+		public MainWindow()
+		{
+			InitializeComponent();
+
+			//XYDiagram2D diagram = (XYDiagram2D)ChartCon.Diagram;
+			//diagram.EnableAxisXNavigation = true;
+			//diagram.EnableAxisYNavigation = true;
+//			diagram.ZoomIn(new Point(500, 500));
+		}
 	}
 
   public class MainWindowViewModel {

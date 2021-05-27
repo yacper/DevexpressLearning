@@ -11,7 +11,7 @@
 		<BindChartSeriesToData:MainWindowViewModel/>
 	</Window.DataContext>
 	<Grid>
-		<dxc:ChartControl DataSource="{Binding Data}">
+		<dxc:ChartControl x:Name="ChartCon"  DataSource="{Binding Data}">
 			<dxc:ChartControl.CrosshairOptions>
 				<dxc:CrosshairOptions ShowArgumentLabels="True" 
                                       ShowValueLabels="True" 
@@ -24,11 +24,23 @@
 			<dxc:ChartControl.Legends>
 				<dxc:Legend/>
 			</dxc:ChartControl.Legends>
-			<dxc:XYDiagram2D>
+			<dxc:XYDiagram2D EnableAxisXNavigation="True" EnableAxisYNavigation="True" >
 				<dxc:BarSideBySideSeries2D DisplayName="Annual Statistics" 
                                            ArgumentDataMember="Argument" 
                                            ValueDataMember="Value" 
                                            CrosshairLabelPattern="${V:f2}M"/>
+
+				<dxc:XYDiagram2D.DefaultPane>
+					<dxc:Pane>
+						<dxc:Pane.AxisXScrollBarOptions>
+							<dxc:ScrollBarOptions Visible="False"/>
+						</dxc:Pane.AxisXScrollBarOptions>
+						<dxc:Pane.AxisYScrollBarOptions>
+							<dxc:ScrollBarOptions  Alignment="Far" BarThickness="12" Visible="True">
+							</dxc:ScrollBarOptions>
+						</dxc:Pane.AxisYScrollBarOptions>
+					</dxc:Pane>
+				</dxc:XYDiagram2D.DefaultPane>
 			</dxc:XYDiagram2D>
 		</dxc:ChartControl>
 	</Grid>

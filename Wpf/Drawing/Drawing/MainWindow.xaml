@@ -15,9 +15,9 @@
 			<Image Grid.Row="0" Source="{DynamicResource IconGearDrawingImage}"  ></Image>
         </Button>
         <StackPanel Grid.Row="1" Orientation="Horizontal">
-			<Image  Source="{DynamicResource IconGreen} " Width="50" Height="50" ></Image>
-			<Image  Source="{DynamicResource IconWarn} " Width="50" Height="50" ></Image>
-			<Image  Source="{DynamicResource IconFatal} " Width="50" Height="50" ></Image>
+			<Image  Source="{DynamicResource IconStateGreen} " Width="50" Height="50" ></Image>
+			<Image  Source="{DynamicResource IconStateWarn} " Width="50" Height="50" ></Image>
+			<Image  Source="{DynamicResource IconStateFatal} " Width="50" Height="50" ></Image>
 		</StackPanel>
 
 	</Grid>

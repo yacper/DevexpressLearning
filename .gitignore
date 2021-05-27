@@ -1,6 +1,7 @@
 *.suo
 *.user
 *.asta.bak
+*.asta.lock
 .vs/
 [Bb]in/
 [Oo]bj/
