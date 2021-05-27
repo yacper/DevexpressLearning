@@ -1,3 +1,4 @@
+using DotEx.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,15 @@ namespace DataTrigger
 		{
 			InitializeComponent();
 			DataContext = this;
+
+
+			int[] a = {1, 2, 3};
+			int[] b = { 2, 3, 4};
+
+			List<int> aa = a.Except(b, p => p, (a,b)=>a==b).ToList();
+			List<int> bb = b.Except(a, p => p, (a,b)=>a==b).ToList();
+
+
 		}
 
 

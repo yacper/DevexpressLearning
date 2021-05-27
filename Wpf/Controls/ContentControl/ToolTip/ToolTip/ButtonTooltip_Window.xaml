@@ -1,0 +1,58 @@
+<!--https://www.cnblogs.com/xhzi/archive/2010/11/30/1891694.html-->
+<Window x:Class="ToolTip.ButtonTooltip_Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ToolTip"
+        mc:Ignorable="d"
+        Title="ButtonTooltip_Window" Height="450" Width="800">
+    <StackPanel Orientation="Vertical">
+		<Button Content="Tooltip演示">
+			<Button.ToolTip>
+				<ToolTip>
+					<StackPanel>
+						<TextBlock FontWeight="Heavy">两个TextBlock</TextBlock>
+						<TextBlock>简要介绍：Tooltip是一个十分强大的功能组件！</TextBlock>
+					</StackPanel>
+				</ToolTip>
+			</Button.ToolTip>
+		</Button>
+
+		<Button Content="禁用控件Tooltip演示" IsEnabled="False" ToolTip="禁用按钮" ToolTipService.ShowOnDisabled="True" />
+
+
+		<Button Content="丰富多彩的Tooltip">
+			<Button.ToolTip>
+				<StackPanel Background="Azure" Height="200" Width="200">
+					<StackPanel Background="LightBlue" Height="30" Width="200" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" >
+						<Image VerticalAlignment="Top" Width="30" Height="30" Source="Images\qianqian.png" />
+						<TextBlock>
+							<Run FontFamily="微软雅黑" FontSize="18" FontWeight="Normal" Text="天使的翅膀"/>
+						</TextBlock>
+					</StackPanel>
+					<StackPanel Width="200">
+						<TextBlock TextWrapping="Wrap" Width="100" Height="98" HorizontalAlignment="Center" VerticalAlignment="Top">
+							<Run FontFamily="Verdana" FontSize="11" Foreground="Black" Text="落叶随风将要去何方只留给天空美丽场"/>
+						</TextBlock>
+					</StackPanel>
+				</StackPanel>
+			</Button.ToolTip>
+		</Button>
+
+
+		<Button Width="120" Height="30" Content="带阴效果Tooltip">
+			<Button.ToolTip>
+				<Border Background="LightBlue" Margin="-4,0,-4,-3">
+					<Border.BitmapEffect>
+						<OuterGlowBitmapEffect></OuterGlowBitmapEffect>
+					</Border.BitmapEffect>
+					<Label>简单带阴影效果Tooltip</Label>
+				</Border>
+			</Button.ToolTip>
+		</Button>
+
+
+
+	</StackPanel>
+</Window>

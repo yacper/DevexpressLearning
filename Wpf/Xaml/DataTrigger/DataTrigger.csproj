@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\DotEx\DotEx.Common\DotEx.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Page Update="DrawingImages.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
