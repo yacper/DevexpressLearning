@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DevExpress.Mvvm;
+using DevExpress.Mvvm.UI;
+using DevExpress.Xpf.Bars;
+using DevExpress.Xpf.Controls;
+using DevExpress.Xpf.Core;
+using DevExpress.Xpf.Dialogs;
+using DevExpress.Xpf.Docking;
+using DevExpress.Xpf.LayoutControl;
+using DevExpress.Xpf.WindowsUI;
+using DevExpress.Xpf.WindowsUI.Navigation;
+using LayoutGroup = DevExpress.Xpf.LayoutControl.LayoutGroup;
 
 namespace _1.ViewModelBase
 {
@@ -23,6 +34,7 @@ namespace _1.ViewModelBase
 		public MainWindow()
 		{
 			InitializeComponent();
+
 		}
 	}
 }

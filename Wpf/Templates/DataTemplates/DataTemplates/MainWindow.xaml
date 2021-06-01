@@ -1,4 +1,4 @@
-﻿<Window x:Class="DataTemplates.MainWindow"
+<Window x:Class="DataTemplates.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,6 +7,16 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+		<Button>
+			<Button.ContentTemplate>
+				<DataTemplate>
+					<StackPanel Orientation="Horizontal">
+                        <TextBlock Text="hello"></TextBlock>
+                        <Button Width="100"></Button>
+					</StackPanel>
+				</DataTemplate>
+			</Button.ContentTemplate>
+		</Button>
 
     </Grid>
 </Window>
