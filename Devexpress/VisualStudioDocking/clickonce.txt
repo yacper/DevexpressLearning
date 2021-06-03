@@ -1,0 +1,5 @@
+DevExpress.Xpf.PropertyGrid.v{DXVersion}
+DevExpress.Xpf.Themes.VS2019Blue.v{DXVersion}
+DevExpress.Xpf.Themes.VS2019Dark.v{DXVersion}
+DevExpress.Xpf.Themes.VS2019Light.v{DXVersion}
+DevExpress.Xpf.Themes.Office2010Blue.v{DXVersion}

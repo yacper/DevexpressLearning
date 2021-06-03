@@ -47,7 +47,7 @@
                         </dxa:AccordionControl>
                     </dxdo:LayoutPanel>
                     <dxdo:DocumentGroup Name="Documents" DestroyOnClosingChildren="False"
-                                        dxmvvm:UIRegion.Region="{x:Static common1:Regions.Documents}" ItemHeight="*" ItemWidth="200">
+                                        dxmvvm:UIRegion.Region="{x:Static common1:Regions.Documents}" ItemWidth="200">
                         <dxdo:DocumentGroup.ItemStyle>
                             <Style TargetType="dxdo:LayoutPanel">
                                 <Setter Property="Caption" Value="{Binding Caption}"/>

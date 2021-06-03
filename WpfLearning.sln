@@ -287,7 +287,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ControlTemplates", "Wpf\Tem
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Layouts", "Devexpress\Controls\LayoutManagement\Layouts\Layouts.csproj", "{A09CD85E-EA7C-438D-B3E9-AD451AEDE1AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MIF.Main", "Devexpress\MVVM\MIF\MIF.Main\MIF.Main.csproj", "{CB18FB40-D79F-49E7-913D-31CE7A269923}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MIF.Main", "Devexpress\MVVM\MIF\MIF.Main\MIF.Main.csproj", "{CB18FB40-D79F-49E7-913D-31CE7A269923}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisualStudioDocking", "Devexpress\VisualStudioDocking\VisualStudioDocking.csproj", "{57490D0A-67B4-4E2D-B5ED-FEF0B7D9505D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -801,6 +803,14 @@ Global
 		{CB18FB40-D79F-49E7-913D-31CE7A269923}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CB18FB40-D79F-49E7-913D-31CE7A269923}.Release|x86.ActiveCfg = Release|Any CPU
 		{CB18FB40-D79F-49E7-913D-31CE7A269923}.Release|x86.Build.0 = Release|Any CPU
+		{57490D0A-67B4-4E2D-B5ED-FEF0B7D9505D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57490D0A-67B4-4E2D-B5ED-FEF0B7D9505D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57490D0A-67B4-4E2D-B5ED-FEF0B7D9505D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{57490D0A-67B4-4E2D-B5ED-FEF0B7D9505D}.Debug|x86.Build.0 = Debug|Any CPU
+		{57490D0A-67B4-4E2D-B5ED-FEF0B7D9505D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57490D0A-67B4-4E2D-B5ED-FEF0B7D9505D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57490D0A-67B4-4E2D-B5ED-FEF0B7D9505D}.Release|x86.ActiveCfg = Release|Any CPU
+		{57490D0A-67B4-4E2D-B5ED-FEF0B7D9505D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -938,6 +948,7 @@ Global
 		{8034F662-150D-4B76-B3BE-677D3D7297C4} = {1C482C49-47F9-478D-BEBF-6CA2397A03AE}
 		{A09CD85E-EA7C-438D-B3E9-AD451AEDE1AD} = {B6AFCA45-650E-4141-94D2-8C283219A4D3}
 		{CB18FB40-D79F-49E7-913D-31CE7A269923} = {437371A7-0B6A-472D-9B42-3E61BB39F883}
+		{57490D0A-67B4-4E2D-B5ED-FEF0B7D9505D} = {4D11C6A8-05E6-46F1-861A-FD8B1DB66FCD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A26D33EA-3064-49AC-AC3B-E5AB2383890D}
