@@ -1,0 +1,42 @@
+<Window x:Class="Layouts.TileLayoutControl_Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Layouts"
+		xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+        xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+        mc:Ignorable="d"
+        Title="TileLayoutControl_Window" Height="450" Width="800"
+		DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        >
+	<Grid>
+		<dxlc:TileLayoutControl Background="{x:Null}" Name="tileLayoutControl1">
+			<dxlc:Tile Header="System Information" Name="tile1">
+				<Image Name="image1" Stretch="None" Source="Images/System.png" />
+			</dxlc:Tile>
+			<dxlc:Tile Header="Research" Name="tile2" Size="Small" Background="#FFC14AAF">
+				<Image Name="image2" Stretch="None" Source="Images/Research.png" />
+			</dxlc:Tile>
+			<dxlc:Tile Header="Statistics" Name="tile3" Size="Small" Background="#FF5CA332">
+				<Image Name="image3" Stretch="None" Source="Images/Statistics.png" />
+			</dxlc:Tile>
+			<dxlc:Tile Header="Rates" Name="tile4" Size="Large" dxlc:FlowLayoutControl.IsFlowBreak="True"
+                       HorizontalHeaderAlignment="Center">
+				<Image Name="image4" Stretch="None" Source="Images/Rates.png" />
+			</dxlc:Tile>
+			<dxlc:Tile Name="tile5" Size="Large"
+                       HorizontalHeaderAlignment="Center" Background="#FF666666"
+                       ContentSource="{Binding Agents}" ContentChangeInterval="00:00:03" AnimateContentChange="True">
+				<dxlc:Tile.ContentTemplate>
+					<DataTemplate>
+						<Grid>
+							<TextBlock Text="{Binding AgentName}" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+							<Image Source="{Binding PhotoSource}" Stretch="None" HorizontalAlignment="Right" VerticalAlignment="Top" />
+						</Grid>
+					</DataTemplate>
+				</dxlc:Tile.ContentTemplate>
+			</dxlc:Tile>
+		</dxlc:TileLayoutControl>
+	</Grid>
+</Window>

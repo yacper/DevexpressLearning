@@ -22,7 +22,7 @@
 							</dxg:GridControl.Columns>
 						</dxg:GridControl>
 					</dxdo:LayoutPanel>
-					<dxdo:LayoutPanel Caption="Panel2"  Name="panel2">
+					<dxdo:LayoutPanel Caption="Panel2"  Name="panel2" ItemHeight="*" ItemWidth="*">
                         <!--<dxSample:MyUserControl dx:DXSerializer.SerializationID="uc1" />-->
                         <dxSample:MyUserControl x:Name="uc1" />
 					</dxdo:LayoutPanel>

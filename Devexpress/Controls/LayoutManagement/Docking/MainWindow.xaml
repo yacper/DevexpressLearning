@@ -18,7 +18,7 @@
 					<dxdo:LayoutPanel Caption="Panel2"/>
 				</dxdo:FloatGroup>
 			</dxdo:DockLayoutManager.FloatGroups>
-			<dxdo:LayoutGroup Caption="LayoutRoot" Orientation="Vertical" >
+			<dxdo:LayoutGroup Caption="LayoutRoot" Orientation="Vertical" ItemHeight="*" ItemWidth="*" >
 				<dxdo:LayoutGroup Orientation="Horizontal">
 					<dxdo:LayoutPanel Caption="Panel1">
 						<Label Content="Label"/>

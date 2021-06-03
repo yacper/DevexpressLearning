@@ -1,0 +1,107 @@
+<dx:ThemedWindow 
+    x:Class="Layouts.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+	xmlns:lc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol" 
+    Title="MainWindow" Height="450" Width="800">
+
+	<Grid x:Name="LayoutRoot" Background="White">
+		<lc:LayoutControl View="Tabs" Orientation="Vertical" Background="#FFEAEAEA">
+
+			<lc:LayoutGroup Orientation="Horizontal">
+				<lc:LayoutGroup Orientation="Vertical">
+					<lc:LayoutItem Label="Item 1:">
+						<TextBox />
+					</lc:LayoutItem>
+					<lc:LayoutGroup Orientation="Horizontal">
+						<lc:LayoutItem Label="Item 2:">
+							<TextBox />
+						</lc:LayoutItem>
+						<lc:LayoutGroup Orientation="Vertical">
+							<lc:LayoutItem Label="Item 3:">
+								<TextBox />
+							</lc:LayoutItem>
+							<lc:LayoutItem Label="Item 4:">
+								<TextBox />
+							</lc:LayoutItem>
+						</lc:LayoutGroup>
+					</lc:LayoutGroup>
+				</lc:LayoutGroup>
+				<lc:LayoutGroup View="Tabs">
+					<lc:LayoutGroup Header="Tab 1" Orientation="Vertical">
+						<lc:LayoutItem Label="Item 5:">
+							<TextBox />
+						</lc:LayoutItem>
+						<lc:LayoutItem Label="Item 6:">
+							<TextBox />
+						</lc:LayoutItem>
+					</lc:LayoutGroup>
+					<lc:LayoutGroup Header="Tab 2">
+						<lc:LayoutItem Label="Item 7:">
+							<TextBox />
+						</lc:LayoutItem>
+						<lc:LayoutItem Label="Item 8:">
+							<TextBox />
+						</lc:LayoutItem>
+					</lc:LayoutGroup>
+				</lc:LayoutGroup>
+			</lc:LayoutGroup>
+			<lc:LayoutGroup Orientation="Horizontal">
+				<lc:LayoutItem Label="Item 9:" HorizontalAlignment="Left">
+					<TextBox Width="100" />
+				</lc:LayoutItem>
+				<lc:LayoutItem Label="Item 10:">
+					<TextBox />
+				</lc:LayoutItem>
+				<lc:LayoutItem Label="Item 11:" HorizontalAlignment="Right">
+					<TextBox Width="100" />
+				</lc:LayoutItem>
+			</lc:LayoutGroup>
+
+
+			<lc:LayoutGroup Orientation="Horizontal" View="Group" Header="Layout Group">
+				<lc:LayoutItem Label="Item 9:" HorizontalAlignment="Left">
+					<TextBox Width="100" />
+				</lc:LayoutItem>
+				<lc:LayoutItem Label="Item 10:">
+					<TextBox />
+				</lc:LayoutItem>
+				<lc:LayoutItem Label="Item 11:" HorizontalAlignment="Right">
+					<TextBox Width="100" />
+				</lc:LayoutItem>
+			</lc:LayoutGroup>
+
+			<lc:LayoutGroup Orientation="Vertical" View="GroupBox" Header="Layout Group" IsCollapsible="True">
+				<lc:LayoutItem Label="Item 9:" HorizontalAlignment="Left">
+					<TextBox Width="100" />
+				</lc:LayoutItem>
+				<lc:LayoutItem Label="Item 10:">
+					<TextBox />
+				</lc:LayoutItem>
+				<lc:LayoutItem Label="Item 11:" HorizontalAlignment="Right">
+					<TextBox Width="100" />
+				</lc:LayoutItem>
+			</lc:LayoutGroup>
+
+
+			<lc:LayoutControl x:Name="layoutControl1" Background="#FFEAEAEA">
+				<lc:LayoutGroup View="Tabs" Width="200" >
+					<lc:LayoutGroup Orientation="Vertical" Header="Tab 1">
+						<lc:LayoutItem Label="Item A">
+							<TextBox   Text=""/>
+						</lc:LayoutItem>
+						<lc:LayoutItem Label="Item B">
+							<TextBox   Text=""/>
+						</lc:LayoutItem>
+					</lc:LayoutGroup>
+					<lc:LayoutItem Label="Item 2" lc:LayoutControl.TabHeader="Tabbed Item">
+						<TextBox   Text=""/>
+					</lc:LayoutItem>
+				</lc:LayoutGroup>
+			</lc:LayoutControl>
+
+		</lc:LayoutControl>
+	</Grid>
+
+</dx:ThemedWindow>

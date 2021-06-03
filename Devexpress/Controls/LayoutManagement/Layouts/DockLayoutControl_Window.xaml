@@ -1,0 +1,22 @@
+<Window x:Class="Layouts.DockLayoutControl_Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Layouts"
+        xmlns:lc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+        mc:Ignorable="d"
+        Title="DockLayoutControl_Window" Height="450" Width="800">
+
+	<Grid x:Name="LayoutRoot" Background="White">
+		<lc:DockLayoutControl AllowItemSizing="True" AllowHorizontalSizing="True" AllowVerticalSizing="True">
+			<lc:GroupBox lc:DockLayoutControl.Dock="Top" Height="70" Header="GroupBox 1" />
+			<lc:GroupBox lc:DockLayoutControl.Dock="Right" Header="GroupBox 2" />
+			<lc:GroupBox lc:DockLayoutControl.Dock="Bottom" Height="70" Header="GroupBox 3" />
+			<lc:GroupBox lc:DockLayoutControl.Dock="Left" Header="GroupBox 4" />
+			<lc:GroupBox lc:DockLayoutControl.Dock="Top" Height="70" Header="GroupBox 5" />
+			<lc:GroupBox lc:DockLayoutControl.Dock="Client" Header="GroupBox 6" />
+		</lc:DockLayoutControl>
+	</Grid>
+
+</Window>
