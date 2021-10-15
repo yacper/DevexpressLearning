@@ -291,7 +291,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MIF.Main", "Devexpress\MVVM
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisualStudioDocking", "Devexpress\VisualStudioDocking\VisualStudioDocking.csproj", "{57490D0A-67B4-4E2D-B5ED-FEF0B7D9505D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GdiplusWriteableBitmap", "Wpf\Drawing\GdiplusWriteableBitmap\GdiplusWriteableBitmap.csproj", "{7AF6B299-57EC-4B3C-A0CD-1421603F32B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GdiplusWriteableBitmap", "Wpf\Drawing\GdiplusWriteableBitmap\GdiplusWriteableBitmap.csproj", "{7AF6B299-57EC-4B3C-A0CD-1421603F32B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotEx.UI.Drawing", "DotEx\DotEx.UI.Drawing\DotEx.UI.Drawing.csproj", "{5B04CFEF-2AD8-4441-87C2-62A6834F3470}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkiaSharpTest", "Wpf\Drawing\SkiaSharpTest\SkiaSharpTest.csproj", "{AC2BCC91-FEFD-44E3-9286-D3F5F39AF608}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -821,6 +825,22 @@ Global
 		{7AF6B299-57EC-4B3C-A0CD-1421603F32B4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7AF6B299-57EC-4B3C-A0CD-1421603F32B4}.Release|x86.ActiveCfg = Release|Any CPU
 		{7AF6B299-57EC-4B3C-A0CD-1421603F32B4}.Release|x86.Build.0 = Release|Any CPU
+		{5B04CFEF-2AD8-4441-87C2-62A6834F3470}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B04CFEF-2AD8-4441-87C2-62A6834F3470}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B04CFEF-2AD8-4441-87C2-62A6834F3470}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5B04CFEF-2AD8-4441-87C2-62A6834F3470}.Debug|x86.Build.0 = Debug|Any CPU
+		{5B04CFEF-2AD8-4441-87C2-62A6834F3470}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B04CFEF-2AD8-4441-87C2-62A6834F3470}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B04CFEF-2AD8-4441-87C2-62A6834F3470}.Release|x86.ActiveCfg = Release|Any CPU
+		{5B04CFEF-2AD8-4441-87C2-62A6834F3470}.Release|x86.Build.0 = Release|Any CPU
+		{AC2BCC91-FEFD-44E3-9286-D3F5F39AF608}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC2BCC91-FEFD-44E3-9286-D3F5F39AF608}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC2BCC91-FEFD-44E3-9286-D3F5F39AF608}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AC2BCC91-FEFD-44E3-9286-D3F5F39AF608}.Debug|x86.Build.0 = Debug|Any CPU
+		{AC2BCC91-FEFD-44E3-9286-D3F5F39AF608}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC2BCC91-FEFD-44E3-9286-D3F5F39AF608}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC2BCC91-FEFD-44E3-9286-D3F5F39AF608}.Release|x86.ActiveCfg = Release|Any CPU
+		{AC2BCC91-FEFD-44E3-9286-D3F5F39AF608}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -960,6 +980,7 @@ Global
 		{CB18FB40-D79F-49E7-913D-31CE7A269923} = {437371A7-0B6A-472D-9B42-3E61BB39F883}
 		{57490D0A-67B4-4E2D-B5ED-FEF0B7D9505D} = {4D11C6A8-05E6-46F1-861A-FD8B1DB66FCD}
 		{7AF6B299-57EC-4B3C-A0CD-1421603F32B4} = {2FF27569-3CD8-437D-B3FA-1A2290341903}
+		{AC2BCC91-FEFD-44E3-9286-D3F5F39AF608} = {2FF27569-3CD8-437D-B3FA-1A2290341903}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A26D33EA-3064-49AC-AC3B-E5AB2383890D}
