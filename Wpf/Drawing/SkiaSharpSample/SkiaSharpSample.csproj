@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>True</UseWindowsForms>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>$(DefineConstants)TRACE;__DESKTOP__;__WPF__</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>$(DefineConstants)TRACE;__DESKTOP__;__WPF__</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Resource Include="icon.ico">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+
+
+  <ItemGroup>
+    <PackageReference Include="SkiaSharp.HarfBuzz" Version="2.80.3" />
+    <PackageReference Include="SkiaSharp.Views.WindowsForms" Version="2.80.3" />
+    <PackageReference Include="SkiaSharp.Views.WPF" Version="2.80.3" />
+  </ItemGroup>
+
+
+</Project>
