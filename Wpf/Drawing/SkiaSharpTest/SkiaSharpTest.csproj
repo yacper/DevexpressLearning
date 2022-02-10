@@ -7,7 +7,120 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Banana.jpg" />
+    <None Remove="Resources\BananaMatte.png" />
+    <None Remove="Resources\BrickWallTile.jpg" />
+    <None Remove="Resources\FacePalm.jpg" />
+    <None Remove="Resources\monkey.png" />
+    <None Remove="Resources\MonkeyFace.png" />
+    <None Remove="Resources\MountainClimbers.jpg" />
+    <None Remove="Resources\Newtons_cradle_animation_book_2.gif" />
+    <None Remove="Resources\PageOfCode.png" />
+    <None Remove="Resources\SeatedMonkey.jpg" />
+    <None Remove="Resources\SeatedMonkeyMatte.png" />
+    <None Remove="Resources\StoneWallTile.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Banana.jpg" />
+    <EmbeddedResource Include="Resources\BananaMatte.png" />
+    <EmbeddedResource Include="Resources\BrickWallTile.jpg" />
+    <EmbeddedResource Include="Resources\FacePalm.jpg" />
+    <EmbeddedResource Include="Resources\monkey.png" />
+    <EmbeddedResource Include="Resources\MonkeyFace.png" />
+    <EmbeddedResource Include="Resources\MountainClimbers.jpg" />
+    <EmbeddedResource Include="Resources\Newtons_cradle_animation_book_2.gif" />
+    <EmbeddedResource Include="Resources\PageOfCode.png" />
+    <EmbeddedResource Include="Resources\SeatedMonkey.jpg" />
+    <EmbeddedResource Include="Resources\SeatedMonkeyMatte.png" />
+    <EmbeddedResource Include="Resources\StoneWallTile.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="SkiaSharp.Views.WPF" Version="2.80.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Basics\BitmapDissolvePage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Basics\BasicBitmapsPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Basics\CodeMoreCodePage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Basics\PulsatingEllipsePage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Basics\ExpandingCirclesPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Basics\EllipseFillPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Basics\FramedTextPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Basics\SurfaceSizePage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Effects\AnimatedBitmapTilePage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Effects\AlgorithmicBrickWallPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Paths\PathFillPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Basics\BitmapDissolvePage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Basics\BasicBitmapsPage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Basics\CodeMoreCodePage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Basics\PulsatingEllipsePage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Basics\ExpandingCirclesPage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Basics\EllipseFillPage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Basics\FramedTextPage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Basics\SurfaceSizePage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Effects\AnimatedBitmapTilePage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Effects\AlgorithmicBrickWallPage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Paths\PathFillPage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
 
 </Project>

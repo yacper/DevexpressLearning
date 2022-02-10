@@ -1,0 +1,34 @@
+﻿<Window x:Class="SkiaSharpTest.PulsatingEllipsePage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SkiaSharpTest"
+        xmlns:wpf="clr-namespace:SkiaSharp.Views.WPF;assembly=SkiaSharp.Views.WPF"
+        mc:Ignorable="d"
+        Title="SkElementPage" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Slider x:Name="slider"
+                Grid.Row="0"
+                Maximum="10"
+                Minimum="0.1"
+                Value="5"
+                Margin="20, 0" />
+
+        <Label Grid.Row="1"
+               Content="{Binding Source={x:Reference slider},
+                              Path=Value,
+                              StringFormat='Cycle time = {0:F1} seconds'}"
+                />
+
+        <wpf:SKElement x:Name="canvasView"
+                           Grid.Row="2"
+                           PaintSurface="OnCanvasViewPaintSurface" />
+    </Grid>
+</Window>
