@@ -23,6 +23,7 @@ namespace SkiaSharpSample.Samples
             using (var paint = new SKPaint())
             {
                 paint.TextSize = 32.0f;
+                paint.TextAlign = SKTextAlign.Left;
                 paint.IsAntialias = true;
                 paint.Color = (SKColor)0xFF4281A4;
                 paint.IsStroke = false;
@@ -33,6 +34,7 @@ namespace SkiaSharpSample.Samples
             using (var paint = new SKPaint())
             {
                 paint.TextSize = 32.0f;
+                paint.TextAlign = SKTextAlign.Left;
                 paint.IsAntialias = true;
                 paint.Color = (SKColor)0xFF4281A4;
                 paint.IsStroke = false;
@@ -42,6 +44,7 @@ namespace SkiaSharpSample.Samples
             using (var paint = new SKPaint())
             {
                 paint.TextSize = 32.0f;
+                paint.TextAlign = SKTextAlign.Left;
                 paint.IsAntialias = true;
                 paint.Color = (SKColor)0xFF4284A4;
                 paint.IsStroke = false;
@@ -52,6 +55,7 @@ namespace SkiaSharpSample.Samples
             using (var paint = new SKPaint())
             {
                 paint.TextSize = 32.0f;
+                paint.TextAlign = SKTextAlign.Left;
                 paint.IsAntialias = true;
                 paint.Color = (SKColor)0xFF4284A4;
                 paint.IsStroke = false;
