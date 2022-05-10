@@ -17,6 +17,32 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Shared\Media\adobe-dng.dng" />
+    <None Remove="Shared\Media\animated-heart.gif" />
+    <None Remove="Shared\Media\baboon.png" />
+    <None Remove="Shared\Media\baby_tux.webp" />
+    <None Remove="Shared\Media\color-wheel.png" />
+    <None Remove="Shared\Media\content-font.ttf" />
+    <None Remove="Shared\Media\embedded-font.ttf" />
+    <None Remove="Shared\Media\logos.svg" />
+    <None Remove="Shared\Media\nine-patch.png" />
+    <None Remove="Shared\Media\opacity.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Shared\Media\adobe-dng.dng" />
+    <EmbeddedResource Include="Shared\Media\animated-heart.gif" />
+    <EmbeddedResource Include="Shared\Media\baboon.png" />
+    <EmbeddedResource Include="Shared\Media\baby_tux.webp" />
+    <EmbeddedResource Include="Shared\Media\color-wheel.png" />
+    <EmbeddedResource Include="Shared\Media\content-font.ttf" />
+    <EmbeddedResource Include="Shared\Media\embedded-font.ttf" />
+    <EmbeddedResource Include="Shared\Media\logos.svg" />
+    <EmbeddedResource Include="Shared\Media\nine-patch.png" />
+    <EmbeddedResource Include="Shared\Media\opacity.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="icon.ico">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
