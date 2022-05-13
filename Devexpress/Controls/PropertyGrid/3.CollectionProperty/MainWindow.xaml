@@ -1,13 +1,13 @@
-<core:ThemedWindow
+<dx:ThemedWindow
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
     xmlns:dxprg="http://schemas.devexpress.com/winfx/2008/xaml/propertygrid"
     xmlns:system="clr-namespace:System;assembly=System.Runtime"
-    xmlns:core="clr-namespace:DevExpress.Xpf.Core;assembly=DevExpress.Xpf.Core.v20.2"
+    xmlns:core="clr-namespace:DevExpress.Xpf.Core;assembly=DevExpress.Xpf.Cor"
     xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
-    xmlns:grid="clr-namespace:DevExpress.Xpf.Grid;assembly=DevExpress.Xpf.Grid.v20.2"
-    xmlns:propertyGrid="clr-namespace:DevExpress.Xpf.PropertyGrid;assembly=DevExpress.Xpf.PropertyGrid.v20.2"
+    xmlns:grid="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:propertyGrid="http://schemas.devexpress.com/winfx/2008/xaml/propertygrid"
     xmlns:dxPropertyGrid="clr-namespace:DXPropertyGrid" 
     xmlns:local="clr-namespace:pgrid_collection"
     x:Class="DXPropertyGrid.MainWindow"
@@ -36,7 +36,7 @@
                 <propertyGrid:PropertyDefinition Path="*.Phone" />
             </propertyGrid:CollectionDefinition>
         </propertyGrid:PropertyGridControl>
-        <grid:GridControl Name="grid" Grid.Column="0">
+        <dxg:GridControl Name="grid" Grid.Column="0">
             <grid:GridControl.Columns>
                 <grid:GridColumn FieldName="ProductName" />
                 <grid:GridColumn FieldName="Country" />
@@ -47,9 +47,9 @@
             <grid:GridControl.View>
                 <grid:TableView AllowEditing="False" />
             </grid:GridControl.View>
-        </grid:GridControl>
+        </dxg:GridControl>
 
 
 
     </Grid>
-</core:ThemedWindow>
+</dx:ThemedWindow>
