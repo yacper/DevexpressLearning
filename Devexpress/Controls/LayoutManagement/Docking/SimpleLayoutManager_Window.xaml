@@ -7,12 +7,13 @@
         mc:Ignorable="d"
     xmlns:dxdo="http://schemas.devexpress.com/winfx/2008/xaml/docking"
     xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
     Title="SimpleLayoutManager_Window" Height="450" Width="800"
 Closing="Window_Closing" Loaded="Window_Loaded"
         >
     <Grid>
 
-		<dxdo:DockLayoutManager x:Name="layoutManager">
+		<dxdo:DockLayoutManager x:Name="layoutManager" dxdo:RestoreLayoutOptions.RemoveOldPanels="False" dxdo:RestoreLayoutOptions.AddNewPanels="False">
 			<dxdo:LayoutGroup Caption="LayoutRoot" Orientation="Vertical" ItemHeight="*" ItemWidth="*" >
 				<dxdo:LayoutPanel Caption="Panel1"/>
 				<dxdo:LayoutPanel Caption="Panel2">
