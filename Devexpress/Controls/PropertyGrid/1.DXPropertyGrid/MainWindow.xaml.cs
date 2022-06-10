@@ -50,7 +50,9 @@ namespace DXPropertyGrid
 		public Gender Gender { get; set; }
 		public DateTime BirthDate { get; set; }
 		public string Phone { get; set; }
-	}
+
+        protected string _Phone;
+    }
 	public enum Gender { Male, Female }
 
 }
