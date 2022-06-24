@@ -56,16 +56,27 @@ namespace DXPropertyGrid
 		}
 	}
 
+public interface ICustomer
+{
+		 string Email { get; set; }
+	
+}
 
-	public class Customer
+public class CustomerBase : ICustomer
+{
+    [Category("Customer Info"), Description("Customer's full name")]
+    public string Name { get; set; }
+
+    [Category("Contact"), Description("Customer's email address")]
+    public string Email { get; set; }
+}
+
+
+public class Customer:CustomerBase
 	{
 		[Browsable(false), ReadOnly(true)]
 		public int ID { get; set; }
-		[Category("Customer Info"), Description("Customer's full name")]
-		public string Name { get; set; }
-		[Category("Contact"), Description("Customer's email address")]
-		public string Email { get; set; }
-		[Category("Contact"), Description("Customer's phone number")]
+        [Category("Contact"), Description("Customer's phone number")]
 		public string Phone { get; set; }
 		[Category("Order Info"), Description("Ordered items"), DisplayName("Ordered Items")]
 		public ProductList Products { get; set; }
@@ -75,6 +86,7 @@ namespace DXPropertyGrid
 	{
 		[DisplayName("ISBN")]
 		public int ID { get; set; }
+		[DefaultValue("hha")]
 		public string Author { get; set; }
 		public string Title { get; set; }
 		public double Price { get; set; }
