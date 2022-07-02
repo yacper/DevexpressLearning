@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Plotly.NET" Version="3.0.0" />
+    <PackageReference Include="Plotly.NET.CSharp" Version="0.0.1" />
+    <PackageReference Include="Plotly.NET.ImageExport" Version="3.0.0" />
+    <PackageReference Include="Plotly.NET.Interactive" Version="3.0.1" />
+  </ItemGroup>
+
+</Project>
