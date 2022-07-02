@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="DockLayoutManagerPractice.Views.ErrorList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DockLayoutManagerPractice.Views"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             >
+             <!--dx:DXSerializer.SerializationID="ErrorListID">-->
+    <Grid >
+        <ListView Background="Transparent" BorderThickness="0">
+            <ListView.View>
+                <GridView>
+                    <GridView.ColumnHeaderContainerStyle>
+                        <Style TargetType="GridViewColumnHeader">
+                            <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ListView}}" />
+                            <Setter Property="Background" Value="Transparent" />
+                            <Setter Property="IsHitTestVisible" Value="False" />
+                        </Style>
+                    </GridView.ColumnHeaderContainerStyle>
+                    <GridViewColumn Width="15" />
+                    <GridViewColumn Width="15"/>
+                    <GridViewColumn Header="Description" Width="300" />
+                    <GridViewColumn Header="File" Width="50" />
+                    <GridViewColumn Header="Line" Width="50"/>
+                    <GridViewColumn Header="Column" Width="50"/>
+                    <GridViewColumn Header="Project" Width="50"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+    </Grid>
+</UserControl>
