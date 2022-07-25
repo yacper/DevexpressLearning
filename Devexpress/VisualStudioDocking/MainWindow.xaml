@@ -68,7 +68,7 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <dxdo:DockLayoutManager x:Name="DemoDockContainer" FloatingMode="Desktop" ItemsSource="{Binding Workspaces}"
-                                    DockingStyle="VS2010" FloatingDocumentContainer="DocumentHost">
+                                    DockingStyle="Default" FloatingDocumentContainer="DocumentHost">
                 <dxmvvm:Interaction.Behaviors>
                     <local:DockingSerializationDialogService/>
                 </dxmvvm:Interaction.Behaviors>

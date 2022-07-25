@@ -299,8 +299,8 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-     <PackageReference Include="DevExpress.Wpf.Demos" Version="21.1.4" />
-    <PackageReference Include="DevExpress.Wpf" Version="21.1.4" />
-    <PackageReference Include="DevExpress.Wpf.Themes.All" Version="21.1.4" />
+     <PackageReference Include="DevExpress.Wpf.Demos" Version="21.*" />
+    <PackageReference Include="DevExpress.Wpf" Version="21.*" />
+    <PackageReference Include="DevExpress.Wpf.Themes.All" Version="21.*" />
   </ItemGroup>
 </Project>
