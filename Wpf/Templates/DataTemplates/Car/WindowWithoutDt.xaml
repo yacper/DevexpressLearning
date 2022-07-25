@@ -1,0 +1,23 @@
+﻿<Window x:Class="Cars.WindowWithoutDt"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Window Without Datatemplate" Height="350" Width="623" xmlns:my="clr-namespace:Cars"
+        xmlns:cars="clr-namespace:Cars">
+    <!--<DataTemplate>
+            <Grid>
+                <StackPanel Orientation="Horizontal">
+                    <Grid>
+                        <Rectangle Stroke="Yellow" Fill="Orange" Width="{Binding Price}"></Rectangle>
+                        <TextBlock Text="{Binding Year}"></TextBlock>
+                    </Grid>
+                    <TextBlock Text="{Binding Price}" Margin="5,0"></TextBlock>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>-->
+    <StackPanel Orientation="Horizontal" Margin="5">
+        <cars:CarDetailView x:Name="carDetailView1" />
+        <ListBox x:Name="listBoxCars" Width="180" Margin="5,0" SelectionChanged="listBoxCars_SelectionChanged">
+            
+        </ListBox>
+    </StackPanel>
+</Window>
