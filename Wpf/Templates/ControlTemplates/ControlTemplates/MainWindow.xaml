@@ -6,7 +6,23 @@
         xmlns:local="clr-namespace:ControlTemplates"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
-    </Grid>
+    <Window.Resources>
+        <ControlTemplate x:Key="roundbutton" TargetType="Button">
+            <Grid>
+                <Ellipse x:Name="backgroundElement" Fill="{TemplateBinding Background}" Stroke="{TemplateBinding Foreground}" />
+                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Fill" TargetName="backgroundElement" Value="AliceBlue"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Window.Resources>
+    <StackPanel Margin="10">
+        <Label>Unstyled Button</Label>
+        <Button>Button 1</Button>
+        <Label>Rounded Button</Label>
+        <Button Template="{StaticResource roundbutton}" Width="65" Height="65">Button 2</Button>
+    </StackPanel>
 </Window>
