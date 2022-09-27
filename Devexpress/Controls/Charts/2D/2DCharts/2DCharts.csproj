@@ -8,7 +8,7 @@
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="DevExpress.Wpf" Version="21.2.5" />
-    <PackageReference Include="DevExpress.Wpf.Themes.All" Version="21.2.5" />
+    <PackageReference Include="DevExpress.Wpf" Version="22.1.4" />
+    <PackageReference Include="DevExpress.Wpf.Themes.All" Version="22.1.4" />
   </ItemGroup>    
 </Project>

@@ -8,6 +8,6 @@
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="DevExpress.WindowsDesktop.Wpf" Version="20.2.*" />
+    <PackageReference Include="DevExpress.Wpf" Version="22.1.*" />
   </ItemGroup>    
 </Project>
