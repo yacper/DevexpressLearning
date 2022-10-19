@@ -1,12 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using DevExpress.Mvvm;
 
-using DevExpress.Mvvm;
-namespace _1.ViewModelBase
-{
-
-    public class MainViewModel : DevExpress.Mvvm.ViewModelBase {
+namespace Example.ViewModel {
+    public class MainViewModel : ViewModelBase {
         public string FirstName {
             get { return GetProperty(() => FirstName); }
             set { SetProperty(() => FirstName, value, UpdateFullName); }
@@ -44,5 +39,4 @@ namespace _1.ViewModelBase
             ShowMessageCommand = new DelegateCommand<string>(ShowMessage, CanShowMessage);
         }
     }
-	
 }
