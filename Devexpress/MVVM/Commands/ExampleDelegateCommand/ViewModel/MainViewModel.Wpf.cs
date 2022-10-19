@@ -1,4 +1,6 @@
-﻿using DevExpress.Mvvm;
+﻿// https://docs.devexpress.com/WPF/17353/mvvm-framework/commands/delegate-commands
+
+using DevExpress.Mvvm;
 using System.Windows;
 
 namespace Example.ViewModel
