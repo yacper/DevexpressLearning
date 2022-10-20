@@ -36,14 +36,14 @@ namespace NeoDataGrid.TestView
     public partial class RGridControlTest : UserControl
     {
         public ObservableCollection<Persion> Persions { get; set; }
-        public ObservableCollection<RowTools> RowTools { get; set; }
+        public RowTools RowTools { get; set; }
 
         public RGridControlTest()
         {
             InitializeComponent();
             DataContext = this;
 
-            RowTools = new ObservableCollection<RowTools>();
+            RowTools = CreateRowTools();
             Persions = new ObservableCollection<Persion>();
 
             InitData();
@@ -60,8 +60,6 @@ namespace NeoDataGrid.TestView
         {
             for(int i = 0; i < 10; i++)
             {
-                RowTools.Add(CreateRowTools());
-
                 Persions.Add(new Persion() 
                 {
                     Name = i.ToString(),

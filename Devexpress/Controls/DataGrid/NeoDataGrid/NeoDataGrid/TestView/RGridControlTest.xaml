@@ -7,20 +7,20 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" >
     <Grid>
-        <control:RGridControl x:Name="_RGridControl" RowTools="{Binding RowTools}" RItemSource="{Binding Persions}">
-            <control:RGridColumn RFieldName="Name" Width="*">
+        <control:RGridControl x:Name="_RGridControl" DefaultTools="{Binding RowTools}" ItemsSource="{Binding Persions}">
+            <dxg:GridColumn FieldName="Name" Width="*">
                 
-            </control:RGridColumn>
+            </dxg:GridColumn>
             <control:RGridControl.View>
-                <dxg:TreeListView AllowDragDrop="True"                                   
+                <dxg:TableView AllowDragDrop="True"                                   
                                   ShowHorizontalLines="False" 
                                   ShowVerticalLines="False">
-                    <dxg:TreeListView.RowStyle>
+                    <dxg:TableView.RowStyle>
                         <Style TargetType="dxg:RowControl">
                             <Setter Property="Template" Value="{StaticResource RowControlTest}"></Setter>
                         </Style>
-                    </dxg:TreeListView.RowStyle>
-                </dxg:TreeListView>
+                    </dxg:TableView.RowStyle>
+                </dxg:TableView>
             </control:RGridControl.View>
         </control:RGridControl>
     </Grid>

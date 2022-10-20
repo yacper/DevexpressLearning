@@ -26,27 +26,10 @@ namespace NeoDataGrid.Control
                 rTlv!.DropLimtEnum = (TLVDragDropLimtEnum)e.NewValue;
             }));
 
-        public static DependencyProperty RChildNodesPathProperty = DependencyProperty.Register("RChildNodesPath", typeof(string), typeof(RTreeListView),
-            new PropertyMetadata(null, (d, e) => 
-            {
-                var rTlv = d as RTreeListView;
-                rTlv!.RChildNodesPath = (string)e.NewValue;
-            }));
-
         public TLVDragDropLimtEnum DropLimtEnum 
         {
             get => (TLVDragDropLimtEnum)GetValue(DropLimtEnumProperty);
             set => SetValue(DropLimtEnumProperty, value);
-        }
-
-        public string RChildNodesPath
-        {
-            get => (string)GetValue(RChildNodesPathProperty);
-            set 
-            {
-                SetValue(RChildNodesPathProperty, value);
-                SetCNPath(value);
-            }
         }
 
         public RTreeListView() : base()
@@ -101,12 +84,6 @@ namespace NeoDataGrid.Control
         {
             var rc = GetRowElementByRowHandle(idx) as RowControl;            
             return (rc!.DataContext as TreeListRowData)!.Node;
-        }
-
-        private void SetCNPath(string rCPath)
-        {
-            if(this.Parent is RGridControl && (this.Parent as RGridControl)!.RItemSource != null)
-                ChildNodesPath = $"{nameof(CombineDataItem.Source)}.{rCPath}";
         }
 
         private List<TreeListNode> dragNodes;

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using DevExpress.Xpf.Grid;
+using DevExpress.Xpf.Grid.TreeList;
+using NeoDataGrid.Control;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -61,6 +64,36 @@ namespace NeoTrader
                 return Visibility.Visible;
 
             return IsMuseMove ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class RowControlDataContentConverter : IMultiValueConverter
+    {
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (values == null || values.Length != 2 || !(values[0] is RowData || values[0] is TreeListRowData) || !(values[1] is RGridControl))
+                return null;
+
+            var rgc = values[1] as RGridControl;
+            if (values[0] is RowData)
+            {
+                if (rgc!.RowTools == null || rgc!.RowTools.Count() == 0)
+                    return rgc!.DefaultTools;
+
+                return rgc!.RowTools.First();
+            }
+
+            int level = (values[0] as TreeListRowData)!.Node.ActualLevel;
+            if(rgc!.RowTools == null || rgc!.RowTools.Count() == 0)
+                return rgc!.DefaultTools;
+
+            var tools = rgc.RowTools.Where(_ => { return _.Level == level; }).FirstOrDefault();
+            return tools == null ? rgc.DefaultTools : tools;
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)

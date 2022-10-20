@@ -11,7 +11,9 @@
                     xmlns:dxdot="http://schemas.devexpress.com/winfx/2008/xaml/docking/themekeys" 
                     xmlns:dxgt="http://schemas.devexpress.com/winfx/2008/xaml/grid/themekeys"
                     xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
-                    xmlns:system="clr-namespace:System;assembly=mscorlib" xmlns:local="clr-namespace:NeoTrader">
+                    xmlns:system="clr-namespace:System;assembly=mscorlib" 
+                    xmlns:control="clr-namespace:NeoDataGrid.Control"
+                    xmlns:local="clr-namespace:NeoTrader">
 
     <!--#region Color Brush-->
     <Color x:Key="ChartTopBarBackGroundColor">#FF00325A</Color>
@@ -301,6 +303,7 @@
     </Style>
     
     <local:TableRowToolsVisibleConverter x:Key="TableRowToolsVisibleConverter"></local:TableRowToolsVisibleConverter>
+    <local:RowControlDataContentConverter x:Key="RowControlDataContentConverter"></local:RowControlDataContentConverter>
     <ControlTemplate x:Key="{dxgt:GridRowThemeKey ResourceKey=RowTemplate}" TargetType="dxg:RowControl" >
         <Grid Height="{StaticResource TableRowHeight}" >
             <Border x:Name="Background" Background="{TemplateBinding Background}" />
@@ -365,7 +368,6 @@
             <ListView x:Name="PART_TOOLS"                       
                       Style="{StaticResource HorizontalListViewStyle}"                       
                       HorizontalAlignment="Right"
-                      DataContext="{Binding Row}"
                       ItemContainerStyle="{StaticResource TransparentListViewItemStyle}" 
                       ItemsSource="{Binding ToolVMs}" 
                       SelectedItem="{Binding SelectedToolVm}" 
@@ -377,6 +379,12 @@
                         <Binding RelativeSource="{RelativeSource AncestorLevel=1,AncestorType=dxg:RowControl,Mode=FindAncestor}" Path="IsMouseOver"></Binding>
                     </MultiBinding>
                 </ListView.Visibility>
+                <ListView.DataContext>
+                    <MultiBinding Converter="{StaticResource RowControlDataContentConverter}">
+                        <Binding Path=""></Binding>
+                        <Binding RelativeSource="{RelativeSource Mode=FindAncestor,AncestorLevel=1,AncestorType=control:RGridControl}"></Binding>
+                    </MultiBinding>
+                </ListView.DataContext>
             </ListView>
         </Grid>
         <ControlTemplate.Triggers>

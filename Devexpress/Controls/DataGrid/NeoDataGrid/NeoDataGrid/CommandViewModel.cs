@@ -148,26 +148,28 @@ public interface IRowTools
     public RowToolsViewMode SelectedToolVm { get; }
     public bool ToolIsFixed { get; }
     public Brush ToolsBgBrush { get; }
-    
-
+    public int Level { get;  }
 }
 
 public class RowTools : IRowTools
 {
-    public ObservableCollection<RowToolsViewMode> ToolVMs { get; protected set; }  //  tools 实体
-
-    public RowToolsViewMode SelectedToolVm { get; set; }     // 当前选中的控件
-
-    public bool ToolIsFixed { get; set; }                 // tools  是否固定在 row上
-    public Brush ToolsBgBrush { get; set; }
-
+    public ObservableCollection<RowToolsViewMode> ToolVMs { get; protected set; }   //  tools 实体
+    public RowToolsViewMode SelectedToolVm { get; set; }                            // 当前选中的控件
+    public bool ToolIsFixed { get; set; }                                           // tools  是否固定在 row上
+    public Brush ToolsBgBrush { get; set; } 
+    public int Level { get; set; }                                                  // 作用的 RowControl Level
     public RowTools(bool toolIsFixed = false)
     {
+        Level = -1;
         ToolVMs = new();
         ToolIsFixed = toolIsFixed;
         ToolsBgBrush = Brushes.Transparent;
     }
 
+    public RowTools(int level, bool toolIsFixed = false): this(toolIsFixed)
+    {
+        Level = level;
+    }
 
     public void AddVM(RowToolsViewMode vm)
     {
