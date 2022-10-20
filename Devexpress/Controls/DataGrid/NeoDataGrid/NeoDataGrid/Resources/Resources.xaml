@@ -1,0 +1,415 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"                                        
+                    xmlns:dxdo="http://schemas.devexpress.com/winfx/2008/xaml/docking"
+                    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+                    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                    xmlns:dxa="http://schemas.devexpress.com/winfx/2008/xaml/accordion"
+                    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"                                        
+                    xmlns:dxdove="http://schemas.devexpress.com/winfx/2008/xaml/docking/visualelements"                     
+                    xmlns:cs="colorscheme_ignorable_uri"                     
+                    xmlns:dxdot="http://schemas.devexpress.com/winfx/2008/xaml/docking/themekeys" 
+                    xmlns:dxgt="http://schemas.devexpress.com/winfx/2008/xaml/grid/themekeys"
+                    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib" xmlns:local="clr-namespace:NeoTrader">
+
+    <!--#region Color Brush-->
+    <Color x:Key="ChartTopBarBackGroundColor">#FF00325A</Color>
+    <SolidColorBrush x:Key="ChartTopBarBackGroundSolidColorBrush" Color="{DynamicResource ChartTopBarBackGroundColor}"></SolidColorBrush>
+    <Color x:Key="ChartTopBarBorderColor">#FF194E6A</Color>
+    <SolidColorBrush x:Key="ChartTopBarBorderSolidColorBrush" Color="{DynamicResource ChartTopBarBorderColor}"></SolidColorBrush>
+    <Color x:Key="UiMaskHoverColor">#B0CCCCCC</Color>
+    <SolidColorBrush x:Key="UiMaskHoverBrush" Color="{DynamicResource UiMaskHoverColor}"></SolidColorBrush>
+    <Color x:Key="UiMaskCheckedColor">#FF32617A</Color>
+    <SolidColorBrush x:Key="UiMaskCheckedBrush" Color="{DynamicResource UiMaskCheckedColor}"></SolidColorBrush>
+    <Color x:Key="TableRowToolsBgColor">#FF007ACC</Color>
+    <SolidColorBrush x:Key="TableRowToolsBgBrush" Color="{DynamicResource TableRowToolsBgColor}"></SolidColorBrush>
+    
+    <!--#endregion-->
+
+    <SolidColorBrush x:Key="{dxgt:GridRowThemeKey ResourceKey=BorderUnfocusedBrush}" Color="#FF3F3F46"></SolidColorBrush>
+    <SolidColorBrush x:Key="{dxgt:GridRowThemeKey ResourceKey=BorderFocusedBrush}" Color="#FF3F3F46" x:Uid="@Color=SelectionBackground" />
+    
+    <Color x:Key="RowHoverColor">#2a2e39</Color>
+    <SolidColorBrush x:Key="RowHoverBrush" Color="{DynamicResource RowHoverColor}"></SolidColorBrush>
+
+    <!--#region Size-->
+    <system:Double x:Key="TableRowHeight">22</system:Double>
+    <system:Double x:Key="ControlBoxContentSize">22</system:Double>
+    <system:Double x:Key="ToolSize">22</system:Double>
+    <system:Double x:Key="LayoutPanelCaptionImageSize">16</system:Double>
+    <!--#endregion-->
+    
+    <system:Double x:Key="NormalImageSize">20</system:Double>
+
+    <!--#region Geometry-->
+    <Geometry x:Key="RightArrowPath">M1,0 L3,0 L6,3.5 L3,7 L1,7 L4,3.5z</Geometry>
+    <Geometry x:Key="DownArrowPath">M0,1 L3.5,4 L7,1 L7,3 L3.5,6 L0,3z</Geometry>
+    <!--#endregion-->
+
+    
+    <local:DisplayModeToVisibleConverter x:Key="DisplayModeToVisibleConverter"></local:DisplayModeToVisibleConverter>
+    <Style TargetType="TextBox" x:Key="BottomTextStyle">
+        <Setter Property="IsReadOnly" Value="True"/>
+        <Setter Property="AcceptsReturn" Value="True"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="VerticalContentAlignment" Value="Top"/>
+        <Setter Property="Padding" Value="7,5"/>
+    </Style>
+
+   
+
+    <!--#endregion-->
+    
+    <Style x:Key="ButtonStyle" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid ToolTip="{Binding DisplayName}">
+                        <Border x:Name="Border"                                 
+                                BorderBrush="{TemplateBinding BorderBrush}"                                 
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}"/>
+                        <Grid Opacity="{TemplateBinding Opacity}" >
+                            <Grid Margin="5,3,5,3" >
+                                <dx:DXImage Source="{Binding Glyph}" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <dx:DXImage.Visibility>
+                                        <MultiBinding Converter="{StaticResource DisplayModeToVisibleConverter}">
+                                            <Binding Path="DisplayMode"></Binding>
+                                            <Binding>
+                                                <Binding.Source>
+                                                    <local:DisplayMode>Glyph</local:DisplayMode>
+                                                </Binding.Source>
+                                            </Binding>
+                                        </MultiBinding>
+                                    </dx:DXImage.Visibility>
+                                </dx:DXImage>
+                                <TextBlock Text="{Binding DisplayName}" 
+                                           HorizontalAlignment="Center"
+                                           TextWrapping="NoWrap"
+                                           TextTrimming="CharacterEllipsis"
+                                           TextAlignment="{Binding DisplayTextAlign}" 
+                                           VerticalAlignment="Center" 
+                                           Width="{Binding DisplayTextWidth}">
+                                    <TextBlock.Visibility>
+                                        <MultiBinding Converter="{StaticResource DisplayModeToVisibleConverter}">
+                                            <Binding Path="DisplayMode"></Binding>
+                                            <Binding>
+                                                <Binding.Source>
+                                                    <local:DisplayMode>Content</local:DisplayMode>
+                                                </Binding.Source>
+                                            </Binding>
+                                        </MultiBinding>
+                                    </TextBlock.Visibility>
+                                </TextBlock>
+                                <DockPanel>
+                                    <dx:DXImage Width="{StaticResource NormalImageSize}" Source="{Binding Glyph}" Margin="0" DockPanel.Dock="{Binding GlyphDock}"></dx:DXImage>
+                                    <TextBlock Text="{Binding DisplayName}" 
+                                               Margin="3,0,3,0" 
+                                               TextAlignment="{Binding DisplayTextAlign}" 
+                                               TextWrapping="NoWrap"
+                                               TextTrimming="CharacterEllipsis"
+                                               HorizontalAlignment="Center" 
+                                               VerticalAlignment="Center" 
+                                               Width="{Binding DisplayTextWidth}"></TextBlock>
+                                    <DockPanel.Visibility>
+                                        <MultiBinding Converter="{StaticResource DisplayModeToVisibleConverter}">
+                                            <Binding Path="DisplayMode"></Binding>
+                                            <Binding>
+                                                <Binding.Source>
+                                                    <local:DisplayMode>ContentAndGlyph</local:DisplayMode>
+                                                </Binding.Source>
+                                            </Binding>
+                                        </MultiBinding>
+                                    </DockPanel.Visibility>
+                                </DockPanel>
+                            </Grid>
+                            <dx:DXImage Width="15" 
+                                        Height="15"
+                                        Margin="0,0,0,0"
+                                        HorizontalAlignment="Right" 
+                                        VerticalAlignment="Bottom" 
+                                        Visibility="{Binding TipGlyphShow,Converter={dx:BooleanToVisibilityConverter}}"
+                                        Source="{Binding TipGlyph}"></dx:DXImage>
+                            <Path HorizontalAlignment="Right" 
+                                      VerticalAlignment="Bottom" 
+                                      Data="M 4,0 L 4,4 L 0,4 L 4,0"  
+                                      Margin="0 0 1 1" 
+                                      Visibility="{Binding IsExpand, Converter={dxmvvm:BooleanToVisibilityConverter}}"
+                                      Fill="{TemplateBinding Foreground}"
+                                      IsHitTestVisible="false"/>
+                        </Grid>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Opacity" Value="0.7"></Setter>
+                            <!--<Setter Property="Background" TargetName="Border" Value="#1A1A1A1A"></Setter>-->
+                        </Trigger>
+
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Opacity" Value="0.9"></Setter>
+                            <Setter TargetName="Border"  Property="Background" Value="{StaticResource UiMaskHoverBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.5"></Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <DataTemplate x:Key="NormalButtonTemplate">
+        <ContentControl >
+            <Button Style="{StaticResource ButtonStyle}" 
+                    BorderBrush="{Binding BorderBrush}" 
+                    Background="{Binding BackgroundBrush}"                    
+                    Command="{Binding Command}"                      
+                    CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}"
+                    BorderThickness="{Binding BorderThickness}" ></Button>
+        </ContentControl>
+    </DataTemplate>
+
+    <DataTemplate x:Key="IconTextTemplate">
+        <ContentControl>
+            <Grid ToolTip="{Binding DisplayName}">
+                <Grid Opacity="{TemplateBinding Opacity}" >
+                    <Grid Margin="5,3,5,3" >
+                        <dx:DXImage Source="{Binding Glyph}" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <dx:DXImage.Visibility>
+                                <MultiBinding Converter="{StaticResource DisplayModeToVisibleConverter}">
+                                    <Binding Path="DisplayMode"></Binding>
+                                    <Binding>
+                                        <Binding.Source>
+                                            <local:DisplayMode>Glyph</local:DisplayMode>
+                                        </Binding.Source>
+                                    </Binding>
+                                </MultiBinding>
+                            </dx:DXImage.Visibility>
+                        </dx:DXImage>
+                        <TextBlock Text="{Binding DisplayName}" 
+                                   TextWrapping="NoWrap"
+                                   TextTrimming="CharacterEllipsis"
+                                   HorizontalAlignment="Center" 
+                                   VerticalAlignment="Center" 
+                                   TextAlignment="{Binding DisplayTextAlign}" 
+                                   Width="{Binding DisplayLen}">
+                            <TextBlock.Visibility>
+                                <MultiBinding Converter="{StaticResource DisplayModeToVisibleConverter}">
+                                    <Binding Path="DisplayMode"></Binding>
+                                    <Binding>
+                                        <Binding.Source>
+                                            <local:DisplayMode>Content</local:DisplayMode>
+                                        </Binding.Source>
+                                    </Binding>
+                                </MultiBinding>
+                            </TextBlock.Visibility>
+                        </TextBlock>
+                        <DockPanel>
+                            <dx:DXImage Source="{Binding Glyph}" Margin="0" DockPanel.Dock="{Binding IconDock}"></dx:DXImage>
+                            <TextBlock Text="{Binding DisplayName}" 
+                                       Margin="3,0,3,0" 
+                                       HorizontalAlignment="Center" 
+                                       TextAlignment="{Binding DisplayTextAlign}" 
+                                       TextWrapping="NoWrap"
+                                       TextTrimming="CharacterEllipsis"
+                                       VerticalAlignment="Center" 
+                                       Width="{Binding DisplayLen}"></TextBlock>
+                            <DockPanel.Visibility>
+                                <MultiBinding Converter="{StaticResource DisplayModeToVisibleConverter}">
+                                    <Binding Path="DisplayMode"></Binding>
+                                    <Binding>
+                                        <Binding.Source>
+                                            <local:DisplayMode>ContentAndGlyph</local:DisplayMode>
+                                        </Binding.Source>
+                                    </Binding>
+                                </MultiBinding>
+                            </DockPanel.Visibility>
+                        </DockPanel>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </ContentControl>
+    </DataTemplate>
+
+    <local:ButtonItemTemplaSelector x:Key="ButtonItemTemplaSelector"
+                                    IconTextTemplate="{StaticResource IconTextTemplate}"
+                                    NormalBtnTemplate="{StaticResource NormalButtonTemplate}"/>
+    
+    <Style x:Key="TransparentListViewItemStyle" TargetType="ListViewItem">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <ContentControl Content="{Binding}"                                    
+                                    ContentTemplateSelector="{StaticResource ButtonItemTemplaSelector}"></ContentControl>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="HorizontalListViewStyle" TargetType="ListView">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListView">
+                    <StackPanel x:Name="_StackPanel" 
+                                Background="{TemplateBinding Background}" 
+                                Orientation="Horizontal" 
+                                IsItemsHost="True" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <ControlTemplate x:Key="HorizontalListViewTemplate" TargetType="ListView">
+        <StackPanel x:Name="_StackPanel" Orientation="Horizontal" IsItemsHost="True" />
+    </ControlTemplate>
+    
+    <DataTemplate x:Key="ControlBoxContentTemplate">
+        <ListView ItemsSource="{Binding}"
+                  Background="Transparent"
+                  Style="{StaticResource HorizontalListViewStyle}"
+                  Height="{StaticResource ControlBoxContentSize}"                    
+                  ItemContainerStyle="{StaticResource TransparentListViewItemStyle}"></ListView>
+    </DataTemplate>
+
+    <DataTemplate x:Key="DefaultCaptionTemplate">
+        <ContentControl>
+            <TextBlock Text="{Binding}" HorizontalAlignment="Left" VerticalAlignment="Center" TextAlignment="Center"></TextBlock>
+        </ContentControl>
+    </DataTemplate>
+    <DataTemplate x:Key="ButtonsCaptionDataTemplate">
+        <ContentControl dxdove:DockPane.HitTestType="Content">
+            <ListView ItemsSource="{Binding}"                                     
+                      Template="{StaticResource HorizontalListViewTemplate}"
+                      Height="{StaticResource ControlBoxContentSize}"
+                      ItemContainerStyle="{StaticResource TransparentListViewItemStyle}"></ListView>
+        </ContentControl>
+    </DataTemplate>
+    
+   
+    <Style TargetType="dxg:RowControl">
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource RowHoverBrush}" />
+            </Trigger>
+            <DataTrigger Binding="{Binding Path=SelectionState}" Value="Focused">
+                <Setter Property="Background" Value="{DynamicResource TableRowToolsBgBrush}" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    
+    <local:TableRowToolsVisibleConverter x:Key="TableRowToolsVisibleConverter"></local:TableRowToolsVisibleConverter>
+    <ControlTemplate x:Key="{dxgt:GridRowThemeKey ResourceKey=RowTemplate}" TargetType="dxg:RowControl" >
+        <Grid Height="{StaticResource TableRowHeight}" >
+            <Border x:Name="Background" Background="{TemplateBinding Background}" />
+            <Border x:Name="BottomLine" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,0,0,1" VerticalAlignment="Bottom" />
+            <Grid x:Name="PART_LayoutPanel" />
+            <ListView x:Name="PART_TOOLS"                       
+                      Style="{StaticResource HorizontalListViewStyle}"                       
+                      HorizontalAlignment="Right"
+                      DataContext="{Binding Row}"
+                      ItemContainerStyle="{StaticResource TransparentListViewItemStyle}" 
+                      ItemsSource="{Binding ToolVMs}" 
+                      SelectedItem="{Binding SelectedToolVm}" 
+                      Margin="0,0,0,1"                      
+                      Background="{Binding ToolsBgBrush}">
+                <ListView.Visibility>
+                    <MultiBinding Converter="{StaticResource TableRowToolsVisibleConverter}">
+                        <Binding Path="ToolIsFixed"></Binding>
+                        <Binding RelativeSource="{RelativeSource AncestorLevel=1,AncestorType=dxg:RowControl,Mode=FindAncestor}" Path="IsMouseOver"></Binding>
+                    </MultiBinding>
+                </ListView.Visibility>
+            </ListView>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="ShowHorizontalLine" Value="False">
+                <Setter Property="Visibility" TargetName="BottomLine" Value="Collapsed" />
+            </Trigger>
+            <Trigger Property="ShowBottomLine" Value="True">
+                <Setter Property="Visibility" TargetName="BottomLine" Value="Visible" />
+            </Trigger>
+            <Trigger Property="FadeSelection" Value="True">
+                <!--<Setter Property="Background" Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=BorderUnfocusedBrush}}" />
+                <Setter Property="Foreground" Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=TextUnfocusedBrush}}" />-->
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource RowHoverBrush}" />
+            </Trigger>
+            <DataTrigger Binding="{Binding Path=SelectionState}" Value="Focused">
+                <Setter Property="Background" Value="{DynamicResource TableRowToolsBgBrush}" />
+            </DataTrigger>
+            <Trigger Property="ShowRowBreak" Value="True">
+                <Setter Property="BorderBrush" TargetName="BottomLine" Value="{StaticResource {dxgt:GridRowThemeKey ResourceKey=RowBreakBrush}}" />
+                <Setter Property="BorderThickness" TargetName="BottomLine" Value="{StaticResource {dxgt:GridRowThemeKey ResourceKey=RowBreakThickness}}" />
+            </Trigger>
+            <Trigger Property="FixedRowPosition" Value="Bottom">
+                <Setter Property="VerticalAlignment" TargetName="BottomLine" Value="Top" />
+            </Trigger>
+            <Trigger Property="IsLastFixedRow" Value="True">
+                <Setter Property="Background" TargetName="BottomLine" Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=RowSeparatorBrush}}" />
+                <Setter Property="BorderThickness" TargetName="BottomLine" Value="0,1,0,1" />
+            </Trigger>
+            <!-- <DataTrigger Binding="{Binding Path=(dxg:GridControl.ActiveView).DataControl.(dxi:AppearanceOptions.HasBackground), RelativeSource={RelativeSource Self}}" Value="True"> -->
+            <!--     <Setter Property="Background" Value="{Binding Path=(dxg:GridControl.ActiveView).DataControl.(dxi:AppearanceOptions.Background), RelativeSource={RelativeSource Self}}"/> -->
+            <!-- </DataTrigger> -->
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="RowControlTest" TargetType="dxg:RowControl" >
+        <Grid Height="{StaticResource TableRowHeight}" >
+            <Border x:Name="Background" Background="{TemplateBinding Background}" />
+            <Border x:Name="BottomLine" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,0,0,1" VerticalAlignment="Bottom" />
+            <Grid x:Name="PART_LayoutPanel" />
+            <ListView x:Name="PART_TOOLS"                       
+                      Style="{StaticResource HorizontalListViewStyle}"                       
+                      HorizontalAlignment="Right"
+                      DataContext="{Binding Row}"
+                      ItemContainerStyle="{StaticResource TransparentListViewItemStyle}" 
+                      ItemsSource="{Binding ToolVMs}" 
+                      SelectedItem="{Binding SelectedToolVm}" 
+                      Margin="0,0,0,1"                      
+                      Background="{Binding ToolsBgBrush}">
+                <ListView.Visibility>
+                    <MultiBinding Converter="{StaticResource TableRowToolsVisibleConverter}">
+                        <Binding Path="ToolIsFixed"></Binding>
+                        <Binding RelativeSource="{RelativeSource AncestorLevel=1,AncestorType=dxg:RowControl,Mode=FindAncestor}" Path="IsMouseOver"></Binding>
+                    </MultiBinding>
+                </ListView.Visibility>
+            </ListView>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="ShowHorizontalLine" Value="False">
+                <Setter Property="Visibility" TargetName="BottomLine" Value="Collapsed" />
+            </Trigger>
+            <Trigger Property="ShowBottomLine" Value="True">
+                <Setter Property="Visibility" TargetName="BottomLine" Value="Visible" />
+            </Trigger>
+            <Trigger Property="FadeSelection" Value="True">
+                <!--<Setter Property="Background" Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=BorderUnfocusedBrush}}" />
+                <Setter Property="Foreground" Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=TextUnfocusedBrush}}" />-->
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource RowHoverBrush}" />
+            </Trigger>
+            <DataTrigger Binding="{Binding Path=SelectionState}" Value="Focused">
+                <Setter Property="Background" Value="{DynamicResource TableRowToolsBgBrush}" />
+            </DataTrigger>
+            <Trigger Property="ShowRowBreak" Value="True">
+                <Setter Property="BorderBrush" TargetName="BottomLine" Value="{StaticResource {dxgt:GridRowThemeKey ResourceKey=RowBreakBrush}}" />
+                <Setter Property="BorderThickness" TargetName="BottomLine" Value="{StaticResource {dxgt:GridRowThemeKey ResourceKey=RowBreakThickness}}" />
+            </Trigger>
+            <Trigger Property="FixedRowPosition" Value="Bottom">
+                <Setter Property="VerticalAlignment" TargetName="BottomLine" Value="Top" />
+            </Trigger>
+            <Trigger Property="IsLastFixedRow" Value="True">
+                <Setter Property="Background" TargetName="BottomLine" Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=RowSeparatorBrush}}" />
+                <Setter Property="BorderThickness" TargetName="BottomLine" Value="0,1,0,1" />
+            </Trigger>
+            <!-- <DataTrigger Binding="{Binding Path=(dxg:GridControl.ActiveView).DataControl.(dxi:AppearanceOptions.HasBackground), RelativeSource={RelativeSource Self}}" Value="True"> -->
+            <!--     <Setter Property="Background" Value="{Binding Path=(dxg:GridControl.ActiveView).DataControl.(dxi:AppearanceOptions.Background), RelativeSource={RelativeSource Self}}"/> -->
+            <!-- </DataTrigger> -->
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+</ResourceDictionary>

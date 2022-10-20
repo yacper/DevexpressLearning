@@ -80,3 +80,140 @@ public class CommandViewModel : ViewModelBase
 
     private bool _IsChecked;
 }
+
+public enum DisplayMode
+{
+    Content = 0,
+    Glyph,
+    ContentAndGlyph
+}
+
+public class RowToolsViewMode: CommandViewModel
+{
+    public bool IsNormalUse { get; set; }                                   // 是否通用，通用显示在RowControl上, 不通用现在 More 下面    
+    public bool IsGlyphText { get; set; }                                   // 只是 文本和图片
+    public new DisplayMode DisplayMode                                      // 显示模式，扩展了父类，添加了单独的 Glyph 显示
+    {
+        get => _DisplayMode;
+        set => SetValue(ref _DisplayMode, value);
+    }
+    public override string DisplayName                                      // 显示文本
+    {
+        get => _DisplayName;
+        set => SetValue(ref _DisplayName, value);
+    }
+    public double DisplayTextWidth { get; set; }                              // 显示文本宽度
+    public Dock GlyphDock { get; set; }                                       // 图片 Dock 对齐方式    
+    public TextAlignment DisplayTextAlign { get; set; }                       // 显示文本对齐方式
+    public override ImageSource Glyph                                         // 显示的图片 
+    {
+        get => _Glyph;
+        set => SetValue(ref _Glyph, value);
+    }
+    public bool TipGlyphShow                                                  // 小标记是否显示
+    {
+        get => _TipGlyphShow;
+        set => SetValue(ref _TipGlyphShow, value);
+    }
+    public ImageSource TipGlyph { get; set; }                                 //  小标记，类似未读邮件的小红点标志
+    public bool IsExpand { get; set; }                                        // 按钮是否是下拉功能
+    public object ToolTip                                                     // ToolTip 
+    { 
+        get => _ToolTip;
+        set=>SetValue(ref _ToolTip, value); 
+    }
+    public Brush BackgroundBrush { get; set; }                                // 背景色
+    public Brush BorderBrush { get; set; }                                    // 边框色
+    public Thickness BorderThickness { get; set; }                            // 边框大小    
+
+    public RowToolsViewMode()
+    {
+        ToolTip = "";
+        
+        BorderBrush = Brushes.Transparent;
+        BorderThickness = new Thickness(0);
+        BackgroundBrush = Brushes.Transparent;
+    }
+
+    private DisplayMode _DisplayMode;
+    private string _DisplayName = "";
+    private ImageSource _Glyph;
+    private Object _ToolTip;
+    private bool _TipGlyphShow;
+}
+
+public interface IRowTools
+{
+    public ObservableCollection<RowToolsViewMode> ToolVMs { get; }
+    public RowToolsViewMode SelectedToolVm { get; }
+    public bool ToolIsFixed { get; }
+    public Brush ToolsBgBrush { get; }
+}
+
+public class RowTools : IRowTools
+{
+    public ObservableCollection<RowToolsViewMode> ToolVMs { get; protected set; }  //  tools 实体
+
+    public RowToolsViewMode SelectedToolVm { get; set; }     // 当前选中的控件
+
+    public bool ToolIsFixed { get; set; }                 // tools  是否固定在 row上
+    public Brush ToolsBgBrush { get; set; }
+
+    public RowTools(bool toolIsFixed = false)
+    {
+        ToolVMs = new();
+        ToolIsFixed = toolIsFixed;
+        ToolsBgBrush = Brushes.Transparent;
+    }
+
+
+    public void AddVM(RowToolsViewMode vm)
+    {
+        if (ToolVMs == null)
+            ToolVMs = new();
+        ToolVMs.Add(vm);
+    }
+
+    public void InsertVM(int idx, RowToolsViewMode vm)
+    {
+        if (ToolVMs == null)
+            ToolVMs = new();
+
+        if (idx < 0 || idx >= ToolVMs.Count)
+            throw new ArgumentOutOfRangeException($"{nameof(idx)}: {idx} 不合法");
+
+        ToolVMs.Insert(idx, vm);
+    }
+
+    public bool RemoveVM(RowToolsViewMode vm)
+    {
+        if (ToolVMs == null)
+            throw new Exception("ToolVMs 没有初始化");
+        return ToolVMs.Remove(vm);
+    }
+
+    public void RemoveVMAt(int idx)
+    {
+        if (idx < 0 || idx >= ToolVMs.Count)
+            throw new ArgumentOutOfRangeException("idx 参数合法");
+
+        if (ToolVMs == null)
+            throw new Exception("ToolVMs 没有初始化");
+
+        ToolVMs.RemoveAt(idx);
+    }
+
+    public void AppendVms(IEnumerable<RowToolsViewMode> vms)
+    {
+        if (vms == null || vms.Count() == 0)
+            return;
+
+        if (ToolVMs == null)
+            throw new Exception("ToolVMs 没有初始化");
+
+        foreach (var vm in vms)
+        {
+            ToolVMs.Add(vm);
+        }
+    }
+}

@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:NeoDataGrid"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
+    <Grid >
+        <Menu>
+            <MenuItem Header="Open RGridControlTest" Click="MenuItem_Click"></MenuItem>
+        </Menu>
     </Grid>
 </Window>
