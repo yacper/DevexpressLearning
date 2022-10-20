@@ -34,5 +34,14 @@ namespace NeoDataGrid
             window.Content = controlTest;
             window.Show();
         }
+
+        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            RTreeListViewTest treeViewTest = new RTreeListViewTest();
+
+            Window window = new Window();
+            window.Content = treeViewTest;
+            window.Show();
+        }
     }
 }

@@ -9,6 +9,7 @@
     <Grid >
         <Menu>
             <MenuItem Header="Open RGridControlTest" Click="MenuItem_Click"></MenuItem>
+            <MenuItem Header="RTreeListViewTest Test" Click="MenuItem_Click_1"></MenuItem>
         </Menu>
     </Grid>
 </Window>

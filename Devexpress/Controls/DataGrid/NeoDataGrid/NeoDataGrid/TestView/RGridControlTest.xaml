@@ -8,12 +8,11 @@
              d:DesignHeight="450" d:DesignWidth="800" >
     <Grid>
         <control:RGridControl x:Name="_RGridControl" RowTools="{Binding RowTools}" RItemSource="{Binding Persions}">
-            <dxg:GridColumn FieldName="Source.Name" Width="*">
+            <control:RGridColumn RFieldName="Name" Width="*">
                 
-            </dxg:GridColumn>
+            </control:RGridColumn>
             <control:RGridControl.View>
-                <dxg:TreeListView AllowDragDrop="True" 
-                                  
+                <dxg:TreeListView AllowDragDrop="True"                                   
                                   ShowHorizontalLines="False" 
                                   ShowVerticalLines="False">
                     <dxg:TreeListView.RowStyle>

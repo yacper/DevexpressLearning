@@ -148,6 +148,8 @@ public interface IRowTools
     public RowToolsViewMode SelectedToolVm { get; }
     public bool ToolIsFixed { get; }
     public Brush ToolsBgBrush { get; }
+    
+
 }
 
 public class RowTools : IRowTools

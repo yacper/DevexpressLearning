@@ -27,6 +27,7 @@ namespace NeoDataGrid.TestView
     {
         public string Name { get; set; }
         public int Age { get; set; }
+        public ObservableCollection<Child> Childs { get; set; }
     }
 
     /// <summary>
