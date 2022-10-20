@@ -97,8 +97,8 @@ namespace NeoDataGrid.Control
             if (e.Action == NotifyCollectionChangedAction.Add)
             {
                 var cItem = e.NewItems![0] as CombineDataItem;
-                (RowTools as IList)!.Insert(e.OldStartingIndex, cItem!.RowTools);
-                (RItemSource as IList)!.Insert(e.OldStartingIndex, cItem!.Source);                
+                (RowTools as IList)!.Insert(e.NewStartingIndex, cItem!.RowTools);
+                (RItemSource as IList)!.Insert(e.NewStartingIndex, cItem!.Source);                
             }
             else if(e.Action == NotifyCollectionChangedAction.Remove)
             {
