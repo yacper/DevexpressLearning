@@ -20,13 +20,13 @@
 		</StackPanel>
 
 		<StackPanel>
-			<Label Content="Binding关联控件-----------------" Margin="5 20" />
+			<Label Content="Element Binding()-----------------" Margin="5 20" />
 			<TextBox Text="{Binding Path=Value, ElementName=slider1}" />
 			<Slider x:Name="slider1" Maximum="100" Minimum="0" Margin="5" />
 		</StackPanel>
 
 		<StackPanel Background="AliceBlue">
-			<Label Content="MultiBinding(多路Binding)-----------------" Margin="5 20" />
+			<Label Content="MultiBinding()-----------------" Margin="5 20" />
 			<ListBox x:Name="listBoxPlane" Height="160" Margin="5">
 				<ListBox.ItemTemplate>
 					<DataTemplate>
