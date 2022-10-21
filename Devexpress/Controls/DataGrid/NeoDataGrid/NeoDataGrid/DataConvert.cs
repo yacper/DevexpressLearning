@@ -118,4 +118,44 @@ namespace NeoTrader
         }
     }
 
+    public class RowContrtolMoreContextDataConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value == null || !(value is RowTools))
+                return null;
+
+            RowTools tools = (RowTools)value;
+            var unuse = tools.ToolVms.Where(_ => { return !_.IsNormalUse; }).Count();
+            if (unuse > 0 && tools.MoreVm == null)
+                tools.CreateMoreVM();
+
+            return tools.MoreVm;
+
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class RowControlNormalUseListConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if(value == null || !(value is IEnumerable<RowToolsViewMode>))
+                return null;
+
+            return (value as IEnumerable<RowToolsViewMode>)!.Where(_ => { return _.IsNormalUse; });
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+
+
 }

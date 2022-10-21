@@ -305,6 +305,8 @@
     <local:TableRowToolsVisibleConverter x:Key="TableRowToolsVisibleConverter"></local:TableRowToolsVisibleConverter>
     <local:RowControlDataContentConverter x:Key="RowControlDataContentConverter"></local:RowControlDataContentConverter>
     <local:RowContorMoreVisibleConverter x:Key="RowContorMoreVisibleConverter"></local:RowContorMoreVisibleConverter>
+    <local:RowContrtolMoreContextDataConverter x:Key="RowContrtolMoreContextDataConverter"></local:RowContrtolMoreContextDataConverter>
+    <local:RowControlNormalUseListConverter x:Key="RowControlNormalUseListConverter"></local:RowControlNormalUseListConverter>
     <ControlTemplate x:Key="{dxgt:GridRowThemeKey ResourceKey=RowTemplate}" TargetType="dxg:RowControl" >
         <Grid Height="{StaticResource TableRowHeight}" >
             <Border x:Name="Background" Background="{TemplateBinding Background}" />
@@ -361,20 +363,10 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <ControlTemplate x:Key="RowControlTest" TargetType="dxg:RowControl"  >
-        <Grid Height="{StaticResource TableRowHeight}" Background="Transparent">
-            <Border x:Name="Background" Background="{TemplateBinding Background}" />
-            <Border x:Name="BottomLine" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,0,0,1" VerticalAlignment="Bottom" />
-            <Grid x:Name="PART_LayoutPanel" />
-            <DockPanel x:Name="PART_TOOLS">
-                <DockPanel.DataContext>
-                    <MultiBinding Converter="{StaticResource RowControlDataContentConverter}">
-                        <Binding Path=""></Binding>
-                        <Binding RelativeSource="{RelativeSource Mode=FindAncestor,AncestorLevel=1,AncestorType=control:RGridControl}"></Binding>
-                    </MultiBinding>
-                </DockPanel.DataContext>
-                <Button DockPanel.Dock="Right"                         
-                        DataContext="{Binding MoreVm}"
+    <ControlTemplate x:Key="CommonToolsControl">
+        <DockPanel>
+            <Button DockPanel.Dock="Right"                         
+                        DataContext="{Binding Converter={StaticResource RowContrtolMoreContextDataConverter}}"
                         Style="{StaticResource ButtonStyle}" 
                         BorderBrush="{Binding BorderBrush}" 
                         Background="{Binding BackgroundBrush}"                    
@@ -382,20 +374,37 @@
                         CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}"
                         BorderThickness="{Binding BorderThickness}" 
                         Visibility="{Binding Converter={StaticResource RowContorMoreVisibleConverter}}"></Button>
-                <ListView DockPanel.Dock="Right" 
+            <ListView DockPanel.Dock="Right" 
                           Style="{StaticResource HorizontalListViewStyle}"                       
                           HorizontalAlignment="Right"
                           Background="{Binding ToolsBgBrush}"
                           ItemContainerStyle="{StaticResource TransparentListViewItemStyle}" 
-                          ItemsSource="{Binding UseToolVMs}"                       
+                          ItemsSource="{Binding ToolVms, Converter={StaticResource  RowControlNormalUseListConverter}}"                       
                           Margin="0,0,0,1"></ListView>
-                <DockPanel.Visibility>
+        </DockPanel>
+    </ControlTemplate>
+    s
+    <ControlTemplate x:Key="RowControlTest" TargetType="dxg:RowControl"  >
+        <Grid Height="{StaticResource TableRowHeight}" Background="Transparent">
+            <Border x:Name="Background" Background="{TemplateBinding Background}" />
+            <Border x:Name="BottomLine" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,0,0,1" VerticalAlignment="Bottom" />
+            <Grid x:Name="PART_LayoutPanel" />
+            <ContentControl x:Name="PART_TOOLS" 
+                            Template="{StaticResource CommonToolsControl}">
+                <ContentControl.DataContext>
+                    <MultiBinding Converter="{StaticResource RowControlDataContentConverter}">
+                        <Binding Path=""></Binding>
+                        <Binding RelativeSource="{RelativeSource Mode=FindAncestor,AncestorLevel=1,AncestorType=control:RGridControl}"></Binding>
+                    </MultiBinding>
+                </ContentControl.DataContext>
+                <ContentControl.Visibility>
                     <MultiBinding Converter="{StaticResource TableRowToolsVisibleConverter}">
                         <Binding Path="ToolIsFixed"></Binding>
                         <Binding RelativeSource="{RelativeSource AncestorLevel=1,AncestorType=dxg:RowControl,Mode=FindAncestor}" Path="IsMouseOver"></Binding>
                     </MultiBinding>
-                </DockPanel.Visibility>
-            </DockPanel>
+                </ContentControl.Visibility>
+            </ContentControl>
+            
             <!--<dxmvvm:Interaction.Behaviors>
                 <dxmvvm:EventToCommand EventName="PreviewMouseRightButtonDown" Command="{Binding }" >
                     <dxmvvm:EventToCommand.EventArgsConverter>

@@ -11,7 +11,7 @@ namespace NeoDataGrid.Control
 {
     public static class RControlUtils
     {
-        public static ContextMenu CreateRowControlContextMenu(ObservableCollection<RowToolsViewMode> vms)
+        public static ContextMenu CreateRowControlContextMenu(IEnumerable<RowToolsViewMode> vms)
         {
             ContextMenu contextMenu = new ContextMenu();
             foreach (var vm in vms)

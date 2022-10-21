@@ -148,9 +148,7 @@ public class RowToolsViewMode: CommandViewModel
 
 public interface IRowTools
 {
-    public ObservableCollection<RowToolsViewMode> TotalToolVms { get; }                 // 总 VMs
-    public ObservableCollection<RowToolsViewMode> UseToolVMs { get; }                   // 常用 VMs
-    public ObservableCollection<RowToolsViewMode> UnuseToolVms { get; }                 // 不常用的 ToolVMs    
+    public ObservableCollection<RowToolsViewMode> ToolVms { get; }                 // 总 VMs    
     public bool ToolIsFixed { get; }
     public Brush ToolsBgBrush { get; }
     public int Level { get; }    
@@ -160,26 +158,17 @@ public interface IRowTools
 
 public class RowTools : IRowTools
 {
-    public ObservableCollection<RowToolsViewMode> TotalToolVms { get; protected set; }                 // 总 VMs
-    public ObservableCollection<RowToolsViewMode> UseToolVMs { get; protected set; }                   // 常用 VMs
-    public ObservableCollection<RowToolsViewMode> UnuseToolVms { get; protected set; }                 // 不常用的 ToolVMs    
+    public ObservableCollection<RowToolsViewMode> ToolVms { get; protected set; }                 // 总 VMs    
     public bool ToolIsFixed { get; set; }                                               // tools  是否固定在 row上
     public Brush ToolsBgBrush { get; set; } 
     public int Level { get; set; }                                                           // 作用的 RowControl Level
     public RowToolsViewMode MoreVm { get; set; }                                             // More 操作 VM
-
     public RowTools(bool toolIsFixed = false)
     {
         Level = -1;
-
-        UseToolVMs = new();
-        TotalToolVms = new();        
-        UnuseToolVms = new();
-
+        ToolVms = new();                
         ToolIsFixed = toolIsFixed;
         ToolsBgBrush = Brushes.Transparent;
-
-        UnuseToolVms.CollectionChanged += UnuseToolVms_CollectionChanged;
     }
 
     public RowTools(int level, bool toolIsFixed = false): this(toolIsFixed)
@@ -193,45 +182,28 @@ public class RowTools : IRowTools
         if (vm == null)
             return;
 
-        if (vm.IsNormalUse)        
-            UseToolVMs.Add(vm);        
-        else
-            UnuseToolVms.Add(vm);
-        
-        TotalToolVms.Add(vm);
+        ToolVms.Add(vm);
     }
 
     public void InsertVM(int idx, RowToolsViewMode vm)
     {
-        if (idx < 0 || idx >= TotalToolVms.Count)
+        if (idx < 0 || idx >= ToolVms.Count)
             throw new ArgumentOutOfRangeException($"{nameof(idx)}: {idx} 不合法");
 
-        if (vm.IsNormalUse)
-            UseToolVMs.Add(vm);
-        else
-            UnuseToolVms.Add(vm);
-
-        TotalToolVms.Insert(idx, vm);
+        ToolVms.Insert(idx, vm);
     }
 
     public bool RemoveVM(RowToolsViewMode vm)
     {
-        if (TotalToolVms == null)
-            throw new Exception("TotalToolVms 没有初始化");
-
-        UseToolVMs.Remove(vm);
-        UnuseToolVms.Remove(vm);
-        return TotalToolVms.Remove(vm);
+        return ToolVms.Remove(vm);
     }
 
     public void RemoveVMAt(int idx)
     {
-        if (idx < 0 || idx >= TotalToolVms.Count)
+        if (idx < 0 || idx >= ToolVms.Count)
             throw new ArgumentOutOfRangeException("idx 参数合法");
 
-
-        var vm = TotalToolVms[idx];
-        RemoveVM(vm);
+        ToolVms.RemoveAt(idx);
     }
 
     public void AppendVms(IEnumerable<RowToolsViewMode> vms)
@@ -240,19 +212,11 @@ public class RowTools : IRowTools
             return;
 
         foreach (var vm in vms)        
-            AddVM(vm);        
+            AddVM(vm); 
     }
     #endregion
 
-    #region Collection Changed
-    private void UnuseToolVms_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
-    {
-        CreateMoreVM();
-        UnuseToolVms.CollectionChanged -= UnuseToolVms_CollectionChanged;
-    }
-    #endregion
-
-    private void CreateMoreVM()
+    public void CreateMoreVM()
     {
         MoreVm = new RowToolsViewMode()
         {
@@ -262,7 +226,7 @@ public class RowTools : IRowTools
             BackgroundBrush = ToolsBgBrush,
             Command = new DelegateCommand<UIElement>((e) => 
             {
-                ContextMenu contextMenu = RControlUtils.CreateRowControlContextMenu(UnuseToolVms);                
+                ContextMenu contextMenu = RControlUtils.CreateRowControlContextMenu(ToolVms.Where(_ => { return !_.IsNormalUse; }));                
                 contextMenu.IsOpen = true;
                 contextMenu.StaysOpen = false;
                 contextMenu.PlacementTarget = e;
