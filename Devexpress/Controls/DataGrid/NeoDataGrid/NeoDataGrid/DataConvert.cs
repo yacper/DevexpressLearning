@@ -156,6 +156,20 @@ namespace NeoTrader
         }
     }
 
+    public class RowControlContextMenuConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value == null || !(value is IEnumerable<RowToolsViewMode>))
+                return null;
 
+            return RControlUtils.CreateRowControlContextMenu((IEnumerable<RowToolsViewMode>)value);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
 
 }

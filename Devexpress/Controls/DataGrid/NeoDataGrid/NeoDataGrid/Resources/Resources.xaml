@@ -289,8 +289,7 @@
                       ItemContainerStyle="{StaticResource TransparentListViewItemStyle}"></ListView>
         </ContentControl>
     </DataTemplate>
-    
-   
+
     <Style TargetType="dxg:RowControl">
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
@@ -301,7 +300,8 @@
             </DataTrigger>
         </Style.Triggers>
     </Style>
-    
+
+    <local:RowControlContextMenuConverter x:Key="RowControlContextMenuConverter"></local:RowControlContextMenuConverter>
     <local:TableRowToolsVisibleConverter x:Key="TableRowToolsVisibleConverter"></local:TableRowToolsVisibleConverter>
     <local:RowControlDataContentConverter x:Key="RowControlDataContentConverter"></local:RowControlDataContentConverter>
     <local:RowContorMoreVisibleConverter x:Key="RowContorMoreVisibleConverter"></local:RowContorMoreVisibleConverter>
@@ -383,20 +383,20 @@
                           Margin="0,0,0,1"></ListView>
         </DockPanel>
     </ControlTemplate>
-    s
-    <ControlTemplate x:Key="RowControlTest" TargetType="dxg:RowControl"  >
+    
+    <ControlTemplate x:Key="RowControlTest" TargetType="dxg:RowControl" >
         <Grid Height="{StaticResource TableRowHeight}" Background="Transparent">
+            <Grid.DataContext>
+                <MultiBinding Converter="{StaticResource RowControlDataContentConverter}">
+                    <Binding Path=""></Binding>
+                    <Binding RelativeSource="{RelativeSource Mode=FindAncestor,AncestorLevel=1,AncestorType=control:RGridControl}"></Binding>
+                </MultiBinding>
+            </Grid.DataContext>
             <Border x:Name="Background" Background="{TemplateBinding Background}" />
             <Border x:Name="BottomLine" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,0,0,1" VerticalAlignment="Bottom" />
             <Grid x:Name="PART_LayoutPanel" />
-            <ContentControl x:Name="PART_TOOLS" 
+            <ContentControl x:Name="PART_TOOLS"                         
                             Template="{StaticResource CommonToolsControl}">
-                <ContentControl.DataContext>
-                    <MultiBinding Converter="{StaticResource RowControlDataContentConverter}">
-                        <Binding Path=""></Binding>
-                        <Binding RelativeSource="{RelativeSource Mode=FindAncestor,AncestorLevel=1,AncestorType=control:RGridControl}"></Binding>
-                    </MultiBinding>
-                </ContentControl.DataContext>
                 <ContentControl.Visibility>
                     <MultiBinding Converter="{StaticResource TableRowToolsVisibleConverter}">
                         <Binding Path="ToolIsFixed"></Binding>
@@ -404,14 +404,9 @@
                     </MultiBinding>
                 </ContentControl.Visibility>
             </ContentControl>
-            
-            <!--<dxmvvm:Interaction.Behaviors>
-                <dxmvvm:EventToCommand EventName="PreviewMouseRightButtonDown" Command="{Binding }" >
-                    <dxmvvm:EventToCommand.EventArgsConverter>
-                        <viewmodels:TextEditEditValueChangingEventArgsConverter />
-                    </dxmvvm:EventToCommand.EventArgsConverter>
-                </dxmvvm:EventToCommand>
-            </dxmvvm:Interaction.Behaviors>-->
+            <Grid.ContextMenu>
+                <Binding Path="ToolVms" Converter="{StaticResource RowControlContextMenuConverter}"></Binding>
+            </Grid.ContextMenu>
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="ShowHorizontalLine" Value="False">
@@ -443,7 +438,7 @@
             </Trigger>
             <!-- <DataTrigger Binding="{Binding Path=(dxg:GridControl.ActiveView).DataControl.(dxi:AppearanceOptions.HasBackground), RelativeSource={RelativeSource Self}}" Value="True"> -->
             <!--     <Setter Property="Background" Value="{Binding Path=(dxg:GridControl.ActiveView).DataControl.(dxi:AppearanceOptions.Background), RelativeSource={RelativeSource Self}}"/> -->
-            <!-- </DataTrigger> -->
+            <!-- </DataTrigger> -->            
         </ControlTemplate.Triggers>
     </ControlTemplate>
 </ResourceDictionary>

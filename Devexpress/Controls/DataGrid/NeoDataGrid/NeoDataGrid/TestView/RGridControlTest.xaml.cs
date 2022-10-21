@@ -76,7 +76,12 @@ namespace NeoDataGrid.TestView
                 //IsNormalUse = true,
                 DisplayMode = DisplayMode.Glyph,
                  Glyph = Images.Build,
-                 DisplayName = "编译"
+                 DisplayName = "编译",
+                 Commands = new ObservableCollection<CommandViewModel>()
+                 {
+                     new RowToolsViewMode(){ DisplayName = "张三", Glyph = Images.Error },
+                     new RowToolsViewMode(){ DisplayName = "里斯", Glyph = Images.Error }
+                 }
             });
 
             rowTools.AddVM(new RowToolsViewMode()
