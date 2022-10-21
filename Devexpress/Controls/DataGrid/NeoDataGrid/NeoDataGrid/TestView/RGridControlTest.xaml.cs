@@ -73,8 +73,32 @@ namespace NeoDataGrid.TestView
             RowTools rowTools = new RowTools(true);
             rowTools.AddVM(new RowToolsViewMode() 
             {
-                 DisplayMode = DisplayMode.Glyph,
+                //IsNormalUse = true,
+                DisplayMode = DisplayMode.Glyph,
                  Glyph = Images.Build,
+                 DisplayName = "编译"
+            });
+
+            rowTools.AddVM(new RowToolsViewMode()
+            {
+                IsNormalUse = true,
+                DisplayMode = DisplayMode.Glyph,
+                Glyph = Images.Build,
+                DisplayName = "编译"
+            });
+            rowTools.AddVM(new RowToolsViewMode()
+            {
+                IsNormalUse = true,
+                DisplayMode = DisplayMode.Glyph,
+                Glyph = Images.Cut,
+                DisplayName = "剪切"
+            });
+            rowTools.AddVM(new RowToolsViewMode()
+            {
+                IsNormalUse = true,
+                DisplayMode = DisplayMode.Glyph,
+                Glyph = Images.Copy,
+                DisplayName = "复制"
             });
 
             return rowTools;

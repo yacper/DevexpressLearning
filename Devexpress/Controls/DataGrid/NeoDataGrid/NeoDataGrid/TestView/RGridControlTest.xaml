@@ -12,7 +12,7 @@
                 
             </dxg:GridColumn>
             <control:RGridControl.View>
-                <dxg:TableView AllowDragDrop="True"                                   
+                <dxg:TableView AllowDragDrop="True" 
                                   ShowHorizontalLines="False" 
                                   ShowVerticalLines="False">
                     <dxg:TableView.RowStyle>

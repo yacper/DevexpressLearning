@@ -304,6 +304,7 @@
     
     <local:TableRowToolsVisibleConverter x:Key="TableRowToolsVisibleConverter"></local:TableRowToolsVisibleConverter>
     <local:RowControlDataContentConverter x:Key="RowControlDataContentConverter"></local:RowControlDataContentConverter>
+    <local:RowContorMoreVisibleConverter x:Key="RowContorMoreVisibleConverter"></local:RowContorMoreVisibleConverter>
     <ControlTemplate x:Key="{dxgt:GridRowThemeKey ResourceKey=RowTemplate}" TargetType="dxg:RowControl" >
         <Grid Height="{StaticResource TableRowHeight}" >
             <Border x:Name="Background" Background="{TemplateBinding Background}" />
@@ -360,32 +361,48 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <ControlTemplate x:Key="RowControlTest" TargetType="dxg:RowControl" >
-        <Grid Height="{StaticResource TableRowHeight}" >
+    <ControlTemplate x:Key="RowControlTest" TargetType="dxg:RowControl"  >
+        <Grid Height="{StaticResource TableRowHeight}" Background="Transparent">
             <Border x:Name="Background" Background="{TemplateBinding Background}" />
             <Border x:Name="BottomLine" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,0,0,1" VerticalAlignment="Bottom" />
             <Grid x:Name="PART_LayoutPanel" />
-            <ListView x:Name="PART_TOOLS"                       
-                      Style="{StaticResource HorizontalListViewStyle}"                       
-                      HorizontalAlignment="Right"
-                      ItemContainerStyle="{StaticResource TransparentListViewItemStyle}" 
-                      ItemsSource="{Binding ToolVMs}" 
-                      SelectedItem="{Binding SelectedToolVm}" 
-                      Margin="0,0,0,1"                      
-                      Background="{Binding ToolsBgBrush}">
-                <ListView.Visibility>
-                    <MultiBinding Converter="{StaticResource TableRowToolsVisibleConverter}">
-                        <Binding Path="ToolIsFixed"></Binding>
-                        <Binding RelativeSource="{RelativeSource AncestorLevel=1,AncestorType=dxg:RowControl,Mode=FindAncestor}" Path="IsMouseOver"></Binding>
-                    </MultiBinding>
-                </ListView.Visibility>
-                <ListView.DataContext>
+            <DockPanel x:Name="PART_TOOLS">
+                <DockPanel.DataContext>
                     <MultiBinding Converter="{StaticResource RowControlDataContentConverter}">
                         <Binding Path=""></Binding>
                         <Binding RelativeSource="{RelativeSource Mode=FindAncestor,AncestorLevel=1,AncestorType=control:RGridControl}"></Binding>
                     </MultiBinding>
-                </ListView.DataContext>
-            </ListView>
+                </DockPanel.DataContext>
+                <Button DockPanel.Dock="Right"                         
+                        DataContext="{Binding MoreVm}"
+                        Style="{StaticResource ButtonStyle}" 
+                        BorderBrush="{Binding BorderBrush}" 
+                        Background="{Binding BackgroundBrush}"                    
+                        Command="{Binding Command}"                      
+                        CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}"
+                        BorderThickness="{Binding BorderThickness}" 
+                        Visibility="{Binding Converter={StaticResource RowContorMoreVisibleConverter}}"></Button>
+                <ListView DockPanel.Dock="Right" 
+                          Style="{StaticResource HorizontalListViewStyle}"                       
+                          HorizontalAlignment="Right"
+                          Background="{Binding ToolsBgBrush}"
+                          ItemContainerStyle="{StaticResource TransparentListViewItemStyle}" 
+                          ItemsSource="{Binding UseToolVMs}"                       
+                          Margin="0,0,0,1"></ListView>
+                <DockPanel.Visibility>
+                    <MultiBinding Converter="{StaticResource TableRowToolsVisibleConverter}">
+                        <Binding Path="ToolIsFixed"></Binding>
+                        <Binding RelativeSource="{RelativeSource AncestorLevel=1,AncestorType=dxg:RowControl,Mode=FindAncestor}" Path="IsMouseOver"></Binding>
+                    </MultiBinding>
+                </DockPanel.Visibility>
+            </DockPanel>
+            <!--<dxmvvm:Interaction.Behaviors>
+                <dxmvvm:EventToCommand EventName="PreviewMouseRightButtonDown" Command="{Binding }" >
+                    <dxmvvm:EventToCommand.EventArgsConverter>
+                        <viewmodels:TextEditEditValueChangingEventArgsConverter />
+                    </dxmvvm:EventToCommand.EventArgsConverter>
+                </dxmvvm:EventToCommand>
+            </dxmvvm:Interaction.Behaviors>-->
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="ShowHorizontalLine" Value="False">

@@ -10,7 +10,7 @@
         <dxg:GridControl ItemsSource="{Binding Persions}">
             <dxg:GridColumn FieldName="Name" Width="*"></dxg:GridColumn>
             <dxg:GridControl.View>
-                <control:RTreeListView TreeDerivationMode="ChildNodesSelector" ChildNodesPath="Childs" DropLimtEnum="ParentNoAppend" AllowDragDrop="True" AllowEditing="False">
+                <control:RTreeListView  TreeDerivationMode="ChildNodesSelector" ChildNodesPath="Childs" DropLimtEnum="ParentNoAppend" AllowDragDrop="True" AllowEditing="False">
                     
                 </control:RTreeListView>
             </dxg:GridControl.View>

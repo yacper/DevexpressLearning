@@ -1,13 +1,17 @@
 ﻿using DevExpress.Xpf.Core;
 using DevExpress.Xpf.Grid;
 using DevExpress.Xpf.Grid.TreeList;
+using NeoTrader;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace NeoDataGrid.Control
@@ -36,6 +40,7 @@ namespace NeoDataGrid.Control
         {
             DragRecordOver += RTreeListView_DragRecordOver;
             StartRecordDrag += RTreeListView_StartRecordDrag;
+
         }
 
         #region Drag
@@ -86,6 +91,19 @@ namespace NeoDataGrid.Control
             return (rc!.DataContext as TreeListRowData)!.Node;
         }
 
+        private void SetRowControlStyle()
+        {
+            if(Parent is RGridControl)          
+            {
+                var rgc = Parent as RGridControl;
+                MultiBinding multiBinding = new MultiBinding();
+                //multiBinding.Converter = new COn;
+                multiBinding.Bindings.Add(new Binding() { RelativeSource = new RelativeSource() { } });
+                RowStyle = new Style();
+               // RowStyle.Setters.Add(new Setter() { Property = RowControl.ContextMenuProperty, Value = );
+            }            
+        }
+        
         private List<TreeListNode> dragNodes;
     }
 }

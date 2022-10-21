@@ -21,6 +21,10 @@ using DevExpress.Mvvm;
 using System.Windows.Data;
 using System.Globalization;
 using System.Windows.Controls;
+using System.Collections.Specialized;
+using System.Windows.Controls.Primitives;
+using NeoDataGrid;
+using NeoDataGrid.Control;
 
 namespace NeoTrader;
 
@@ -144,26 +148,38 @@ public class RowToolsViewMode: CommandViewModel
 
 public interface IRowTools
 {
-    public ObservableCollection<RowToolsViewMode> ToolVMs { get; }
-    public RowToolsViewMode SelectedToolVm { get; }
+    public ObservableCollection<RowToolsViewMode> TotalToolVms { get; }                 // 总 VMs
+    public ObservableCollection<RowToolsViewMode> UseToolVMs { get; }                   // 常用 VMs
+    public ObservableCollection<RowToolsViewMode> UnuseToolVms { get; }                 // 不常用的 ToolVMs    
     public bool ToolIsFixed { get; }
     public Brush ToolsBgBrush { get; }
-    public int Level { get;  }
+    public int Level { get; }    
+    public RowToolsViewMode MoreVm { get; }                                             // More 操作 VM
+    
 }
 
 public class RowTools : IRowTools
 {
-    public ObservableCollection<RowToolsViewMode> ToolVMs { get; protected set; }   //  tools 实体
-    public RowToolsViewMode SelectedToolVm { get; set; }                            // 当前选中的控件
-    public bool ToolIsFixed { get; set; }                                           // tools  是否固定在 row上
+    public ObservableCollection<RowToolsViewMode> TotalToolVms { get; protected set; }                 // 总 VMs
+    public ObservableCollection<RowToolsViewMode> UseToolVMs { get; protected set; }                   // 常用 VMs
+    public ObservableCollection<RowToolsViewMode> UnuseToolVms { get; protected set; }                 // 不常用的 ToolVMs    
+    public bool ToolIsFixed { get; set; }                                               // tools  是否固定在 row上
     public Brush ToolsBgBrush { get; set; } 
-    public int Level { get; set; }                                                  // 作用的 RowControl Level
+    public int Level { get; set; }                                                           // 作用的 RowControl Level
+    public RowToolsViewMode MoreVm { get; set; }                                             // More 操作 VM
+
     public RowTools(bool toolIsFixed = false)
     {
         Level = -1;
-        ToolVMs = new();
+
+        UseToolVMs = new();
+        TotalToolVms = new();        
+        UnuseToolVms = new();
+
         ToolIsFixed = toolIsFixed;
         ToolsBgBrush = Brushes.Transparent;
+
+        UnuseToolVms.CollectionChanged += UnuseToolVms_CollectionChanged;
     }
 
     public RowTools(int level, bool toolIsFixed = false): this(toolIsFixed)
@@ -171,40 +187,51 @@ public class RowTools : IRowTools
         Level = level;
     }
 
+    #region VM OP
     public void AddVM(RowToolsViewMode vm)
     {
-        if (ToolVMs == null)
-            ToolVMs = new();
-        ToolVMs.Add(vm);
+        if (vm == null)
+            return;
+
+        if (vm.IsNormalUse)        
+            UseToolVMs.Add(vm);        
+        else
+            UnuseToolVms.Add(vm);
+        
+        TotalToolVms.Add(vm);
     }
 
     public void InsertVM(int idx, RowToolsViewMode vm)
     {
-        if (ToolVMs == null)
-            ToolVMs = new();
-
-        if (idx < 0 || idx >= ToolVMs.Count)
+        if (idx < 0 || idx >= TotalToolVms.Count)
             throw new ArgumentOutOfRangeException($"{nameof(idx)}: {idx} 不合法");
 
-        ToolVMs.Insert(idx, vm);
+        if (vm.IsNormalUse)
+            UseToolVMs.Add(vm);
+        else
+            UnuseToolVms.Add(vm);
+
+        TotalToolVms.Insert(idx, vm);
     }
 
     public bool RemoveVM(RowToolsViewMode vm)
     {
-        if (ToolVMs == null)
-            throw new Exception("ToolVMs 没有初始化");
-        return ToolVMs.Remove(vm);
+        if (TotalToolVms == null)
+            throw new Exception("TotalToolVms 没有初始化");
+
+        UseToolVMs.Remove(vm);
+        UnuseToolVms.Remove(vm);
+        return TotalToolVms.Remove(vm);
     }
 
     public void RemoveVMAt(int idx)
     {
-        if (idx < 0 || idx >= ToolVMs.Count)
+        if (idx < 0 || idx >= TotalToolVms.Count)
             throw new ArgumentOutOfRangeException("idx 参数合法");
 
-        if (ToolVMs == null)
-            throw new Exception("ToolVMs 没有初始化");
 
-        ToolVMs.RemoveAt(idx);
+        var vm = TotalToolVms[idx];
+        RemoveVM(vm);
     }
 
     public void AppendVms(IEnumerable<RowToolsViewMode> vms)
@@ -212,12 +239,36 @@ public class RowTools : IRowTools
         if (vms == null || vms.Count() == 0)
             return;
 
-        if (ToolVMs == null)
-            throw new Exception("ToolVMs 没有初始化");
-
-        foreach (var vm in vms)
-        {
-            ToolVMs.Add(vm);
-        }
+        foreach (var vm in vms)        
+            AddVM(vm);        
     }
+    #endregion
+
+    #region Collection Changed
+    private void UnuseToolVms_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+    {
+        CreateMoreVM();
+        UnuseToolVms.CollectionChanged -= UnuseToolVms_CollectionChanged;
+    }
+    #endregion
+
+    private void CreateMoreVM()
+    {
+        MoreVm = new RowToolsViewMode()
+        {
+            IsExpand = true,
+            DisplayMode = DisplayMode.Glyph,
+            Glyph = Images.VerticalMore,            
+            BackgroundBrush = ToolsBgBrush,
+            Command = new DelegateCommand<UIElement>((e) => 
+            {
+                ContextMenu contextMenu = RControlUtils.CreateRowControlContextMenu(UnuseToolVms);                
+                contextMenu.IsOpen = true;
+                contextMenu.StaysOpen = false;
+                contextMenu.PlacementTarget = e;
+                contextMenu.Placement = PlacementMode.Right;
+            })
+        };
+    }
+
 }
