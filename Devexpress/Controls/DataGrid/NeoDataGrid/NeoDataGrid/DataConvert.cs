@@ -196,4 +196,31 @@ namespace NeoTrader
         }
     }
 
+    public class RowHandleToRowTemplarteConverter : IMultiValueConverter
+    {
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        {
+            if(values == null || values.Length != 2 || !(values[0] is RowHandle) || !(values[1] is RTreeListView))
+                return "";
+
+            int level = ((RowHandle)values[0]).Value;
+            var tlv = (RTreeListView)values[1];
+            if (tlv.RRowTemplates == null || tlv.RRowTemplates.Count() == 0)
+                return tlv.RRowTemplate == null ? "" : tlv.RRowTemplate;
+
+            foreach (var template in tlv.RRowTemplates)
+            {
+                if(template.Level == level)
+                    return template.DataTemplate;
+            }
+
+            return "";
+        }
+
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
 }
