@@ -1,4 +1,5 @@
-﻿using DevExpress.Xpf.Grid;
+﻿using DevExpress.Xpf.Data;
+using DevExpress.Xpf.Grid;
 using DevExpress.Xpf.Grid.TreeList;
 using NeoDataGrid.Control;
 using System;
@@ -72,7 +73,7 @@ namespace NeoTrader
         }
     }
 
-    public class RowControlDataContentConverter : IMultiValueConverter
+    public class RowControlToolsDataContentConverter : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
@@ -160,13 +161,36 @@ namespace NeoTrader
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == null || !(value is IEnumerable<RowToolsViewMode>))
+            if (value == null || !(value is IEnumerable<RowToolsViewMode>) || ((IEnumerable<RowToolsViewMode>)value).Count() == 0)
                 return null;
 
             return RControlUtils.CreateRowControlContextMenu((IEnumerable<RowToolsViewMode>)value);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class RowControlExplendTipVisibleConverter : IMultiValueConverter
+    {
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        {
+            if(values == null || values.Length != 3 || !(values[0] is bool) || !(values[1] is RowHandle) || !(values[2] is RTreeListView))
+                return Visibility.Collapsed;
+
+            bool isExpend = (bool)values[0];
+            if (isExpend)
+                return Visibility.Collapsed;
+
+            var idx = ((RowHandle)values[1]).Value;
+            var rtlv = (RTreeListView)values[2];
+
+            return rtlv.GetNodeByRowHandle(idx).HasChildren ? Visibility.Visible: Visibility.Collapsed;
+        }
+
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }

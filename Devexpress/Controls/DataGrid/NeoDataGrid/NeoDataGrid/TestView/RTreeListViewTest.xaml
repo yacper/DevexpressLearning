@@ -5,15 +5,24 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NeoDataGrid.TestView" xmlns:control="clr-namespace:NeoDataGrid.Control" xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             Height="450" Width="800">
+    <UserControl.Resources>
+        <ControlTemplate x:Key="RowTemplate">
+            <TextBlock Text="{Binding Row.Name}"></TextBlock>
+        </ControlTemplate>
+    </UserControl.Resources>
     <Grid>
-        <dxg:GridControl ItemsSource="{Binding Persions}">
+        <control:RGridControl ItemsSource="{Binding Persions}">
             <dxg:GridColumn FieldName="Name" Width="*"></dxg:GridColumn>
-            <dxg:GridControl.View>
-                <control:RTreeListView  TreeDerivationMode="ChildNodesSelector" ChildNodesPath="Childs" DropLimtEnum="ParentNoAppend" AllowDragDrop="True" AllowEditing="False">
-                    
+            <control:RGridControl.View>
+                <control:RTreeListView TreeDerivationMode="ChildNodesSelector" ChildNodesPath="Childs"  DropLimtEnum="ParentNoAppend" AllowDragDrop="True" AllowEditing="False">
+                    <control:RTreeListView.RowStyle>
+                        <Style TargetType="dxg:RowControl">
+                            <Setter Property="Template" Value="{StaticResource RowControlTest}"></Setter>
+                        </Style>
+                    </control:RTreeListView.RowStyle>
                 </control:RTreeListView>
-            </dxg:GridControl.View>
-        </dxg:GridControl>  
+            </control:RGridControl.View>
+        </control:RGridControl>  
     </Grid>
 </UserControl>

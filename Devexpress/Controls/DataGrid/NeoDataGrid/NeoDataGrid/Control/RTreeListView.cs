@@ -1,4 +1,6 @@
-﻿using DevExpress.Xpf.Core;
+﻿using DevExpress.Mvvm;
+using DevExpress.Mvvm.Xpf;
+using DevExpress.Xpf.Core;
 using DevExpress.Xpf.Grid;
 using DevExpress.Xpf.Grid.TreeList;
 using NeoTrader;
@@ -36,11 +38,45 @@ namespace NeoDataGrid.Control
             set => SetValue(DropLimtEnumProperty, value);
         }
 
+        public static DependencyProperty RRowTemplateProperty = DependencyProperty.Register("RRowTemplate", typeof(ControlTemplate), typeof(RTreeListView), 
+            new PropertyMetadata(null, (d, e) => 
+            {
+                (d as RTreeListView)!.RRowTemplate = (ControlTemplate)e.NewValue;
+            }) );
+        public ControlTemplate RRowTemplate                                             // 公用一个模板
+        {
+            get => (ControlTemplate) GetValue(RRowTemplateProperty);
+            set
+            {
+                SetValue(RRowTemplateProperty, value);
+                SetRowDataTemplate();
+            }
+        }
+
+        public static DependencyProperty RRowTemplatesProperty = DependencyProperty.Register("RRowTemplates", typeof(IEnumerable<ControlTemplate>), typeof(RTreeListView),
+            new PropertyMetadata(null, (d, e) => 
+            {
+                
+            }));
+
+        // 直接定义模板选择器来实现呢？ 
+        public DataTemplateSelector RTemplateSelector { get; set; }
+
+        public ICommand RRowDoubleClickCommand { get; }
+
         public RTreeListView() : base()
         {
+            ShowIndicator = false;
+            ShowRootIndent = false;
+
             DragRecordOver += RTreeListView_DragRecordOver;
             StartRecordDrag += RTreeListView_StartRecordDrag;
 
+            RRowDoubleClickCommand = new DelegateCommand<TreeListRowData>((rd) => 
+            {
+                rd.Node.IsExpanded = !rd.IsExpanded;
+                
+            });
         }
 
         #region Drag
@@ -57,6 +93,12 @@ namespace NeoDataGrid.Control
         private void RTreeListView_DragRecordOver(object? sender, DragRecordOverEventArgs e)   // TODO： IsFromOutside = true 情况
         {
             var overNode = GetRowControlNodeByHandle(e.TargetRowHandle);
+            if (overNode == null)
+            {
+                e.Effects = DragDropEffects.None;
+                return;
+            }
+
             if(DropLimtEnum == TLVDragDropLimtEnum.ParentNoAppend)           // 只能在相同的父节点中拖拽
             {
                 int level = dragNodes[0].ActualLevel;
@@ -87,23 +129,17 @@ namespace NeoDataGrid.Control
 
         private TreeListNode GetRowControlNodeByHandle(int idx)
         {
-            var rc = GetRowElementByRowHandle(idx) as RowControl;            
+            var rc = GetRowElementByRowHandle(idx) as RowControl;
+            if (rc == null)
+                return null; 
             return (rc!.DataContext as TreeListRowData)!.Node;
         }
 
-        private void SetRowControlStyle()
-        {
-            if(Parent is RGridControl)          
-            {
-                var rgc = Parent as RGridControl;
-                MultiBinding multiBinding = new MultiBinding();
-                //multiBinding.Converter = new COn;
-                multiBinding.Bindings.Add(new Binding() { RelativeSource = new RelativeSource() { } });
-                RowStyle = new Style();
-               // RowStyle.Setters.Add(new Setter() { Property = RowControl.ContextMenuProperty, Value = );
-            }            
+        private void SetRowDataTemplate()
+        {            
+           // DataRowTemplate = App.Current.FindResource("TLVRowDataTemplate") as DataTemplate;
         }
-        
+
         private List<TreeListNode> dragNodes;
     }
 }

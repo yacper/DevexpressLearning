@@ -93,10 +93,12 @@ namespace NeoDataGrid.TestView
             });
             rowTools.AddVM(new RowToolsViewMode()
             {
-                IsNormalUse = true,
+                //IsNormalUse = true,
                 DisplayMode = DisplayMode.Glyph,
                 Glyph = Images.Cut,
-                DisplayName = "剪切"
+                DisplayName = "剪切",
+                IsEnabled = false
+                
             });
             rowTools.AddVM(new RowToolsViewMode()
             {

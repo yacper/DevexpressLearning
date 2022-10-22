@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NeoTrader;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -22,6 +23,7 @@ namespace NeoDataGrid.TestView
     public partial class RTreeListViewTest : UserControl
     {
         public ObservableCollection<Persion> Persions { get; set; }
+        public ObservableCollection<RowTools> RowTools { get; set; }
         public RTreeListViewTest()
         {
             InitializeComponent();
@@ -40,9 +42,20 @@ namespace NeoDataGrid.TestView
                 {
                     Name = $"parent: {i}",
                     Age = i,
-                    Childs = new ObservableCollection<Child>() { new Child() { Name=$"child{i}", Age = i -1 }, new Child() { Name = $"child{i}", Age = i - 1 } }
+                    Childs = new ObservableCollection<Child>() { new Child() { Name=$"A child{i}", Age = i -1 }, new Child() { Name = $"B child{i}", Age = i - 1 } }
                 });
             }
+
+            RowTools = new ObservableCollection<RowTools>();
+            RowTools.Add(new RowTools() 
+            {
+                Level = 0,                
+            });
+
+            RowTools.Add(new RowTools()
+            {
+                Level = 1,                
+            });
         }
     }
 }

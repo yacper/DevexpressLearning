@@ -43,6 +43,7 @@
     <!--#endregion-->
     
     <system:Double x:Key="NormalImageSize">20</system:Double>
+    <system:Double x:Key="SmallImageSize">12</system:Double>
 
     <!--#region Geometry-->
     <Geometry x:Key="RightArrowPath">M1,0 L3,0 L6,3.5 L3,7 L1,7 L4,3.5z</Geometry>
@@ -290,6 +291,37 @@
         </ContentControl>
     </DataTemplate>
 
+    <local:RowControlExplendTipVisibleConverter x:Key="RowControlExplendTipVisibleConverter"></local:RowControlExplendTipVisibleConverter>
+    <DataTemplate x:Key="TLVRowDataTemplate">
+        <ContentControl>
+            <Grid Background="Transparent">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="5"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <ContentControl x:Name="PART_ContentControl" Grid.Column="0" Template="{Binding RRowTemplate, RelativeSource={RelativeSource AncestorLevel=1,AncestorType=control:RTreeListView}}"></ContentControl>
+                <dx:DXImage Source="{x:Static local:Images.SortDsec}" 
+                            Grid.Column="2"                             
+                            Height="{DynamicResource SmallImageSize}" >
+                    <dx:DXImage.Visibility>
+                        <MultiBinding Converter="{StaticResource RowControlExplendTipVisibleConverter}">
+                            <Binding Path="IsExpanded"></Binding>
+                            <Binding Path="RowHandle"></Binding>
+                            <Binding Path="View"></Binding>
+                        </MultiBinding>
+                    </dx:DXImage.Visibility>
+                </dx:DXImage> 
+            </Grid>
+            <dxmvvm:Interaction.Behaviors>
+                <dxmvvm:EventToCommand EventName="MouseDoubleClick" 
+                                       Command="{Binding RRowDoubleClickCommand, RelativeSource={RelativeSource Mode=FindAncestor,AncestorLevel=1,AncestorType=control:RTreeListView}}" 
+                                       CommandParameter="{Binding}">
+                </dxmvvm:EventToCommand>
+            </dxmvvm:Interaction.Behaviors>
+        </ContentControl>
+    </DataTemplate>
+
     <Style TargetType="dxg:RowControl">
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
@@ -303,67 +335,12 @@
 
     <local:RowControlContextMenuConverter x:Key="RowControlContextMenuConverter"></local:RowControlContextMenuConverter>
     <local:TableRowToolsVisibleConverter x:Key="TableRowToolsVisibleConverter"></local:TableRowToolsVisibleConverter>
-    <local:RowControlDataContentConverter x:Key="RowControlDataContentConverter"></local:RowControlDataContentConverter>
+    <local:RowControlToolsDataContentConverter x:Key="RowControlToolsDataContentConverter"></local:RowControlToolsDataContentConverter>
     <local:RowContorMoreVisibleConverter x:Key="RowContorMoreVisibleConverter"></local:RowContorMoreVisibleConverter>
     <local:RowContrtolMoreContextDataConverter x:Key="RowContrtolMoreContextDataConverter"></local:RowContrtolMoreContextDataConverter>
     <local:RowControlNormalUseListConverter x:Key="RowControlNormalUseListConverter"></local:RowControlNormalUseListConverter>
-    <ControlTemplate x:Key="{dxgt:GridRowThemeKey ResourceKey=RowTemplate}" TargetType="dxg:RowControl" >
-        <Grid Height="{StaticResource TableRowHeight}" >
-            <Border x:Name="Background" Background="{TemplateBinding Background}" />
-            <Border x:Name="BottomLine" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,0,0,1" VerticalAlignment="Bottom" />
-            <Grid x:Name="PART_LayoutPanel" />
-            <ListView x:Name="PART_TOOLS"                       
-                      Style="{StaticResource HorizontalListViewStyle}"                       
-                      HorizontalAlignment="Right"
-                      DataContext="{Binding Row}"
-                      ItemContainerStyle="{StaticResource TransparentListViewItemStyle}" 
-                      ItemsSource="{Binding ToolVMs}" 
-                      SelectedItem="{Binding SelectedToolVm}" 
-                      Margin="0,0,0,1"                      
-                      Background="{Binding ToolsBgBrush}">
-                <ListView.Visibility>
-                    <MultiBinding Converter="{StaticResource TableRowToolsVisibleConverter}">
-                        <Binding Path="ToolIsFixed"></Binding>
-                        <Binding RelativeSource="{RelativeSource AncestorLevel=1,AncestorType=dxg:RowControl,Mode=FindAncestor}" Path="IsMouseOver"></Binding>
-                    </MultiBinding>
-                </ListView.Visibility>
-            </ListView>
-        </Grid>
-        <ControlTemplate.Triggers>
-            <Trigger Property="ShowHorizontalLine" Value="False">
-                <Setter Property="Visibility" TargetName="BottomLine" Value="Collapsed" />
-            </Trigger>
-            <Trigger Property="ShowBottomLine" Value="True">
-                <Setter Property="Visibility" TargetName="BottomLine" Value="Visible" />
-            </Trigger>
-            <Trigger Property="FadeSelection" Value="True">
-                <!--<Setter Property="Background" Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=BorderUnfocusedBrush}}" />
-                <Setter Property="Foreground" Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=TextUnfocusedBrush}}" />-->
-            </Trigger>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{DynamicResource RowHoverBrush}" />
-            </Trigger>
-            <DataTrigger Binding="{Binding Path=SelectionState}" Value="Focused">
-                <Setter Property="Background" Value="{DynamicResource TableRowToolsBgBrush}" />
-            </DataTrigger>
-            <Trigger Property="ShowRowBreak" Value="True">
-                <Setter Property="BorderBrush" TargetName="BottomLine" Value="{StaticResource {dxgt:GridRowThemeKey ResourceKey=RowBreakBrush}}" />
-                <Setter Property="BorderThickness" TargetName="BottomLine" Value="{StaticResource {dxgt:GridRowThemeKey ResourceKey=RowBreakThickness}}" />
-            </Trigger>
-            <Trigger Property="FixedRowPosition" Value="Bottom">
-                <Setter Property="VerticalAlignment" TargetName="BottomLine" Value="Top" />
-            </Trigger>
-            <Trigger Property="IsLastFixedRow" Value="True">
-                <Setter Property="Background" TargetName="BottomLine" Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=RowSeparatorBrush}}" />
-                <Setter Property="BorderThickness" TargetName="BottomLine" Value="0,1,0,1" />
-            </Trigger>
-            <!-- <DataTrigger Binding="{Binding Path=(dxg:GridControl.ActiveView).DataControl.(dxi:AppearanceOptions.HasBackground), RelativeSource={RelativeSource Self}}" Value="True"> -->
-            <!--     <Setter Property="Background" Value="{Binding Path=(dxg:GridControl.ActiveView).DataControl.(dxi:AppearanceOptions.Background), RelativeSource={RelativeSource Self}}"/> -->
-            <!-- </DataTrigger> -->
-        </ControlTemplate.Triggers>
-    </ControlTemplate>
-
-    <ControlTemplate x:Key="CommonToolsControl">
+    
+    <ControlTemplate x:Key="CommonToolsTemplate">
         <DockPanel>
             <Button DockPanel.Dock="Right"                         
                         DataContext="{Binding Converter={StaticResource RowContrtolMoreContextDataConverter}}"
@@ -375,28 +352,28 @@
                         BorderThickness="{Binding BorderThickness}" 
                         Visibility="{Binding Converter={StaticResource RowContorMoreVisibleConverter}}"></Button>
             <ListView DockPanel.Dock="Right" 
-                          Style="{StaticResource HorizontalListViewStyle}"                       
-                          HorizontalAlignment="Right"
-                          Background="{Binding ToolsBgBrush}"
-                          ItemContainerStyle="{StaticResource TransparentListViewItemStyle}" 
-                          ItemsSource="{Binding ToolVms, Converter={StaticResource  RowControlNormalUseListConverter}}"                       
-                          Margin="0,0,0,1"></ListView>
+                      Style="{StaticResource HorizontalListViewStyle}"                       
+                      HorizontalAlignment="Right"
+                      Background="{Binding ToolsBgBrush}"
+                      ItemContainerStyle="{StaticResource TransparentListViewItemStyle}" 
+                      ItemsSource="{Binding ToolVms, Converter={StaticResource  RowControlNormalUseListConverter}}"                       
+                      Margin="0,0,0,1"></ListView>
         </DockPanel>
     </ControlTemplate>
-    
-    <ControlTemplate x:Key="RowControlTest" TargetType="dxg:RowControl" >
-        <Grid Height="{StaticResource TableRowHeight}" Background="Transparent">
+
+    <ControlTemplate x:Key="{dxgt:GridRowThemeKey ResourceKey=RowTemplate}" TargetType="dxg:RowControl" >
+        <Grid Height="{StaticResource TableRowHeight}" Background="Transparent" >
             <Grid.DataContext>
-                <MultiBinding Converter="{StaticResource RowControlDataContentConverter}">
+                <MultiBinding Converter="{StaticResource RowControlToolsDataContentConverter}">
                     <Binding Path=""></Binding>
                     <Binding RelativeSource="{RelativeSource Mode=FindAncestor,AncestorLevel=1,AncestorType=control:RGridControl}"></Binding>
                 </MultiBinding>
             </Grid.DataContext>
             <Border x:Name="Background" Background="{TemplateBinding Background}" />
             <Border x:Name="BottomLine" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,0,0,1" VerticalAlignment="Bottom" />
-            <Grid x:Name="PART_LayoutPanel" />
-            <ContentControl x:Name="PART_TOOLS"                         
-                            Template="{StaticResource CommonToolsControl}">
+            <Grid x:Name="PART_LayoutPanel"/>
+            <ContentControl x:Name="PART_TOOLS"                            
+                            Template="{StaticResource CommonToolsTemplate}">
                 <ContentControl.Visibility>
                     <MultiBinding Converter="{StaticResource TableRowToolsVisibleConverter}">
                         <Binding Path="ToolIsFixed"></Binding>
@@ -436,6 +413,70 @@
                 <Setter Property="Background" TargetName="BottomLine" Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=RowSeparatorBrush}}" />
                 <Setter Property="BorderThickness" TargetName="BottomLine" Value="0,1,0,1" />
             </Trigger>
+            <!--<EventTrigger RoutedEvent="MouseDoubleClick">
+                
+            </EventTrigger>-->
+            <!-- <DataTrigger Binding="{Binding Path=(dxg:GridControl.ActiveView).DataControl.(dxi:AppearanceOptions.HasBackground), RelativeSource={RelativeSource Self}}" Value="True"> -->
+            <!--     <Setter Property="Background" Value="{Binding Path=(dxg:GridControl.ActiveView).DataControl.(dxi:AppearanceOptions.Background), RelativeSource={RelativeSource Self}}"/> -->
+            <!-- </DataTrigger> -->
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="RowControlTest" TargetType="dxg:RowControl" >
+        <Grid Height="{StaticResource TableRowHeight}" Background="Transparent" >
+            <Border x:Name="Background" Background="{TemplateBinding Background}" />
+            <Border x:Name="BottomLine" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,0,0,1" VerticalAlignment="Bottom" />
+            <Grid x:Name="PART_LayoutPanel"/>
+            <ContentControl x:Name="PART_TOOLS"                            
+                            Template="{StaticResource CommonToolsTemplate}">
+                <ContentControl.DataContext>
+                    <MultiBinding Converter="{StaticResource RowControlToolsDataContentConverter}">
+                        <Binding Path=""></Binding>
+                        <Binding RelativeSource="{RelativeSource Mode=FindAncestor,AncestorLevel=1,AncestorType=control:RGridControl}"></Binding>
+                    </MultiBinding>
+                </ContentControl.DataContext>
+                <ContentControl.Visibility>
+                    <MultiBinding Converter="{StaticResource TableRowToolsVisibleConverter}">
+                        <Binding Path="ToolIsFixed"></Binding>
+                        <Binding RelativeSource="{RelativeSource AncestorLevel=1,AncestorType=dxg:RowControl,Mode=FindAncestor}" Path="IsMouseOver"></Binding>
+                    </MultiBinding>
+                </ContentControl.Visibility>
+            </ContentControl>
+            <Grid.ContextMenu>
+                <Binding Path="DataContext.ToolVms" ElementName="PART_TOOLS" Converter="{StaticResource RowControlContextMenuConverter}"></Binding>
+            </Grid.ContextMenu>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="ShowHorizontalLine" Value="False">
+                <Setter Property="Visibility" TargetName="BottomLine" Value="Collapsed" />
+            </Trigger>
+            <Trigger Property="ShowBottomLine" Value="True">
+                <Setter Property="Visibility" TargetName="BottomLine" Value="Visible" />
+            </Trigger>
+            <Trigger Property="FadeSelection" Value="True">
+                <!--<Setter Property="Background" Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=BorderUnfocusedBrush}}" />
+                <Setter Property="Foreground" Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=TextUnfocusedBrush}}" />-->
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource RowHoverBrush}" />
+            </Trigger>
+            <DataTrigger Binding="{Binding Path=SelectionState}" Value="Focused">
+                <Setter Property="Background" Value="{DynamicResource TableRowToolsBgBrush}" />
+            </DataTrigger>
+            <Trigger Property="ShowRowBreak" Value="True">
+                <Setter Property="BorderBrush" TargetName="BottomLine" Value="{StaticResource {dxgt:GridRowThemeKey ResourceKey=RowBreakBrush}}" />
+                <Setter Property="BorderThickness" TargetName="BottomLine" Value="{StaticResource {dxgt:GridRowThemeKey ResourceKey=RowBreakThickness}}" />
+            </Trigger>
+            <Trigger Property="FixedRowPosition" Value="Bottom">
+                <Setter Property="VerticalAlignment" TargetName="BottomLine" Value="Top" />
+            </Trigger>
+            <Trigger Property="IsLastFixedRow" Value="True">
+                <Setter Property="Background" TargetName="BottomLine" Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=RowSeparatorBrush}}" />
+                <Setter Property="BorderThickness" TargetName="BottomLine" Value="0,1,0,1" />
+            </Trigger>
+            <!--<EventTrigger RoutedEvent="MouseDoubleClick">
+                
+            </EventTrigger>-->
             <!-- <DataTrigger Binding="{Binding Path=(dxg:GridControl.ActiveView).DataControl.(dxi:AppearanceOptions.HasBackground), RelativeSource={RelativeSource Self}}" Value="True"> -->
             <!--     <Setter Property="Background" Value="{Binding Path=(dxg:GridControl.ActiveView).DataControl.(dxi:AppearanceOptions.Background), RelativeSource={RelativeSource Self}}"/> -->
             <!-- </DataTrigger> -->            
