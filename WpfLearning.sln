@@ -309,7 +309,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DI", "DI", "{02D84FAF-6336-
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfAutofac", "Wpf\DI\WpfAutofac\WpfAutofac.csproj", "{592D78E1-D505-406D-A400-A83442E9E8EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeoDataGrid", "Devexpress\Controls\DataGrid\NeoDataGrid\NeoDataGrid\NeoDataGrid.csproj", "{3C0CDBF1-B599-4EF4-B691-1EFE20FD08A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NeoDataGrid", "Devexpress\Controls\DataGrid\NeoDataGrid\NeoDataGrid\NeoDataGrid.csproj", "{3C0CDBF1-B599-4EF4-B691-1EFE20FD08A2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleViewModelBase", "Devexpress\MVVM\View Models\ExampleViewModelBase\ExampleViewModelBase.csproj", "{5E5A7DBC-5FE8-4AF3-9C68-79A8AD440903}"
 EndProject
@@ -318,6 +318,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Commands", "Commands", "{253B5098-609A-4A80-A665-6E26D088B676}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExampleDelegateCommand", "Devexpress\MVVM\Commands\ExampleDelegateCommand\ExampleDelegateCommand.csproj", "{EC75D661-105C-4869-A537-703F29B12B6A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamlTest", "Wpf\Xaml\XamlTest\XamlTest.csproj", "{9F8CD76F-B43F-4130-B7C9-6EB25DDEF076}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1233,6 +1235,18 @@ Global
 		{EC75D661-105C-4869-A537-703F29B12B6A}.Release|x64.Build.0 = Release|Any CPU
 		{EC75D661-105C-4869-A537-703F29B12B6A}.Release|x86.ActiveCfg = Release|x86
 		{EC75D661-105C-4869-A537-703F29B12B6A}.Release|x86.Build.0 = Release|x86
+		{9F8CD76F-B43F-4130-B7C9-6EB25DDEF076}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F8CD76F-B43F-4130-B7C9-6EB25DDEF076}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F8CD76F-B43F-4130-B7C9-6EB25DDEF076}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9F8CD76F-B43F-4130-B7C9-6EB25DDEF076}.Debug|x64.Build.0 = Debug|Any CPU
+		{9F8CD76F-B43F-4130-B7C9-6EB25DDEF076}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9F8CD76F-B43F-4130-B7C9-6EB25DDEF076}.Debug|x86.Build.0 = Debug|Any CPU
+		{9F8CD76F-B43F-4130-B7C9-6EB25DDEF076}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F8CD76F-B43F-4130-B7C9-6EB25DDEF076}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F8CD76F-B43F-4130-B7C9-6EB25DDEF076}.Release|x64.ActiveCfg = Release|Any CPU
+		{9F8CD76F-B43F-4130-B7C9-6EB25DDEF076}.Release|x64.Build.0 = Release|Any CPU
+		{9F8CD76F-B43F-4130-B7C9-6EB25DDEF076}.Release|x86.ActiveCfg = Release|Any CPU
+		{9F8CD76F-B43F-4130-B7C9-6EB25DDEF076}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1384,6 +1398,7 @@ Global
 		{917DD431-B653-408D-9EA5-A29B4BD145BD} = {2D8EAC4F-6142-4D90-B99D-E0EEA67D1DB6}
 		{253B5098-609A-4A80-A665-6E26D088B676} = {269B2586-47C7-4310-9AF3-AE8C4DE9FE85}
 		{EC75D661-105C-4869-A537-703F29B12B6A} = {253B5098-609A-4A80-A665-6E26D088B676}
+		{9F8CD76F-B43F-4130-B7C9-6EB25DDEF076} = {6FAF9DC0-9935-4F56-A899-04CF66AAD3B6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A26D33EA-3064-49AC-AC3B-E5AB2383890D}
