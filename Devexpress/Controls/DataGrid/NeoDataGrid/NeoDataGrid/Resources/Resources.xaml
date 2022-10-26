@@ -292,6 +292,7 @@
     </DataTemplate>
 
     <local:RowControlExplendTipVisibleConverter x:Key="RowControlExplendTipVisibleConverter"></local:RowControlExplendTipVisibleConverter>
+    <local:RowHandleToRowTemplarteConverter x:Key="RowHandleToRowTemplarteConverter"></local:RowHandleToRowTemplarteConverter>
     <DataTemplate x:Key="TLVRowDataTemplate">
         <ContentControl>
             <Grid Background="Transparent">
@@ -300,7 +301,15 @@
                     <ColumnDefinition Width="5"></ColumnDefinition>
                     <ColumnDefinition Width="Auto"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <ContentControl x:Name="PART_ContentControl" Grid.Column="0" Template="{Binding RRowTemplate, RelativeSource={RelativeSource AncestorLevel=1,AncestorType=control:RTreeListView}}"></ContentControl>
+                <ContentControl x:Name="PART_ContentControl" 
+                                Grid.Column="0">
+                    <ContentControl.Template>
+                        <MultiBinding Converter="{StaticResource RowHandleToRowTemplarteConverter}">
+                            <Binding Path="RowHandle"></Binding>
+                            <Binding RelativeSource="{RelativeSource AncestorLevel=1,AncestorType=control:RTreeListView}"></Binding>
+                        </MultiBinding>
+                    </ContentControl.Template>
+                </ContentControl>
                 <dx:DXImage Source="{x:Static local:Images.SortDsec}" 
                             Grid.Column="2"                             
                             Height="{DynamicResource SmallImageSize}" >
