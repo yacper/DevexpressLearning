@@ -22,7 +22,10 @@ namespace DataTemplates
 	{
 		public MainWindow()
 		{
+            DataContext = this;
 			InitializeComponent();
-		}
-	}
+        }
+
+        public TestVm Test { get; set; } = new TestVm();
+    }
 }

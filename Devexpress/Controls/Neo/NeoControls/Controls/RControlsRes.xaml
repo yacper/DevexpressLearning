@@ -1,0 +1,112 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:NeoTrader.UI.Controls"
+                    xmlns:neoTrader="clr-namespace:NeoTrader"
+                    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+
+
+    <DataTemplate DataType="{x:Type neoTrader:CommandVm}">
+        <Border x:Name="_Border">
+            <Button x:Name="_Button" Command="{Binding Command}">
+                <Button.ContextMenu>
+                    <ContextMenu x:Name="MainContextMenu"
+                                 PlacementRectangle="{Binding RelativeSource={RelativeSource Self}}">
+                        <MenuItem Header="Main">
+                            <MenuItem Header="Find" />
+                            <MenuItem Header="Add" />
+                            <MenuItem Header="View" />
+                            <MenuItem Header="Edit" />
+                        </MenuItem>
+                    </ContextMenu>
+                </Button.ContextMenu>
+                <Button.Triggers>
+                    <EventTrigger SourceName="_Button" RoutedEvent="Button.Click">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainContextMenu"
+                                                               Storyboard.TargetProperty="(ContextMenu.IsOpen)">
+                                    <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                        <DiscreteObjectKeyFrame.Value>
+                                            <system:Boolean>True</system:Boolean>
+                                        </DiscreteObjectKeyFrame.Value>
+                                    </DiscreteObjectKeyFrame>
+                                </ObjectAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Button.Triggers>
+                <StackPanel x:Name="_Panel" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Image x:Name="_Glyph" Source="{Binding Glyph}" Margin="0,-2,0,-2"/>
+                    <TextBlock x:Name="_Text" Text="{Binding DisplayName}">
+                        <dx:Badge.Badge>
+                            <dx:Badge BadgeKind="None" Content="{Binding BadgeContent}" />
+                        </dx:Badge.Badge>
+                    </TextBlock>
+                    <Image x:Name="_StateImg" Source="{Binding StateImg}" />
+                </StackPanel>
+            </Button>
+        </Border>
+
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding Path=DisplayMode}" Value="Content">
+                <Setter TargetName="_Glyph" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="_Text" Property="Visibility" Value="Visible" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=DisplayMode}" Value="ContentAndGlyph">
+                <Setter TargetName="_Glyph" Property="Visibility" Value="Visible" />
+                <Setter TargetName="_Text" Property="Visibility" Value="Visible" />
+            </DataTrigger>
+
+            <DataTrigger Binding="{Binding Path=IsSeparator}" Value="True">
+                <Setter TargetName="_Border" Property="BorderThickness" Value="1,0,0,0" />
+                <Setter TargetName="_Button" Property="Visibility" Value="Collapsed" />
+            </DataTrigger>
+
+
+        </DataTemplate.Triggers>
+    </DataTemplate>
+
+
+    <!--<Style TargetType="controls:RToolItem" >
+        --><!--<Setter Property="Template">                --><!--ControlTemplate--><!--
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <StackPanel HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                            <Image Source="{Binding CommandVm.Glyph}" />
+                            <TextBlock Text="{Binding CommandVm.DisplayName}" />
+                        </StackPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+
+        </Setter>--><!--
+
+        <Setter Property="ContentTemplate">     --><!--DataTemplate--><!--
+            <Setter.Value>
+                <DataTemplate DataType="CommandVm">
+                    <Border>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Image Source="{Binding Glyph}" />
+                            <TextBlock Text="{Binding DisplayName}" />
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+        --><!--<Setter Property="con">
+            <Setter.Value>
+
+            </Setter.Value>
+
+        </Setter>--><!--
+
+
+    </Style>-->
+
+
+</ResourceDictionary>

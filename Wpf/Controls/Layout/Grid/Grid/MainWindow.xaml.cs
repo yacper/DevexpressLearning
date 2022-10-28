@@ -30,5 +30,11 @@ namespace Grid
 			GridSplitter window = new GridSplitter();
 			window.Show();
 		}
+		private void GridItems_Click(object sender, RoutedEventArgs e)
+		{
+			GridItems window = new GridItems();
+			window.Show();
+		}
+
 	}
 }

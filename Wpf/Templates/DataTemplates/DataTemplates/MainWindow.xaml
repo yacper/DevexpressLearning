@@ -5,9 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DataTemplates"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        DataContext="DataTemplates.MainWindow">
+
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type local:TestVm}">
+            <ContentControl>
+                <StackPanel>
+                    <TextBlock Text="{Binding Value}"></TextBlock>
+                    <Button Content="Press"></Button>
+                </StackPanel>
+            </ContentControl>
+        </DataTemplate>
+    </Window.Resources>
     <Grid>
-		<Button>
+    <ContentPresenter Content="{Binding Test}"></ContentPresenter>
+
+		<!--<Button>
 			<Button.ContentTemplate>
 				<DataTemplate>
 					<StackPanel Orientation="Horizontal">
@@ -16,7 +30,7 @@
 					</StackPanel>
 				</DataTemplate>
 			</Button.ContentTemplate>
-		</Button>
+		</Button>-->
 
     </Grid>
 </Window>

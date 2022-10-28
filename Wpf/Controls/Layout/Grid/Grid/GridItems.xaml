@@ -1,0 +1,27 @@
+﻿<Window x:Class="Grid.GridItems"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Grid"
+        mc:Ignorable="d"
+        Title="GridItems" Height="450" Width="800" Loaded="OnLoaded" >
+    <Window.Resources>
+
+        <DataTemplate DataType="{x:Type local:Item}">
+            <Grid>
+                <Button  Content="{Binding Val}"></Button>
+
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
+
+
+    <ItemsControl x:Name="im" ItemsSource="{Binding Items}">
+        <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+                <Grid x:Name="Grid1" />
+            </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+    </ItemsControl>
+</Window>

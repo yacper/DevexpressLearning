@@ -10,6 +10,7 @@
 		<Menu DockPanel.Dock="Top">
 			<MenuItem Header="_File">
 				<MenuItem Header="_GridSplitter" Click="GridSplitter_Click" />
+				<MenuItem Header="_GridItems" Click="GridItems_Click" />
 
 				<Separator />
 				<MenuItem Header="_Exit" />
@@ -19,13 +20,13 @@
 
 			<Grid ShowGridLines="True">
 				<Grid.RowDefinitions>
-					<RowDefinition></RowDefinition>
-					<RowDefinition></RowDefinition>
+					<RowDefinition Height="*"></RowDefinition>
+					<RowDefinition Height="*"></RowDefinition>
 				</Grid.RowDefinitions>
 				<Grid.ColumnDefinitions>
-					<ColumnDefinition></ColumnDefinition>
-					<ColumnDefinition></ColumnDefinition>
-					<ColumnDefinition></ColumnDefinition>
+					<ColumnDefinition Width="*"></ColumnDefinition>
+					<ColumnDefinition Width="*"></ColumnDefinition>
+					<ColumnDefinition Width="*"></ColumnDefinition>
 				</Grid.ColumnDefinitions>
 				<Button Grid.Row="0" Grid.Column="0">Top Left</Button>
 				<Button Grid.Row="0" Grid.Column="1">Middle Left</Button>

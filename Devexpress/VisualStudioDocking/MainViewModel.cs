@@ -26,6 +26,7 @@ using DevExpress.Xpf.DemoBase.Helpers;
 using DevExpress.Xpf.DemoBase.Helpers.TextColorizer;
 using DevExpress.Xpf.Docking;
 using DevExpress.Xpf.PropertyGrid;
+using DevExpress.XtraRichEdit.Import.Html;
 using Microsoft.Win32;
 
 namespace VisualStudioDocking.ViewModels
@@ -393,6 +394,9 @@ namespace VisualStudioDocking.ViewModels
 	}
 	public abstract class WorkspaceViewModel : ViewModel
 	{
+
+		public override string BindableName { get { return Data; } }
+
 		protected WorkspaceViewModel()
 		{
 			IsClosed = true;
@@ -405,6 +409,10 @@ namespace VisualStudioDocking.ViewModels
 		public virtual bool IsClosed { get; set; }
 		public virtual bool IsOpened { get; set; }
 
+
+		//public virtual string SerializationInfo { get; set; }
+        public virtual string Data { get; set; }
+        public virtual string Id   { get; set; } = new Guid().ToString();
 		public void Close()
 		{
 			EventHandler handler = RequestClose;
@@ -572,6 +580,8 @@ namespace VisualStudioDocking.ViewModels
 			Refresh = Images.Refresh;
 		}
 
+
+
 		public event EventHandler<SolutionItemOpeningEventArgs> ItemOpening;
 
 		public ImageSource PropertiesWindow { get; set; }
@@ -582,9 +592,12 @@ namespace VisualStudioDocking.ViewModels
 
 		public void OpenItem(SolutionItem item)
 		{
-			if (item != null && item.IsFile && ItemOpening != null)
+            if (item != null && item.IsFile && ItemOpening != null)
+            {
 				ItemOpening.Invoke(this, new SolutionItemOpeningEventArgs(item));
-		}
+                Data               = "hello";
+            }
+        }
 	}
 
 	public class SolutionItem

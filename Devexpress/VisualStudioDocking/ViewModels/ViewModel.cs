@@ -5,12 +5,13 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Media;
+using DevExpress.Mvvm;
 
 namespace VisualStudioDocking
 {
-	public abstract class ViewModel : IDisposable
+	public abstract class ViewModel : ViewModelBase
 	{
-		public string BindableName { get { return GetBindableName(DisplayName); } }
+		public virtual string BindableName { get { return GetBindableName(DisplayName); } }
 		public virtual string DisplayName { get; protected set; }
 		public virtual ImageSource Glyph { get; set; }
 

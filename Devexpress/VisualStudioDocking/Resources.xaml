@@ -23,12 +23,15 @@
         <Setter Property="dxdo:AutoHideGroup.IsAutoHideCenter" Value="True" />
     </Style>
     <Style TargetType="dxdo:LayoutPanel" x:Key="LayoutPanelStyleBase">
-        <Setter Property="BindableName" Value="{Binding BindableName}"/>
+        <Setter Property="BindableName" Value="{Binding Data}"/>
         <Setter Property="Caption" Value="{Binding DisplayName}" />
         <Setter Property="CloseCommand" Value="{Binding CloseCommand}" />
         <Setter Property="Closed" Value="{Binding IsClosed, Mode=TwoWay}" />
         <Setter Property="IsActive" Value="{Binding IsActive}" />
         <Setter Property="dxdo:DocumentGroup.ShowPinButton" Value="False" />
+        <Setter Property="dxdo:BaseLayoutItem.ToolTip" Value="{Binding Data}" />
+        <Setter Property="Tag" Value="{Binding Data}" />
+        <Setter Property="dx:DXSerializer.SerializationID" Value="{Binding Id}" />
     </Style>
     <Style TargetType="{x:Type dxdo:LayoutPanel}" BasedOn="{StaticResource LayoutPanelStyleBase}"/>
     <Style TargetType="{x:Type dxdo:DocumentPanel}" BasedOn="{StaticResource LayoutPanelStyleBase}">

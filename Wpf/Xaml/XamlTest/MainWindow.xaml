@@ -41,6 +41,13 @@
         <StackPanel>
             <Label Target="box" Content="Enter _text:" />
             <TextBox Name="box" />
+
+            <Button MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" MinWidth="75" Margin="10">
+                Help
+            </Button>
+            <Button MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave" MinWidth="75" Margin="10">
+                OK
+            </Button>
         </StackPanel>
     </Grid>
 </Window>
