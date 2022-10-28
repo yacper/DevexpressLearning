@@ -54,6 +54,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="BindingEngine" Version="1.0.0" />
     <PackageReference Include="DeepCloner" Version="0.10.4" />
     <PackageReference Include="DevExpress.Wpf" Version="22.1.*" />
 	  <PackageReference Include="DevExpress.Wpf.Themes.All" Version="22.*" />

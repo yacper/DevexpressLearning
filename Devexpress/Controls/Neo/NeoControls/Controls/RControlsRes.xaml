@@ -5,7 +5,7 @@
                     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
                     xmlns:system="clr-namespace:System;assembly=System.Runtime" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars">
 
-    <DataTemplate x:Key="connectItemTemplate">
+    <!--<DataTemplate x:Key="connectItemTemplate">
         <ContentControl>
             <dxb:BarButtonItem KeyGesture="{Binding KeyGesture}"
                                Command="{Binding Command}"
@@ -28,11 +28,11 @@
 
             </dxb:BarButtonItem>
         </ContentControl>
-    </DataTemplate>
+    </DataTemplate>-->
     <DataTemplate DataType="{x:Type neoTrader:CommandVm}">
         <Border x:Name="_Border" Padding="0">
-            <Button Padding="0" Background="Transparent" BorderBrush="Transparent" x:Name="_Button" Command="{Binding Command}">
-                <Button.ContextMenu>
+            <Button x:Name="_Button" Command="{Binding Command}">
+                <!--<Button.ContextMenu>
                     <ContextMenu x:Name="MainContextMenu"
                                  PlacementRectangle="{Binding RelativeSource={RelativeSource Self}}">
                         <MenuItem Header="Main">
@@ -58,10 +58,10 @@
                             </Storyboard>
                         </BeginStoryboard>
                     </EventTrigger>
-                </Button.Triggers>
+                </Button.Triggers>-->
                 <StackPanel x:Name="_Panel" Orientation="Horizontal" HorizontalAlignment="Center">
                     <Image x:Name="_Glyph" Width="20" Height="20" Source="{Binding Glyph}" Margin="0,-2,0,-2"/>
-                    <TextBlock x:Name="_Text" Text="{Binding DisplayName}">
+                    <TextBlock x:Name="_Text" Text="{Binding DisplayName,Mode=TwoWay}">
                         <dx:Badge.Badge>
                             <dx:Badge BadgeKind="None" Content="{Binding BadgeContent}" />
                         </dx:Badge.Badge>
@@ -91,7 +91,7 @@
     </DataTemplate>
 
 
-    <DataTemplate x:Key="CommandTemplate">
+    <!--<DataTemplate x:Key="CommandTemplate">
         <Border x:Name="_Border" >
             <Button x:Name="_Button" Command="{Binding Command}">
                 <Button.ContextMenu>
@@ -150,7 +150,7 @@
 
 
         </DataTemplate.Triggers>
-    </DataTemplate>
+    </DataTemplate>-->
     <!--<Style TargetType="controls:RToolItem" >
         --><!--<Setter Property="Template">                --><!--ControlTemplate--><!--
             <Setter.Value>
