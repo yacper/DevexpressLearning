@@ -44,14 +44,12 @@ public class CommandVm : ViewModelBase
         BindingValueChangedHandler          targetChangedHandler = null)
     {
         //todo: remove binding
-        bind = BindingEngine.SetPropertyBinding(this, targetExpression, source, sourceExpression);
+        var binding = BindingEngine.SetPropertyBinding(this, targetExpression, source, sourceExpression);
         if (targetChangedHandler != null)
-            bind.SetTargetChanged(targetChangedHandler);
+            binding.SetTargetChanged(targetChangedHandler);
 
         return this;
     }
-
-     protected WeakBinding bind;
 
 #region State状态，不应被用户设置
 
