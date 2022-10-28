@@ -87,9 +87,10 @@ namespace NeoDataGrid.TestView
             rowTools.AddVM(new RowToolsViewMode()
             {
                 IsNormalUse = true,
-                DisplayMode = DisplayMode.Glyph,
+                DisplayMode = DisplayMode.Content,
                 Glyph = Images.Build,
-                DisplayName = "编译"
+                DisplayName = "+",
+               // DisplayTextWidth = 30
             });
             rowTools.AddVM(new RowToolsViewMode()
             {

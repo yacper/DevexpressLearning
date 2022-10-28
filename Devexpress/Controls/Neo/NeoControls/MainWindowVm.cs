@@ -51,4 +51,6 @@ public class MainWindowVm : ViewModelBase
             }))
             { Glyph = Images.Account, StateImg = Images.ConnectedStatus, BadgeContent = "D", DisplayMode = BarItemDisplayMode.ContentAndGlyph };
 
+
+
 }

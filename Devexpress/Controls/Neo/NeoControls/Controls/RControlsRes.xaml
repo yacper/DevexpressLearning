@@ -3,11 +3,96 @@
                     xmlns:controls="clr-namespace:NeoTrader.UI.Controls"
                     xmlns:neoTrader="clr-namespace:NeoTrader"
                     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
-                    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+                    xmlns:system="clr-namespace:System;assembly=System.Runtime" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars">
 
+    <DataTemplate x:Key="connectItemTemplate">
+        <ContentControl>
+            <dxb:BarButtonItem KeyGesture="{Binding KeyGesture}"
+                               Command="{Binding Command}"
+                               Glyph="{Binding Glyph}"
+                               IsEnabled="{Binding IsEnabled}"                               
+                               BarItemDisplayMode="{Binding DisplayMode}"
+                               ToolTipService.ShowOnDisabled="True" Content="{Binding}">
+                <dxb:BarButtonItem.ContentTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+                            <TextBlock Width="120" VerticalAlignment="Center" 
+                                       HorizontalAlignment="Left" 
+                                       TextTrimming="CharacterEllipsis"
+                                       TextWrapping="NoWrap" 
+                                       Text="{Binding Provider.Name}"/>
+                            <Image Width="18" Margin="10,0,0,0" Source="{Binding Provider.ConnectionState, Converter={StaticResource ConnectStatusConverter}}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </dxb:BarButtonItem.ContentTemplate>
 
+            </dxb:BarButtonItem>
+        </ContentControl>
+    </DataTemplate>
     <DataTemplate DataType="{x:Type neoTrader:CommandVm}">
-        <Border x:Name="_Border">
+        <Border x:Name="_Border" Padding="0">
+            <Button Padding="0" Background="Transparent" BorderBrush="Transparent" x:Name="_Button" Command="{Binding Command}">
+                <Button.ContextMenu>
+                    <ContextMenu x:Name="MainContextMenu"
+                                 PlacementRectangle="{Binding RelativeSource={RelativeSource Self}}">
+                        <MenuItem Header="Main">
+                            <MenuItem Header="Find" />
+                            <MenuItem Header="Add" />
+                            <MenuItem Header="View" />
+                            <MenuItem Header="Edit" />
+                        </MenuItem>
+                    </ContextMenu>
+                </Button.ContextMenu>
+                <Button.Triggers>
+                    <EventTrigger SourceName="_Button" RoutedEvent="Button.Click">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MainContextMenu"
+                                                               Storyboard.TargetProperty="(ContextMenu.IsOpen)">
+                                    <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                        <DiscreteObjectKeyFrame.Value>
+                                            <system:Boolean>True</system:Boolean>
+                                        </DiscreteObjectKeyFrame.Value>
+                                    </DiscreteObjectKeyFrame>
+                                </ObjectAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Button.Triggers>
+                <StackPanel x:Name="_Panel" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Image x:Name="_Glyph" Width="20" Height="20" Source="{Binding Glyph}" Margin="0,-2,0,-2"/>
+                    <TextBlock x:Name="_Text" Text="{Binding DisplayName}">
+                        <dx:Badge.Badge>
+                            <dx:Badge BadgeKind="None" Content="{Binding BadgeContent}" />
+                        </dx:Badge.Badge>
+                    </TextBlock>
+                    <Image x:Name="_StateImg" Width="20" Height="20" Source="{Binding StateImg}" />
+                </StackPanel>
+            </Button>
+        </Border>
+
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding Path=DisplayMode}" Value="Content">
+                <Setter TargetName="_Glyph" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="_Text" Property="Visibility" Value="Visible" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=DisplayMode}" Value="ContentAndGlyph">
+                <Setter TargetName="_Glyph" Property="Visibility" Value="Visible" />
+                <Setter TargetName="_Text" Property="Visibility" Value="Visible" />
+            </DataTrigger>
+
+            <DataTrigger Binding="{Binding Path=IsSeparator}" Value="True">
+                <Setter TargetName="_Border" Property="BorderThickness" Value="1,0,0,0" />
+                <Setter TargetName="_Button" Property="Visibility" Value="Collapsed" />
+            </DataTrigger>
+
+
+        </DataTemplate.Triggers>
+    </DataTemplate>
+
+
+    <DataTemplate x:Key="CommandTemplate">
+        <Border x:Name="_Border" >
             <Button x:Name="_Button" Command="{Binding Command}">
                 <Button.ContextMenu>
                     <ContextMenu x:Name="MainContextMenu"
@@ -37,13 +122,13 @@
                     </EventTrigger>
                 </Button.Triggers>
                 <StackPanel x:Name="_Panel" Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Image x:Name="_Glyph" Source="{Binding Glyph}" Margin="0,-2,0,-2"/>
+                    <Image x:Name="_Glyph" Width="20" Height="20" Source="{Binding Glyph}" Margin="0,-2,0,-2"/>
                     <TextBlock x:Name="_Text" Text="{Binding DisplayName}">
                         <dx:Badge.Badge>
                             <dx:Badge BadgeKind="None" Content="{Binding BadgeContent}" />
                         </dx:Badge.Badge>
                     </TextBlock>
-                    <Image x:Name="_StateImg" Source="{Binding StateImg}" />
+                    <Image x:Name="_StateImg" Width="20" Height="20" Source="{Binding StateImg}" />
                 </StackPanel>
             </Button>
         </Border>
@@ -66,8 +151,6 @@
 
         </DataTemplate.Triggers>
     </DataTemplate>
-
-
     <!--<Style TargetType="controls:RToolItem" >
         --><!--<Setter Property="Template">                --><!--ControlTemplate--><!--
             <Setter.Value>

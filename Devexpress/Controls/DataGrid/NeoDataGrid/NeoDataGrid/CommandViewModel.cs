@@ -132,11 +132,12 @@ public class RowToolsViewMode: CommandViewModel
 
     public RowToolsViewMode()
     {
-        ToolTip = "";
+        ToolTip = null;
         
         BorderBrush = Brushes.Transparent;
         BorderThickness = new Thickness(0);
-        BackgroundBrush = Brushes.Transparent;
+        BackgroundBrush = App.Current.FindResource("TableRowToolsBgBrush") as Brush;
+        DisplayTextWidth = Double.NaN;
     }
 
     private DisplayMode _DisplayMode;
