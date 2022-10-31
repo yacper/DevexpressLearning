@@ -82,7 +82,7 @@ public class MainWindowVm : ViewModelBase
             new CommandVm("ContentAndGlyphAndStateAddBage", new DelegateCommand(() => { }))
             { DisplayMode=BarItemDisplayMode.ContentAndGlyph,Glyph=Images.Trading, StateImg = Images.ConnectingStatus, BadgeContent="F",KeyGesture=new KeyGesture(Key.A, ModifierKeys.Control)},
         } },
-        new CommandVm("Content", new DelegateCommand(() => { }))
+        new CommandVm("Content", new DelegateCommand(() => {  }))
         {DisplayMode=BarItemDisplayMode.Content},
         new CommandVm("Glyph", new DelegateCommand(() => { }))
         {Glyph = Images.Account},

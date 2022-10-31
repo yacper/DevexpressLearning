@@ -35,8 +35,10 @@ public class CommandVm : ViewModelBase
 
     public BarItemDisplayMode DisplayMode { get; set; } // 显示模式，纯文字还是带icon
     public bool               IsCheckBox  { get; set; } // 是否作为checkbox
+    public bool               IsLink { get; set; }     // 是否作为 LinkBtn   
     public bool               IsSeparator { get; set; } // 是否只是一个seperator
     public KeyGesture         KeyGesture  { get; set; } // 对应快捷键
+    public object             Tag { get; set; }    // 存储相关的数据 
 
      public  CommandVm WithPropertyBinding<TSource>( 
         Expression<Func<CommandVm, object>> targetExpression,

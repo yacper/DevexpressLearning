@@ -10,26 +10,10 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
         <Window.Resources>
+        </Window.Resources>
 
-   
-</Window.Resources>
-
-    <WrapPanel>
-    <controls:RToolItem Content="{Binding ToolButtonVm}" Height="24" Width="Auto"/>
-    <Button Content="ChangeDisplayName" Height="24" Width="Auto" >
-        <dxmvvm:Interaction.Behaviors>
-            <dxmvvm:EventToCommand EventName="Click" Command="{Binding ChangeDisplayNameCommand}"
-                                    />
-        </dxmvvm:Interaction.Behaviors>
-    </Button>
-    <controls:RToolItem Content="{Binding ContentVm}" Height="24" Width="Auto"/>
-    <controls:RToolItem Content="{Binding SeperatorVm}" Height="24" Width="Auto"/>
-    <controls:RToolItem Content="{Binding ContentAndGlyphVm}" Height="24" Width="Auto"/>
-    <controls:RToolItem Content="{Binding ContentAndGlyphAndStateVm}" Height="24" Width="Auto"/>
-    <controls:RToolItem Content="{Binding ContentAndGlyphAndStateAndBadgeVm}" Height="24" Width="Auto"/>
-    <ContentPresenter Content="{Binding ToolButtonVm}" Width="Auto"/>
-        <!--<dxb:BarContainerControl ItemsSource="{Binding Commands}" ItemTemplate="{DynamicResource connectItemTemplate}" AllowDrop="False" BorderBrush="Transparent">
-        </dxb:BarContainerControl>-->
+    <!--<WrapPanel>
+    
         <dxb:BarContainerControl ContainerType="Top" Grid.Row="0">
             <dxb:ToolBarControl Caption="File" 
                                 RotateWhenVertical="True" 
@@ -38,5 +22,10 @@
                                 ItemTemplateSelector="{DynamicResource BarItemDataTemplateSelector}">
             </dxb:ToolBarControl>
         </dxb:BarContainerControl>
-    </WrapPanel>
+    </WrapPanel>-->
+    <Menu>
+        <MenuItem Header="Table Row Tools" Click="MenuItem_Click"></MenuItem>
+        <MenuItem Header="WorkSpace Tools" Click="MenuItem_Click_1"></MenuItem>
+        <MenuItem Header="单个 Tool" Click="MenuItem_Click_2"></MenuItem>
+    </Menu>
 </Window>

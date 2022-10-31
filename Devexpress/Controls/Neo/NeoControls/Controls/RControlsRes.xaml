@@ -7,7 +7,7 @@
                     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
                     xmlns:system="clr-namespace:System;assembly=System.Runtime"
                     xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" >
-    <DataTemplate x:Key="ContentDataTemplate">
+    <DataTemplate x:Key="BarItemContentDataTemplate">
         <Border x:Name="PATA_BAR_Border" Padding="0">
             <DockPanel>
                 <TextBlock x:Name="_Text" Text="{Binding DisplayName}" HorizontalAlignment="Left">
@@ -33,39 +33,92 @@
             </DataTrigger>
         </DataTemplate.Triggers>
     </DataTemplate>
+
+    <local:LinkStatusToBrushConverter x:Key="LinkStatusToBrushConverter"></local:LinkStatusToBrushConverter>
+    <local:ELinkStatusToColorTextConverter x:Key="ELinkStatusToColorTextConverter"></local:ELinkStatusToColorTextConverter>
+    <DataTemplate x:Key="GlyphDataTemplate" DataType="{x:Type neoTrader:CommandVm}">
+        <ContentControl>
+            <Grid>
+                <Border x:Name="Part_Border" Background="{Binding Converter={StaticResource LinkStatusToBrushConverter}}">
+                    <TextBlock Text="{Binding Tag, Converter={StaticResource ELinkStatusToColorTextConverter}}"></TextBlock>
+                </Border>
+                <!--<dx:DXImage Source="{x:Static Images.Link}"></dx:DXImage>-->
+            </Grid>
+        </ContentControl>
+        <DataTemplate.Triggers>
+            <!--<Trigger Property="IsLink" Value="False">
+                <Setter TargetName="Part_Border" Property="Visibility" Value="Collapsed"></Setter>
+            </Trigger>-->
+        </DataTemplate.Triggers>
+    </DataTemplate>
     
-    <DataTemplate x:Key="SubItemNormalTemplate">
+    <DataTemplate x:Key="BarButtonItemDataTemplate">
         <ContentControl>
             <dxb:BarButtonItem KeyGesture="{Binding KeyGesture}"
                                Command="{Binding Command}"                               
                                Alignment="Far"
-                               Glyph="{Binding Glyph}"
+                               Glyph="{Binding Glyph}"                               
                                ShowKeyGesture="True"
                                IsEnabled="{Binding IsEnabled}"                               
                                BarItemDisplayMode="{Binding DisplayMode}"   
-                               ToolTipService.ShowOnDisabled="True" Content="{Binding}" 
-                               ContentTemplate="{StaticResource  ContentDataTemplate}">
+                               Content="{Binding}" 
+                               ContentTemplate="{StaticResource BarItemContentDataTemplate}">
             </dxb:BarButtonItem>
         </ContentControl>
     </DataTemplate>
 
-    <DataTemplate x:Key="SubItemLinkTemplate">
+    <DataTemplate x:Key="BarSubItemDataTemplate">
         <ContentControl>
             <neoTraderControls:RBarSubItem KeyGesture="{Binding KeyGesture}"
                                            Command="{Binding Command}"
-                                           Glyph="{Binding Glyph}"
+                                           Glyph="{Binding Glyph}"                                           
                                            IsEnabled="{Binding IsEnabled}"                               
-                                           BarItemDisplayMode="{Binding DisplayMode}"                               
-                                           ToolTipService.ShowOnDisabled="True" 
+                                           BarItemDisplayMode="{Binding DisplayMode}"                                                                          
                                            Content="{Binding}"                            
                                            ItemLinksSource="{Binding Commands}"
                                            ItemTemplateSelector="{DynamicResource BarItemDataTemplateSelector}"
-                                           ContentTemplate="{StaticResource  ContentDataTemplate}">
+                                           ContentTemplate="{StaticResource BarItemContentDataTemplate}">
             </neoTraderControls:RBarSubItem>
         </ContentControl>
     </DataTemplate>
 
-    <local:BarItemDataTemplateSelector x:Key="BarItemDataTemplateSelector" SubItemNormalTemplate="{StaticResource SubItemNormalTemplate}" SubItemLinkTemplate="{StaticResource SubItemLinkTemplate}"></local:BarItemDataTemplateSelector>
+    <DataTemplate x:Key="BarCheckItemDataTemplate">
+        <ContentControl>
+            <dxb:BarCheckItem KeyGesture="{Binding KeyGesture}"
+                              Command="{Binding Command}"                               
+                              Alignment="Far"
+                              Glyph="{Binding Glyph}"
+                              ShowKeyGesture="True"
+                              IsChecked="{Binding IsChecked}"
+                              IsEnabled="{Binding IsEnabled}"                               
+                              BarItemDisplayMode="{Binding DisplayMode}"   
+                              Content="{Binding}" 
+                              ContentTemplate="{StaticResource BarItemContentDataTemplate}">
+            </dxb:BarCheckItem>
+        </ContentControl>
+    </DataTemplate>
+
+    <DataTemplate x:Key="LinkItemDataTemplate">
+        <ContentControl>
+            <dxb:BarButtonItem KeyGesture="{Binding KeyGesture}"
+                               Command="{Binding Command}"                               
+                               Alignment="Far"                               
+                               GlyphTemplate="{StaticResource GlyphDataTemplate}"
+                               ShowKeyGesture="True"
+                               IsEnabled="{Binding IsEnabled}"                               
+                               BarItemDisplayMode="{Binding DisplayMode}"   
+                               Content="{Binding}" 
+                               ContentTemplate="{StaticResource BarItemContentDataTemplate}">
+            </dxb:BarButtonItem>
+        </ContentControl>
+    </DataTemplate>
+
+
+    <local:BarItemDataTemplateSelector x:Key="BarItemDataTemplateSelector" 
+                                       LinkItemTemplate="{StaticResource LinkItemDataTemplate}"
+                                       BarCheckItemTemplate="{StaticResource BarCheckItemDataTemplate}"
+                                       BarButtonItemTemplate="{StaticResource BarButtonItemDataTemplate}" 
+                                       BarSubItemTemplate="{StaticResource BarSubItemDataTemplate}"></local:BarItemDataTemplateSelector>
 
     <!--<DataTemplate x:Key="CommandTemplate">
         <Border x:Name="_Border" >

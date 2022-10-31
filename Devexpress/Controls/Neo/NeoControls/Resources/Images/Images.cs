@@ -30,6 +30,7 @@ namespace NeoTrader{
         public const string Trading = $"{ImageFloder}Panel/Trading.svg";
         public const string Account = $"{ImageFloder}Panel/Account.svg";
         public const string AlertWindow = ImageFloder + "Panel/Alert.svg";
+        public const string Link = DxFloder + "SvgImages/Icon Builder/Actions_Hyperlink.svg";
 
 
         public const string ConnectedStatus = ImageFloder + "Panel/ConnectedStatus.svg";
@@ -44,6 +45,7 @@ namespace NeoTrader{
         public static ImageSource Logger { get { return GetSvgImage(ImagePaths.Logger); } }
         public static ImageSource Trading { get { return GetSvgImage(ImagePaths.Trading); } }
         public static ImageSource Account { get { return GetSvgImage(ImagePaths.Account); } }
+        public static ImageSource Link { get { return GetSvgImage(ImagePaths.Link); } }
 
 
         public static ImageSource ConnectedStatus { get { return GetSvgImage(ImagePaths.ConnectedStatus); } }
