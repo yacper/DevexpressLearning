@@ -28,7 +28,7 @@ namespace NeoControls
         {
             DataContext = ViewModelSource.Create<MainWindowVm>();
             InitializeComponent();
-            CompatibilitySettings.UseLightweightBarItems = false;
+            //CompatibilitySettings.UseLightweightBarItems = false;
         }
 
         private void ToolBarControl_Loaded(object sender, RoutedEventArgs e)
