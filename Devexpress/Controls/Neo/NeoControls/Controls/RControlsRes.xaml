@@ -2,34 +2,70 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="clr-namespace:NeoTrader.UI.Controls"
                     xmlns:neoTrader="clr-namespace:NeoTrader"
+                    xmlns:local="clr-namespace:NeoControls"
                     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
-                    xmlns:system="clr-namespace:System;assembly=System.Runtime" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars">
-
-    <DataTemplate x:Key="connectItemTemplate">
+                    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+                    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" >
+    <DataTemplate x:Key="ContentDataTemplate">
+        <Border x:Name="PATA_BAR_Border" Padding="0">
+            <DockPanel>
+                <TextBlock x:Name="_Text" Text="{Binding DisplayName}" HorizontalAlignment="Left">
+                                <dx:Badge.Badge>
+                                    <dx:Badge BadgeKind="None" Content="{Binding BadgeContent}" />
+                                </dx:Badge.Badge>
+                </TextBlock>
+                <Image x:Name="_StateImg" Width="20" Height="20" HorizontalAlignment="Right" Source="{Binding StateImg}" />
+            </DockPanel>
+        </Border>
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding Path=DisplayMode}" Value="Content">
+                <Setter TargetName="_Text" Property="Visibility" Value="Visible" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=DisplayMode}" Value="ContentAndGlyph">
+                <Setter TargetName="_Text" Property="Visibility" Value="Visible" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=IsSeparator}" Value="True">
+                <Setter TargetName="PATA_BAR_Border" Property="BorderThickness" Value="1,0,0,0" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=StateImg}" Value="{x:Null}">
+                <Setter TargetName="_StateImg" Property="Visibility" Value="Collapsed" />
+            </DataTrigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
+    
+    <DataTemplate x:Key="SubItemNormalTemplate">
         <ContentControl>
             <dxb:BarButtonItem KeyGesture="{Binding KeyGesture}"
-                               Command="{Binding Command}"
+                               Command="{Binding Command}"                               
+                               Alignment="Far"
                                Glyph="{Binding Glyph}"
                                IsEnabled="{Binding IsEnabled}"                               
-                               BarItemDisplayMode="{Binding DisplayMode}"
-                               ToolTipService.ShowOnDisabled="True" Content="{Binding}">
-                <dxb:BarButtonItem.ContentTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
-                            <TextBlock Width="120" VerticalAlignment="Center" 
-                                       HorizontalAlignment="Left" 
-                                       TextTrimming="CharacterEllipsis"
-                                       TextWrapping="NoWrap" 
-                                       Text="{Binding Provider.Name}"/>
-                            <Image Width="18" Margin="10,0,0,0" Source="{Binding Provider.ConnectionState, Converter={StaticResource ConnectStatusConverter}}"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </dxb:BarButtonItem.ContentTemplate>
-
+                               BarItemDisplayMode="{Binding DisplayMode}"   
+                               ToolTipService.ShowOnDisabled="True" Content="{Binding}" 
+                               ContentTemplate="{StaticResource  ContentDataTemplate}">
             </dxb:BarButtonItem>
         </ContentControl>
     </DataTemplate>
-    <DataTemplate DataType="{x:Type neoTrader:CommandVm}">
+
+    <DataTemplate x:Key="SubItemLinkTemplate">
+        <ContentControl>
+            <dxb:BarSubItem KeyGesture="{Binding KeyGesture}"
+                            Command="{Binding Command}"
+                            Glyph="{Binding Glyph}"
+                            IsEnabled="{Binding IsEnabled}"                               
+                            BarItemDisplayMode="{Binding DisplayMode}"                               
+                            ToolTipService.ShowOnDisabled="True" 
+                            Content="{Binding}"                            
+                            ItemLinksSource="{Binding Commands}"
+                            ItemTemplateSelector="{DynamicResource BarItemDataTemplateSelector}"
+                            ContentTemplate="{StaticResource  ContentDataTemplate}">
+            </dxb:BarSubItem>
+        </ContentControl>
+    </DataTemplate>
+
+    <local:BarItemDataTemplateSelector x:Key="BarItemDataTemplateSelector" SubItemNormalTemplate="{StaticResource SubItemNormalTemplate}" SubItemLinkTemplate="{StaticResource SubItemLinkTemplate}"></local:BarItemDataTemplateSelector>
+
+    <!--<DataTemplate DataType="{x:Type neoTrader:CommandVm}">
         <Border x:Name="_Border" Padding="0">
             <Button Padding="0" Background="Transparent" BorderBrush="Transparent" x:Name="_Button" Command="{Binding Command}">
                 <Button.ContextMenu>
@@ -88,7 +124,7 @@
 
 
         </DataTemplate.Triggers>
-    </DataTemplate>
+    </DataTemplate>-->
 
 
     <DataTemplate x:Key="CommandTemplate">

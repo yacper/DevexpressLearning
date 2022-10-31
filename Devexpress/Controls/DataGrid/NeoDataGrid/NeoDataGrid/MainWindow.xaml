@@ -8,7 +8,7 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid >
         <Menu>
-            <MenuItem Header="Open RGridControlTest" Click="MenuItem_Click"></MenuItem>
+            <MenuItem Name="MenuItem1" Header="Open RGridControlTest" Click="MenuItem_Click"></MenuItem>
             <MenuItem Header="RTreeListViewTest Test" Click="MenuItem_Click_1"></MenuItem>
         </Menu>
     </Grid>

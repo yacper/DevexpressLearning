@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Data;
 using DevExpress.Xpf.Core;
 
 namespace NeoControls
@@ -18,7 +19,7 @@ public partial class App : Application
     {
         base.OnStartup(e);
 
-
+        
         ApplicationThemeHelper.ApplicationThemeName = DevExpress.Xpf.Core.Theme.VS2019Dark.Name;
     }
 }

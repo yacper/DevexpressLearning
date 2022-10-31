@@ -5,7 +5,11 @@
 // purpose:
 // modifiers:
 
+using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 using DevExpress.Mvvm;
 using DevExpress.Xpf.Bars;
 using NeoTrader;
@@ -52,5 +56,29 @@ public class MainWindowVm : ViewModelBase
             { Glyph = Images.Account, StateImg = Images.ConnectedStatus, BadgeContent = "D", DisplayMode = BarItemDisplayMode.ContentAndGlyph };
 
 
+    public KeyGesture KeyGesture { get; set; } = new KeyGesture(Key.F, ModifierKeys.Alt);
 
+    public virtual ObservableCollection<CommandVm> ToolBarsVms { get; set; } = new ObservableCollection<CommandVm>() 
+    {
+        new CommandVm("ContentAndGlyph", new DelegateCommand(() => { }))
+        {Glyph = Images.Account, DisplayMode=BarItemDisplayMode.ContentAndGlyph, KeyGesture=new KeyGesture(Key.A, ModifierKeys.Control), Commands = new ObservableCollection<CommandVm>()
+        {
+            new CommandVm("Content", new DelegateCommand(() => { }))
+            { DisplayMode=BarItemDisplayMode.Content, KeyGesture=new KeyGesture(Key.A, ModifierKeys.Control)},
+            new CommandVm("ContentAndGlyph", new DelegateCommand(() => { }))
+            { DisplayMode=BarItemDisplayMode.ContentAndGlyph, Glyph=Images.Trading},
+            new CommandVm("ContentAndGlyphAndState", new DelegateCommand(() => { }))
+            { DisplayMode=BarItemDisplayMode.ContentAndGlyph,Glyph=Images.Trading, StateImg = Images.ConnectingStatus, KeyGesture=new KeyGesture(Key.A, ModifierKeys.Control)},
+            new CommandVm("ContentAndGlyphAndStateAddBage", new DelegateCommand(() => { }))
+            { DisplayMode=BarItemDisplayMode.ContentAndGlyph,Glyph=Images.Trading, StateImg = Images.ConnectingStatus, BadgeContent="F",KeyGesture=new KeyGesture(Key.A, ModifierKeys.Control)},
+        } },
+        new CommandVm("Content", new DelegateCommand(() => { }))
+        {DisplayMode=BarItemDisplayMode.Content},
+        new CommandVm("Glyph", new DelegateCommand(() => { }))
+        {Glyph = Images.Account},
+        new CommandVm("ContentAndGlyphAndState", new DelegateCommand(() => { }))
+        {DisplayMode=BarItemDisplayMode.ContentAndGlyph,Glyph=Images.Trading, StateImg = Images.ConnectingStatus},
+        new CommandVm("ContentAndGlyphAndStateAndBadge", new DelegateCommand(() => { }))
+        {DisplayMode=BarItemDisplayMode.ContentAndGlyph,Glyph=Images.Trading, StateImg = Images.ConnectingStatus, BadgeContent="F",KeyGesture=new KeyGesture(Key.A, ModifierKeys.Control)},
+    };
 }

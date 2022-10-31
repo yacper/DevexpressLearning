@@ -20,24 +20,42 @@
     <controls:RToolItem Content="{Binding ContentAndGlyphVm}" Height="24" Width="Auto"/>
     <controls:RToolItem Content="{Binding ContentAndGlyphAndStateVm}" Height="24" Width="Auto"/>
     <controls:RToolItem Content="{Binding ContentAndGlyphAndStateAndBadgeVm}" Height="24" Width="Auto"/>
-    <ContentPresenter Content="{Binding ToolButtonVm}" Height="20" Width="Auto"/>
+    <ContentPresenter Content="{Binding ToolButtonVm}" Width="Auto"/>
         <!--<dxb:BarContainerControl ItemsSource="{Binding Commands}" ItemTemplate="{DynamicResource connectItemTemplate}" AllowDrop="False" BorderBrush="Transparent">
         </dxb:BarContainerControl>-->
         <dxb:BarContainerControl ContainerType="Top" Grid.Row="0">
-            <dxb:ToolBarControl Caption="File" RotateWhenVertical="True" ShowDragWidget="False">
-                <dxb:BarButtonItem Content="{Binding ContentAndGlyphAndStateAndBadgeVm}" >
+            <dxb:ToolBarControl Caption="File" 
+                                RotateWhenVertical="True" 
+                                ShowDragWidget="False" 
+                                ItemsSource="{Binding ToolBarsVms}" 
+                                Loaded="ToolBarControl_Loaded"
+                                ItemTemplateSelector="{DynamicResource BarItemDataTemplateSelector}">
+                <!--<dxb:BarButtonItem Content="{Binding ContentAndGlyphAndStateAndBadgeVm}" >
                 </dxb:BarButtonItem>
-                <dxb:BarButtonItem Content="Open" Glyph="{dx:DXImage Image=Open_16x16.png}"/>
+                <dxb:BarButtonItem Content="Open" Glyph="{dx:DXImage Image=Open_16x16.png}" />
                 <dxb:BarButtonItem Content="Close" Glyph="{dx:DXImage Image=Close_16x16.png}"/>
                 <dxb:BarSubItem Content="{Binding ToolButtonVm}">
-                    <dxb:BarButtonItem x:Name="btnNew" Content="{Binding ContentAndGlyphVm}" GlyphSize="Custom"/>
+                    <dxb:BarButtonItem x:Name="btnNew" Content="{Binding ContentAndGlyphVm}" GlyphSize="Custom" ShowKeyGesture="True" KeyGesture="{Binding KeyGesture}"/>
                     <dxb:BarSubItem Content="{Binding ToolButtonVm}" GlyphSize="Custom">
                         <dxb:BarButtonItem x:Name="btnOpen" Content="Open"  GlyphSize="Custom"/>
                         <dxb:BarButtonItem x:Name="btnClose" Content="Close"  GlyphSize="Custom"/>
                     </dxb:BarSubItem>
                     
-                </dxb:BarSubItem>
+                </dxb:BarSubItem>-->
             </dxb:ToolBarControl>
         </dxb:BarContainerControl>
+        <!--<Grid Width="201" Height="200">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100.5"></ColumnDefinition>
+                <ColumnDefinition Width="10.5"></ColumnDefinition>
+                <ColumnDefinition Width="90"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid Background="Black" Grid.Column="0" UseLayoutRounding="True">
+                
+            </Grid>
+            <Grid Background="Black" Grid.Column="2" UseLayoutRounding="False"></Grid>
+        </Grid>
+        <TextBlock TextOptions.TextFormattingMode="Display" FontSize="8" Text="AAAAAAAAAA AAAAAA BBB"/>
+        <TextBlock TextOptions.TextFormattingMode="Ideal" FontSize="8" Text="AAAAAAAAAA BBBB VVVVV"/>-->
     </WrapPanel>
 </Window>
