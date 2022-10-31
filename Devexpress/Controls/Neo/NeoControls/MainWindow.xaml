@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:NeoControls"
         xmlns:controls="clr-namespace:NeoTrader.UI.Controls"
         xmlns:neoTrader="clr-namespace:NeoTrader" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+        xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
         <Window.Resources>
@@ -15,6 +16,12 @@
 
     <WrapPanel>
     <controls:RToolItem Content="{Binding ToolButtonVm}" Height="24" Width="Auto"/>
+    <Button Content="ChangeDisplayName" Height="24" Width="Auto" >
+        <dxmvvm:Interaction.Behaviors>
+            <dxmvvm:EventToCommand EventName="Click" Command="{Binding ChangeDisplayNameCommand}"
+                                    />
+        </dxmvvm:Interaction.Behaviors>
+    </Button>
     <controls:RToolItem Content="{Binding ContentVm}" Height="24" Width="Auto"/>
     <controls:RToolItem Content="{Binding SeperatorVm}" Height="24" Width="Auto"/>
     <controls:RToolItem Content="{Binding ContentAndGlyphVm}" Height="24" Width="Auto"/>
@@ -37,6 +44,7 @@
                 <dxb:BarSubItem Content="{Binding ToolButtonVm}">
                     <dxb:BarButtonItem x:Name="btnNew" Content="{Binding ContentAndGlyphVm}" GlyphSize="Custom" ShowKeyGesture="True" KeyGesture="{Binding KeyGesture}"/>
                     <dxb:BarSubItem Content="{Binding ToolButtonVm}" GlyphSize="Custom">
+                        <dxb:BarButtonItem x:Name="btnA" Content="{Binding ContentAndGlyphAndStateAndBadgeVm}"  />
                         <dxb:BarButtonItem x:Name="btnOpen" Content="Open"  GlyphSize="Custom"/>
                         <dxb:BarButtonItem x:Name="btnClose" Content="Close"  GlyphSize="Custom"/>
                     </dxb:BarSubItem>

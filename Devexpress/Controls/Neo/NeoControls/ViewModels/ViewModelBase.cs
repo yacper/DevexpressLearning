@@ -25,10 +25,10 @@ namespace NeoTrader
 			get { return GetBindableName(DisplayName); }
 		}
 
-		public virtual string      DisplayName { get; set; }
-		public virtual ImageSource Glyph       { get; set; }
-		public virtual ImageSource StateImg    { get; set; }		// 状态图标
-		public virtual string BadgeContent    { get; set; }		// badge
+        public virtual string      DisplayName  { get=>GetProperty(()=>DisplayName); set=>SetProperty(()=> DisplayName, value); }
+        public virtual ImageSource Glyph        { get=>GetProperty(()=>Glyph); set=>SetProperty(()=> Glyph, value); }
+        public virtual ImageSource StateImg     { get=>GetProperty(()=>StateImg); set=>SetProperty(()=>StateImg, value); } // 状态图标
+        public virtual string      BadgeContent { get=>GetProperty(()=>BadgeContent); set=>SetProperty(()=>BadgeContent, value); } // badge
 
 	
 		string GetBindableName(string name)
@@ -56,6 +56,9 @@ namespace NeoTrader
 		}
 #endif
 
-		#endregion
-	}
+      
+#endregion
+
+
+    }
 }
