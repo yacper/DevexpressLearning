@@ -23,6 +23,7 @@ using System.Globalization;
 using System.Windows.Controls;
 using Illusion.Utility;
 using System.Linq.Expressions;
+using DevExpress.Mvvm.Native;
 using Force.DeepCloner;
 
 namespace NeoTrader;
@@ -102,8 +103,7 @@ public class CommandVm : ViewModelBase
             StateImg = StateImg,
             BadgeContent = BadgeContent,
 
-
-            Commands = Commands,
+            Commands = Commands?.Select(p=>p.Clone(owner)).ToObservableCollection(),
 
             DisplayMode = DisplayMode,
             IsSubItem = IsSubItem,
