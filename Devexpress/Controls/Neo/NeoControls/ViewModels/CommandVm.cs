@@ -89,7 +89,7 @@ public class CommandVmPropertyBinding<T>:CommandVmPropertyBinding
 
 public class CommandVm : ViewModelBase
 {
-    public override string ToString() => $"Command:{Id}";
+    public override string ToString() => $"Command:{DisplayName}";
 
     public object Owner { get; set; } // 
 
@@ -124,12 +124,13 @@ public class CommandVm : ViewModelBase
     public ObservableCollection<CommandVm> Commands { get; set; } // 子命令项 (用于menu的子命令)
 
     public BarItemDisplayMode DisplayMode { get; set; } = BarItemDisplayMode.ContentAndGlyph; // 显示模式，纯文字还是带icon
-    public bool               IsSubItem   { get; set; } = false;                              // 有子命令
-    public bool               IsCheckBox  { get; set; }                                       // 是否作为checkbox
-    public bool               IsLink      { get; set; }                                       // 是否作为 LinkBtn   
-    public bool               IsSeparator { get; set; }                                       // 是否只是一个seperator
-    public KeyGesture         KeyGesture  { get; set; }                                       // 对应快捷键
-    public object             Tag         { get; set; }                                       // 存储相关的数据 
+    public     BarItemAlignment   Alignment   { get; set; }     // Alignment
+    public bool               IsSubItem   { get; set; } = false; // 有子命令
+    public bool               IsCheckBox  { get; set; }          // 是否作为checkbox
+    public bool               IsLink      { get; set; }          // 是否作为 LinkBtn   
+    public bool               IsSeparator { get; set; }          // 是否只是一个seperator
+    public KeyGesture         KeyGesture  { get; set; }          // 对应快捷键
+    public object             Tag         { get; set; }          // 存储相关的数据 
 
 
      public  CommandVm WithPropertyBinding<TSource>( 
@@ -183,8 +184,6 @@ public class CommandVm : ViewModelBase
 #endregion
 
 
-
-    public Guid Id { get; set; } = Guid.NewGuid();
     public CommandVm()
     {
         IsEnabled  = true;
@@ -195,7 +194,6 @@ public class CommandVm : ViewModelBase
     {
         Bindings.ForEach(p => BindingEngine.ClearBinding(p)); 
     }
-
 
 
     public CommandVm(string displayName) : this(displayName, null, null)
@@ -220,21 +218,3 @@ public class CommandVm : ViewModelBase
         Commands = subCommands;
     }
 }
-
-//public static class CommandVmEx
-//{
-//     public static CommandVm WithPropertyBinding<TSource>(this CommandVm vm, 
-//        Expression<Func<CommandVm, object>> targetExpression,
-//        TSource                             source, Expression<Func<TSource, object>> sourceExpression,
-//        BindingValueChangedHandler          targetChangedHandler = null)
-//    {
-//        //todo: remove binding
-//        var binding = BindingEngine.SetPropertyBinding(vm, targetExpression, source, sourceExpression);
-//        if (targetChangedHandler != null)
-//            binding.SetTargetChanged(targetChangedHandler);
-
-//        return vm;
-//    }
-
-
-//}
