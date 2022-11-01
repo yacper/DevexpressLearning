@@ -60,6 +60,7 @@
         <ContentControl>
             <dxb:BarButtonItem KeyGesture="{Binding KeyGesture}"
                                Command="{Binding Command}"                               
+                               CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}"
                                Alignment="Far"
                                Glyph="{Binding Glyph}"                               
                                ShowKeyGesture="True"

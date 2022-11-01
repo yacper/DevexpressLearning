@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <RootNamespace>how_to_create_bars_in_one_common_container_using_barmanager</RootNamespace>
+    <Nullable>enable</Nullable>
+   <UseWPF>true</UseWPF>
+  </PropertyGroup>
+  <ItemGroup>
+     <PackageReference Include="DevExpress.Wpf.Demos" Version="22.*" />
+    <PackageReference Include="DevExpress.Wpf" Version="22.*" />
+    <PackageReference Include="DevExpress.Wpf.Themes.All" Version="22.*" />
+  </ItemGroup>
+
+</Project>
