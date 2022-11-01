@@ -29,14 +29,16 @@ public class Provider : BindableBase
 {
     public override string ToString() => Name;
 
-    public         string          Name   { get;                              set; } = "P1";
-    public         ConnectedStatus Status { get;                              set; } = ConnectedStatus.Disconnected;
-    public virtual ImageSource     Source { get => GetProperty(() => Source); set => SetProperty(() => Source, value); }
+    public         string          Name     { get;                                set; } = "P1";
+    public         ConnectedStatus Status   { get;                                set; } = ConnectedStatus.Disconnected;
+    public virtual ImageSource     StateImg { get => GetProperty(() => StateImg); set => SetProperty(() => StateImg, value); }
+    public         int          Badge    { get => GetProperty(() => Badge);    set => SetProperty(() => Badge, value); }
 
     public void Toggle()
     {
-        Status = Status == ConnectedStatus.Disconnected ? ConnectedStatus.Connected : ConnectedStatus.Disconnected;
-        Source = Status == ConnectedStatus.Disconnected ? null : Images.ConnectedStatus;
+        Status   =  Status == ConnectedStatus.Disconnected ? ConnectedStatus.Connected : ConnectedStatus.Disconnected;
+        StateImg =  Status == ConnectedStatus.Disconnected ? null : Images.ConnectedStatus;
+        Badge    += 1;
     }
 }
 
@@ -60,7 +62,6 @@ public partial class SiginTools : UserControl
                  {
                      Owner = new Provider() { Name = "P1" },
                      //DisplayName = ,
-                     //DisplayNameExpression = (vm) =>((vm.Owner as Provider).Name),
                      DisplayMode = BarItemDisplayMode.ContentAndGlyph,
                      Glyph       = Images.Monitor,
                      //StateImg    = Images.ConnectedStatus,
@@ -71,8 +72,9 @@ public partial class SiginTools : UserControl
                                                                             }
                                                                            )
                  }
-                 .WithPropertyBinding(T => T.StateImg, S => (S.Owner as Provider).Source)
-                 .WithPropertyBinding(T => T.DisplayName, S => (S.Owner as Provider).Name);
+                 .WithPropertyBinding(T => T.StateImg, S => (S.Owner as Provider).StateImg)
+                 .WithPropertyBinding(T => T.DisplayName, S => (S.Owner as Provider).Name)
+                 .WithPropertyBinding(T => T.BadgeContent, S => (S.Owner as Provider).Badge);
 
         CommandVm vm2 = vm.Clone(new Provider() { Name = "p2" })
             ;
