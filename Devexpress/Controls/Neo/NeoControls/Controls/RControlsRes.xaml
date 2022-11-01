@@ -9,7 +9,8 @@
                     xmlns:dxdot="http://schemas.devexpress.com/winfx/2008/xaml/docking/themekeys" 
                     xmlns:dxgt="http://schemas.devexpress.com/winfx/2008/xaml/grid/themekeys"
                     xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
-                    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" >
+                    xmlns:dxbt="http://schemas.devexpress.com/winfx/2008/xaml/bars/themekeys"
+                    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" xmlns:dxcn="http://schemas.devexpress.com/winfx/2008/xaml/core/internal" xmlns:dxbc="http://schemas.devexpress.com/winfx/2008/xaml/bars/internal">
     <system:Double x:Key="TableRowHeight">22</system:Double>
     <DataTemplate x:Key="BarItemContentDataTemplate">
         <Border x:Name="PATA_BAR_Border" Padding="0">
@@ -60,8 +61,7 @@
         <ContentControl>
             <dxb:BarButtonItem KeyGesture="{Binding KeyGesture}"
                                Command="{Binding Command}"                               
-                               Alignment="Far"
-                               Glyph="{Binding Glyph}"                               
+                               Glyph="{Binding Glyph}"                           
                                ShowKeyGesture="True"
                                IsEnabled="{Binding IsEnabled}"                               
                                BarItemDisplayMode="{Binding DisplayMode}"   
@@ -79,6 +79,7 @@
                                            IsEnabled="{Binding IsEnabled}"                               
                                            BarItemDisplayMode="{Binding DisplayMode}"                                                                          
                                            Content="{Binding}"                            
+                                          
                                            ItemLinksSource="{Binding Commands}"
                                            ItemTemplateSelector="{DynamicResource BarItemDataTemplateSelector}"
                                            ContentTemplate="{StaticResource BarItemContentDataTemplate}">
@@ -300,5 +301,120 @@
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
+
+    <ControlTemplate x:Key="{dxbt:BarControlThemeKey ResourceKey=QuickCustomizationButtonTemplate,IsThemeIndependent = true}" TargetType="{x:Type dxb:BarQuickCustomizationButton}">
+        <Grid x:Name="Root" Margin="1">
+            <Border x:Name="IsDefault" Background="Transparent" BorderBrush="Transparent" BorderThickness="1" />
+            <!--<Path x:Name="Content" Fill="#FFF1F1F1" HorizontalAlignment="Right" Margin="3" Style="{StaticResource UIShape.RightDown}" VerticalAlignment="Bottom" cs:id="Path_0000" x:Uid="@Fill=Foreground" />-->
+            <dx:DXImage x:Name="Content" Source="{x:Static neoTrader:Images.VMore}" Height="20"></dx:DXImage>
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="MouseOver">
+                        <Storyboard>
+                            <ColorAnimation Duration="0" Storyboard.TargetName="IsDefault" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="#FF3E3E40"  x:Uid="@To=HoverBackground" />
+                            <ColorAnimation Duration="0" Storyboard.TargetName="IsDefault" Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" To="#FF3E3E40"  x:Uid="@To=HoverBorder" />
+                            <!--<ColorAnimation Duration="0" Storyboard.TargetName="Content" Storyboard.TargetProperty="(Path.Fill).(SolidColorBrush.Color)" To="#FF007ACC" x:Uid="@To=Focused" />-->
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Pressed">
+                        <Storyboard>
+                            <ColorAnimation Duration="0" Storyboard.TargetName="IsDefault" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="#FF007ACC" x:Uid="@To=SelectionBackground" />
+                            <ColorAnimation Duration="0" Storyboard.TargetName="IsDefault" Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" To="#FF007ACC"  x:Uid="@To=SelectionBorder" />
+                            <!--<ColorAnimation Duration="0" Storyboard.TargetName="Content" Storyboard.TargetProperty="(Path.Fill).(SolidColorBrush.Color)" To="#FFFFFFFF" x:Uid="@To=SelectionForeground" />-->
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Checked">
+                        <Storyboard>
+                            <ColorAnimation Duration="0" Storyboard.TargetName="IsDefault" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="#FF007ACC" x:Uid="@To=SelectionBackground" />
+                            <ColorAnimation Duration="0" Storyboard.TargetName="IsDefault" Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" To="#FF007ACC" x:Uid="@To=SelectionBorder" />
+                            <!--<ColorAnimation Duration="0" Storyboard.TargetName="Content" Storyboard.TargetProperty="(Path.Fill).(SolidColorBrush.Color)" To="#FFFFFFFF" x:Uid="@To=SelectionForeground" />-->
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Disabled">
+                        <Storyboard>
+                            <DoubleAnimation Duration="0" Storyboard.TargetName="Root" Storyboard.TargetProperty="Opacity" To="0.38" />
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+                <VisualStateGroup x:Name="OrientationStates">
+                    <VisualState x:Name="Horizontal" />
+                    <VisualState x:Name="Vertical">
+                        <!--<Storyboard>
+                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content" Storyboard.TargetProperty="RenderTransform">
+                                <DiscreteObjectKeyFrame KeyTime="0">
+                                    <DiscreteObjectKeyFrame.Value>
+                                        <RotateTransform Angle="180" CenterX="3.5" CenterY="3.5" />
+                                    </DiscreteObjectKeyFrame.Value>
+                                </DiscreteObjectKeyFrame>
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>-->
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="dx:ThemeManager.IsTouchEnabled" Value="True">
+                <Setter Property="MinWidth" TargetName="Root" Value="44" />
+                <Setter Property="MinHeight" TargetName="Root" Value="44" />
+                <!--<Setter Property="HorizontalAlignment" TargetName="Content" Value="Center" />
+                <Setter Property="VerticalAlignment" TargetName="Content" Value="Center" />-->
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!--<dxcn:RenderTemplate x:Key="{dxbt:BarItemRenderThemeKey ResourceKey=ArrowTemplateInMenu,IsThemeIndependent = true}">
+        <dxcn:RenderPanel Margin="10">
+            <dxbc:RenderArrowPath Data="F1 M 0,0 0,8 4,4 0,0 Z " Height="8" HorizontalAlignment="Center" Foreground="Beige" Margin="0" Stretch="Fill" VerticalAlignment="Center" Width="20" />
+        </dxcn:RenderPanel>
+    </dxcn:RenderTemplate>
+
+    <dxcn:RenderTemplate x:Key="{dxbt:BarItemRenderThemeKey ResourceKey=DefaultArrowTemplate,IsThemeIndependent = true}">
+        <dxcn:RenderPanel>
+            <dxbc:RenderArrowPath Data="F1 M 0,0 8,0 4,4 0,0 Z " Height="4" HorizontalAlignment="Center" Margin="0,1,0,0" Stretch="Fill" VerticalAlignment="Center" Width="80"  />
+        </dxcn:RenderPanel>
+    </dxcn:RenderTemplate>
+    <dxcn:RenderTemplate x:Key="{dxbt:BarItemRenderThemeKey ResourceKey=ArrowTemplateInPageHeader,IsThemeIndependent = true}">
+        <dxcn:RenderPanel>
+            <dxbc:RenderArrowPath Data="F1 M 0,0 8,0 4,4 0,0 Z " Height="4" HorizontalAlignment="Center" Margin="0,1,0,0" Stretch="Fill" VerticalAlignment="Center" Width="18"  />
+        </dxcn:RenderPanel>
+    </dxcn:RenderTemplate>-->
+
+    <dxcn:RenderTemplate x:Key="{dxbt:BarItemRenderThemeKey ResourceKey=BaseSplitItemTemplateInBar}" x:Shared="False">
+        <dxcn:RenderBorder Name="PART_Root" Background="Transparent">
+            <dxcn:RenderPanel>
+                <dxb:RenderBarItemBorderControl Name="PART_Background" RenderTemplateSelector="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=BorderStateTemplateSelectorInBar}}" />
+                <dxcn:RenderPanel LayoutProvider="{x:Static dxcn:LayoutProvider.DockInstance}">
+                    <dxcn:RenderPanel Name="PART_ContentContainer">
+                        <dxb:RenderBarItemBorderControl Name="PART_ContentBackground" HideBorderSide="Right" RenderTemplateSelector="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=BorderStateTemplateSelectorInBar}}" />
+                        <dxcn:RenderPanel Name="PART_Container" LayoutProvider="{x:Static dxcn:LayoutProvider.DockInstance}">
+                            <dxcn:RenderContentControl Name="PART_Glyph" RenderContentTemplate="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=GlyphTemplate}}" PreferRenderTemplate="False" />
+                            <dxcn:RenderContentControl Name="PART_Content" PreferRenderTemplate="False" HorizontalAlignment="Center" HorizontalContentAlignment="Center" />
+                        </dxcn:RenderPanel>
+                    </dxcn:RenderPanel>
+                    <dxcn:RenderBorder Width="1" Name="PART_Separator" />
+                    <dxcn:RenderPanel Name="PART_ArrowContainer">
+                        <dxcn:RenderBorder Background="Transparent" />
+                        <dxb:RenderBarItemBorderControl Name="PART_ArrowBackground" HideBorderSide="Left" RenderTemplateSelector="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=BorderStateTemplateSelectorInBar}}" />
+                        <dxcn:RenderPanel Name="PART_PathArrowContainer" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <dxb:RenderArrowControl RenderTemplateSelector="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=RenderArrowControlTemplateSelector}}" />
+                        </dxcn:RenderPanel>
+                    </dxcn:RenderPanel>
+                </dxcn:RenderPanel>
+            </dxcn:RenderPanel>
+        </dxcn:RenderBorder>
+        <dxcn:RenderTemplate.Triggers>
+            <dxcn:RenderTriggersCollection>
+                <dxcn:RenderTriggersCollection.MergedTriggers>
+                    <dxcn:RenderTriggersCollection Source="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=GlyphAlignmentStatesInBar}}" />
+                    <dxcn:RenderTriggersCollection Source="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=ArrowAlignmentStates}}" />
+                    <dxcn:RenderTriggersCollection Source="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=ForegroundColorStatesInBar}}" />
+                    <dxcn:RenderTriggersCollection Source="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=EnabledBorderStates}}" />
+                    <dxcn:RenderTriggersCollection Source="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=SplitAppearanceTriggers}}" />
+                </dxcn:RenderTriggersCollection.MergedTriggers>
+            </dxcn:RenderTriggersCollection>
+        </dxcn:RenderTemplate.Triggers>
+    </dxcn:RenderTemplate>
+
 
 </ResourceDictionary>
