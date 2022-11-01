@@ -17,6 +17,8 @@ using DevExpress.Mvvm.POCO;
 using DevExpress.Xpf.Core;
 using DevExpress.Xpf.Bars;
 using System.Globalization;
+using NeoTrader.UI.Controls;
+using DevExpress.Xpf.Grid.TreeList;
 
 namespace NeoControls
 {
@@ -51,7 +53,13 @@ namespace NeoControls
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
+            Window w = new Window()
+            {
+                Name = "TableTool"
+            };
 
+            w.Content = new TableToolsDemo();
+            w.Show();
         }
 
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
@@ -177,6 +185,58 @@ namespace NeoControls
         }
     }
 
-    
+    public class RowControlToolsDataContentConverter : IMultiValueConverter
+    {
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (values == null || values.Length != 2 || !(values[0] is DevExpress.Xpf.Grid.RowData || values[0] is TreeListRowData) || !(values[1] is RGridControl))
+                return null;
+
+            var rgc = values[1] as RGridControl;
+            if (values[0] is DevExpress.Xpf.Grid.RowData)
+            {
+                if (rgc!.RowTools == null || rgc!.RowTools.Count() == 0)
+                    return rgc!.DefaultTools;
+
+                return rgc!.RowTools.First();
+            }
+
+            int level = (values[0] as TreeListRowData)!.Node.ActualLevel;
+            if (rgc!.RowTools == null || rgc!.RowTools.Count() == 0)
+                return rgc!.DefaultTools;
+
+            //var tools = rgc.RowTools.Where(_ => { return _.Level == level; }).FirstOrDefault();
+            return rgc.DefaultTools;
+        }
+
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+
+    public class TableRowToolsVisibleConverter : IMultiValueConverter
+    {
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (values == null || values.Length != 2 || !(values[0] is bool) || !(values[1] is bool))
+                return Visibility.Collapsed;
+
+            bool IsFixed = (bool)values[0];
+            bool IsMuseMove = (bool)values[1];
+            if (IsFixed)
+                return Visibility.Visible;
+
+            return IsMuseMove ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+
 
 }

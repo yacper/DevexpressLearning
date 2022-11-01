@@ -151,7 +151,7 @@ namespace NeoControls
                             })
                         },
                     }
-                },
+                }.WithPropertyBinding<Symbol>(o=>o.DisplayName, Symbol, S=>S.TF),
 
                 //new CommandVm()
                 //{

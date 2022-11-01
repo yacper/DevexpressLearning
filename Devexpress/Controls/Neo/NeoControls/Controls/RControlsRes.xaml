@@ -6,7 +6,11 @@
                     xmlns:local="clr-namespace:NeoControls"
                     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
                     xmlns:system="clr-namespace:System;assembly=System.Runtime"
+                    xmlns:dxdot="http://schemas.devexpress.com/winfx/2008/xaml/docking/themekeys" 
+                    xmlns:dxgt="http://schemas.devexpress.com/winfx/2008/xaml/grid/themekeys"
+                    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
                     xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" >
+    <system:Double x:Key="TableRowHeight">22</system:Double>
     <DataTemplate x:Key="BarItemContentDataTemplate">
         <Border x:Name="PATA_BAR_Border" Padding="0">
             <DockPanel>
@@ -220,5 +224,72 @@
 
     </Style>-->
 
+    <ControlTemplate x:Key="CommonToolsTemplate">
+        <dxb:BarContainerControl ContainerType="Top" HorizontalAlignment="Right" >
+            <dxb:ToolBarControl RotateWhenVertical="True" 
+                                ShowDragWidget="False" 
+                                Background="{Binding ToolsBgBrush}"
+                                ItemsSource="{Binding DefaultTools}"                                 
+                                ItemTemplateSelector="{DynamicResource BarItemDataTemplateSelector}">
+            </dxb:ToolBarControl>
+        </dxb:BarContainerControl>
+        <!--<controls:RToolsControl RItemsSource="{Binding ToolVms}"
+                                Background="{Binding ToolsBgBrush}"  
+                                HorizontalAlignment="Right"
+                                Margin="0,0,0,1"
+                                ItemTemplate="{StaticResource RToolsControlItemTemplate}">
+        </controls:RToolsControl>-->
+    </ControlTemplate>
+
+    <local:TableRowToolsVisibleConverter x:Key="TableRowToolsVisibleConverter"></local:TableRowToolsVisibleConverter>
+    <ControlTemplate x:Key="RowControlTemplate" TargetType="dxg:RowControl" >
+        <Grid Height="{StaticResource TableRowHeight}" Background="Transparent" >
+            <Border x:Name="Background" Background="{TemplateBinding Background}" />
+            <Border x:Name="BottomLine" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,0,0,1" VerticalAlignment="Bottom" />
+            <Grid x:Name="PART_LayoutPanel"/>
+            <ContentControl x:Name="PART_TOOLS"                            
+                            DataContext="{Binding RelativeSource={RelativeSource AncestorLevel=1,AncestorType=controls:RGridControl,Mode=FindAncestor}}"
+                            Template="{StaticResource CommonToolsTemplate}">
+                <ContentControl.Visibility>
+                    <MultiBinding Converter="{StaticResource TableRowToolsVisibleConverter}">
+                        <Binding Path="ToolsBarIsFixed"></Binding>
+                        <Binding RelativeSource="{RelativeSource AncestorLevel=1,AncestorType=dxg:RowControl,Mode=FindAncestor}" Path="IsMouseOver"></Binding>
+                    </MultiBinding>
+                </ContentControl.Visibility>
+            </ContentControl>
+            <!--<Grid.ContextMenu>
+                <Binding Path="DataContext.ToolVms" ElementName="PART_TOOLS" Converter="{StaticResource RowControlContextMenuConverter}"></Binding>
+            </Grid.ContextMenu>-->
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="ShowHorizontalLine" Value="False">
+                <Setter Property="Visibility" TargetName="BottomLine" Value="Collapsed" />
+            </Trigger>
+            <Trigger Property="ShowBottomLine" Value="True">
+                <Setter Property="Visibility" TargetName="BottomLine" Value="Visible" />
+            </Trigger>
+            <Trigger Property="FadeSelection" Value="True">
+                <!--<Setter Property="Background" Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=BorderUnfocusedBrush}}" />
+                <Setter Property="Foreground" Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=TextUnfocusedBrush}}" />-->
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource RowHoverBrush}" />
+            </Trigger>
+            <DataTrigger Binding="{Binding Path=SelectionState}" Value="Focused">
+                <Setter Property="Background" Value="{DynamicResource TableRowToolsBgBrush}" />
+            </DataTrigger>
+            <Trigger Property="ShowRowBreak" Value="True">
+                <Setter Property="BorderBrush" TargetName="BottomLine" Value="{StaticResource {dxgt:GridRowThemeKey ResourceKey=RowBreakBrush}}" />
+                <Setter Property="BorderThickness" TargetName="BottomLine" Value="{StaticResource {dxgt:GridRowThemeKey ResourceKey=RowBreakThickness}}" />
+            </Trigger>
+            <Trigger Property="FixedRowPosition" Value="Bottom">
+                <Setter Property="VerticalAlignment" TargetName="BottomLine" Value="Top" />
+            </Trigger>
+            <Trigger Property="IsLastFixedRow" Value="True">
+                <Setter Property="Background" TargetName="BottomLine" Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=RowSeparatorBrush}}" />
+                <Setter Property="BorderThickness" TargetName="BottomLine" Value="0,1,0,1" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
 
 </ResourceDictionary>

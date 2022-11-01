@@ -17,6 +17,7 @@
     <None Remove="Resources\Images\Panel\Monitor.svg" />
     <None Remove="Resources\Images\Panel\Stats.svg" />
     <None Remove="Resources\Images\Panel\Trading.svg" />
+    <None Remove="Resources\Images\Panel\VerticalMode.svg" />
     <None Remove="Resources\Images\Panel\Watchlist.svg" />
   </ItemGroup>
 
@@ -46,6 +47,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\Panel\Trading.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Panel\VerticalMode.svg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\Panel\Watchlist.svg">

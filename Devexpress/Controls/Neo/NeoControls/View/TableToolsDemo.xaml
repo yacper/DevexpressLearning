@@ -3,10 +3,26 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:NeoControls"
+             xmlns:local="clr-namespace:NeoControls" xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" xmlns:controls="clr-namespace:NeoTrader.UI.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        
+    </UserControl.Resources>
     <Grid>
-            
+        <controls:RGridControl ItemsSource="{Binding Persions}" DefaultTools="{Binding DefaultTools}">
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn Header="Name" FieldName="Name"></dxg:GridColumn>
+            </dxg:GridControl.Columns>
+            <dxg:GridControl.View>
+                <dxg:TableView ShowGroupPanel="False" AllowDrop="False" AllowEditing="False">
+                    <dxg:TableView.RowStyle>
+                        <Style TargetType="dxg:RowControl">
+                            <Setter Property="Template" Value="{StaticResource RowControlTemplate}"></Setter>
+                        </Style>
+                    </dxg:TableView.RowStyle>
+                </dxg:TableView>
+            </dxg:GridControl.View>
+        </controls:RGridControl>
     </Grid>
 </UserControl>
