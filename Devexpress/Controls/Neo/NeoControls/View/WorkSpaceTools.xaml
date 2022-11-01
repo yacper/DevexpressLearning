@@ -14,19 +14,21 @@
         <dxb:BarContainerControl ContainerType="Top" Grid.Column="0">
             <dxb:ToolBarControl Caption="File" 
                                 RotateWhenVertical="True" 
-                                ShowDragWidget="False" 
+                                ShowDragWidget="False"   
+                                AllowCustomizationMenu="False"
+                                AllowQuickCustomization="False"
                                 ItemsSource="{Binding LeftVms}"                                 
                                 ItemTemplateSelector="{DynamicResource BarItemDataTemplateSelector}">
             </dxb:ToolBarControl>
         </dxb:BarContainerControl>
 
-        <dxb:BarContainerControl ContainerType="Top" Grid.Column="1">
+        <!--<dxb:BarContainerControl ContainerType="Top" Grid.Column="1">
             <dxb:ToolBarControl Caption="File" 
                                 RotateWhenVertical="True" 
                                 ShowDragWidget="False" 
                                 ItemsSource="{Binding LeftVms}"  
                                 ItemTemplateSelector="{DynamicResource BarItemDataTemplateSelector}">
             </dxb:ToolBarControl>
-        </dxb:BarContainerControl>
+        </dxb:BarContainerControl>-->
     </Grid>
 </UserControl>

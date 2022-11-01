@@ -57,89 +57,32 @@ public partial class SiginTools : UserControl
     private void InitData()
     {
         var vm = new CommandVm()
-            {
-                Owner = new Provider() { Name = "P1" },
-                //DisplayName = ,
-                //DisplayNameExpression = (vm) =>((vm.Owner as Provider).Name),
-                DisplayMode = BarItemDisplayMode.ContentAndGlyph,
-                Glyph       = Images.Monitor,
-                //StateImg    = Images.ConnectedStatus,
-                Command = new DelegateCommand<FrameworkContentElement>((e) =>
-                                                                       {
-                                                                           Console.WriteLine(e.ToString());
-                                                                           ((e.DataContext as CommandVm).Owner as Provider).Toggle();
-                                                                       }
-                                                                      )
-            }
-        .WithPropertyBinding(T => T.StateImg, S => (S.Owner as Provider).Source)
-             .WithPropertyBinding(T => T.DisplayName, S => (S.Owner as Provider).Name);
+                 {
+                     Owner = new Provider() { Name = "P1" },
+                     //DisplayName = ,
+                     //DisplayNameExpression = (vm) =>((vm.Owner as Provider).Name),
+                     DisplayMode = BarItemDisplayMode.ContentAndGlyph,
+                     Glyph       = Images.Monitor,
+                     //StateImg    = Images.ConnectedStatus,
+                     Command = new DelegateCommand<FrameworkContentElement>((e) =>
+                                                                            {
+                                                                                Console.WriteLine(e.ToString());
+                                                                                ((e.DataContext as CommandVm).Owner as Provider).Toggle();
+                                                                            }
+                                                                           )
+                 }
+                 .WithPropertyBinding(T => T.StateImg, S => (S.Owner as Provider).Source)
+                 .WithPropertyBinding(T => T.DisplayName, S => (S.Owner as Provider).Name);
 
-            CommandVm vm2 = vm.Clone(new Provider() { Name = "p2" })
-                    ;
-            //vm2.DisplayName = "p2";
-
-
-            //var vm2 = new CommandVm()
-            //      {
-            //          Owner = new Provider() { Name = "P2" },
-            //          //DisplayName = ,
-            //          //DisplayNameExpression = (vm) =>((vm.Owner as Provider).Name),
-            //          DisplayMode = BarItemDisplayMode.ContentAndGlyph,
-            //          Glyph       = Images.Monitor,
-            //          //StateImg    = Images.ConnectedStatus,
-            //          Command = new DelegateCommand<FrameworkContentElement>((e) =>
-            //                                                                 {
-            //                                                                     Console.WriteLine(e.ToString());
-            //                                                                     ((e.DataContext as CommandVm).Owner as Provider).Toggle();
-            //                                                                 }
-            //                                                                )
-            //      }
-            //  //.WithPropertyBinding(T => T.StateImg, S => (S.Owner as Provider).Source)
-            //       .WithPropertyBinding(T => T.DisplayName, S => (S.Owner as Provider).Name);
-
-
+        CommandVm vm2 = vm.Clone(new Provider() { Name = "p2" })
             ;
 
-            //vm2.Command.Execute(null);
 
-
-            PVms = new ObservableCollection<CommandVm>()
+        PVms = new ObservableCollection<CommandVm>()
         {
             vm,
             vm2
         };
-
-
-        //PVms = new ObservableCollection<CommandVm>()
-        //{
-        //    new CommandVm()
-        //    {
-        //        Owner       = new Provider(){Name = "P1"},
-        //        //DisplayName = ,
-        //        //DisplayNameExpression = (vm) =>((vm.Owner as Provider).Name),
-        //        DisplayMode           = BarItemDisplayMode.ContentAndGlyph,
-        //        Glyph                 = Images.Monitor,
-        //        //StateImg    = Images.ConnectedStatus,
-        //        Command = new DelegateCommand<FrameworkContentElement>((e) =>
-        //                                                 {
-
-        //                                                     Console.WriteLine(e.ToString());
-        //                                                     ((e.DataContext as CommandVm).Owner as Provider).Toggle();
-        //                                                 }
-        //                                                )
-        //    }.WithPropertyBinding(T => T.StateImg, S => (S.Owner as Provider).Source)
-        //    .WithPropertyBinding(T => T.DisplayName, S => (S.Owner as Provider).Name)
-
-        //    //.WithCommand(new DelegateCommand(() =>
-        //    //                                             {
-
-        //    //                                                 //Console.WriteLine(e.ToString());
-        //    //                                                 base..Toggle();
-        //    //                                             }
-        //    //                                            )),
-
-
-        //};
     }
 }
 }

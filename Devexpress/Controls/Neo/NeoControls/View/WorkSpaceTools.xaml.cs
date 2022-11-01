@@ -151,8 +151,9 @@ namespace NeoControls
                             })
                         },
                     }
-                }.WithPropertyBinding<Symbol>(o=>o.DisplayName, Symbol, S=>S.TF),
 
+                }.WithPropertyBinding<Symbol>(o=>o.DisplayName, Symbol, S=>S.TF),
+                new CommandVm(){ Glyph = Images.Account },
                 //new CommandVm()
                 //{
                 //    Glyph = Images.Link,

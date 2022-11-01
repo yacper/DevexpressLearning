@@ -225,13 +225,22 @@
 
     </Style>-->
 
+    <local:RGridControlToVmValueConverter x:Key="RGridControlToVmValueConverter"></local:RGridControlToVmValueConverter>
     <ControlTemplate x:Key="CommonToolsTemplate">
         <dxb:BarContainerControl ContainerType="Top" HorizontalAlignment="Right" >
             <dxb:ToolBarControl RotateWhenVertical="True" 
                                 ShowDragWidget="False" 
-                                Background="{Binding ToolsBgBrush}"
-                                ItemsSource="{Binding DefaultTools}"                                 
+                                Background="{Binding ToolsBgBrush}"                                
+                                AllowCustomizationMenu="False"
+                                AllowQuickCustomization="False" 
                                 ItemTemplateSelector="{DynamicResource BarItemDataTemplateSelector}">
+                <dxb:ToolBarControl.ItemsSource>
+                    <MultiBinding Converter="{StaticResource RGridControlToVmValueConverter}">
+                        <Binding Path="DataContext" RelativeSource="{RelativeSource AncestorLevel=1, AncestorType=dxg:RowControl,Mode=FindAncestor}"></Binding>
+                        <Binding Path="DefaultTools"></Binding>
+                        <Binding Path="InstanceVmChangeAction"></Binding>
+                    </MultiBinding>
+                </dxb:ToolBarControl.ItemsSource>
             </dxb:ToolBarControl>
         </dxb:BarContainerControl>
         <!--<controls:RToolsControl RItemsSource="{Binding ToolVms}"
