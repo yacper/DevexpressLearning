@@ -19,6 +19,8 @@ using DevExpress.Xpf.Bars;
 using System.Globalization;
 using NeoTrader.UI.Controls;
 using DevExpress.Xpf.Grid.TreeList;
+using DevExpress.Xpf.Grid;
+using System.ComponentModel;
 
 namespace NeoControls
 {
@@ -229,6 +231,34 @@ namespace NeoControls
                 return Visibility.Visible;
 
             return IsMuseMove ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class RGridControlToVmValueConverter : IMultiValueConverter
+    {
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        {
+            if(values.Length != 3 || !(values[0] is RowData) || !(values[1] is CommandVm) || !(values[2] is Action<object, string, CommandVm>))            
+                return null;
+            
+            RowData rowData = (RowData)values[0];
+            CommandVm defaultVm = (CommandVm)values[1];
+            Action<object, string, CommandVm> action = (Action<object, string, CommandVm>)values[2];
+
+            CommandVm newVM = (CommandVm)defaultVm.Clone();  // 需要深度克隆
+
+            object s = rowData.Row;
+            (s as INotifyPropertyChanged).PropertyChanged += (s, e) => 
+            {
+                action.Invoke(s, e.PropertyName, newVM);
+            };
+
+            return newVM.Commands;
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)

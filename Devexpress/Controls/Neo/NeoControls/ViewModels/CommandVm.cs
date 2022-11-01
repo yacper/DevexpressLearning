@@ -23,10 +23,11 @@ using System.Globalization;
 using System.Windows.Controls;
 using Illusion.Utility;
 using System.Linq.Expressions;
+using Force.DeepCloner;
 
 namespace NeoTrader;
 
-public class CommandVm : ViewModelBase
+public class CommandVm : ViewModelBase, ICloneable
 {
     public override string ToString() => $"Command:{DisplayName}";
 
@@ -53,7 +54,12 @@ public class CommandVm : ViewModelBase
         return this;
     }
 
-#region State状态，不应被用户设置
+    public object Clone()
+    {
+        return this.MemberwiseClone();        // 这里 deep Copy 好像有问题
+    }
+
+    #region State状态，不应被用户设置
 
     public virtual bool       IsSubItem  { get; set; } // 是否被移到submenu中
     public virtual bool       IsChecked  { get=>GetProperty(()=>IsChecked); set=>SetProperty(()=>IsChecked, value); }

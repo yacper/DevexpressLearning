@@ -30,11 +30,11 @@ namespace NeoTrader.UI.Controls
             set => SetValue(RowToolsProperty, value);            
         }
 
-        public static DependencyProperty DefaultToolsProperty = DependencyProperty.Register("DefaultTools", typeof(IEnumerable<CommandVm>), typeof(RGridControl));
+        public static DependencyProperty DefaultToolsProperty = DependencyProperty.Register("DefaultTools", typeof(CommandVm), typeof(RGridControl));
 
-        public IEnumerable<CommandVm> DefaultTools 
+        public CommandVm DefaultTools 
         { 
-            get => (IEnumerable<CommandVm>)GetValue(DefaultToolsProperty); 
+            get => (CommandVm)GetValue(DefaultToolsProperty); 
             set => SetValue(DefaultToolsProperty, value);
         } 
         
@@ -52,9 +52,18 @@ namespace NeoTrader.UI.Controls
             set => SetValue(ToolsBarIsFixedProperty, value);
         }
 
+        // 对象， 对应的属性发生变化， 
+        public static DependencyProperty InstanceVmChangeActionProperty = DependencyProperty.Register("InstanceVmChangeAction", typeof(Action<object, string, CommandVm>), typeof(RGridControl));
+        public Action<object, string, CommandVm> InstanceVmChangeAction
+        {
+            get => (Action<object, string, CommandVm>)GetValue(InstanceVmChangeActionProperty);
+            set=>SetValue(InstanceVmChangeActionProperty, value);
+        }
+
         public RGridControl(): base()
         {
-            // DefaultTools = new CommandVm();            
+            DefaultTools = new CommandVm();
+            InstanceVmChangeAction = (s, p, vm) => { };
         }
     }
 }
