@@ -19,56 +19,72 @@ using System.Windows.Shapes;
 
 namespace NeoControls
 {
-    public enum ConnectedStatus
+public enum ConnectedStatus
+{
+    Connected,
+    Disconnected,
+}
+
+public class Provider : BindableBase
+{
+    public override string ToString() => Name;
+
+    public         string          Name     { get;                                set; } = "P1";
+    public         ConnectedStatus Status   { get;                                set; } = ConnectedStatus.Disconnected;
+    public virtual ImageSource     StateImg { get => GetProperty(() => StateImg); set => SetProperty(() => StateImg, value); }
+    public         int          Badge    { get => GetProperty(() => Badge);    set => SetProperty(() => Badge, value); }
+
+    public void Toggle()
     {
-        Connected,
-        Disconnected,
+        Status   =  Status == ConnectedStatus.Disconnected ? ConnectedStatus.Connected : ConnectedStatus.Disconnected;
+        StateImg =  Status == ConnectedStatus.Disconnected ? null : Images.ConnectedStatus;
+        Badge    += 1;
+    }
+}
+
+/// <summary>
+/// SiginTools.xaml 的交互逻辑
+/// </summary>
+public partial class SiginTools : UserControl
+{
+    public ObservableCollection<CommandVm> PVms { get; set; }
+
+    public SiginTools()
+    {
+        InitializeComponent();
+        this.DataContext = this;
+        InitData();
     }
 
-    public class Privoider: BindableBase
+    private void InitData()
     {
-        public ConnectedStatus Status { get; set; } = ConnectedStatus.Disconnected;
-        public virtual ImageSource Source { get => GetProperty(() => Source); set => SetProperty(() => Source, value); }
+        var vm = new CommandVm()
+                 {
+                     Owner = new Provider() { Name = "P1" },
+                     //DisplayName = ,
+                     DisplayMode = BarItemDisplayMode.ContentAndGlyph,
+                     Glyph       = Images.Monitor,
+                     //StateImg    = Images.ConnectedStatus,
+                     Command = new DelegateCommand<FrameworkContentElement>((e) =>
+                                                                            {
+                                                                                Console.WriteLine(e.ToString());
+                                                                                ((e.DataContext as CommandVm).Owner as Provider).Toggle();
+                                                                            }
+                                                                           )
+                 }
+                 .WithPropertyBinding(T => T.StateImg, S => (S.Owner as Provider).StateImg)
+                 .WithPropertyBinding(T => T.DisplayName, S => (S.Owner as Provider).Name)
+                 .WithPropertyBinding(T => T.BadgeContent, S => (S.Owner as Provider).Badge);
 
-        public void Toggle()
+        CommandVm vm2 = vm.Clone(new Provider() { Name = "p2" })
+            ;
+
+
+        PVms = new ObservableCollection<CommandVm>()
         {
-            Status = Status == ConnectedStatus.Disconnected ? ConnectedStatus.Connected : ConnectedStatus.Disconnected;
-            Source = Status == ConnectedStatus.Disconnected ? null : Images.ConnectedStatus;
-        }
-
-        
+            vm,
+            vm2
+        };
     }
-    /// <summary>
-    /// SiginTools.xaml 的交互逻辑
-    /// </summary>
-    public partial class SiginTools : UserControl
-    {
-        public Privoider Privoider { get; set; }
-        public ObservableCollection<CommandVm> PVms { get; set; }
-        public SiginTools()
-        {
-            InitializeComponent();
-            this.DataContext = this;
-            InitData();
-        }
-
-        private void InitData()
-        {
-            Privoider = new Privoider();
-            PVms = new ObservableCollection<CommandVm>() 
-            {
-                new CommandVm()
-                {
-                    DisplayName = "TCP_Privorder",
-                    DisplayMode = BarItemDisplayMode.ContentAndGlyph,
-                    Glyph = Images.Monitor,
-                    StateImg = Images.ConnectedStatus,
-                    Command = new DelegateCommand(() =>
-                    {
-                        Privoider.Toggle();
-                    })
-                }.WithPropertyBinding<Privoider>(T=>T.StateImg, Privoider, S=>S.Source),
-            };
-        }
-    }
+}
 }

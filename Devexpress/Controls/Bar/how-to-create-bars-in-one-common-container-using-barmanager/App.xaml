@@ -1,0 +1,9 @@
+﻿<Application x:Class="how_to_create_bars_in_one_common_container_using_barmanager.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:how_to_create_bars_in_one_common_container_using_barmanager"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>

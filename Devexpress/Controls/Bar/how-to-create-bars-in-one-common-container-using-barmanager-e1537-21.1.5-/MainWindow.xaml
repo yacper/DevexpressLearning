@@ -1,0 +1,49 @@
+<Window x:Class="WpfApplication2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" 
+        xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" 
+        xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+        xmlns:local="clr-namespace:WpfApplication2"        
+        Title="MainWindow" UseLayoutRounding="True"
+        Height="233" Width="525"
+        dx:ThemeManager.ThemeName="Office2013"
+        DataContext="{dxmvvm:ViewModelSource Type=local:MyViewModel}">
+    <Grid>
+        <dxb:BarManager ToolbarGlyphSize="Small">
+            <dxb:BarManager.Bars>
+                <dxb:Bar Caption="File" IsMainMenu="True">
+                    <dxb:BarSubItem x:Name="biFile" Content="File">
+                        <dxb:BarButtonItem x:Name="biFileOpen" Content="Open" Glyph="{dx:DXImage Image=Open_16x16.png}" LargeGlyph="{dx:DXImage Image=Open_32x32.png}" Command="{Binding OpenFileCommand}" />
+                        <dxb:BarButtonItem x:Name="biFileNew" Content="New" Glyph="{dx:DXImage Image=New_16x16.png}" LargeGlyph="{dx:DXImage Image=New_32x32.png}" Command="{Binding NewFileCommand}" />
+                    </dxb:BarSubItem>
+                    <dxb:BarSubItem x:Name="biEdit" Content="Edit">
+                        <dxb:BarButtonItemLink BarItemName="biCut"/>
+                        <dxb:BarButtonItemLink BarItemName="biCopy"/>
+                        <dxb:BarButtonItemLink BarItemName="biPaste"/>
+                    </dxb:BarSubItem>
+                </dxb:Bar>
+                <dxb:Bar Caption="Edit">
+                    <dxb:BarButtonItem x:Name="biCut" Content="Cut" Glyph="{dx:DXImage Image=Cut_16x16.png}" LargeGlyph="{dx:DXImage Image=Cut_32x32.png}" Command="Cut" />
+                    <dxb:BarButtonItem x:Name="biCopy" Content="Copy" Glyph="{dx:DXImage Image=Copy_16x16.png}" LargeGlyph="{dx:DXImage Image=Copy_32x32.png}" Command="Copy" />
+                    <dxb:BarButtonItem x:Name="biPaste" Content="Paste" Glyph="{dx:DXImage Image=Paste_16x16.png}" LargeGlyph="{dx:DXImage Image=Paste_32x32.png}" Command="Paste"/>
+                    <dxb:BarItemSeparator/>
+                    <dxb:BarCheckItem x:Name="biBold" Content="Bold" Glyph="{dx:DXImage Image=Bold_16x16.png}" LargeGlyph="{dx:DXImage Image=Bold_32x32.png}" IsChecked="{Binding IsBold, Mode=TwoWay}"/>
+                    <dxb:BarCheckItem x:Name="biItalic" Content="Italic" Glyph="{dx:DXImage Image=Italic_16x16.png}" LargeGlyph="{dx:DXImage Image=Italic_32x32.png}" IsChecked="{Binding IsItalic, Mode=TwoWay}"/>
+                    <dxb:BarCheckItem x:Name="biUnderline" Content="Underline" Glyph="{dx:DXImage Image=Underline_16x16.png}" LargeGlyph="{dx:DXImage Image=Underline_32x32.png}" IsChecked="{Binding IsUnderline, Mode=TwoWay}"/>
+                </dxb:Bar>
+                <dxb:Bar Caption="StatusBar" IsStatusBar="True" ShowSizeGrip="True">
+                    <dxb:Bar.DockInfo>
+                        <dxb:BarDockInfo ContainerType="Bottom"/>
+                    </dxb:Bar.DockInfo>
+                    <dxb:BarStaticItem x:Name="biRow" Content="Row:" ShowBorder="False"/>
+                    <dxb:BarStaticItem x:Name="biRowValue" Content="1" ShowBorder="False"/>
+                    <dxb:BarCheckItem x:Name="biLeft" Alignment="Far" Glyph="{dx:DXImage Image=AlignLeft_16x16.png}" GroupIndex="1" IsChecked="True" Command="{Binding SetAlignmentCommand}" CommandParameter="{x:Static TextAlignment.Left}" />
+                    <dxb:BarCheckItem x:Name="biCenter" Alignment="Far" Glyph="{dx:DXImage Image=AlignCenter_16x16.png}" GroupIndex="1" Command="{Binding SetAlignmentCommand}" CommandParameter="{x:Static TextAlignment.Center}" />
+                    <dxb:BarCheckItem x:Name="biRight" Alignment="Far" Glyph="{dx:DXImage Image=AlignRight_16x16.png}" GroupIndex="1" Command="{Binding SetAlignmentCommand}" CommandParameter="{x:Static TextAlignment.Right}" />
+                </dxb:Bar>
+            </dxb:BarManager.Bars>
+            <TextBox Text="{Binding Text, Mode=TwoWay}" TextAlignment="{Binding Alignment}" TextDecorations="{Binding Decorations}" FontWeight="{Binding Weight}" FontStyle="{Binding Style}" />
+        </dxb:BarManager>
+    </Grid>
+</Window>

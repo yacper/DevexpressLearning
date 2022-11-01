@@ -79,7 +79,7 @@ public class RToolItem : ContentControl
     //        Header           = vm.DisplayName,
     //        IsEnabled        = vm.IsEnabled,
     //        InputGestureText = $"{vm.KeyGesture}",
-    //        Icon             = new Image() { Source = vm.Glyph },
+    //        Icon             = new Image() { StateImg = vm.Glyph },
     //        Height           = (double)App.Current.FindResource("ControlBoxContentSize"),
     //    };
 
