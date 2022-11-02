@@ -41,7 +41,7 @@ namespace NeoControls
         private void ToolBarControl_Loaded(object sender, RoutedEventArgs e)
         {
             ToolBarControl toolBarControl = (ToolBarControl)sender;
-            List<Border> borders = NeoTrader.UiUtils.UIUtils.GetChildObjects<Border>(toolBarControl, "PATA_BAR_Border");
+            List<Border> borders = NeoTrader.UiUtils.UIUtils.GetChildObjects<Border>(toolBarControl, "PART_BAR_Border");
             double maxVal = borders[0].ActualWidth;
             //foreach (Border b in borders)
             //{

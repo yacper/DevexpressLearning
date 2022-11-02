@@ -20,12 +20,12 @@ namespace NeoTrader.UI.Controls
 {    
     public class RDataGrid : GridControl
     {
-        public static DependencyProperty ToolsBgBrushProperty = DependencyProperty.Register("ToolsBgBrush", typeof(Brush), typeof(RDataGrid), new PropertyMetadata(Brushes.Blue));
-        public Brush ToolsBgBrush
-        {
-            get => (Brush)GetValue(ToolsBgBrushProperty);
-            set => SetValue(ToolsBgBrushProperty, value);
-        }
+        //public static DependencyProperty ToolsBgBrushProperty = DependencyProperty.Register("ToolsBgBrush", typeof(Brush), typeof(RDataGrid), new PropertyMetadata(Brushes.Blue));
+        //public Brush ToolsBgBrush
+        //{
+        //    get => (Brush)GetValue(ToolsBgBrushProperty);
+        //    set => SetValue(ToolsBgBrushProperty, value);
+        //}
 
         public static DependencyProperty AlwaysShowToolBarProperty = DependencyProperty.Register(nameof(AlwaysShowToolBar), typeof(bool), typeof(RDataGrid), new PropertyMetadata(false));
         public bool AlwaysShowToolBar
@@ -102,7 +102,7 @@ namespace NeoTrader.UI.Controls
             tv.RowStyle.Setters.Add(new Setter() 
             {
                 Property = RowControl.TemplateProperty,
-                Value = App.Current.FindResource("RowControlTemplate")
+                Value = App.Current.FindResource("RDataGrid_RowControlTemplate")
             });
 
             return tv;

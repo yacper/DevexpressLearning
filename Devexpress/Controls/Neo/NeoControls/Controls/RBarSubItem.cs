@@ -26,7 +26,7 @@ namespace NeoTrader.UI.Controls
             //if (PopupIsInit)
             //    return;
             SubMenuClientPanel panel = NeoTrader.UiUtils.UIUtils.GetParentObject<SubMenuClientPanel>(ItemLinks[0].LinkControl as LightweightBarItemLinkControl);
-            var borders = NeoTrader.UiUtils.UIUtils.GetChildObjects<Border>(panel, "PATA_BAR_Border");
+            var borders = NeoTrader.UiUtils.UIUtils.GetChildObjects<Border>(panel, "PART_BAR_Border");
             double maxVal = 0;
             foreach (var b in borders)
             {

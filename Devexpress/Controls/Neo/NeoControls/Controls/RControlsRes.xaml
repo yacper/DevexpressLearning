@@ -17,7 +17,7 @@
                     xmlns:dxcn="http://schemas.devexpress.com/winfx/2008/xaml/core/internal" xmlns:dxbc="http://schemas.devexpress.com/winfx/2008/xaml/bars/internal">
     <system:Double x:Key="TableRowHeight">22</system:Double>
     <DataTemplate x:Key="BarItemContentDataTemplate">
-        <Border x:Name="PATA_BAR_Border" Padding="0">
+        <Border x:Name="PART_BAR_Border" Padding="0">
             <DockPanel>
                 <TextBlock x:Name="_Text" Text="{Binding DisplayName}" HorizontalAlignment="Left">
                     <dx:Badge.Badge>
@@ -43,7 +43,7 @@
                 <Setter TargetName="_Text" Property="Visibility" Value="Visible" />
             </DataTrigger>
             <DataTrigger Binding="{Binding Path=IsSeparator}" Value="True">
-                <Setter TargetName="PATA_BAR_Border" Property="BorderThickness" Value="1,0,0,0" />
+                <Setter TargetName="PART_BAR_Border" Property="BorderThickness" Value="1,0,0,0" />
             </DataTrigger>
             <DataTrigger Binding="{Binding Path=StateImg}" Value="{x:Null}">
                 <Setter TargetName="_StateImg" Property="Visibility" Value="Collapsed" />
@@ -251,8 +251,8 @@
 
     </Style>-->
 
-    <local:RGridControlToVmValueConverter x:Key="RGridControlToVmValueConverter"></local:RGridControlToVmValueConverter>
-    <ControlTemplate x:Key="CommonToolsTemplate">
+    <local:RGridControlToVmValueConverter x:Key="RDataGrid_RowToolCommandsValueConverter"></local:RGridControlToVmValueConverter>
+    <ControlTemplate x:Key="RDataGrid_RowCommonToolsTemplate">
         <dxb:BarContainerControl ContainerType="Top" HorizontalAlignment="Right" >
             <dxb:ToolBarControl RotateWhenVertical="True" 
                                 ShowDragWidget="False"   
@@ -261,7 +261,7 @@
                                 AllowQuickCustomization="False" 
                                 ItemTemplateSelector="{DynamicResource BarItemDataTemplateSelector}">
                 <dxb:ToolBarControl.ItemsSource>
-                    <MultiBinding Converter="{StaticResource RGridControlToVmValueConverter}">
+                    <MultiBinding Converter="{StaticResource RDataGrid_RowToolCommandsValueConverter}">
                         <Binding Path="DataContext" RelativeSource="{RelativeSource AncestorLevel=1, AncestorType=dxg:RowControl,Mode=FindAncestor}"></Binding>
                         <Binding Path="ToolCommandsTemplate"></Binding>
                         <Binding Path="Visibility" RelativeSource="{RelativeSource AncestorLevel=1, AncestorType=dxg:RowControl,Mode=FindAncestor}"></Binding>
@@ -291,17 +291,17 @@
         </ContentControl>
     </DataTemplate>
 
-    <local:TableRowToolsVisibleConverter x:Key="TableRowToolsVisibleConverter"></local:TableRowToolsVisibleConverter>
-    <ControlTemplate x:Key="RowControlTemplate" TargetType="dxg:RowControl" >
+    <local:TableRowToolsVisibleConverter x:Key="RDataGrid_RowToolsVisibilityConverter"></local:TableRowToolsVisibleConverter>
+    <ControlTemplate x:Key="RDataGrid_RowControlTemplate" TargetType="dxg:RowControl" >
         <Grid Height="{StaticResource TableRowHeight}" Background="Transparent" >
             <Border x:Name="Background" Background="{TemplateBinding Background}" />
             <Border x:Name="BottomLine" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,0,0,1" VerticalAlignment="Bottom" />
             <Grid x:Name="PART_LayoutPanel"/>
             <ContentControl x:Name="PART_TOOLS"                            
                             DataContext="{Binding RelativeSource={RelativeSource AncestorLevel=1,AncestorType=controls:RDataGrid,Mode=FindAncestor}}"
-                            Template="{StaticResource CommonToolsTemplate}">
+                            Template="{StaticResource RDataGrid_RowCommonToolsTemplate}">
                 <ContentControl.Visibility>
-                    <MultiBinding Converter="{StaticResource TableRowToolsVisibleConverter}">
+                    <MultiBinding Converter="{StaticResource RDataGrid_RowToolsVisibilityConverter}">
                         <Binding Path="AlwaysShowToolBar"></Binding>
                         <Binding RelativeSource="{RelativeSource AncestorLevel=1,AncestorType=dxg:RowControl,Mode=FindAncestor}" Path="IsMouseOver"></Binding>
                     </MultiBinding>
