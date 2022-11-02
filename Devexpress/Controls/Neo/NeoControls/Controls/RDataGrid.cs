@@ -18,16 +18,16 @@ using System.Windows.Media;
 
 namespace NeoTrader.UI.Controls
 {    
-    public class RGridControl : GridControl
+    public class RDataGrid : GridControl
     {
-        public static DependencyProperty ToolsBgBrushProperty = DependencyProperty.Register("ToolsBgBrush", typeof(Brush), typeof(RGridControl), new PropertyMetadata(Brushes.Blue));
+        public static DependencyProperty ToolsBgBrushProperty = DependencyProperty.Register("ToolsBgBrush", typeof(Brush), typeof(RDataGrid), new PropertyMetadata(Brushes.Blue));
         public Brush ToolsBgBrush
         {
             get => (Brush)GetValue(ToolsBgBrushProperty);
             set => SetValue(ToolsBgBrushProperty, value);
         }
 
-        public static DependencyProperty AlwaysShowToolBarProperty = DependencyProperty.Register("AlwaysShowToolBar", typeof(bool), typeof(RGridControl), new PropertyMetadata(false));
+        public static DependencyProperty AlwaysShowToolBarProperty = DependencyProperty.Register("AlwaysShowToolBar", typeof(bool), typeof(RDataGrid), new PropertyMetadata(false));
         public bool AlwaysShowToolBar
         {
             get => (bool)GetValue(AlwaysShowToolBarProperty);
@@ -48,7 +48,7 @@ namespace NeoTrader.UI.Controls
         //    set => SetValue(RowToolsProperty, value);            
         //}
 
-        public static DependencyProperty DefaultToolsProperty = DependencyProperty.Register("DefaultTools", typeof(CommandVm), typeof(RGridControl));
+        public static DependencyProperty DefaultToolsProperty = DependencyProperty.Register("DefaultTools", typeof(CommandVm), typeof(RDataGrid));
 
         public CommandVm DefaultTools 
         { 
@@ -56,7 +56,7 @@ namespace NeoTrader.UI.Controls
             set => SetValue(DefaultToolsProperty, value);
         }
 
-        public static DependencyProperty CellTemplateSelectorProperty = DependencyProperty.Register("CellTemplateSelector", typeof(DataTemplateSelector), typeof(RGridControl),
+        public static DependencyProperty CellTemplateSelectorProperty = DependencyProperty.Register("CellTemplateSelector", typeof(DataTemplateSelector), typeof(RDataGrid),
             new PropertyMetadata(null, (d, e) => 
             {
 
@@ -68,7 +68,7 @@ namespace NeoTrader.UI.Controls
             set=>SetValue(CellTemplateSelectorProperty, value);
         }
 
-        public RGridControl(): base()
+        public RDataGrid(): base()
         {
             DefaultTools = new CommandVm();
             if (View == null)

@@ -198,10 +198,10 @@ namespace NeoControls
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            if (values == null || values.Length != 2 || !(values[0] is DevExpress.Xpf.Grid.RowData || values[0] is TreeListRowData) || !(values[1] is RGridControl))
+            if (values == null || values.Length != 2 || !(values[0] is DevExpress.Xpf.Grid.RowData || values[0] is TreeListRowData) || !(values[1] is RDataGrid))
                 return null;
 
-            var rgc = values[1] as RGridControl;
+            var rgc = values[1] as RDataGrid;
             //if (values[0] is DevExpress.Xpf.Grid.RowData)
             //{
             //    if (rgc!.RowTools == null || rgc!.RowTools.Count() == 0)

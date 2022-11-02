@@ -33,7 +33,7 @@
 
             <TabControl Grid.Column="0">
                 <TabItem Header="TableView">
-                    <controls:RGridControl SelectionMode="Row" ItemsSource="{Binding People}" DefaultTools="{Binding DefaultTools}"  AlwaysShowToolBar="True">
+                    <controls:RDataGrid SelectionMode="Row" ItemsSource="{Binding People}" DefaultTools="{Binding DefaultTools}"  AlwaysShowToolBar="True">
                         <dxg:GridControl.Columns>
                             <dxg:GridColumn Header="Name" FieldName="Name"  ></dxg:GridColumn>
                             <dxg:GridColumn Header="Age" FieldName="Age" ></dxg:GridColumn>
@@ -47,21 +47,21 @@
                                 </dxg:TableView.RowStyle>
                             </dxg:TableView>
                         </dxg:GridControl.View>
-                    </controls:RGridControl>
+                    </controls:RDataGrid>
                 </TabItem>
                 <TabItem Header="Auto Columns">
-                    <controls:RGridControl ItemsSource="{Binding People}" SelectionMode="Row" DefaultTools="{Binding DefaultTools}" AlwaysShowToolBar="False"></controls:RGridControl>
+                    <controls:RDataGrid ItemsSource="{Binding People}" SelectionMode="Row" DefaultTools="{Binding DefaultTools}" AlwaysShowToolBar="False"></controls:RDataGrid>
                 </TabItem>
                 <TabItem Header="Manual Columns">
-                    <controls:RGridControl ItemsSource="{Binding People}" SelectionMode="Row" DefaultTools="{Binding DefaultTools}" AlwaysShowToolBar="False">
+                    <controls:RDataGrid ItemsSource="{Binding People}" SelectionMode="Row" DefaultTools="{Binding DefaultTools}" AlwaysShowToolBar="False">
                         <dxg:GridColumn Header="姓名" FieldName="Name"></dxg:GridColumn>
                         <dxg:GridColumn Header="年齡" FieldName="Age"></dxg:GridColumn>
-                    </controls:RGridControl>
+                    </controls:RDataGrid>
                 </TabItem>
 
                 <TabItem Header="Binding Columns">
-                    <controls:RGridControl ColumnsSource="{Binding Columns}" ItemsSource="{Binding People}" SelectionMode="Row" DefaultTools="{Binding DefaultTools}" AlwaysShowToolBar="False">
-                    </controls:RGridControl>
+                    <controls:RDataGrid ColumnsSource="{Binding Columns}" ItemsSource="{Binding People}" SelectionMode="Row" DefaultTools="{Binding DefaultTools}" AlwaysShowToolBar="False">
+                    </controls:RDataGrid>
                 </TabItem>
 
             </TabControl>

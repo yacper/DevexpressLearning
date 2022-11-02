@@ -278,7 +278,7 @@
     <DataTemplate x:Key="DefaultColumnTemplate">
         <ContentControl>
             <dxg:GridColumn AllowSorting="{Binding AllowSorting}" 
-                            CellTemplateSelector="{Binding CellTemplateSelector, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1,AncestorType=controls:RGridControl}}" 
+                            CellTemplateSelector="{Binding CellTemplateSelector, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1,AncestorType=controls:RDataGrid}}" 
                             Width="{Binding Width}" 
                             Header="{Binding Header}"
                             HeaderTemplate="{DynamicResource GridColumnHeaderDefaultTemplate}"
@@ -294,7 +294,7 @@
             <Border x:Name="BottomLine" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,0,0,1" VerticalAlignment="Bottom" />
             <Grid x:Name="PART_LayoutPanel"/>
             <ContentControl x:Name="PART_TOOLS"                            
-                            DataContext="{Binding RelativeSource={RelativeSource AncestorLevel=1,AncestorType=controls:RGridControl,Mode=FindAncestor}}"
+                            DataContext="{Binding RelativeSource={RelativeSource AncestorLevel=1,AncestorType=controls:RDataGrid,Mode=FindAncestor}}"
                             Template="{StaticResource CommonToolsTemplate}">
                 <ContentControl.Visibility>
                     <MultiBinding Converter="{StaticResource TableRowToolsVisibleConverter}">
