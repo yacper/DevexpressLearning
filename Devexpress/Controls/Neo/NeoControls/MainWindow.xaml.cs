@@ -22,6 +22,7 @@ using DevExpress.Xpf.Grid.TreeList;
 using DevExpress.Xpf.Grid;
 using System.ComponentModel;
 using System.Collections;
+using System.Collections.ObjectModel;
 
 namespace NeoControls
 {
@@ -250,14 +251,14 @@ namespace NeoControls
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            if(values.Length != 4 || !(values[0] is RowData) || !(values[1] is CommandVm) || !(values[2] is Visibility) || !(values[3] is IList))
+            if(values.Length != 4 || !(values[0] is RowData) || !(values[1] is ObservableCollection<CommandVm>) || !(values[2] is Visibility) || !(values[3] is IList))
                 return null;
             
 
-            var rowData = (RowData)values[0];
-            var defaultVm = (CommandVm)values[1];
+            var rowData = (RowData)values[0];            
             var visibility = (Visibility)values[2];
             var itemsSource = (IList)values[3];
+            var defaultVm = (ObservableCollection<CommandVm>)values[1];
 
             if (visibility == Visibility.Hidden)
                 return null;
@@ -267,9 +268,9 @@ namespace NeoControls
             if (handle >= itemsSource.Count)
                 return null;
 
-            object owner = itemsSource[handle];            
-            CommandVm newVM = defaultVm.Clone(owner);
-            return newVM.Commands;
+            object owner = itemsSource[handle];
+            
+            return defaultVm.Select(_ => _.Clone(owner)); 
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)

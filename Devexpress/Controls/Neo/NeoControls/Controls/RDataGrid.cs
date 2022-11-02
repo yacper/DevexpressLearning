@@ -48,11 +48,11 @@ namespace NeoTrader.UI.Controls
         //    set => SetValue(RowToolsProperty, value);            
         //}
 
-        public static DependencyProperty DefaultToolsProperty = DependencyProperty.Register("DefaultTools", typeof(CommandVm), typeof(RDataGrid));
+        public static DependencyProperty DefaultToolsProperty = DependencyProperty.Register("DefaultTools", typeof(ObservableCollection<CommandVm>), typeof(RDataGrid));
 
-        public CommandVm DefaultTools 
+        public ObservableCollection<CommandVm> DefaultTools 
         { 
-            get => (CommandVm)GetValue(DefaultToolsProperty); 
+            get => (ObservableCollection<CommandVm>)GetValue(DefaultToolsProperty); 
             set => SetValue(DefaultToolsProperty, value);
         }
 
@@ -70,7 +70,7 @@ namespace NeoTrader.UI.Controls
 
         public RDataGrid(): base()
         {
-            DefaultTools = new CommandVm();
+            DefaultTools = new();
             if (View == null)
                 View = CreateTableView();
 

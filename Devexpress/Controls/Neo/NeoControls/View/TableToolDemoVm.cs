@@ -47,7 +47,7 @@ namespace NeoControls.View
     {
         public int SelectedIdx { get; set; }
         public ObservableCollection<Person> People { get=>GetProperty(()=>People); set=>SetProperty(()=>People, value); }
-        public CommandVm DefaultTools { get; set; }
+        public ObservableCollection<CommandVm> DefaultTools { get; set; }
         public ObservableCollection<CommandVm> OpVms { get; set; }
         public string CollectionChangedInfo { get => GetProperty(() => CollectionChangedInfo); set=>SetProperty(()=>CollectionChangedInfo, value); }
         public ObservableCollection<RColumnItemData> Columns { get=>GetProperty(()=>Columns); set=>SetProperty(()=>Columns, value); }
@@ -77,9 +77,7 @@ namespace NeoControls.View
 
         private void InitDefaultTools()
         {
-            DefaultTools = new CommandVm()
-            {
-                Commands = new ObservableCollection<CommandVm>()
+            DefaultTools = new ObservableCollection<CommandVm>()
                 {
                     new CommandVm()
                     {
@@ -115,8 +113,7 @@ namespace NeoControls.View
                             new CommandVm(){ Glyph = Images.Trading, DisplayName = "交易", Command = new DelegateCommand(() => { }) },
                         }
                     }
-                }
-            };
+                };
         }
 
         private void InitOpVms()
