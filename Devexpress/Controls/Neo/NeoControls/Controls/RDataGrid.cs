@@ -27,7 +27,7 @@ namespace NeoTrader.UI.Controls
             set => SetValue(ToolsBgBrushProperty, value);
         }
 
-        public static DependencyProperty AlwaysShowToolBarProperty = DependencyProperty.Register("AlwaysShowToolBar", typeof(bool), typeof(RDataGrid), new PropertyMetadata(false));
+        public static DependencyProperty AlwaysShowToolBarProperty = DependencyProperty.Register(nameof(AlwaysShowToolBar), typeof(bool), typeof(RDataGrid), new PropertyMetadata(false));
         public bool AlwaysShowToolBar
         {
             get => (bool)GetValue(AlwaysShowToolBarProperty);
@@ -48,15 +48,15 @@ namespace NeoTrader.UI.Controls
         //    set => SetValue(RowToolsProperty, value);            
         //}
 
-        public static DependencyProperty DefaultToolsProperty = DependencyProperty.Register("DefaultTools", typeof(ObservableCollection<CommandVm>), typeof(RDataGrid));
+        public static DependencyProperty ToolCommandsTemplateProperty = DependencyProperty.Register(nameof(ToolCommandsTemplate), typeof(ObservableCollection<CommandVm>), typeof(RDataGrid));
 
-        public ObservableCollection<CommandVm> DefaultTools 
+        public ObservableCollection<CommandVm> ToolCommandsTemplate 
         { 
-            get => (ObservableCollection<CommandVm>)GetValue(DefaultToolsProperty); 
-            set => SetValue(DefaultToolsProperty, value);
+            get => (ObservableCollection<CommandVm>)GetValue(ToolCommandsTemplateProperty); 
+            set => SetValue(ToolCommandsTemplateProperty, value);
         }
 
-        public static DependencyProperty CellTemplateSelectorProperty = DependencyProperty.Register("CellTemplateSelector", typeof(DataTemplateSelector), typeof(RDataGrid),
+        public static DependencyProperty CellTemplateSelectorProperty = DependencyProperty.Register(nameof(CellTemplateSelector), typeof(DataTemplateSelector), typeof(RDataGrid),
             new PropertyMetadata(null, (d, e) => 
             {
 
@@ -70,7 +70,8 @@ namespace NeoTrader.UI.Controls
 
         public RDataGrid(): base()
         {
-            DefaultTools = new();
+            SelectionMode = MultiSelectMode.Row;
+            ToolCommandsTemplate  = new();
             if (View == null)
                 View = CreateTableView();
 

@@ -28,7 +28,7 @@
 
             <TabControl Grid.Column="0">
                 <TabItem Header="TableView">
-                    <controls:RDataGrid SelectionMode="Row" ItemsSource="{Binding People}" DefaultTools="{Binding DefaultTools}"  AlwaysShowToolBar="True">
+                    <controls:RDataGrid ItemsSource="{Binding People}" ToolCommandsTemplate="{Binding DefaultTools}"  AlwaysShowToolBar="True">
                         <dxg:GridControl.Columns>
                             <dxg:GridColumn Header="Name" FieldName="Name"  ></dxg:GridColumn>
                             <dxg:GridColumn Header="Age" FieldName="Age" ></dxg:GridColumn>
@@ -45,17 +45,17 @@
                     </controls:RDataGrid>
                 </TabItem>
                 <TabItem Header="Auto Columns">
-                    <controls:RDataGrid ItemsSource="{Binding People}" SelectionMode="Row" DefaultTools="{Binding DefaultTools}" AlwaysShowToolBar="False"></controls:RDataGrid>
+                    <controls:RDataGrid ItemsSource="{Binding People}"  ToolCommandsTemplate="{Binding DefaultTools}" ></controls:RDataGrid>
                 </TabItem>
                 <TabItem Header="Manual Columns">
-                    <controls:RDataGrid ItemsSource="{Binding People}" SelectionMode="Row" DefaultTools="{Binding DefaultTools}" AlwaysShowToolBar="False">
+                    <controls:RDataGrid ItemsSource="{Binding People}"  ToolCommandsTemplate="{Binding DefaultTools}" >
                         <dxg:GridColumn Header="姓名" FieldName="Name"></dxg:GridColumn>
                         <dxg:GridColumn Header="年齡" FieldName="Age"></dxg:GridColumn>
                     </controls:RDataGrid>
                 </TabItem>
 
                 <TabItem Header="Binding Columns">
-                    <controls:RDataGrid ColumnsSource="{Binding Columns}" ItemsSource="{Binding People}" SelectionMode="Row" DefaultTools="{Binding DefaultTools}" AlwaysShowToolBar="False">
+                    <controls:RDataGrid ColumnsSource="{Binding Columns}" ItemsSource="{Binding People}" ToolCommandsTemplate="{Binding DefaultTools}" AlwaysShowToolBar="False">
                     </controls:RDataGrid>
                 </TabItem>
 

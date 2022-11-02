@@ -216,7 +216,7 @@ namespace NeoControls
             //    return rgc!.DefaultTools;
 
             //var tools = rgc.RowTools.Where(_ => { return _.Level == level; }).FirstOrDefault();
-            return rgc.DefaultTools;
+            return rgc.ToolCommandsTemplate;
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
