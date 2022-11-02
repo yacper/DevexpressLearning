@@ -24,27 +24,67 @@
                 </dxb:ToolBarControl>
             </dxb:BarContainerControl>
         </StackPanel>
-        <TabControl Grid.Row="1">
-            <TabItem Header="TableView">
-                <controls:RGridControl ItemsSource="{Binding People}" DefaultTools="{Binding DefaultTools}"  ToolsBarIsFixed="True">
-                    <dxg:GridControl.Columns>
-                        <dxg:GridColumn Header="Name" FieldName="Name"  ></dxg:GridColumn>
-                        <dxg:GridColumn Header="Age" FieldName="Age" ></dxg:GridColumn>
-                    </dxg:GridControl.Columns>
-                    <dxg:GridControl.View>
-                        <dxg:TableView ShowGroupPanel="False" AllowDragDrop="True" AllowEditing="False" AllowSorting="True" ColumnSortClearMode="Click">
-                            <dxg:TableView.RowStyle>
-                                <Style TargetType="dxg:RowControl">
-                                    <Setter Property="Template" Value="{StaticResource RowControlTemplate}"></Setter>
-                                </Style>
-                            </dxg:TableView.RowStyle>
-                        </dxg:TableView>
-                    </dxg:GridControl.View>
-                </controls:RGridControl>
-            </TabItem>
-            <TabItem Header="binding Columns">
-                
-            </TabItem>
-        </TabControl>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="5"></ColumnDefinition>
+                <ColumnDefinition MinWidth="150"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TabControl Grid.Column="0">
+                <TabItem Header="TableView">
+                    <controls:RGridControl SelectionMode="Row" ItemsSource="{Binding People}" DefaultTools="{Binding DefaultTools}"  ToolsBarIsFixed="True">
+                        <dxg:GridControl.Columns>
+                            <dxg:GridColumn Header="Name" FieldName="Name"  ></dxg:GridColumn>
+                            <dxg:GridColumn Header="Age" FieldName="Age" ></dxg:GridColumn>
+                        </dxg:GridControl.Columns>
+                        <dxg:GridControl.View>
+                            <dxg:TableView ShowGroupPanel="False" AllowDragDrop="True" AllowEditing="False" AllowSorting="True" ColumnSortClearMode="Click">
+                                <dxg:TableView.RowStyle>
+                                    <Style TargetType="dxg:RowControl">
+                                        <Setter Property="Template" Value="{StaticResource RowControlTemplate}"></Setter>
+                                    </Style>
+                                </dxg:TableView.RowStyle>
+                            </dxg:TableView>
+                        </dxg:GridControl.View>
+                    </controls:RGridControl>
+                </TabItem>
+                <TabItem Header="Auto Columns">
+                    <controls:RGridControl ItemsSource="{Binding People}" SelectionMode="Row" DefaultTools="{Binding DefaultTools}" ToolsBarIsFixed="False"></controls:RGridControl>
+                </TabItem>
+                <TabItem Header="Manual Columns">
+                    <controls:RGridControl ItemsSource="{Binding People}" SelectionMode="Row" DefaultTools="{Binding DefaultTools}" ToolsBarIsFixed="False">
+                        <dxg:GridColumn Header="姓名" FieldName="Name"></dxg:GridColumn>
+                        <dxg:GridColumn Header="年齡" FieldName="Age"></dxg:GridColumn>
+                    </controls:RGridControl>
+                </TabItem>
+
+                <TabItem Header="Binding Columns">
+                    <controls:RGridControl ColumnsSource="{Binding Columns}" ItemsSource="{Binding People}" SelectionMode="Row" DefaultTools="{Binding DefaultTools}" ToolsBarIsFixed="False">
+                    </controls:RGridControl>
+                </TabItem>
+
+            </TabControl>
+            <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></GridSplitter>
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"></RowDefinition>
+                    <RowDefinition Height="20"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="Collection Change："></TextBlock>
+                <StackPanel HorizontalAlignment="Right" Grid.Row="1">
+                    <dxb:BarContainerControl >
+                        <dxb:ToolBarControl RotateWhenVertical="True" 
+                                    ShowDragWidget="False" 
+                                    AllowCustomizationMenu="False"
+                                    ItemsSource="{Binding TextBoxOpVms}"                                 
+                                    ItemTemplateSelector="{DynamicResource BarItemDataTemplateSelector}">
+                        </dxb:ToolBarControl>
+                    </dxb:BarContainerControl>
+                </StackPanel>
+                <TextBox Grid.Row="2" TextAlignment="Left" TextWrapping="Wrap" Text="{Binding CollectionChangedInfo}"></TextBox>
+            </Grid>
+        </Grid>
+        
     </Grid>
 </UserControl>

@@ -266,6 +266,19 @@
         </controls:RToolsControl>-->
     </ControlTemplate>
 
+    <local:BoolToFixedConverter x:Key="BoolToFixedConverter"></local:BoolToFixedConverter>
+    <DataTemplate x:Key="DefaultColumnTemplate">
+        <ContentControl>
+            <dxg:GridColumn AllowSorting="{Binding AllowSorting}" 
+                            CellTemplateSelector="{Binding CellTemplateSelector, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1,AncestorType=controls:RGridControl}}" 
+                            Width="{Binding Width}" 
+                            Header="{Binding Header}"
+                            HeaderTemplate="{DynamicResource GridColumnHeaderDefaultTemplate}"
+                            FieldName="{Binding FieldName}"                              
+                            Fixed="{Binding IsFixed, Converter={StaticResource BoolToFixedConverter}}"  FilterPopupMode="Disabled"/>
+        </ContentControl>
+    </DataTemplate>
+
     <local:TableRowToolsVisibleConverter x:Key="TableRowToolsVisibleConverter"></local:TableRowToolsVisibleConverter>
     <ControlTemplate x:Key="RowControlTemplate" TargetType="dxg:RowControl" >
         <Grid Height="{StaticResource TableRowHeight}" Background="Transparent" >

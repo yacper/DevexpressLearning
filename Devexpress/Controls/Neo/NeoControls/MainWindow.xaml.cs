@@ -277,4 +277,21 @@ namespace NeoControls
             throw new NotImplementedException();
         }
     }
+
+    public class BoolToFixedConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value == null)
+                return FixedStyle.None;
+
+            bool newVal = (bool)value;
+            if (newVal)
+                return FixedStyle.Left;
+
+            return FixedStyle.None;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) { throw new NotImplementedException(); }
+    }
 }

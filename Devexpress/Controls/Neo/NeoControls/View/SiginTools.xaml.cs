@@ -105,7 +105,7 @@ public partial class SiginTools : UserControl
                      Command = new DelegateCommand<FrameworkContentElement>((e) =>
                                                                             {
                                                                                 Console.WriteLine(e.ToString());
-                                                                            //    ((e.DataContext as CommandVm).Owner as Provider).Toggle();
+                                                                                ((e.DataContext as CommandVm).Owner as Provider).Toggle();
                                                                             }
                                                                            ),
                      Commands = new ObservableCollection<CommandVm>()
