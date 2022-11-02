@@ -21,13 +21,13 @@
                     </dx:Badge.Badge>
                 </TextBlock>
                 <Image x:Name="_StateImg" Margin="2,0,0,0" Height="10" HorizontalAlignment="Right" Source="{Binding StateImg}">
-                    <Image.Style>
+                    <!--<Image.Style>
                         <Style TargetType="Image">
                             <Style.Setters>
                                 <Setter Property="Visibility" Value="Visible" />
                             </Style.Setters>
                         </Style>
-                    </Image.Style>
+                    </Image.Style>-->
                 </Image>
             </DockPanel>
         </Border>

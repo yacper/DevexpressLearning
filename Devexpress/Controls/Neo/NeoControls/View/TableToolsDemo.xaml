@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NeoControls" xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" xmlns:controls="clr-namespace:NeoTrader.UI.Controls" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+             xmlns:controls1="clr-namespace:NeoControls.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Background="Black">
     <UserControl.Resources>
@@ -16,15 +17,9 @@
                 <ColumnDefinition MinWidth="150"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <dxb:BarContainerControl >
-                <dxb:ToolBarControl UseWholeRow="True"
-                    RotateWhenVertical="True" 
-                                    ShowDragWidget="False" 
-                                    AllowCustomizationMenu="False"
-                                    ItemsSource="{Binding OpVms}"                                 
-                                    ItemTemplateSelector="{DynamicResource BarItemDataTemplateSelector}">
-                </dxb:ToolBarControl>
+                <controls1:RToolBar ItemsSource="{Binding OpVms}">
+                </controls1:RToolBar>
             </dxb:BarContainerControl>
-
 
             <TabControl Grid.Column="0">
                 <TabItem Header="TableView">
@@ -55,7 +50,7 @@
                 </TabItem>
 
                 <TabItem Header="Binding Columns">
-                    <controls:RDataGrid ColumnsSource="{Binding Columns}" ItemsSource="{Binding People}" ToolCommandsTemplate="{Binding DefaultTools}" AlwaysShowToolBar="False">
+                    <controls:RDataGrid ColumnsSource="{Binding Columns}" ItemsSource="{Binding People}" ToolCommandsTemplate="{Binding DefaultTools}" >
                     </controls:RDataGrid>
                 </TabItem>
 

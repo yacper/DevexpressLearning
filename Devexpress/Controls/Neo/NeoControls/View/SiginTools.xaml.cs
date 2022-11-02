@@ -104,7 +104,7 @@ public partial class SiginTools : UserControl
                  {
                      Owner = new Provider() { Name = "Tools" },
                      //DisplayName = ,
-                     DisplayMode = BarItemDisplayMode.ContentAndGlyph,
+                     DisplayMode = BarItemDisplayMode.Content,
                      Glyph       = Images.VMore,
                      GlyphAlignment = Dock.Right,
                      Alignment = BarItemAlignment.Far,
