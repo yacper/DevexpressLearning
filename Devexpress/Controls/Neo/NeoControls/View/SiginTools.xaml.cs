@@ -117,10 +117,10 @@ public partial class SiginTools : UserControl
                                                                            ),
                      Commands = new ObservableCollection<CommandVm>()
                      {
-                         vm.Clone(new Provider() { Name = "p6" }).WithProperty(p=>p.KeyGesture, new KeyGesture(Key.D6, ModifierKeys.Control)),
+                         vm.Clone(new Provider() { Name = "p6666666666666666666666" }).WithProperty(p=>p.KeyGesture, new KeyGesture(Key.D6, ModifierKeys.Control)),
                          vm.Clone(new Provider() { Name = "p7" }).WithProperty(p=>p.KeyGesture, new KeyGesture(Key.D7, ModifierKeys.Control)),
                          new CommandVm() { IsSeparator = true},
-                         vm.Clone(new Provider() { Name = "p8" }).WithProperty(p=>p.KeyGesture, new KeyGesture(Key.D8, ModifierKeys.Control)),
+                         vm.Clone(new Provider() { Name = "p8888888" }).WithProperty(p=>p.KeyGesture, new KeyGesture(Key.D8, ModifierKeys.Control)),
                      }
                  }
                  .WithPropertyBinding(T => T.StateImg, S => (S.Owner as Provider).StateImg)

@@ -27,11 +27,11 @@ namespace NeoTrader.UI.Controls
             set => SetValue(ToolsBgBrushProperty, value);
         }
 
-        public static DependencyProperty ToolsBarIsFixedProperty = DependencyProperty.Register("ToolsBarIsFixed", typeof(bool), typeof(RGridControl), new PropertyMetadata(false));
-        public bool ToolsBarIsFixed
+        public static DependencyProperty AlwaysShowToolBarProperty = DependencyProperty.Register("AlwaysShowToolBar", typeof(bool), typeof(RGridControl), new PropertyMetadata(false));
+        public bool AlwaysShowToolBar
         {
-            get => (bool)GetValue(ToolsBarIsFixedProperty);
-            set => SetValue(ToolsBarIsFixedProperty, value);
+            get => (bool)GetValue(AlwaysShowToolBarProperty);
+            set => SetValue(AlwaysShowToolBarProperty, value);
         }
 
         // Tools 数据

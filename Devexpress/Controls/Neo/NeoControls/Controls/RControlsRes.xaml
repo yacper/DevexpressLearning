@@ -83,7 +83,7 @@
 
     <DataTemplate x:Key="BarSubItemDataTemplate">
         <ContentControl>
-            <neoTraderControls:RBarSubItem KeyGesture="{Binding KeyGesture}"
+            <controls:RBarSubItem KeyGesture="{Binding KeyGesture}"
                                            Command="{Binding Command}"
                                            Glyph="{Binding Glyph}"                                   
                                            GlyphAlignment="{Binding GlyphAlignment}"
@@ -95,7 +95,7 @@
                                            ItemLinksSource="{Binding Commands}"
                                            ItemTemplateSelector="{DynamicResource BarItemDataTemplateSelector}"
                                            ContentTemplate="{StaticResource BarItemContentDataTemplate}">
-            </neoTraderControls:RBarSubItem>
+            </controls:RBarSubItem>
         </ContentControl>
     </DataTemplate>
 
@@ -298,7 +298,7 @@
                             Template="{StaticResource CommonToolsTemplate}">
                 <ContentControl.Visibility>
                     <MultiBinding Converter="{StaticResource TableRowToolsVisibleConverter}">
-                        <Binding Path="ToolsBarIsFixed"></Binding>
+                        <Binding Path="AlwaysShowToolBar"></Binding>
                         <Binding RelativeSource="{RelativeSource AncestorLevel=1,AncestorType=dxg:RowControl,Mode=FindAncestor}" Path="IsMouseOver"></Binding>
                     </MultiBinding>
                 </ContentControl.Visibility>

@@ -22,8 +22,9 @@ namespace NeoTrader.UI.Controls
 
         private void RBarSubItem_Popup(object sender, EventArgs e)
         {
-            if (PopupIsInit)
-                return;
+            //return;
+            //if (PopupIsInit)
+            //    return;
             SubMenuClientPanel panel = NeoTrader.UiUtils.UIUtils.GetParentObject<SubMenuClientPanel>(ItemLinks[0].LinkControl as LightweightBarItemLinkControl);
             var borders = NeoTrader.UiUtils.UIUtils.GetChildObjects<Border>(panel, "PATA_BAR_Border");
             double maxVal = 0;

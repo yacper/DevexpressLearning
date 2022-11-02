@@ -33,7 +33,7 @@
 
             <TabControl Grid.Column="0">
                 <TabItem Header="TableView">
-                    <controls:RGridControl SelectionMode="Row" ItemsSource="{Binding People}" DefaultTools="{Binding DefaultTools}"  ToolsBarIsFixed="True">
+                    <controls:RGridControl SelectionMode="Row" ItemsSource="{Binding People}" DefaultTools="{Binding DefaultTools}"  AlwaysShowToolBar="True">
                         <dxg:GridControl.Columns>
                             <dxg:GridColumn Header="Name" FieldName="Name"  ></dxg:GridColumn>
                             <dxg:GridColumn Header="Age" FieldName="Age" ></dxg:GridColumn>
@@ -50,17 +50,17 @@
                     </controls:RGridControl>
                 </TabItem>
                 <TabItem Header="Auto Columns">
-                    <controls:RGridControl ItemsSource="{Binding People}" SelectionMode="Row" DefaultTools="{Binding DefaultTools}" ToolsBarIsFixed="False"></controls:RGridControl>
+                    <controls:RGridControl ItemsSource="{Binding People}" SelectionMode="Row" DefaultTools="{Binding DefaultTools}" AlwaysShowToolBar="False"></controls:RGridControl>
                 </TabItem>
                 <TabItem Header="Manual Columns">
-                    <controls:RGridControl ItemsSource="{Binding People}" SelectionMode="Row" DefaultTools="{Binding DefaultTools}" ToolsBarIsFixed="False">
+                    <controls:RGridControl ItemsSource="{Binding People}" SelectionMode="Row" DefaultTools="{Binding DefaultTools}" AlwaysShowToolBar="False">
                         <dxg:GridColumn Header="姓名" FieldName="Name"></dxg:GridColumn>
                         <dxg:GridColumn Header="年齡" FieldName="Age"></dxg:GridColumn>
                     </controls:RGridControl>
                 </TabItem>
 
                 <TabItem Header="Binding Columns">
-                    <controls:RGridControl ColumnsSource="{Binding Columns}" ItemsSource="{Binding People}" SelectionMode="Row" DefaultTools="{Binding DefaultTools}" ToolsBarIsFixed="False">
+                    <controls:RGridControl ColumnsSource="{Binding Columns}" ItemsSource="{Binding People}" SelectionMode="Row" DefaultTools="{Binding DefaultTools}" AlwaysShowToolBar="False">
                     </controls:RGridControl>
                 </TabItem>
 
