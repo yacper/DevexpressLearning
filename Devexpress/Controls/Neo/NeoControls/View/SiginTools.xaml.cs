@@ -32,7 +32,7 @@ public class Provider : BindableBase
     public         string          Name     { get;                                set; } = "P1";
     public         ConnectedStatus Status   { get;                                set; } = ConnectedStatus.Disconnected;
     public virtual ImageSource     StateImg { get => GetProperty(() => StateImg); set => SetProperty(() => StateImg, value); }
-    public         int          Badge    { get => GetProperty(() => Badge);    set => SetProperty(() => Badge, value); }
+    public         int             Badge    { get => GetProperty(() => Badge);    set => SetProperty(() => Badge, value); }
 
     public void Toggle()
     {
@@ -76,14 +76,62 @@ public partial class SiginTools : UserControl
                  .WithPropertyBinding(T => T.DisplayName, S => (S.Owner as Provider).Name)
                  .WithPropertyBinding(T => T.BadgeContent, S => (S.Owner as Provider).Badge);
 
-        CommandVm vm2 = vm.Clone(new Provider() { Name = "p2" })
+
+        CommandVm vmSep1 = new CommandVm() { IsSeparator = true };
+
+        CommandVm vm2 = vm.Clone(new Provider() { Name = "p2" });
+
+        CommandVm vmSep2 = new CommandVm() { IsSeparator = true };
+        CommandVm vm3 = vm.Clone(new Provider() { Name = "p3" })
             ;
+
+        CommandVm vm4 = vm.Clone(new Provider() { Name = "p4" });
+        vm4.Alignment = BarItemAlignment.Far;
+
+        CommandVm vmSep3 = new CommandVm() { IsSeparator = true, Alignment = BarItemAlignment.Far };
+        CommandVm vm5    = vm.Clone(new Provider() { Name = "p5" });
+        vm5.Alignment = BarItemAlignment.Far;
+
+
+        var otherTools = new CommandVm()
+                 {
+                     Owner = new Provider() { Name = "Tools" },
+                     //DisplayName = ,
+                     DisplayMode = BarItemDisplayMode.ContentAndGlyph,
+                     Glyph       = Images.VMore,
+                     GlyphAlignment = Dock.Right,
+                     Alignment = BarItemAlignment.Far,
+                     //StateImg    = Images.ConnectedStatus,
+                     Command = new DelegateCommand<FrameworkContentElement>((e) =>
+                                                                            {
+                                                                                Console.WriteLine(e.ToString());
+                                                                            //    ((e.DataContext as CommandVm).Owner as Provider).Toggle();
+                                                                            }
+                                                                           ),
+                     Commands = new ObservableCollection<CommandVm>()
+                     {
+                         vm.Clone(new Provider() { Name = "p6" }),
+                         vm.Clone(new Provider() { Name = "p7" }),
+                         vm.Clone(new Provider() { Name = "p8" }),
+                     }
+                 }
+                 .WithPropertyBinding(T => T.StateImg, S => (S.Owner as Provider).StateImg)
+                 .WithPropertyBinding(T => T.DisplayName, S => (S.Owner as Provider).Name)
+                 .WithPropertyBinding(T => T.BadgeContent, S => (S.Owner as Provider).Badge);
+
 
 
         PVms = new ObservableCollection<CommandVm>()
         {
             vm,
-            vm2
+            vmSep1,
+            vm2,
+            vmSep2,
+            vm3,
+            vm4,
+            vmSep3,
+            vm5,
+            otherTools
         };
     }
 }

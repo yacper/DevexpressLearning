@@ -78,6 +78,7 @@
             <neoTraderControls:RBarSubItem KeyGesture="{Binding KeyGesture}"
                                            Command="{Binding Command}"
                                            Glyph="{Binding Glyph}"                                   
+                                           GlyphAlignment="{Binding GlyphAlignment}"
                                            CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}"
                                            IsEnabled="{Binding IsEnabled}"                               
                                            BarItemDisplayMode="{Binding DisplayMode}"                                                                          
@@ -122,12 +123,21 @@
         </ContentControl>
     </DataTemplate>
 
+   <DataTemplate x:Key="RBarItemSeparatorTemplate">
+        <ContentControl>
+            <dxb:BarItemSeparator Alignment="{Binding Alignment}"/>
+        </ContentControl>
+    </DataTemplate>
+
 
     <local:BarItemDataTemplateSelector x:Key="BarItemDataTemplateSelector" 
                                        LinkItemTemplate="{StaticResource LinkItemDataTemplate}"
                                        BarCheckItemTemplate="{StaticResource BarCheckItemDataTemplate}"
                                        BarButtonItemTemplate="{StaticResource BarButtonItemDataTemplate}" 
-                                       BarSubItemTemplate="{StaticResource BarSubItemDataTemplate}"></local:BarItemDataTemplateSelector>
+                                       BarSubItemTemplate="{StaticResource BarSubItemDataTemplate}"
+                                       BarItemSeparatorTemplate="{StaticResource RBarItemSeparatorTemplate}"
+                                       
+                                       ></local:BarItemDataTemplateSelector>
 
     <!--<DataTemplate x:Key="CommandTemplate">
         <Border x:Name="_Border" >
