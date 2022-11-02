@@ -253,10 +253,10 @@ namespace NeoControls
             CommandVm newVM = (CommandVm)defaultVm.Clone(rowData.Row);  // 需要深度克隆
 
             object s = rowData.Row;
-            (s as INotifyPropertyChanged).PropertyChanged += (s, e) => 
-            {
-                action.Invoke(s, e.PropertyName, newVM);
-            };
+            //(s as INotifyPropertyChanged).PropertyChanged += (s, e) => 
+            //{
+            //    action.Invoke(s, e.PropertyName, newVM);
+            //};
 
             return newVM.Commands;
         }

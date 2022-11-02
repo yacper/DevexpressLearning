@@ -80,6 +80,8 @@ namespace NeoControls
 
             LeftVms = new ObservableCollection<CommandVm>()
             {
+                new CommandVm(){ DisplayMode = BarItemDisplayMode.Content, DisplayName="NewTest", Command = new DelegateCommand(() => { }) },
+                new CommandVm(){ Glyph = Images.Account, Commands = new ObservableCollection<CommandVm>(){ new CommandVm() { Glyph = Images.Logger } } },
                 new CommandVm()
                 {
                     DisplayName = $"{Symbol.TF}",
@@ -152,8 +154,7 @@ namespace NeoControls
                         },
                     }
 
-                }.WithPropertyBinding<Symbol>(o=>o.DisplayName, Symbol, S=>S.TF),
-                new CommandVm(){ Glyph = Images.Account },
+                }.WithPropertyBinding<Symbol>(o=>o.DisplayName, Symbol, S=>S.TF),                
                 //new CommandVm()
                 //{
                 //    Glyph = Images.Link,

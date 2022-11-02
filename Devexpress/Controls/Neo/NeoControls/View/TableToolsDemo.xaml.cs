@@ -29,6 +29,16 @@ namespace NeoControls
            // this.PropertyChanged += Persion_PropertyChanged;
         }
 
+        public void AddAge()
+        {
+            Age++;
+        }
+
+        public void ReduceAge()
+        {
+            Age--;
+        }
+
         private void Persion_PropertyChanged(PropertyChangedEventArgs e, ref CommandVm vm)
         {
             // 
@@ -66,21 +76,36 @@ namespace NeoControls
             {
                 Commands = new ObservableCollection<CommandVm>()
                 {
-                    new CommandVm(){ DisplayName = "-", Command = new DelegateCommand(() =>
-                {
-                    Persions[SelectedIdx].Age--;
-                })},
+                    new CommandVm()
+                    { 
+                        DisplayName = "-",
+                        Owner = Persions[0],
+                        Command = new DelegateCommand<FrameworkContentElement>((e) =>
+                        {
+                            ((e.DataContext as CommandVm).Owner as Persion).ReduceAge();
+                        })
+                    }.WithPropertyBinding(T=>T.IsEnabled, S=>(S.Owner as Persion).Age ),
 
-                new CommandVm(){ DisplayName = "+", Command = new DelegateCommand(() =>
-                {
-                    Persions[SelectedIdx].Age++;
-                })},
-                new CommandVm(){ Glyph=Images.VMore, Command= new DelegateCommand(() => { }),Commands = new ObservableCollection<CommandVm>()
-                {
-                    new CommandVm(){ Glyph= Images.Watchlist, DisplayName="查看List", Command = new DelegateCommand(()=>{ }) },
-                    new CommandVm(){ Glyph = Images.Account, DisplayName = "用户信息", Command = new DelegateCommand(()=>{ }) },
-                    new CommandVm(){ Glyph = Images.Trading, DisplayName = "交易", Command = new DelegateCommand(() => { }) },
-                }}
+                    new CommandVm()
+                    { 
+                        DisplayName = "+",
+                        Owner = Persions[0],
+                        Command = new DelegateCommand<FrameworkContentElement>((e) =>
+                        {
+                            ((e.DataContext as CommandVm).Owner as Persion).AddAge();
+                        })
+                    }.WithPropertyBinding(T=>T.IsEnabled, S=>(S.Owner as Persion).Age),
+                    new CommandVm()
+                    { 
+                        Glyph=Images.VMore, 
+                        Command= new DelegateCommand(() => { }),
+                        Commands = new ObservableCollection<CommandVm>()
+                        {
+                            new CommandVm(){ Glyph= Images.Watchlist, DisplayName="查看List", Command = new DelegateCommand(()=>{ }) },
+                            new CommandVm(){ Glyph = Images.Account, DisplayName = "用户信息", Command = new DelegateCommand(()=>{ }) },
+                            new CommandVm(){ Glyph = Images.Trading, DisplayName = "交易", Command = new DelegateCommand(() => { }) },
+                        }
+                    }
                 }
             };
 
@@ -90,11 +115,11 @@ namespace NeoControls
 
         public void PropertyChangedFun(object s, string propertyName, CommandVm vm)
         {
-            if(propertyName == nameof(Persion.Age))
-            {
-                vm.Commands[0].IsEnabled = false;
-                vm.Commands[1].IsEnabled = false;
-            }
+            //if(propertyName == nameof(Persion.Age))  // 这个细微操作感觉可以直接用 VM的 WithPropertyBinding 来实现
+            //{
+            //    vm.Commands[0].IsEnabled = false;
+            //    vm.Commands[1].IsEnabled = false;
+            //}
         }
     }
 }
