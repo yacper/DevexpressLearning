@@ -88,7 +88,10 @@ namespace NeoControls.View
                         {
                             ((e.DataContext as CommandVm).Owner as Person).ReduceAge();
                         })
-                    }.WithPropertyBinding(T=>T.IsEnabled, S=>(S.Owner as Person).Age ),
+                    }.WithPropertyBinding(T=>T.IsEnabled, S=>(S.Owner as Person).Age, (s, e) =>
+                    {
+                        (e.Data.Target.Source as CommandVm).IsEnabled = ((e.Data.Target.Source as CommandVm).Owner as Person).Age > 0;
+                    } ),
 
                     new CommandVm()
                     {
@@ -98,7 +101,8 @@ namespace NeoControls.View
                         {
                             ((e.DataContext as CommandVm).Owner as Person).AddAge();
                         })
-                    }.WithPropertyBinding(T=>T.IsEnabled, S=>(S.Owner as Person).Age),
+                    },
+                    //.WithPropertyBinding(T=>T.IsEnabled, S=>(S.Owner as Person).Age),
                     new CommandVm()
                     {
                         Glyph=Images.VMore,

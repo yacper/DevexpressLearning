@@ -30,66 +30,6 @@ using System.Reflection;
 using PropertyInfo = System.Reflection.PropertyInfo;
 
 namespace NeoTrader;
-public class CommandVmPropertyBinding
-{
-    public CommandVm                                   Target               { get; set; }
-    public Expression<Func<CommandVm, object>> TargetExpression     { get; set; }
-    public object                                   Source               { get; set; }
-    public Expression<Func<object, object>>         SourceExpression     { get; set; }
-    public BindingValueChangedHandler          TargetChangedHandler { get; set; }
-
-    public virtual void Apply()
-    {
-        Binding = BindingEngine.SetPropertyBinding(Target, TargetExpression, Source, SourceExpression);
-    }
-
-    public virtual CommandVmPropertyBinding Clone(CommandVm target)
-    {
-        var ret = new CommandVmPropertyBinding()
-        {
-            Target               = target,
-            TargetExpression     = TargetExpression,
-            SourceExpression     = SourceExpression,
-            TargetChangedHandler = TargetChangedHandler
-        };
-
-        if (Source == Target)
-            ret.Source = target;
-
-        return ret;
-    }
-
-    protected WeakPropertyBinding Binding;
-}
-
-public class CommandVmPropertyBinding<T>:CommandVmPropertyBinding 
-{
-    public new T                                   Source               { get=>(T)base.Source; set=>base.Source = value; }
-    public new Expression<Func<T, object>>         SourceExpression     { get; set; }
-    
-    public override void Apply()
-    {
-        Binding = BindingEngine.SetPropertyBinding(Target, TargetExpression, Source, SourceExpression);
-    }
-
-    public override CommandVmPropertyBinding<T> Clone(CommandVm target)
-    {
-        var ret = new CommandVmPropertyBinding<T>()
-        {
-            Target               = target,
-            TargetExpression     = TargetExpression,
-            SourceExpression     = SourceExpression,
-            TargetChangedHandler = TargetChangedHandler
-        };
-
-        if (object.ReferenceEquals(Source, Target))
-            ret.Source = (T)Convert.ChangeType(target, typeof(T));
-
-        return ret;
-    }
-
-}
-
 
 public class CommandVm : ViewModelBase
 {
@@ -109,12 +49,15 @@ public class CommandVm : ViewModelBase
             Commands = Commands?.Select(p=>p.Clone(owner)).ToObservableCollection(),
 
             DisplayMode = DisplayMode,
+            GlyphAlignment = GlyphAlignment,
+            Alignment = Alignment,
             IsSubItem = IsSubItem,
             IsCheckBox = IsChecked,
             IsChecked = IsChecked,
             IsLink = IsLink,
             IsSeparator = IsSeparator,
             KeyGesture = KeyGesture,
+            ShowKeyGesture = ShowKeyGesture,
             Tag = Tag
         };
 
@@ -126,10 +69,9 @@ public class CommandVm : ViewModelBase
     public ICommand                        Command  { get; set; } // 对应command(可以为空，那么只有点开子命令功能)
     public ObservableCollection<CommandVm> Commands { get; set; } // 子命令项 (用于menu的子命令)
 
-    public Dock               GlyphAlignment { get; set; } = Dock.Left; // glyph alignment
-
     public BarItemDisplayMode DisplayMode    { get; set; } = BarItemDisplayMode.ContentAndGlyph; // 显示模式，纯文字还是带icon
-    public BarItemAlignment   Alignment      { get; set; }                                       // Alignment
+    public Dock               GlyphAlignment { get; set; } = Dock.Left; // glyph alignment
+    public BarItemAlignment   Alignment      { get; set; } = BarItemAlignment.Near;              // Alignment
     public bool               IsSubItem      { get; set; } = false;                              // 有子命令
     public bool               IsCheckBox     { get; set; }                                       // 是否作为checkbox
     public bool               IsLink         { get; set; }                                       // 是否作为 LinkBtn   
@@ -193,18 +135,6 @@ public class CommandVm : ViewModelBase
     }
 
 
-
-    public CommandVm WithKeyGesture(KeyGesture keyGesture)
-    {
-        this.KeyGesture = keyGesture;
-        return this;
-    }
-
-    protected List<CommandVmPropertyBinding> Bindings = new();
-
-
-
-
 #region State状态，不应被用户设置
     public virtual bool       IsChecked  { get=>GetProperty(()=>IsChecked); set=>SetProperty(()=>IsChecked, value); }
     public virtual bool       IsEnabled  { get=>GetProperty(()=>IsEnabled); set=>SetProperty(()=>IsEnabled, value); }               //是否启用
@@ -245,4 +175,72 @@ public class CommandVm : ViewModelBase
         Command  = command;
         Commands = subCommands;
     }
+
+    protected List<CommandVmPropertyBinding> Bindings = new();
 }
+
+public class CommandVmPropertyBinding
+{
+    public CommandVm                                   Target               { get; set; }
+    public Expression<Func<CommandVm, object>> TargetExpression     { get; set; }
+    public object                                   Source               { get; set; }
+    public Expression<Func<object, object>>         SourceExpression     { get; set; }
+    public BindingValueChangedHandler          TargetChangedHandler { get; set; }
+
+    public virtual void Apply()
+    {
+        Binding = BindingEngine.SetPropertyBinding(Target, TargetExpression, Source, SourceExpression);
+        if(TargetChangedHandler != null)
+            Binding.SetTargetChanged(TargetChangedHandler);
+    }
+
+    public virtual CommandVmPropertyBinding Clone(CommandVm target)
+    {
+        var ret = new CommandVmPropertyBinding()
+        {
+            Target               = target,
+            TargetExpression     = TargetExpression,
+            SourceExpression     = SourceExpression,
+            TargetChangedHandler = TargetChangedHandler
+        };
+
+        if (Source == Target)
+            ret.Source = target;
+
+        return ret;
+    }
+
+    protected WeakPropertyBinding Binding;
+}
+
+public class CommandVmPropertyBinding<T>:CommandVmPropertyBinding 
+{
+    public new T                                   Source               { get=>(T)base.Source; set=>base.Source = value; }
+    public new Expression<Func<T, object>>         SourceExpression     { get; set; }
+    
+    public override void Apply()
+    {
+        Binding = BindingEngine.SetPropertyBinding(Target, TargetExpression, Source, SourceExpression);
+        if(TargetChangedHandler != null)
+            Binding.SetTargetChanged(TargetChangedHandler);
+    }
+
+    public override CommandVmPropertyBinding<T> Clone(CommandVm target)
+    {
+        var ret = new CommandVmPropertyBinding<T>()
+        {
+            Target               = target,
+            TargetExpression     = TargetExpression,
+            SourceExpression     = SourceExpression,
+            TargetChangedHandler = TargetChangedHandler
+        };
+
+        if (object.ReferenceEquals(Source, Target))
+            ret.Source = (T)Convert.ChangeType(target, typeof(T));
+
+        return ret;
+    }
+
+}
+
+

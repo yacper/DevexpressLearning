@@ -16,13 +16,19 @@
         <Border x:Name="PATA_BAR_Border" Padding="0">
             <DockPanel>
                 <TextBlock x:Name="_Text" Text="{Binding DisplayName}" HorizontalAlignment="Left">
-                                <dx:Badge.Badge>
-                                    <dx:Badge BadgeKind="None" Content="{Binding BadgeContent}" />
-                                </dx:Badge.Badge>
+                    <dx:Badge.Badge>
+                        <dx:Badge BadgeKind="None" Content="{Binding BadgeContent}" />
+                    </dx:Badge.Badge>
                 </TextBlock>
-                <Image x:Name="_StateImg" Margin="5,0,0,0"  Height="20" HorizontalAlignment="Right" Source="{Binding StateImg}" />
-
-                <!--<TextBlock x:Name="_Key" Text="{Binding KeyGesture}" />-->
+                <Image x:Name="_StateImg" Margin="2,0,0,0" Height="10" HorizontalAlignment="Right" Source="{Binding StateImg}">
+                    <Image.Style>
+                        <Style TargetType="Image">
+                            <Style.Setters>
+                                <Setter Property="Visibility" Value="Visible" />
+                            </Style.Setters>
+                        </Style>
+                    </Image.Style>
+                </Image>
             </DockPanel>
         </Border>
         <DataTemplate.Triggers>

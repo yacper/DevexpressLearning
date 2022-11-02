@@ -32,14 +32,15 @@ public class Provider : BindableBase
     public         string          Name     { get;                                set; } = "P1";
     public         ConnectedStatus Status   { get;                                set; } = ConnectedStatus.Disconnected;
     public virtual ImageSource     StateImg { get => GetProperty(() => StateImg); set => SetProperty(() => StateImg, value); }
-    public         int             Badge    { get => GetProperty(() => Badge);    set => SetProperty(() => Badge, value); }
+    public         object             Badge    { get => GetProperty(() => Badge);    set => SetProperty(() => Badge, value); }
 
     public void Toggle()
     {
-        Status   =  Status == ConnectedStatus.Disconnected ? ConnectedStatus.Connected : ConnectedStatus.Disconnected;
-        StateImg =  Status == ConnectedStatus.Disconnected ? null : Images.ConnectedStatus;
-        Badge    += 1;
-    }
+        Status   = Status == ConnectedStatus.Disconnected ? ConnectedStatus.Connected : ConnectedStatus.Disconnected;
+        StateImg = Status == ConnectedStatus.Disconnected ? null : Images.ConnectedStatus;
+            Badge = Badge != null ? (Convert.ToInt32(Badge) + 1).ToString() : "1";
+            //Badge = Status == ConnectedStatus.Disconnected ? null : Images.ConnectedStatus;
+        }
 }
 
 /// <summary>
@@ -111,15 +112,15 @@ public partial class SiginTools : UserControl
                      Command = new DelegateCommand<FrameworkContentElement>((e) =>
                                                                             {
                                                                                 Console.WriteLine(e.ToString());
-                                                                                ((e.DataContext as CommandVm).Owner as Provider).Toggle();
+                                                                                //((e.DataContext as CommandVm).Owner as Provider).Toggle();
                                                                             }
                                                                            ),
                      Commands = new ObservableCollection<CommandVm>()
                      {
-                         vm.Clone(new Provider() { Name = "p6" }).WithKeyGesture(new KeyGesture(Key.D6, ModifierKeys.Control)),
-                         vm.Clone(new Provider() { Name = "p7" }).WithKeyGesture(new KeyGesture(Key.D7, ModifierKeys.Control)),
+                         vm.Clone(new Provider() { Name = "p6" }).WithProperty(p=>p.KeyGesture, new KeyGesture(Key.D6, ModifierKeys.Control)),
+                         vm.Clone(new Provider() { Name = "p7" }).WithProperty(p=>p.KeyGesture, new KeyGesture(Key.D7, ModifierKeys.Control)),
                          new CommandVm() { IsSeparator = true},
-                         vm.Clone(new Provider() { Name = "p8" }).WithKeyGesture(new KeyGesture(Key.D8, ModifierKeys.Control)),
+                         vm.Clone(new Provider() { Name = "p8" }).WithProperty(p=>p.KeyGesture, new KeyGesture(Key.D8, ModifierKeys.Control)),
                      }
                  }
                  .WithPropertyBinding(T => T.StateImg, S => (S.Owner as Provider).StateImg)

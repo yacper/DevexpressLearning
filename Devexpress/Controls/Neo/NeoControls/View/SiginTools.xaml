@@ -9,7 +9,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <dxb:BarContainerControl ContainerType="Top" >
-            <dxb:ToolBarControl Height="24"
+            <dxb:ToolBarControl Height="26"
                                 Caption="File" 
                                 UseWholeRow="True"
                                 AllowCustomizationMenu ="False"
