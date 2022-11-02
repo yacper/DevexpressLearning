@@ -259,7 +259,7 @@
                 <dxb:ToolBarControl.ItemsSource>
                     <MultiBinding Converter="{StaticResource RGridControlToVmValueConverter}">
                         <Binding Path="DataContext" RelativeSource="{RelativeSource AncestorLevel=1, AncestorType=dxg:RowControl,Mode=FindAncestor}"></Binding>
-                        <Binding Path="DefaultTools"></Binding>
+                        <Binding Path="ToolCommandsTemplate"></Binding>
                         <Binding Path="Visibility" RelativeSource="{RelativeSource AncestorLevel=1, AncestorType=dxg:RowControl,Mode=FindAncestor}"></Binding>
                         <Binding Path="ItemsSource"></Binding>
                     </MultiBinding>
