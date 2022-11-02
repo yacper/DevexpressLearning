@@ -14,22 +14,23 @@
             <RowDefinition Height="50"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <StackPanel HorizontalAlignment="Right">
-            <dxb:BarContainerControl >
-                <dxb:ToolBarControl RotateWhenVertical="True" 
-                                    ShowDragWidget="False" 
-                                    AllowCustomizationMenu="False"
-                                    ItemsSource="{Binding OpVms}"                                 
-                                    ItemTemplateSelector="{DynamicResource BarItemDataTemplateSelector}">
-                </dxb:ToolBarControl>
-            </dxb:BarContainerControl>
-        </StackPanel>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="5"></ColumnDefinition>
                 <ColumnDefinition MinWidth="150"></ColumnDefinition>
             </Grid.ColumnDefinitions>
+            <dxb:BarContainerControl >
+                <dxb:ToolBarControl UseWholeRow="True"
+                    RotateWhenVertical="True" 
+                                    ShowDragWidget="False" 
+                                    AllowCustomizationMenu="False"
+                                    ItemsSource="{Binding OpVms}"                                 
+                                    ItemTemplateSelector="{DynamicResource BarItemDataTemplateSelector}">
+                </dxb:ToolBarControl>
+            </dxb:BarContainerControl>
+
+
             <TabControl Grid.Column="0">
                 <TabItem Header="TableView">
                     <controls:RGridControl SelectionMode="Row" ItemsSource="{Binding People}" DefaultTools="{Binding DefaultTools}"  ToolsBarIsFixed="True">

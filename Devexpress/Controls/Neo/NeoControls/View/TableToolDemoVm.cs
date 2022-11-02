@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using DevExpress.Mvvm;
+using DevExpress.Xpf.Bars;
 using Neo.Api.Attributes;
 using NeoTrader;
 using NeoTrader.UI.Controls;
@@ -126,6 +127,7 @@ namespace NeoControls.View
                 new CommandVm()
                 {
                     DisplayName = "+",
+                    Alignment = BarItemAlignment.Far,
                     Command = new DelegateCommand(() =>
                     {
                         People.Add(new Person(){ Name = $"New Person {random.NextInt64(0, 100) }", Age = (int)random.NextInt64(0, 100) });
@@ -134,6 +136,7 @@ namespace NeoControls.View
                 new CommandVm()
                 {
                     DisplayName = "-",
+                    Alignment = BarItemAlignment.Far,
                     Command = new DelegateCommand(() =>
                     {
                         if(People.Count > 0)
@@ -143,6 +146,7 @@ namespace NeoControls.View
                 new CommandVm()
                 {
                     DisplayName = "Clear",
+                    Alignment = BarItemAlignment.Far,
                     Command = new DelegateCommand(() =>
                     {
                         People.Clear();
@@ -151,6 +155,7 @@ namespace NeoControls.View
                 new CommandVm()
                 {
                     DisplayName = "Column Op",
+                    Alignment = BarItemAlignment.Far,
                     Commands = new ObservableCollection<CommandVm>()
                     {
                         new CommandVm()
