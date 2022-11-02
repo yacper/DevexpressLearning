@@ -10,7 +10,11 @@
                     xmlns:dxgt="http://schemas.devexpress.com/winfx/2008/xaml/grid/themekeys"
                     xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
                     xmlns:dxbt="http://schemas.devexpress.com/winfx/2008/xaml/bars/themekeys"
-                    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" xmlns:dxcn="http://schemas.devexpress.com/winfx/2008/xaml/core/internal" xmlns:dxbc="http://schemas.devexpress.com/winfx/2008/xaml/bars/internal">
+                    xmlns:dxwuit="http://schemas.devexpress.com/winfx/2008/xaml/windowsui/themekeys"
+                    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" 
+                    xmlns:dxi="http://schemas.devexpress.com/winfx/2008/xaml/core/internal"
+                    xmlns:themes="http://schemas.devexpress.com/winfx/2008/xaml/core/themekeys"
+                    xmlns:dxcn="http://schemas.devexpress.com/winfx/2008/xaml/core/internal" xmlns:dxbc="http://schemas.devexpress.com/winfx/2008/xaml/bars/internal">
     <system:Double x:Key="TableRowHeight">22</system:Double>
     <DataTemplate x:Key="BarItemContentDataTemplate">
         <Border x:Name="PATA_BAR_Border" Padding="0">
@@ -251,8 +255,8 @@
     <ControlTemplate x:Key="CommonToolsTemplate">
         <dxb:BarContainerControl ContainerType="Top" HorizontalAlignment="Right" >
             <dxb:ToolBarControl RotateWhenVertical="True" 
-                                ShowDragWidget="False" 
-                                Background="{Binding ToolsBgBrush}"                                
+                                ShowDragWidget="False"   
+                                Background="{DynamicResource {dxi:ThemeResource {themes:PaletteBrushThemeKey ResourceKey=SelectionBackground}}}"                                
                                 AllowCustomizationMenu="False"
                                 AllowQuickCustomization="False" 
                                 ItemTemplateSelector="{DynamicResource BarItemDataTemplateSelector}">
