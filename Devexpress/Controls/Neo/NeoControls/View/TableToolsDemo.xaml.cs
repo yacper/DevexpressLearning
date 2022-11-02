@@ -16,13 +16,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DevExpress.Mvvm;
+using Neo.Api.Attributes;
 using NeoTrader;
 
 namespace NeoControls
 {
     public class Person: BindableBase
     {
+        [StatAttribute]
         public string Name { get => GetProperty(() => Name); set => SetProperty(() => Name, value); }
+        [StatAttribute]
         public int Age { get => GetProperty(() => Age); set => SetProperty(() => Age, value); }
 
         public Person()
@@ -49,6 +52,12 @@ namespace NeoControls
             //}
         }
     }
+
+    public class TableViewParams
+    {
+        
+    }
+
     /// <summary>
     /// TableToolsDemo.xaml 的交互逻辑
     /// </summary>
@@ -57,6 +66,7 @@ namespace NeoControls
         public int SelectedIdx { get; set; } 
         public ObservableCollection<Person> People { get; set; } 
         public CommandVm DefaultTools { get; set; }
+        public ObservableCollection<CommandVm> OpVms { get; set; }
         public Action<object, string, CommandVm> PropertyChangedAction { get; set; }
         public TableToolsDemo()
         {
@@ -67,31 +77,30 @@ namespace NeoControls
 
         public void InitData()
         {
+            InitPeople();
+            InitDefaultTools();
+            InitOpVms();
+        }
+
+        public void InitPeople()
+        {
             People = new ObservableCollection<Person>();
-            for(int i = 0;i < 10; i++)
+            for (int i = 0; i < 10; i++)
             {
                 People.Add(new Person() { Name = $" 张三{i}", Age = i });
             }
 
-            People.CollectionChanged += (s, e) =>
-            {
+            People.CollectionChanged += People_CollectionChanged;
+        }
 
-                switch (e.Action)
-                {
-                    case NotifyCollectionChangedAction.Move:
-                        break;
-                    case NotifyCollectionChangedAction.Replace:
-
-                        break;
-                }
-            };
-
+        public void InitDefaultTools()
+        {
             DefaultTools = new CommandVm()
             {
                 Commands = new ObservableCollection<CommandVm>()
                 {
                     new CommandVm()
-                    { 
+                    {
                         DisplayName = "-",
                         Owner = People[0],
                         Command = new DelegateCommand<FrameworkContentElement>((e) =>
@@ -101,7 +110,7 @@ namespace NeoControls
                     }.WithPropertyBinding(T=>T.IsEnabled, S=>(S.Owner as Person).Age ),
 
                     new CommandVm()
-                    { 
+                    {
                         DisplayName = "+",
                         Owner = People[0],
                         Command = new DelegateCommand<FrameworkContentElement>((e) =>
@@ -110,8 +119,8 @@ namespace NeoControls
                         })
                     }.WithPropertyBinding(T=>T.IsEnabled, S=>(S.Owner as Person).Age),
                     new CommandVm()
-                    { 
-                        Glyph=Images.VMore, 
+                    {
+                        Glyph=Images.VMore,
                         Command= new DelegateCommand(() => { }),
                         Commands = new ObservableCollection<CommandVm>()
                         {
@@ -122,18 +131,63 @@ namespace NeoControls
                     }
                 }
             };
-
-            PropertyChangedAction = PropertyChangedFun;
-
         }
 
-        public void PropertyChangedFun(object s, string propertyName, CommandVm vm)
+        public void InitOpVms()
         {
-            //if(propertyName == nameof(Persion.Age))  // 这个细微操作感觉可以直接用 VM的 WithPropertyBinding 来实现
-            //{
-            //    vm.Commands[0].IsEnabled = false;
-            //    vm.Commands[1].IsEnabled = false;
-            //}
+            Random random = new Random();
+            OpVms = new ObservableCollection<CommandVm>()
+            {
+                new CommandVm()
+                {
+                    DisplayName = "+",
+                    Command = new DelegateCommand(() =>
+                    {
+                        People.Add(new Person(){ Name = $"New Person {random.NextInt64(0, 100) }", Age = (int)random.NextInt64(0, 100) });
+                    }),
+                },
+                new CommandVm()
+                {
+                    DisplayName = "-",
+                    Command = new DelegateCommand(() =>
+                    {
+                        if(People.Count > 0)
+                            People.RemoveAt(0);
+                    }),
+                },
+                new CommandVm()
+                {
+                    DisplayName = "Clear",
+                    Command = new DelegateCommand(() =>
+                    {
+                        People.Clear();
+                    }),
+                }
+            };
+        }
+
+        private void People_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
+
+                    break;
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Remove:
+
+                    break;
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Replace:
+
+                    break;
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Move:
+
+                    break;
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Reset:
+
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

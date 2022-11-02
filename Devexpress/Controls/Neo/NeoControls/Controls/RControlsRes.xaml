@@ -254,7 +254,8 @@
                     <MultiBinding Converter="{StaticResource RGridControlToVmValueConverter}">
                         <Binding Path="DataContext" RelativeSource="{RelativeSource AncestorLevel=1, AncestorType=dxg:RowControl,Mode=FindAncestor}"></Binding>
                         <Binding Path="DefaultTools"></Binding>
-                        <Binding Path="InstanceVmChangeAction"></Binding>
+                        <Binding Path="Visibility" RelativeSource="{RelativeSource AncestorLevel=1, AncestorType=dxg:RowControl,Mode=FindAncestor}"></Binding>
+                        <Binding Path="ItemsSource"></Binding>
                     </MultiBinding>
                 </dxb:ToolBarControl.ItemsSource>
             </dxb:ToolBarControl>
@@ -316,6 +317,7 @@
                 <Setter Property="BorderThickness" TargetName="BottomLine" Value="0,1,0,1" />
             </Trigger>
         </ControlTemplate.Triggers>
+        
     </ControlTemplate>
 
     <ControlTemplate x:Key="{dxbt:BarControlThemeKey ResourceKey=QuickCustomizationButtonTemplate,IsThemeIndependent = true}" TargetType="{x:Type dxb:BarQuickCustomizationButton}">

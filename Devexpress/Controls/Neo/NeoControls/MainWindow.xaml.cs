@@ -21,6 +21,7 @@ using NeoTrader.UI.Controls;
 using DevExpress.Xpf.Grid.TreeList;
 using DevExpress.Xpf.Grid;
 using System.ComponentModel;
+using System.Collections;
 
 namespace NeoControls
 {
@@ -201,17 +202,17 @@ namespace NeoControls
                 return null;
 
             var rgc = values[1] as RGridControl;
-            if (values[0] is DevExpress.Xpf.Grid.RowData)
-            {
-                if (rgc!.RowTools == null || rgc!.RowTools.Count() == 0)
-                    return rgc!.DefaultTools;
+            //if (values[0] is DevExpress.Xpf.Grid.RowData)
+            //{
+            //    if (rgc!.RowTools == null || rgc!.RowTools.Count() == 0)
+            //        return rgc!.DefaultTools;
 
-                return rgc!.RowTools.First();
-            }
+            //    return rgc!.RowTools.First();
+            //}
 
-            int level = (values[0] as TreeListRowData)!.Node.ActualLevel;
-            if (rgc!.RowTools == null || rgc!.RowTools.Count() == 0)
-                return rgc!.DefaultTools;
+            //int level = (values[0] as TreeListRowData)!.Node.ActualLevel;
+            //if (rgc!.RowTools == null || rgc!.RowTools.Count() == 0)
+            //    return rgc!.DefaultTools;
 
             //var tools = rgc.RowTools.Where(_ => { return _.Level == level; }).FirstOrDefault();
             return rgc.DefaultTools;
@@ -249,21 +250,25 @@ namespace NeoControls
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            if(values.Length != 3 || !(values[0] is RowData) || !(values[1] is CommandVm) || !(values[2] is Action<object, string, CommandVm>))            
+            if(values.Length != 4 || !(values[0] is RowData) || !(values[1] is CommandVm) || !(values[2] is Visibility) || !(values[3] is IList))
                 return null;
             
-            RowData rowData = (RowData)values[0];
-            CommandVm defaultVm = (CommandVm)values[1];
-            Action<object, string, CommandVm> action = (Action<object, string, CommandVm>)values[2];
 
-            CommandVm newVM = (CommandVm)defaultVm.Clone(rowData.Row);  // 需要深度克隆
+            var rowData = (RowData)values[0];
+            var defaultVm = (CommandVm)values[1];
+            var visibility = (Visibility)values[2];
+            var itemsSource = (IList)values[3];
 
-            object s = rowData.Row;
-            //(s as INotifyPropertyChanged).PropertyChanged += (s, e) => 
-            //{
-            //    action.Invoke(s, e.PropertyName, newVM);
-            //};
+            if (visibility == Visibility.Hidden)
+                return null;
 
+            int handle = rowData.RowHandle.Value;
+            
+            if (handle >= itemsSource.Count)
+                return null;
+
+            object owner = itemsSource[handle];            
+            CommandVm newVM = defaultVm.Clone(owner);
             return newVM.Commands;
         }
 
@@ -272,7 +277,4 @@ namespace NeoControls
             throw new NotImplementedException();
         }
     }
-
-
-
 }
