@@ -23,8 +23,11 @@ using System.Globalization;
 using System.Windows.Controls;
 using Illusion.Utility;
 using System.Linq.Expressions;
+using DevExpress.Diagram.Core.Native.Generation;
 using DevExpress.Mvvm.Native;
 using Force.DeepCloner;
+using System.Reflection;
+using PropertyInfo = System.Reflection.PropertyInfo;
 
 namespace NeoTrader;
 public class CommandVmPropertyBinding
@@ -125,14 +128,15 @@ public class CommandVm : ViewModelBase
 
     public Dock               GlyphAlignment { get; set; } = Dock.Left; // glyph alignment
 
-    public BarItemDisplayMode DisplayMode { get; set; } = BarItemDisplayMode.ContentAndGlyph; // 显示模式，纯文字还是带icon
-    public     BarItemAlignment   Alignment   { get; set; }     // Alignment
-    public bool               IsSubItem   { get; set; } = false; // 有子命令
-    public bool               IsCheckBox  { get; set; }          // 是否作为checkbox
-    public bool               IsLink      { get; set; }          // 是否作为 LinkBtn   
-    public bool               IsSeparator { get; set; }          // 是否只是一个seperator
-    public KeyGesture         KeyGesture  { get; set; }          // 对应快捷键
-    public object             Tag         { get; set; }          // 存储相关的数据 
+    public BarItemDisplayMode DisplayMode    { get; set; } = BarItemDisplayMode.ContentAndGlyph; // 显示模式，纯文字还是带icon
+    public BarItemAlignment   Alignment      { get; set; }                                       // Alignment
+    public bool               IsSubItem      { get; set; } = false;                              // 有子命令
+    public bool               IsCheckBox     { get; set; }                                       // 是否作为checkbox
+    public bool               IsLink         { get; set; }                                       // 是否作为 LinkBtn   
+    public bool               IsSeparator    { get; set; }                                       // 是否只是一个seperator
+    public KeyGesture         KeyGesture     { get; set; }                                       // 对应快捷键
+    public bool               ShowKeyGesture { get; set; } = true;
+    public object             Tag            { get; set; } // 存储相关的数据 
 
 
      public  CommandVm WithPropertyBinding<TSource>( 
@@ -171,6 +175,28 @@ public class CommandVm : ViewModelBase
         Bindings.Add(binding);
 
 
+        return this;
+    }
+    public CommandVm WithProperty<T>(Expression<Func<CommandVm, object>> memberLambda, T value)
+    {
+        var memberSelectorExpression = memberLambda.Body as MemberExpression;
+        if (memberSelectorExpression != null)
+        {
+            var property = memberSelectorExpression.Member as PropertyInfo;
+            if (property != null)
+            {
+                property.SetValue(this, value, null);
+            }
+        }
+
+        return this;
+    }
+
+
+
+    public CommandVm WithKeyGesture(KeyGesture keyGesture)
+    {
+        this.KeyGesture = keyGesture;
         return this;
     }
 

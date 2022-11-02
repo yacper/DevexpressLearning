@@ -61,6 +61,7 @@ public partial class SiginTools : UserControl
         var vm = new CommandVm()
                  {
                      Owner = new Provider() { Name = "P1" },
+                     KeyGesture = new KeyGesture(Key.D1, ModifierKeys.Control),
                      //DisplayName = ,
                      DisplayMode = BarItemDisplayMode.ContentAndGlyph,
                      Glyph       = Images.Monitor,
@@ -79,17 +80,22 @@ public partial class SiginTools : UserControl
 
         CommandVm vmSep1 = new CommandVm() { IsSeparator = true };
 
-        CommandVm vm2 = vm.Clone(new Provider() { Name = "p2" });
+        CommandVm vm2 = vm.Clone(new Provider() { Name = "p2",  });
+        vm2.KeyGesture = new KeyGesture(Key.D2, ModifierKeys.Control);
+
 
         CommandVm vmSep2 = new CommandVm() { IsSeparator = true };
-        CommandVm vm3 = vm.Clone(new Provider() { Name = "p3" })
-            ;
+        CommandVm vm3 = vm.Clone(new Provider() { Name = "p3" });
+        vm3.KeyGesture = new KeyGesture(Key.D3, ModifierKeys.Control);
 
         CommandVm vm4 = vm.Clone(new Provider() { Name = "p4" });
+        vm4.KeyGesture = new KeyGesture(Key.D4, ModifierKeys.Control);
+        vm4.WithProperty(p => p.ShowKeyGesture, true);
         vm4.Alignment = BarItemAlignment.Far;
 
         CommandVm vmSep3 = new CommandVm() { IsSeparator = true, Alignment = BarItemAlignment.Far };
         CommandVm vm5    = vm.Clone(new Provider() { Name = "p5" });
+        vm5.KeyGesture = new KeyGesture(Key.D5, ModifierKeys.Control);
         vm5.Alignment = BarItemAlignment.Far;
 
 
@@ -110,9 +116,10 @@ public partial class SiginTools : UserControl
                                                                            ),
                      Commands = new ObservableCollection<CommandVm>()
                      {
-                         vm.Clone(new Provider() { Name = "p6" }),
-                         vm.Clone(new Provider() { Name = "p7" }),
-                         vm.Clone(new Provider() { Name = "p8" }),
+                         vm.Clone(new Provider() { Name = "p6" }).WithKeyGesture(new KeyGesture(Key.D6, ModifierKeys.Control)),
+                         vm.Clone(new Provider() { Name = "p7" }).WithKeyGesture(new KeyGesture(Key.D7, ModifierKeys.Control)),
+                         new CommandVm() { IsSeparator = true},
+                         vm.Clone(new Provider() { Name = "p8" }).WithKeyGesture(new KeyGesture(Key.D8, ModifierKeys.Control)),
                      }
                  }
                  .WithPropertyBinding(T => T.StateImg, S => (S.Owner as Provider).StateImg)

@@ -20,7 +20,9 @@
                                     <dx:Badge BadgeKind="None" Content="{Binding BadgeContent}" />
                                 </dx:Badge.Badge>
                 </TextBlock>
-                <Image x:Name="_StateImg" Margin="20,0,0,0" Width="20" Height="20" HorizontalAlignment="Right" Source="{Binding StateImg}" />
+                <Image x:Name="_StateImg" Margin="5,0,0,0"  Height="20" HorizontalAlignment="Right" Source="{Binding StateImg}" />
+
+                <!--<TextBlock x:Name="_Key" Text="{Binding KeyGesture}" />-->
             </DockPanel>
         </Border>
         <DataTemplate.Triggers>
@@ -64,7 +66,7 @@
                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}"
                                Alignment="{Binding Alignment}"
                                Glyph="{Binding Glyph}"                               
-                               ShowKeyGesture="True"
+                               ShowKeyGesture="{Binding ShowKeyGesture}"
                                IsEnabled="{Binding IsEnabled}"                               
                                BarItemDisplayMode="{Binding DisplayMode}"   
                                Content="{Binding}" 
