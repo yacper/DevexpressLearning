@@ -93,12 +93,18 @@ namespace NeoControls
         public DataTemplate BarButtonItemTemplate { get; set; }
         public DataTemplate BarSubItemTemplate { get; set; }
         public DataTemplate LinkItemTemplate { get; set; }
+        public DataTemplate BarItemSeparatorTemplate { get; set; }
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
             if (item == null || !(item is CommandVm))
                 return base.SelectTemplate(item, container);
 
             var vm = item as CommandVm;
+
+            if (vm.IsSeparator)
+                return BarItemSeparatorTemplate;
+
+
             if (vm.IsCheckBox)
                 return BarCheckItemTemplate;
 

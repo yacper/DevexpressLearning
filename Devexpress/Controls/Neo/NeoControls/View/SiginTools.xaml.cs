@@ -32,7 +32,7 @@ public class Provider : BindableBase
     public         string          Name     { get;                                set; } = "P1";
     public         ConnectedStatus Status   { get;                                set; } = ConnectedStatus.Disconnected;
     public virtual ImageSource     StateImg { get => GetProperty(() => StateImg); set => SetProperty(() => StateImg, value); }
-    public         int          Badge    { get => GetProperty(() => Badge);    set => SetProperty(() => Badge, value); }
+    public         int             Badge    { get => GetProperty(() => Badge);    set => SetProperty(() => Badge, value); }
 
     public void Toggle()
     {
@@ -76,14 +76,33 @@ public partial class SiginTools : UserControl
                  .WithPropertyBinding(T => T.DisplayName, S => (S.Owner as Provider).Name)
                  .WithPropertyBinding(T => T.BadgeContent, S => (S.Owner as Provider).Badge);
 
-        CommandVm vm2 = vm.Clone(new Provider() { Name = "p2" })
+
+        CommandVm vmSep1 = new CommandVm() { IsSeparator = true };
+
+        CommandVm vm2 = vm.Clone(new Provider() { Name = "p2" });
+
+        CommandVm vmSep2 = new CommandVm() { IsSeparator = true };
+        CommandVm vm3 = vm.Clone(new Provider() { Name = "p3" })
             ;
+
+        CommandVm vm4 = vm.Clone(new Provider() { Name = "p4" });
+        vm4.Alignment = BarItemAlignment.Far;
+
+        CommandVm vmSep3 = new CommandVm() { IsSeparator = true, Alignment = BarItemAlignment.Far };
+        CommandVm vm5    = vm.Clone(new Provider() { Name = "p5" });
+        vm5.Alignment = BarItemAlignment.Far;
 
 
         PVms = new ObservableCollection<CommandVm>()
         {
             vm,
-            vm2
+            vmSep1,
+            vm2,
+            vmSep2,
+            vm3,
+            vm4,
+            vmSep3,
+            vm5,
         };
     }
 }

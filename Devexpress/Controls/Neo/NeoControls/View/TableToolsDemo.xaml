@@ -10,7 +10,7 @@
         
     </UserControl.Resources>
     <Grid>
-        <controls:RGridControl ItemsSource="{Binding Persions}" DefaultTools="{Binding DefaultTools}" InstanceVmChangeAction="{Binding PropertyChangedAction}" ToolsBarIsFixed="True">
+        <controls:RGridControl ItemsSource="{Binding People}" DefaultTools="{Binding DefaultTools}" InstanceVmChangeAction="{Binding PropertyChangedAction}" ToolsBarIsFixed="True">
             <dxg:GridControl.Columns>
                 <dxg:GridColumn Header="Name" FieldName="Name"></dxg:GridColumn>
                 <dxg:GridColumn Header="Age" FieldName="Age"></dxg:GridColumn>

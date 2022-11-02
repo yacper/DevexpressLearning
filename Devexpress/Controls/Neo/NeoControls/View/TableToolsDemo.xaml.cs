@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -19,12 +20,12 @@ using NeoTrader;
 
 namespace NeoControls
 {
-    public class Persion: BindableBase
+    public class Person: BindableBase
     {
         public string Name { get => GetProperty(() => Name); set => SetProperty(() => Name, value); }
         public int Age { get => GetProperty(() => Age); set => SetProperty(() => Age, value); }
 
-        public Persion()
+        public Person()
         {
            // this.PropertyChanged += Persion_PropertyChanged;
         }
@@ -54,7 +55,7 @@ namespace NeoControls
     public partial class TableToolsDemo : UserControl
     {
         public int SelectedIdx { get; set; } 
-        public ObservableCollection<Persion> Persions { get; set; } 
+        public ObservableCollection<Person> People { get; set; } 
         public CommandVm DefaultTools { get; set; }
         public Action<object, string, CommandVm> PropertyChangedAction { get; set; }
         public TableToolsDemo()
@@ -66,11 +67,24 @@ namespace NeoControls
 
         public void InitData()
         {
-            Persions = new ObservableCollection<Persion>();
+            People = new ObservableCollection<Person>();
             for(int i = 0;i < 10; i++)
             {
-                Persions.Add(new Persion() { Name = $" 张三{i}", Age = i });
+                People.Add(new Person() { Name = $" 张三{i}", Age = i });
             }
+
+            People.CollectionChanged += (s, e) =>
+            {
+
+                switch (e.Action)
+                {
+                    case NotifyCollectionChangedAction.Move:
+                        break;
+                    case NotifyCollectionChangedAction.Replace:
+
+                        break;
+                }
+            };
 
             DefaultTools = new CommandVm()
             {
@@ -79,22 +93,22 @@ namespace NeoControls
                     new CommandVm()
                     { 
                         DisplayName = "-",
-                        Owner = Persions[0],
+                        Owner = People[0],
                         Command = new DelegateCommand<FrameworkContentElement>((e) =>
                         {
-                            ((e.DataContext as CommandVm).Owner as Persion).ReduceAge();
+                            ((e.DataContext as CommandVm).Owner as Person).ReduceAge();
                         })
-                    }.WithPropertyBinding(T=>T.IsEnabled, S=>(S.Owner as Persion).Age ),
+                    }.WithPropertyBinding(T=>T.IsEnabled, S=>(S.Owner as Person).Age ),
 
                     new CommandVm()
                     { 
                         DisplayName = "+",
-                        Owner = Persions[0],
+                        Owner = People[0],
                         Command = new DelegateCommand<FrameworkContentElement>((e) =>
                         {
-                            ((e.DataContext as CommandVm).Owner as Persion).AddAge();
+                            ((e.DataContext as CommandVm).Owner as Person).AddAge();
                         })
-                    }.WithPropertyBinding(T=>T.IsEnabled, S=>(S.Owner as Persion).Age),
+                    }.WithPropertyBinding(T=>T.IsEnabled, S=>(S.Owner as Person).Age),
                     new CommandVm()
                     { 
                         Glyph=Images.VMore, 

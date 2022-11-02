@@ -10,10 +10,15 @@
     <Grid>
         <dxb:BarContainerControl ContainerType="Top" >
             <dxb:ToolBarControl Caption="File" 
+                                UseWholeRow="True"
+                                AllowCustomizationMenu ="False"
+                                AllowQuickCustomization="False"
                                 RotateWhenVertical="True" 
                                 ShowDragWidget="False" 
                                 ItemsSource="{Binding PVms}"                                 
-                                ItemTemplateSelector="{DynamicResource BarItemDataTemplateSelector}">
+                                ItemTemplateSelector="{DynamicResource BarItemDataTemplateSelector}"
+
+                                >
             </dxb:ToolBarControl>
         </dxb:BarContainerControl>
     </Grid>
