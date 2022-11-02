@@ -78,6 +78,7 @@
             <neoTraderControls:RBarSubItem KeyGesture="{Binding KeyGesture}"
                                            Command="{Binding Command}"
                                            Glyph="{Binding Glyph}"                                   
+                                           GlyphAlignment="{Binding GlyphAlignment}"
                                            CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}"
                                            IsEnabled="{Binding IsEnabled}"                               
                                            BarItemDisplayMode="{Binding DisplayMode}"                                                                          

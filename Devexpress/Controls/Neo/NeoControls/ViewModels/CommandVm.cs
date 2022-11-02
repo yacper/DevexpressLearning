@@ -123,6 +123,8 @@ public class CommandVm : ViewModelBase
     public ICommand                        Command  { get; set; } // 对应command(可以为空，那么只有点开子命令功能)
     public ObservableCollection<CommandVm> Commands { get; set; } // 子命令项 (用于menu的子命令)
 
+    public Dock               GlyphAlignment { get; set; } = Dock.Left; // glyph alignment
+
     public BarItemDisplayMode DisplayMode { get; set; } = BarItemDisplayMode.ContentAndGlyph; // 显示模式，纯文字还是带icon
     public     BarItemAlignment   Alignment   { get; set; }     // Alignment
     public bool               IsSubItem   { get; set; } = false; // 有子命令

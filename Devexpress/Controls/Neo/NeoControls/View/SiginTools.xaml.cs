@@ -93,6 +93,34 @@ public partial class SiginTools : UserControl
         vm5.Alignment = BarItemAlignment.Far;
 
 
+        var otherTools = new CommandVm()
+                 {
+                     Owner = new Provider() { Name = "Tools" },
+                     //DisplayName = ,
+                     DisplayMode = BarItemDisplayMode.ContentAndGlyph,
+                     Glyph       = Images.VMore,
+                     GlyphAlignment = Dock.Right,
+                     Alignment = BarItemAlignment.Far,
+                     //StateImg    = Images.ConnectedStatus,
+                     Command = new DelegateCommand<FrameworkContentElement>((e) =>
+                                                                            {
+                                                                                Console.WriteLine(e.ToString());
+                                                                            //    ((e.DataContext as CommandVm).Owner as Provider).Toggle();
+                                                                            }
+                                                                           ),
+                     Commands = new ObservableCollection<CommandVm>()
+                     {
+                         vm.Clone(new Provider() { Name = "p6" }),
+                         vm.Clone(new Provider() { Name = "p7" }),
+                         vm.Clone(new Provider() { Name = "p8" }),
+                     }
+                 }
+                 .WithPropertyBinding(T => T.StateImg, S => (S.Owner as Provider).StateImg)
+                 .WithPropertyBinding(T => T.DisplayName, S => (S.Owner as Provider).Name)
+                 .WithPropertyBinding(T => T.BadgeContent, S => (S.Owner as Provider).Badge);
+
+
+
         PVms = new ObservableCollection<CommandVm>()
         {
             vm,
@@ -103,6 +131,7 @@ public partial class SiginTools : UserControl
             vm4,
             vmSep3,
             vm5,
+            otherTools
         };
     }
 }
