@@ -18,7 +18,7 @@
                     xmlns:dxcn="http://schemas.devexpress.com/winfx/2008/xaml/core/internal" xmlns:dxbc="http://schemas.devexpress.com/winfx/2008/xaml/bars/internal">
     <system:Double x:Key="TableRowHeight">22</system:Double>
     <DataTemplate x:Key="BarItemContentDataTemplate">
-        <Border x:Name="PART_BAR_Border" Padding="0">
+        <Border x:Name="PART_BAR_Border" Padding="0" Margin="0">
             <DockPanel>
                 <TextBlock x:Name="_Text" Text="{Binding DisplayName}" HorizontalAlignment="Left">
                     <dx:Badge.Badge>
@@ -26,13 +26,6 @@
                     </dx:Badge.Badge>
                 </TextBlock>
                 <Image x:Name="_StateImg" Margin="2,0,0,0" Height="10" HorizontalAlignment="Right" Source="{Binding StateImg}">
-                    <!--<Image.Style>
-                        <Style TargetType="Image">
-                            <Style.Setters>
-                                <Setter Property="Visibility" Value="Visible" />
-                            </Style.Setters>
-                        </Style>
-                    </Image.Style>-->
                 </Image>
             </DockPanel>
         </Border>
@@ -76,11 +69,13 @@
                                Command="{Binding Command}"                               
                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}"
                                Alignment="{Binding Alignment}"
-                               Glyph="{Binding Glyph}"                               
+                               Glyph="{Binding Glyph}"                              
                                ShowKeyGesture="{Binding ShowKeyGesture}"
                                IsEnabled="{Binding IsEnabled}"                               
                                BarItemDisplayMode="{Binding DisplayMode}"   
                                Content="{Binding}" 
+                               Margin="0,-1,0,0"
+                               Padding="0"
                                ContentTemplate="{StaticResource BarItemContentDataTemplate}">
             </dxb:BarButtonItem>
         </ContentControl>
@@ -89,24 +84,25 @@
     <DataTemplate x:Key="BarSubItemDataTemplate">
         <ContentControl>
             <controls:RBarSubItem KeyGesture="{Binding KeyGesture}"
-                                           Command="{Binding Command}"
-                                           Glyph="{Binding Glyph}"                                   
-                                           GlyphAlignment="{Binding GlyphAlignment}"
-                                           CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}"
-                                           IsEnabled="{Binding IsEnabled}"                               
-                                           BarItemDisplayMode="{Binding DisplayMode}"                                                                          
-                                           Content="{Binding}"                            
-                                           Alignment="{Binding Alignment}"
-                                           ItemLinksSource="{Binding Commands}"
-                                           ItemTemplateSelector="{DynamicResource BarItemDataTemplateSelector}"
-                                           ContentTemplate="{StaticResource BarItemContentDataTemplate}">
+                                  Command="{Binding Command}"
+                                  Glyph="{Binding Glyph}"    
+                                  Margin="0,-1,0,0"
+                                  GlyphAlignment="{Binding GlyphAlignment}"
+                                  CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}"
+                                  IsEnabled="{Binding IsEnabled}"                               
+                                  BarItemDisplayMode="{Binding DisplayMode}"                                                                          
+                                  Content="{Binding}"                            
+                                  Alignment="{Binding Alignment}"
+                                  ItemLinksSource="{Binding Commands}"
+                                  ItemTemplateSelector="{DynamicResource BarItemDataTemplateSelector}"
+                                  ContentTemplate="{StaticResource BarItemContentDataTemplate}">
             </controls:RBarSubItem>
         </ContentControl>
     </DataTemplate>
 
     <DataTemplate x:Key="BarCheckItemDataTemplate">
         <ContentControl>
-            <dxb:BarCheckItem KeyGesture="{Binding KeyGesture}"
+            <dxb:BarCheckItem KeyGesture="{Binding KeyGesture}"                              
                               Command="{Binding Command}"                               
                               CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}"
                               Alignment="{Binding Alignment}"
@@ -124,8 +120,8 @@
     <DataTemplate x:Key="LinkItemDataTemplate">
         <ContentControl>
             <dxb:BarButtonItem KeyGesture="{Binding KeyGesture}"
-                               Command="{Binding Command}"                               
-                               Alignment="{Binding Alignment}"                
+                               Command="{Binding Command}"                                                              
+                               Alignment="{Binding Alignment}"                                 
                                GlyphTemplate="{StaticResource GlyphDataTemplate}"
                                ShowKeyGesture="True"
                                IsEnabled="{Binding IsEnabled}"                               
@@ -279,9 +275,10 @@
 
     <local:RGridControlToVmValueConverter x:Key="RDataGrid_RowToolCommandsValueConverter"></local:RGridControlToVmValueConverter>
     <ControlTemplate x:Key="RDataGrid_RowCommonToolsTemplate">
-        <dxb:BarContainerControl ContainerType="Top" HorizontalAlignment="Right">
-            <dxb:ToolBarControl RotateWhenVertical="True" 
-                                ShowDragWidget="False"                                
+        <dxb:BarContainerControl HorizontalAlignment="Right" Margin="0,0,-1,1" Padding="0">
+            <dxb:ToolBarControl RotateWhenVertical="True"                                 
+                                ShowDragWidget="False"                       
+                                Margin="0,0,0,0" Padding="0,0,0,0"
                                 AllowCustomizationMenu="False"
                                 AllowQuickCustomization="False" 
                                 Background="{dxi:ThemeResource {themes:PaletteBrushThemeKey ResourceKey=SelectionBackground}}"
@@ -347,9 +344,6 @@
             <Trigger Property="FadeSelection" Value="True">
                 <!--<Setter Property="Background" Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=BorderUnfocusedBrush}}" />
                 <Setter Property="Foreground" Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=TextUnfocusedBrush}}" />-->
-            </Trigger>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{DynamicResource RowHoverBrush}" />
             </Trigger>
             <DataTrigger Binding="{Binding Path=SelectionState}" Value="Focused">
                 <Setter Property="Background" Value="{DynamicResource TableRowToolsBgBrush}" />
@@ -487,4 +481,101 @@
     </dxcn:RenderTemplate>
 
 
+
+    <!--<dxb:BarItemRenderTemplateSelector x:Key="{dxbt:BarItemRenderThemeKey ResourceKey=TemplateSelector,IsThemeIndependent = true}" 
+                                       DefaultTemplateInBar="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=DefaultTemplateInBar}}" 
+                                       SplitItemTemplateInBar="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=SplitItemTemplateInBar}}" 
+                                       EditItemTemplateInBar="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=EditItemTemplateInBar}}" 
+                                       StaticTemplateInBar="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=StaticTemplateInBar}}" 
+                                       DefaultTemplateInStatusBar="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=DefaultTemplateInStatusBar}}" 
+                                       SplitItemTemplateInStatusBar="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=SplitItemTemplateInStatusBar}}" 
+                                       EditItemTemplateInStatusBar="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=EditItemTemplateInStatusBar}}" 
+                                       StaticTemplateInStatusBar="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=StaticTemplateInStatusBar}}"
+                                       DefaultTemplateInMenu="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=TemplateInMenu}}" 
+                                       SplitItemTemplateInMenu="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=SplitItemTemplateInMenu}}" 
+                                       EditTemplateInMenu="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=EditTemplateInMenu}}" 
+                                       StaticTemplateInMenu="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=StaticTemplateInMenu}}" 
+                                       DefaultTemplateInMainMenu="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=DefaultTemplateInMainMenu}}" 
+                                       SplitItemTemplateInMainMenu="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=SplitItemTemplateInMainMenu}}" 
+                                       EditItemTemplateInMainMenu="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=EditItemTemplateInMainMenu}}" 
+                                       SubTemplateInMainMenu="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=DefaultTemplateInMainMenu}}" 
+                                       DefaultTemplateInPageHeader="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=TemplateInPageHeader}}" 
+                                       SplitTemplateInPageHeader="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=SplitTemplateInPageHeader}}"
+                                       StaticTemplateInPageHeader="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=StaticTemplateInPageHeader}}" 
+                                       EditTemplateInPageHeader="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=EditTemplateInPageHeader}}" 
+                                       DefaultTemplateInApplicationMenu="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=TemplateInApplicationMenu}}" 
+                                       SplitTemplateInApplicationMenu="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=SplitTemplateInApplicationMenu}}" 
+                                       EditTemplateInApplicationMenu="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=EditTemplateInApplicationMenu}}" 
+                                       DefaultTemplateInPageGroupLarge="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=TemplateInPageGroupLarge}}" 
+                                       DefaultTemplateInPageGroupSmall="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=TemplateInPageGroupSmall}}" 
+                                       SplitItemTemplateInPageGroupLarge="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=SplitItemTemplateInPageGroupLarge}}"
+                                       SplitItemTemplateInPageGroupSmall="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=SplitItemTemplateInPageGroupSmall}}" 
+                                       StaticItemTemplateInPageGroup="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=StaticItemTemplateInPageGroup}}"
+                                       EditTemplateInPageGroup="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=EditTemplateInPageGroup}}"
+                                       EditTemplateInPageGroupSmallWithoutText="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=EditTemplateInPageGroupSmallWithoutText}}" 
+                                       SimplifiedTemplateInPageGroupSmall="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=SimplifiedTemplateInPageGroupSmall}}" 
+                                       SimplifiedSplitItemTemplateInPageGroupSmall="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=SimplifiedSplitItemTemplateInPageGroupSmall}}"
+                                       SimplifiedStaticItemTemplateInPageGroup="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=SimplifiedStaticItemTemplateInPageGroup}}" 
+                                       SimplifiedEditTemplateInPageGroup="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=SimplifiedEditTemplateInPageGroup}}" 
+                                       SimplifiedEditTemplateInPageGroupSmallWithoutText="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=SimplifiedEditTemplateInPageGroupSmallWithoutText}}" 
+                                       DefaultTemplateInRibbonToolBar="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=TemplateInRibbonToolBar}}" 
+                                       SplitTemplateInRibbonToolBar="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=SplitTemplateInRibbonToolBar}}" 
+                                       StaticTemplateInRibbonToolBar="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=StaticTemplateInRibbonToolBar}}" 
+                                       EditTemplateInRibbonToolBar="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=EditTemplateInRibbonToolBar}}" 
+                                       DefaultTemplateInRibbonToolBarFooter="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=TemplateInRibbonToolBarFooter}}" 
+                                       SplitTemplateInRibbonToolBarFooter="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=SplitTemplateInRibbonToolBarFooter}}" 
+                                       StaticTemplateInRibbonToolBarFooter="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=StaticTemplateInRibbonToolBarFooter}}" 
+                                       EditTemplateInRibbonToolBarFooter="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=EditTemplateInRibbonToolBarFooter}}" 
+                                       TemplateInRibbonStatusBar="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=TemplateInRibbonStatusBar}}" 
+                                       EditTemplateInRibbonStatusBar="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=EditItemTemplateInRibbonStatusBar}}" 
+                                       SplitTemplateInRibbonStatusBar="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=SplitTemplateInRibbonStatusBar}}" 
+                                       StaticTemplateInRibbonStatusBar="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=StaticTemplateInRibbonStatusBar}}" />-->
+
+
+    <!--<dxcn:RenderTemplate x:Key="{dxbt:BarItemRenderThemeKey ResourceKey=BaseSplitTemplateInApplicationMenu,IsThemeIndependent = true}" x:Shared="False">
+        <dxcn:RenderBorder Name="PART_Root" Background="Transparent">
+            <dxcn:RenderPanel>
+                <dxb:RenderBarItemBorderControl Name="PART_Background" RenderTemplateSelector="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=BorderStateTemplateSelectorInApplicationMenu}}" />
+                <dxcn:RenderPanel LayoutProvider="{x:Static dxcn:LayoutProvider.DockInstance}">
+                    <dxcn:RenderPanel Dock="Left">
+                        <dxb:RenderBarItemBorderControl Name="PART_ContentBackground" RenderTemplateSelector="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=BorderStateTemplateSelectorInApplicationMenu}}" />
+                        <dxcn:RenderPanel Name="PART_Container" LayoutProvider="{x:Static dxcn:LayoutProvider.DockInstance}">
+                            <dxcn:RenderContentControl Name="PART_Glyph" RenderContentTemplate="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=GlyphTemplate}}" PreferRenderTemplate="False" Dock="Left" />
+                            <dxcn:RenderPanel Name="PART_FirsContainer" Dock="Left" LayoutProvider="{x:Static dxcn:LayoutProvider.DockInstance}">
+                                <dxcn:RenderContentControl Name="PART_Content" PreferRenderTemplate="False" Dock="Top" />
+                                <dxcn:RenderContentControl Name="PART_Description" Dock="Bottom" />
+                            </dxcn:RenderPanel>
+                        </dxcn:RenderPanel>
+                    </dxcn:RenderPanel>
+                    <dxcn:RenderBorder Width="1" Name="PART_Separator" />
+                    <dxcn:RenderPanel Name="PART_ArrowContainer" Dock="Right">
+                        <dxcn:RenderBorder Background="Transparent" />
+                        <dxb:RenderBarItemBorderControl Name="PART_ArrowBackground" RenderTemplateSelector="{DynamicResource {dxbt:BarItemRenderThemeKey ResourceKey=BorderStateTemplateSelectorInApplicationMenu}}" />
+                        <dxcn:RenderPanel>
+                            <dxb:RenderArrowControl RenderTemplateSelector="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=RenderArrowControlTemplateSelector}}" />
+                        </dxcn:RenderPanel>
+                    </dxcn:RenderPanel>
+                </dxcn:RenderPanel>
+            </dxcn:RenderPanel>
+        </dxcn:RenderBorder>
+        <dxcn:RenderTemplate.Triggers>
+            <dxcn:RenderTriggersCollection>
+                <dxcn:RenderTriggersCollection.MergedTriggers>
+                    <dxcn:RenderTriggersCollection Source="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=GlyphAlignmentStatesInBar}}" />
+                    <dxcn:RenderTriggersCollection Source="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=ForegroundColorStatesInApplicationMenu}}" />
+                    <dxcn:RenderTriggersCollection Source="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=EnabledBorderStates}}" />
+                    <dxcn:RenderTriggersCollection Source="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=SplitAppearanceTriggers}}" />
+                </dxcn:RenderTriggersCollection.MergedTriggers>
+            </dxcn:RenderTriggersCollection>
+        </dxcn:RenderTemplate.Triggers>
+    </dxcn:RenderTemplate>
+
+    <dxb:RenderBarItemBorderStateTemplateSelector x:Key="{dxbt:BarItemRenderThemeKey ResourceKey=BorderStateTemplateSelectorInApplicationMenu}" 
+                                                  NormalTemplate="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=NormalBackgroundTemplateInMenu}}" 
+                                                  HoverTemplate="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=HoverBackgroundTemplateInMenu}}" 
+                                                  PressedTemplate="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=PressedBackgroundTemplateInMenu}}" 
+                                                  CheckedTemplate="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=CheckedBackgroundTemplateInMenu}}" 
+                                                  CustomizationTemplate="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=CustomizationBackgroundTemplateInMenu}}" 
+                                                  IndeterminateTemplate="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=IndeterminateBackgroundTemplateInMenu}}" 
+                                                  ContentHighlight="{StaticResource {dxbt:BarItemRenderThemeKey ResourceKey=ContentHighlightTemplateInMenu}}" />-->
 </ResourceDictionary>
