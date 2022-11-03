@@ -284,8 +284,10 @@
                                 ShowDragWidget="False"                                
                                 AllowCustomizationMenu="False"
                                 AllowQuickCustomization="False" 
-                                Background="{dxi:ThemeResource {themes:PaletteBrushThemeKey ResourceKey=SelectionBackground}}"
+                                Background="{dxi:ThemeResource {themes:PaletteBrushThemeKey ResourceKey=Window.Background}}"
                                 ItemTemplateSelector="{DynamicResource BarItemDataTemplateSelector}">
+
+                                <!--Background="{dxi:ThemeResource {themes:PaletteBrushThemeKey ResourceKey=HoverBackground}}"-->
                 <dxb:ToolBarControl.ItemsSource>
                     <MultiBinding Converter="{StaticResource RDataGrid_RowToolCommandsValueConverter}">
                         <Binding Path="DataContext" RelativeSource="{RelativeSource AncestorLevel=1, AncestorType=dxg:RowControl,Mode=FindAncestor}"></Binding>
