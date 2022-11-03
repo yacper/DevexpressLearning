@@ -12,8 +12,9 @@
                     xmlns:dxbt="http://schemas.devexpress.com/winfx/2008/xaml/bars/themekeys"
                     xmlns:dxwuit="http://schemas.devexpress.com/winfx/2008/xaml/windowsui/themekeys"
                     xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" 
-                    xmlns:dxi="http://schemas.devexpress.com/winfx/2008/xaml/core/internal"
+                    xmlns:dxi="http://schemas.devexpress.com/winfx/2008/xaml/core/internal"                    
                     xmlns:themes="http://schemas.devexpress.com/winfx/2008/xaml/core/themekeys"
+                    xmlns:dxt="http://schemas.devexpress.com/winfx/2008/xaml/core/themekeys"
                     xmlns:dxcn="http://schemas.devexpress.com/winfx/2008/xaml/core/internal" xmlns:dxbc="http://schemas.devexpress.com/winfx/2008/xaml/bars/internal">
     <system:Double x:Key="TableRowHeight">22</system:Double>
     <DataTemplate x:Key="BarItemContentDataTemplate">
@@ -250,15 +251,40 @@
 
 
     </Style>-->
+    <!--<ControlTemplate x:Key="{dxbt:BarControlThemeKey ResourceKey=BarTemplate,IsThemeIndependent = true}" TargetType="{x:Type ContentControl}">
+        <Border x:Name="Root" Background="{dxi:ThemeResource {themes:PaletteBrushThemeKey ResourceKey=SelectionBackground}}" x:Uid="@Background=Window.Background">
+            <ContentPresenter />
+        </Border>
+        <ControlTemplate.Triggers>
+            <DataTrigger Binding="{Binding Path=LinksHolder.(dxi:AppearanceOptions.HasBackground), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type dxb:BarControl}}}" Value="True">
+                <Setter Property="Background" TargetName="Root" Value="{Binding Path=LinksHolder.(dxi:AppearanceOptions.Background), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type dxb:BarControl}}}" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=LinksHolder.(dxi:AppearanceOptions.HasBorderBrush), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type dxb:BarControl}}}" Value="True">
+                <Setter Property="BorderBrush" TargetName="Root" Value="{Binding Path=LinksHolder.(dxi:AppearanceOptions.BorderBrush), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type dxb:BarControl}}}" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=LinksHolder.(dxi:AppearanceOptions.HasBorderThickness), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type dxb:BarControl}}}" Value="True">
+                <Setter Property="BorderThickness" TargetName="Root" Value="{Binding Path=LinksHolder.(dxi:AppearanceOptions.BorderThickness), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type dxb:BarControl}}}" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=LinksHolder.(dxi:AppearanceOptions.HasPadding), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type dxb:BarControl}}}" Value="True">
+                <Setter Property="Padding" TargetName="Root" Value="{Binding Path=LinksHolder.(dxi:AppearanceOptions.Padding), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type dxb:BarControl}}}" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=LinksHolder.(dxi:AppearanceOptions.HasCornerRadius), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type dxb:BarControl}}}" Value="True">
+                <Setter Property="CornerRadius" TargetName="Root" Value="{Binding Path=LinksHolder.(dxi:AppearanceOptions.CornerRadius), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type dxb:BarControl}}}" />
+            </DataTrigger>
+            <Trigger Property="dx:ThemeManager.IsTouchEnabled" Value="True">
+                <Setter Property="MinHeight" TargetName="Root" Value="46" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>-->
 
     <local:RGridControlToVmValueConverter x:Key="RDataGrid_RowToolCommandsValueConverter"></local:RGridControlToVmValueConverter>
     <ControlTemplate x:Key="RDataGrid_RowCommonToolsTemplate">
-        <dxb:BarContainerControl ContainerType="Top" HorizontalAlignment="Right" >
+        <dxb:BarContainerControl ContainerType="Top" HorizontalAlignment="Right">
             <dxb:ToolBarControl RotateWhenVertical="True" 
-                                ShowDragWidget="False"   
-                                Background="{DynamicResource {dxi:ThemeResource {themes:PaletteBrushThemeKey ResourceKey=SelectionBackground}}}"                                
+                                ShowDragWidget="False"                                
                                 AllowCustomizationMenu="False"
                                 AllowQuickCustomization="False" 
+                                Background="{dxi:ThemeResource {themes:PaletteBrushThemeKey ResourceKey=SelectionBackground}}"
                                 ItemTemplateSelector="{DynamicResource BarItemDataTemplateSelector}">
                 <dxb:ToolBarControl.ItemsSource>
                     <MultiBinding Converter="{StaticResource RDataGrid_RowToolCommandsValueConverter}">
@@ -338,6 +364,9 @@
             <Trigger Property="IsLastFixedRow" Value="True">
                 <Setter Property="Background" TargetName="BottomLine" Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=RowSeparatorBrush}}" />
                 <Setter Property="BorderThickness" TargetName="BottomLine" Value="0,1,0,1" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{dxi:ThemeResource {themes:PaletteBrushThemeKey ResourceKey=HoverBackground}}" />
             </Trigger>
         </ControlTemplate.Triggers>
         

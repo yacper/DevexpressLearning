@@ -96,8 +96,10 @@ namespace NeoTrader.UI.Controls
             tv.ShowIndicator = false;
             tv.ShowGroupPanel = false;
             tv.AllowDragDrop = true;
-            tv.ColumnSortClearMode = ColumnSortClearMode.Click;
 
+            tv.HighlightItemOnHover = true;
+            tv.ColumnSortClearMode = ColumnSortClearMode.Click;
+            
             tv.RowStyle = new Style(typeof(RowControl));
             tv.RowStyle.Setters.Add(new Setter() 
             {
