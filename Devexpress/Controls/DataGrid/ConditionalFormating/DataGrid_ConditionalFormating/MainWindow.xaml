@@ -13,7 +13,7 @@
         <conditionalFormatting:ConditionalFormattingViewModel/>
     </Window.DataContext>
     <Grid>
-        <dxg:GridControl Name="grid" ItemsSource="{Binding Path=Items}" AllowLiveDataShaping="True" EnableSmartColumnsGeneration="True">
+        <dxg:GridControl Name="grid" ItemsSource="{Binding Path=Items}" AllowLiveDataShaping="True" EnableSmartColumnsGeneration="False" >
             <dxg:GridControl.Columns>
                 <dxg:GridColumn FieldName="State" IsSmart="True" SortIndex="0" VisibleIndex="0"/>
                 <dxg:GridColumn FieldName="Sales" IsSmart="True" VisibleIndex="1"/>
@@ -22,9 +22,14 @@
                 <dxg:GridColumn FieldName="CustomersSatisfaction" IsSmart="True" FixedWidth="True" VisibleIndex="4"/>
                 <dxg:GridColumn FieldName="MarketShare" IsSmart="True" FixedWidth="True" VisibleIndex="5"/>
             </dxg:GridControl.Columns>
+  <dxg:GridControl.TotalSummary>
+                <dxg:GridSummaryItem FieldName="Sales" SummaryType="Average" />
+                <dxg:GridSummaryItem FieldName="Profit" SummaryType="Sum" />
+                <dxg:GridSummaryItem FieldName="CustomersSatisfaction" SummaryType="Average" />
+            </dxg:GridControl.TotalSummary>
             <dxg:GridControl.View>
-                <dxg:TableView AllowEditing="False" AllowConditionalFormattingMenu="True">
-                    <dxg:TableView.FormatConditions>
+                <dxg:TreeListView AllowDragDrop="True" AllowEditing="False" AllowConditionalFormattingMenu="True" AllowSorting="True" ColumnSortClearMode="Click" ShowTotalSummary="True">
+                    <dxg:TreeListView.FormatConditions>
                         <dxg:FormatCondition Expression="[SalesVsTarget] &lt; 0.0m" FieldName="SalesVsTarget" PredefinedFormatName="RedText"/>
                         <dxg:FormatCondition Expression="[Profit] &lt; 0.0" FieldName="Profit">
                             <dxc:Format Foreground="Red"/>
@@ -34,9 +39,13 @@
                         <dxg:TopBottomRuleFormatCondition Expression="[Sales]" FieldName="{x:Null}" PredefinedFormatName="BoldText" Rule="TopPercent" Threshold="10"/>
                         <dxg:DataBarFormatCondition FieldName="Profit" PredefinedFormatName="GreenGradientDataBar"/>
                         <dxg:IconSetFormatCondition FieldName="MarketShare" PredefinedFormatName="Quarters5IconSet"/>
+                        <dxg:TopBottomRuleFormatCondition FieldName="MarketShare" Rule="BottomPercent" Threshold="20" PredefinedFormatName="BoldText" />
+                        <dxg:TopBottomRuleFormatCondition FieldName="MarketShare" Rule="BottomPercent" Threshold="20" PredefinedFormatName="RedText" />
+                        <dxg:TopBottomRuleFormatCondition FieldName="MarketShare" Rule="TopPercent" Threshold="20" PredefinedFormatName="BoldText" />
+                        <dxg:TopBottomRuleFormatCondition FieldName="MarketShare" Rule="TopPercent" Threshold="20" PredefinedFormatName="GreenText" />
                         <dxg:IconSetFormatCondition FieldName="CustomersSatisfaction" PredefinedFormatName="Stars3IconSet"/>
-                    </dxg:TableView.FormatConditions>
-                </dxg:TableView>
+                    </dxg:TreeListView.FormatConditions>
+                </dxg:TreeListView>
             </dxg:GridControl.View>
         </dxg:GridControl>
 
