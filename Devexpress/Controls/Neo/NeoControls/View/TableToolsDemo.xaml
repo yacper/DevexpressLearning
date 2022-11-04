@@ -29,13 +29,13 @@
                             <dxg:GridColumn Header="Age" FieldName="Age" ></dxg:GridColumn>
                         </dxg:GridControl.Columns>
                         <dxg:GridControl.View>
-                            <dxg:TableView ShowGroupPanel="False" AllowDragDrop="True" AllowEditing="False" AllowSorting="True" ColumnSortClearMode="Click">
-                                <dxg:TableView.RowStyle>
+                            <controls:RTreeListView AllowDragDrop="True" AllowEditing="False" AllowSorting="True" ColumnSortClearMode="Click" DropLimtEnum="TableView">
+                            <controls:RTreeListView.RowStyle>
                                     <Style TargetType="dxg:RowControl">
                                         <Setter Property="Template" Value="{StaticResource RDataGrid_RowControlTemplate}"></Setter>
                                     </Style>
-                                </dxg:TableView.RowStyle>
-                            </dxg:TableView>
+                                </controls:RTreeListView.RowStyle>
+                            </controls:RTreeListView>
                         </dxg:GridControl.View>
                     </controls:RDataGrid>
                 </TabItem>

@@ -116,7 +116,7 @@ namespace NeoTrader.UI.Controls
                     return;
                 }
 
-                if(e.DropPosition == DropPosition.Append)                           // 兄弟节点直接不能是 Append 模式
+                if(e.DropPosition == DropPosition.Append || e.DropPosition == DropPosition.Inside)                           // 兄弟节点直接不能是 Append 模式
                 {
                     e.Effects = DragDropEffects.None;
                     return;
@@ -126,7 +126,7 @@ namespace NeoTrader.UI.Controls
             if(DropLimtEnum == TLVDragDropLimtEnum.TableView)
             {
                 System.Diagnostics.Debug.WriteLine(e.DropPosition);
-                if (e.DropPosition == DropPosition.Append || e.DropPosition == DropPosition.Inside)                          
+                if (e.DropPosition == DropPosition.Append || e.DropPosition == DropPosition.Inside) 
                 {
                     e.Effects = DragDropEffects.None;
                     return;
