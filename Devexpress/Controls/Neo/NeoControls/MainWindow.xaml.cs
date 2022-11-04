@@ -309,4 +309,23 @@ namespace NeoControls
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) { throw new NotImplementedException(); }
     }
+
+    public class TreeListRowControlExpandedTipsVisibleConverter : IMultiValueConverter
+    {
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        {
+            if(values.Length != 3 || !(values[0] is bool) || !(values[1] is int) || !(values[2] is RowData))
+                return Visibility.Collapsed;
+
+            bool IsExpanded = (bool)values[0];
+            int level = (int)values[1];
+            TreeListRowData data = (TreeListRowData)values[2];
+            return (!IsExpanded && data.Node.HasChildren) ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

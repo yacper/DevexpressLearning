@@ -13,6 +13,7 @@ using System.Linq;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace NeoTrader.UI.Controls
@@ -117,13 +118,11 @@ namespace NeoTrader.UI.Controls
         {
             CellsControlParentPannelLoadCommand = new DelegateCommand<Grid>((g) =>
             {
-                return;
                 var rd = UiUtils.UIUtils.GetParentObject<RDataGrid>(g);
                 if (rd.View is TableView)
                     return;
 
-                DXImage dXImage = new DXImage();
-                dXImage.Name = "PART_ExpandedTips";
+                DXImage dXImage = new DXImage();                
                 dXImage.Source = Images.SortDsec;
                 dXImage.Width = 10;
                 dXImage.Height = 10;
@@ -136,6 +135,29 @@ namespace NeoTrader.UI.Controls
 
                 Grid.SetColumn(dXImage, c);
                 g.Children.Add(dXImage);
+
+                MultiBinding multiBinding = new MultiBinding();
+                multiBinding.Bindings.Add(new Binding() 
+                {
+                    Path =new PropertyPath("DataContext.IsExpanded", null), 
+                    RelativeSource = new RelativeSource() { Mode = RelativeSourceMode.FindAncestor, AncestorLevel = 1, AncestorType = typeof(RowControl) },
+                });
+                multiBinding.Bindings.Add(new Binding() 
+                {
+                    Path = new PropertyPath("DataContext.RowLevel", null),
+                    RelativeSource = new RelativeSource() { Mode = RelativeSourceMode.FindAncestor, AncestorLevel = 1, AncestorType = typeof(RowControl) },
+                });
+
+                multiBinding.Bindings.Add(new Binding()
+                {
+                    Path = new PropertyPath("DataContext", null),
+                    RelativeSource = new RelativeSource() { Mode = RelativeSourceMode.FindAncestor, AncestorLevel = 1, AncestorType = typeof(RowControl) },
+                });
+
+                multiBinding.Converter = new TreeListRowControlExpandedTipsVisibleConverter();
+
+                dXImage.SetBinding(DXImage.VisibilityProperty, multiBinding);
+
             });
         }
 
