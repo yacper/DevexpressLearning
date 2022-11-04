@@ -29,7 +29,21 @@ namespace NeoControls.View
         [Stat]
         public string TaskName { get=>GetProperty(()=>TaskName); set=>SetProperty(()=>TaskName, value); }
         [Stat]
-        public float Progress { get=>GetProperty(()=>Progress); set=>SetProperty(()=>Progress, value); }
+        public int Progress 
+        { 
+            get=>GetProperty(()=>Progress); 
+
+            set 
+            {
+                if (value > 100 || value < 0)                
+                    return;   
+                
+                SetProperty(() => Progress, value);
+                Status = value > 0 ? TaskStatus.Runing : TaskStatus.Waiting;
+                if(value == 100)
+                    Status = TaskStatus.Ending;
+            }
+        }
         [Stat]
         public TaskStatus Status { get=>GetProperty(()=>Status); set=>SetProperty(()=>Status, value); }
         public ObservableCollection<Task> ChildTasks { get; set;}
@@ -62,6 +76,16 @@ namespace NeoControls.View
             return 1;
         }
 
+        public void AddProgress()
+        {
+            Progress += 10;            
+        }
+
+        public void ReduceProgress()
+        {
+            Progress -= 10;
+        }
+
     }
 
     public class TreeListViewDemoVm: BindableBase
@@ -69,6 +93,7 @@ namespace NeoControls.View
         public ObservableCollection<Task> Tasks { get; set; }
 
         public ObservableCollection<CommandVm> DefaultTools { get; set; }
+        public ObservableCollection<CommandVm> ChildToolsTemplate { get; set; }
 
         public TreeListViewDemoVm()
         {
@@ -79,6 +104,7 @@ namespace NeoControls.View
         {
             InitTasks();
             InitDefaultTools();
+            InitChildToolsTemplate();
         }
 
         private void InitTasks()
@@ -110,7 +136,7 @@ namespace NeoControls.View
                 {
                     new CommandVm()
                     {
-                        DisplayName = "Stop",                        
+                        DisplayName = "Stop",
                         Command = new DelegateCommand<FrameworkContentElement>((e) =>
                         {
                             ((e.DataContext as CommandVm).Owner as Task).StopTask();
@@ -126,6 +152,44 @@ namespace NeoControls.View
                         Command = new DelegateCommand<FrameworkContentElement>((e) =>
                         {
                             ((e.DataContext as CommandVm).Owner as Task).StartTask();
+                        })
+                    },
+                    //}.WithPropertyBinding(T=>T.IsEnabled, S=>(S.Owner as Task).Status, (s, e) => 
+                    //{
+                    //   // (e.Data.Target.Source as CommandVm).IsEnabled = ((e.Data.Target.Source as CommandVm).Owner as Task).Status !=  TaskStatus.Runing;
+                    //}),
+                    new CommandVm()
+                    {
+                        Glyph=Images.VMore,
+                        Command= new DelegateCommand(() => { }),
+                        Commands = new ObservableCollection<CommandVm>()
+                        {
+                            new CommandVm(){ Glyph= Images.Watchlist, DisplayName="查看List", Command = new DelegateCommand(()=>{ }) },
+                            new CommandVm(){ Glyph = Images.Account, DisplayName = "用户信息", Command = new DelegateCommand(()=>{ }) },
+                            new CommandVm(){ Glyph = Images.Trading, DisplayName = "交易", Command = new DelegateCommand(() => { }) },
+                        }
+                    }
+                };
+        }
+
+        private void InitChildToolsTemplate()
+        {
+            ChildToolsTemplate = new ObservableCollection<CommandVm>()
+                {
+                    new CommandVm()
+                    {
+                        DisplayName = "+",
+                        Command = new DelegateCommand<FrameworkContentElement>((e) =>
+                        {
+                            ((e.DataContext as CommandVm).Owner as Task).AddProgress();
+                        })
+                    },
+                    new CommandVm()
+                    {
+                        DisplayName = "-",
+                        Command = new DelegateCommand<FrameworkContentElement>((e) =>
+                        {
+                            ((e.DataContext as CommandVm).Owner as Task).ReduceProgress();
                         })
                     },
                     //}.WithPropertyBinding(T=>T.IsEnabled, S=>(S.Owner as Task).Status, (s, e) => 

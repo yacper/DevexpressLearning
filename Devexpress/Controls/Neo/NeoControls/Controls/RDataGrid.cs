@@ -158,11 +158,18 @@ namespace NeoTrader.UI.Controls
                 RowData rd = rc.DataContext as RowData;
                 var rdg = UiUtils.UIUtils.GetParentObject<RDataGrid>(rc);
                 var toolBarControl = UiUtils.UIUtils.GetChildObject<ToolBarControl>(rc, typeof(ToolBarControl));
-                toolBarControl.ItemsSource = rdg.ToolCommandsTemplate.Select(x => x.Clone(rd.Row));
+
+                if (!(rd is TreeListRowData) || (rd as TreeListRowData).Node.HasChildren || rdg.ChildToolCommandsTemplate == null)                
+                    toolBarControl.ItemsSource = rdg.ToolCommandsTemplate.Select(x => x.Clone(rd.Row));                                    
+                else                
+                    toolBarControl.ItemsSource = rdg.ChildToolCommandsTemplate.Select(x => x.Clone(rd.Row));                
 
                 rd.ContentChanged += (s, e) =>
                 {
-                    toolBarControl.ItemsSource = rdg.ToolCommandsTemplate.Select(x => x.Clone(rd.Row));   // TODO: 優化
+                    if (!(rd is TreeListRowData) || (rd as TreeListRowData).Node.HasChildren || rdg.ChildToolCommandsTemplate == null)                    
+                        toolBarControl.ItemsSource = rdg.ToolCommandsTemplate.Select(x => x.Clone(rd.Row));                    
+                    else                    
+                        toolBarControl.ItemsSource = rdg.ChildToolCommandsTemplate.Select(x => x.Clone(rd.Row));                    
                 };
             });
         }
