@@ -5,23 +5,18 @@ using DevExpress.Xpf.Grid;
 using DevExpress.Xpf.Grid.TreeList;
 using Neo.Api.Attributes;
 using NeoControls;
-using NeoTrader;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace NeoTrader.UI.Controls
-{    
+{
     public class RDataGrid : GridControl
     {
         public static DependencyProperty AlwaysShowToolBarProperty = DependencyProperty.Register(nameof(AlwaysShowToolBar), typeof(bool), typeof(RDataGrid), new PropertyMetadata(false));
@@ -170,7 +165,8 @@ namespace NeoTrader.UI.Controls
 
                 rd.PropertyChanged += (s, e) => 
                 {
-                    if(e.PropertyName == nameof(RowData.Row))  // 有可能的問題： Row 發生變化 但是Node 沒有發生變化
+                    System.Diagnostics.Debug.WriteLine(e.PropertyName);
+                    if(e.PropertyName == nameof(RowData.Row)) 
                     {
                         if (rd.Row == null)
                             return;
@@ -196,13 +192,12 @@ namespace NeoTrader.UI.Controls
                             toolBarControl.ItemsSource = rdg.ToolCommandsTemplate.Select(x => x.Clone(rd.Row));
                         }
                         else
-                            toolBarControl.ItemsSource = rdg.ChildToolCommandsTemplate.Select(x => x.Clone(rd.Row));
-                        // level 
-
-                        // TODO: level Changed 
-                        //toolBarControl.ItemsSource = (toolBarControl.ItemsSource as IEnumerable<CommandVm>).Select(_ => _.SetOwner(rd.Row));
-                        //toolBarControl.ItemsSource = ();
+                            toolBarControl.ItemsSource = rdg.ChildToolCommandsTemplate.Select(x => x.Clone(rd.Row));                        
                     }
+                    //else if(e.PropertyName == nameof(RowData.RowHandle))  // RowHandle Change
+                    //{
+                        
+                    //}
 
                 };               
             });
