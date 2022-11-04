@@ -88,7 +88,7 @@ namespace NeoTrader.UI.Controls
             tlv.ShowIndicator = false;            
             tlv.AllowDragDrop = true;
 
-            tlv.ShowRootIndent = true;
+            tlv.ShowRootIndent = false;
             tlv.HighlightItemOnHover = true;            
             tlv.DropLimtEnum = TLVDragDropLimtEnum.TableView;
             tlv.ColumnSortClearMode = ColumnSortClearMode.Click;
@@ -192,7 +192,7 @@ namespace NeoTrader.UI.Controls
 
                 rd.PropertyChanged += (s, e) =>
                 {
-                    System.Diagnostics.Debug.WriteLine(e.PropertyName);
+                    // System.Diagnostics.Debug.WriteLine(e.PropertyName);
                     if (e.PropertyName == nameof(RowData.Row))
                     {
                         if (rd.Row == null)

@@ -126,7 +126,7 @@ namespace NeoTrader.UI.Controls
 
             if(DropLimtEnum == TLVDragDropLimtEnum.TableView)
             {
-                System.Diagnostics.Debug.WriteLine(e.DropPosition);
+                //System.Diagnostics.Debug.WriteLine(e.DropPosition);
                 if (e.DropPosition == DropPosition.Append || e.DropPosition == DropPosition.Inside) 
                 {
                     e.Effects = DragDropEffects.None;
