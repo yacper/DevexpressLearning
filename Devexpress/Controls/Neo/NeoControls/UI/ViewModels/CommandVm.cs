@@ -35,19 +35,14 @@ public class CommandVm : ViewModelBase
 {
     public override string ToString() => $"Command:{DisplayName}";
 
-    public virtual object Owner { get; set; } // 
+    public virtual object      Owner  { get=>GetProperty(()=>Owner); set=>SetProperty(()=> Owner, value); }
 
     public CommandVm SetOwner(object newOwner)
     {
         Owner = newOwner;
-        Bindings.ForEach(b => 
-        {
-            BindingEngine.ClearBinding(b.Target);
-            if (newOwner != null)                
-                b.Apply();
-        });
-        
-        Commands = Commands?.Select(p => p.SetOwner(newOwner)).ToObservableCollection();
+        Bindings.ForEach(b => { b.Reset(); });
+
+        Commands?.ForEach(p => p.SetOwner(newOwner));
 
         return this;
     }
@@ -201,6 +196,12 @@ public class CommandVmPropertyBinding
     public object                                   Source               { get; set; }
     public Expression<Func<object, object>>         SourceExpression     { get; set; }
     public BindingValueChangedHandler          TargetChangedHandler { get; set; }
+
+    public void Reset()
+    {
+        BindingEngine.ClearBinding(Binding);
+        Apply();
+    }
 
     public virtual void Apply()
     {
