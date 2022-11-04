@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NeoControls" xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" xmlns:controls="clr-namespace:NeoTrader.UI.Controls" xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
-             xmlns:controls1="clr-namespace:NeoControls.Controls"
+             xmlns:controls1="clr-namespace:NeoTrader.UI.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Background="Black">
     <UserControl.Resources>

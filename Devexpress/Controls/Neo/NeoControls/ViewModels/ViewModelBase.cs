@@ -9,6 +9,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -41,8 +42,14 @@ namespace NeoTrader
 		#region IDisposable Members
 
 		public void Dispose()
-		{
+        {
+            if (Disposed_)
+                return;
+
 			OnDispose();
+
+            Disposed_ = true;
+			Debug.WriteLine($"{DisplayName}({GetType().Name})({GetHashCode()}) Disposed");
 		}
 
 		protected virtual void OnDispose()
@@ -50,12 +57,14 @@ namespace NeoTrader
 		}
 #if DEBUG
 		~ViewModelBase()
-		{
-			string msg = string.Format("{0} ({1}) ({2}) Finalized", GetType().Name, DisplayName, GetHashCode());
-			System.Diagnostics.Debug.WriteLine(msg);
+        {
+            Dispose();
+
+			Debug.WriteLine($"{DisplayName}({GetType().Name})({GetHashCode()}) Finalized");
 		}
 #endif
 
+    private bool Disposed_ = false;
       
 #endregion
 
