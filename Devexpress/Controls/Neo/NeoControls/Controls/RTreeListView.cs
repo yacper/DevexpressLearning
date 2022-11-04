@@ -40,6 +40,13 @@ namespace NeoTrader.UI.Controls
             set => SetValue(DropLimtEnumProperty, value);
         }
 
+        public static DependencyProperty ChildToolCommandsTemplateProperty = DependencyProperty.Register(nameof(ChildToolCommandsTemplate), typeof(ObservableCollection<CommandVm>), typeof(RTreeListView));
+        public ObservableCollection<CommandVm> ChildToolCommandsTemplate
+        {
+            get => (ObservableCollection<CommandVm>)GetValue(ChildToolCommandsTemplateProperty);
+            set => SetValue(ChildToolCommandsTemplateProperty, value);
+        }
+
         public ICommand RMouseDoubleClickCommand { get; private set; }
 
         public RTreeListView() : base()

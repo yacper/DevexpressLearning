@@ -17,9 +17,9 @@
                 </controls:RDataGrid>
             </TabItem>
             <TabItem Header="ChildNodePath_TwoTools">
-                <controls:RDataGrid ItemsSource="{Binding Tasks}" ToolCommandsTemplate="{Binding DefaultTools}" ChildToolCommandsTemplate="{Binding ChildToolsTemplate}">
+                <controls:RDataGrid ItemsSource="{Binding Tasks}" ToolCommandsTemplate="{Binding DefaultTools}" >
                     <controls:RDataGrid.View>
-                        <controls:RTreeListView ChildNodesPath="ChildTasks" TreeDerivationMode="ChildNodesSelector" DropLimtEnum="ParentNoAppend" AllowDragDrop="True" AllowEditing="False"></controls:RTreeListView>
+                        <controls:RTreeListView ChildNodesPath="ChildTasks" ChildToolCommandsTemplate="{Binding ChildToolsTemplate}" TreeDerivationMode="ChildNodesSelector" DropLimtEnum="ParentNoAppend" AllowDragDrop="True" AllowEditing="False"></controls:RTreeListView>
                     </controls:RDataGrid.View>
                 </controls:RDataGrid>
             </TabItem>
