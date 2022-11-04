@@ -87,8 +87,9 @@ namespace NeoTrader.UI.Controls
             var tlv = new RTreeListView();            
             tlv.ShowIndicator = false;            
             tlv.AllowDragDrop = true;
-            
-            tlv.HighlightItemOnHover = true;
+
+            tlv.ShowRootIndent = true;
+            tlv.HighlightItemOnHover = true;            
             tlv.DropLimtEnum = TLVDragDropLimtEnum.TableView;
             tlv.ColumnSortClearMode = ColumnSortClearMode.Click;
 

@@ -56,7 +56,7 @@ namespace NeoTrader.UI.Controls
             AllowEditing = false;
             AllowDragDrop = true;
             ShowIndicator = false;
-            ShowRootIndent = false;
+            ShowRootIndent = true;
 
             DragRecordOver += RTreeListView_DragRecordOver;
             StartRecordDrag += RTreeListView_StartRecordDrag;
