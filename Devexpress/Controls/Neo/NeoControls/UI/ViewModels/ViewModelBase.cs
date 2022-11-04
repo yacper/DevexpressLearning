@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 using System.Windows.Media;
 using DevExpress.Mvvm;
 
-namespace NeoTrader
+namespace NeoTrader.UI.ViewModels
 {
 	public abstract class ViewModelBase : DevExpress.Mvvm.ViewModelBase, IDisposable
 	{

@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using NeoTrader.UI.ViewModels;
 
 namespace NeoControls
 {
@@ -81,7 +82,7 @@ public partial class SiginTools : UserControl
 
         CommandVm vmSep1 = new CommandVm() { IsSeparator = true };
 
-        CommandVm vm2 = vm.Clone(new Provider() { Name = "p2",  });
+        CommandVm vm2 = vm.Clone(new Provider() { Name = "p2",  }).WithProperty(p=>p.BadgeContent, Images.ConnectedStatus);
         vm2.KeyGesture = new KeyGesture(Key.D2, ModifierKeys.Control);
 
 

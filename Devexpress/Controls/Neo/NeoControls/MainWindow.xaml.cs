@@ -24,6 +24,7 @@ using System.ComponentModel;
 using System.Collections;
 using System.Collections.ObjectModel;
 using NeoControls.View;
+using NeoTrader.UI.ViewModels;
 
 namespace NeoControls
 {

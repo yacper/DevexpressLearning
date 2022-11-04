@@ -17,7 +17,8 @@
                     xmlns:dxt="http://schemas.devexpress.com/winfx/2008/xaml/core/themekeys"
                     xmlns:dxcn="http://schemas.devexpress.com/winfx/2008/xaml/core/internal" 
                     xmlns:dxbc="http://schemas.devexpress.com/winfx/2008/xaml/bars/internal" 
-                    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm">
+                    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+                    xmlns:viewModels="clr-namespace:NeoTrader.UI.ViewModels">
     <system:Double x:Key="TableRowHeight">22</system:Double>
     <DataTemplate x:Key="BarItemContentDataTemplate">
         <Border x:Name="PART_BAR_Border" Padding="0" Margin="0">
@@ -49,7 +50,7 @@
 
     <local:LinkStatusToBrushConverter x:Key="LinkStatusToBrushConverter"></local:LinkStatusToBrushConverter>
     <local:ELinkStatusToColorTextConverter x:Key="ELinkStatusToColorTextConverter"></local:ELinkStatusToColorTextConverter>
-    <DataTemplate x:Key="GlyphDataTemplate" DataType="{x:Type neoTrader:CommandVm}">
+    <DataTemplate x:Key="GlyphDataTemplate" DataType="{x:Type viewModels:CommandVm}">
         <ContentControl>
             <Grid>
                 <Border x:Name="Part_Border" Background="{Binding Converter={StaticResource LinkStatusToBrushConverter}}">

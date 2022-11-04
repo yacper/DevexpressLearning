@@ -12,6 +12,7 @@ using DevExpress.Xpf.Bars;
 using Neo.Api.Attributes;
 using NeoTrader;
 using NeoTrader.UI.Controls;
+using NeoTrader.UI.ViewModels;
 
 namespace NeoControls.View
 {

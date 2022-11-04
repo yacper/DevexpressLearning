@@ -6,7 +6,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/NeoControls;component/Controls/RControlsRes.xaml" />
+                <ResourceDictionary Source="/UI/Controls/RControlsRes.xaml" />
                     </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

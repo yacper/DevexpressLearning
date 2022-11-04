@@ -16,6 +16,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
+using NeoTrader.UI.ViewModels;
 
 namespace NeoTrader.UI.Controls
 {

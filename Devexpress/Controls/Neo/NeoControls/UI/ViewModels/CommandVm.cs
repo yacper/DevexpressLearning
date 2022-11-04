@@ -29,7 +29,7 @@ using Force.DeepCloner;
 using System.Reflection;
 using PropertyInfo = System.Reflection.PropertyInfo;
 
-namespace NeoTrader;
+namespace NeoTrader.UI.ViewModels;
 
 public class CommandVm : ViewModelBase
 {
