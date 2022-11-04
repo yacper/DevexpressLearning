@@ -1,0 +1,29 @@
+﻿<Window x:Class="ChildNodesPathDemo.Incubatos"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ChildNodesPathDemo"
+        xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+        xmlns:childNodesPath="clr-namespace:ChildNodesPath"
+        mc:Ignorable="d"
+        Title="Incubatos" Height="450" Width="800">
+    <Window.DataContext>
+        <childNodesPath:VM2 />
+    </Window.DataContext>
+
+    <Grid>
+        <dxg:TreeListControl ItemsSource="{Binding Incubators}">
+            <dxg:TreeListControl.Columns>
+                <dxg:TreeListColumn FieldName="Name" />
+                <!--<dxg:TreeListColumn FieldName="Symbol" />-->
+                <dxg:TreeListColumn FieldName="TimeFrame" />
+            </dxg:TreeListControl.Columns>
+            <dxg:TreeListControl.View>
+                <dxg:TreeListView AllowDragDrop="True" TreeDerivationMode="ChildNodesSelector" ChildNodesPath="Instances" />
+            </dxg:TreeListControl.View>
+        </dxg:TreeListControl>
+
+
+    </Grid>
+</Window>

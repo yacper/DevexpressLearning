@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net5.0-windows</TargetFramework>
+		<OutputType>WinExe</OutputType>
+		<RootNamespace>ChildNodesPathDemo</RootNamespace>
+		<AssemblyName>ChildNodesPathDemo</AssemblyName>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<UseWindowsForms>true</UseWindowsForms>
+		<UseWPF>true</UseWPF>
+		<Platforms>x86;AnyCPU</Platforms>
+		<CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+		<DefaultItemExcludes>obj*/**</DefaultItemExcludes>
+	</PropertyGroup>
+	<ItemGroup>
+
+		<PackageReference Include="DevExpress.Wpf" Version="22.1.*" />
+	</ItemGroup>
+</Project>
