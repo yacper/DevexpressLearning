@@ -159,17 +159,25 @@ namespace NeoTrader.UI.Controls
                 var rdg = UiUtils.UIUtils.GetParentObject<RDataGrid>(rc);
                 var toolBarControl = UiUtils.UIUtils.GetChildObject<ToolBarControl>(rc, typeof(ToolBarControl));
 
-                if (!(rd is TreeListRowData) || (rd as TreeListRowData).Node.HasChildren || rdg.ChildToolCommandsTemplate == null)                
-                    toolBarControl.ItemsSource = rdg.ToolCommandsTemplate.Select(x => x.Clone(rd.Row));                                    
+                if (!(rd is TreeListRowData) || (rd as TreeListRowData).Node.HasChildren || rdg.ChildToolCommandsTemplate == null)
+                {
+                    if (rdg.ToolCommandsTemplate == null)
+                        return;
+                    toolBarControl.ItemsSource = rdg.ToolCommandsTemplate.Select(x => x.Clone(rd.Row));
+                }
                 else                
-                    toolBarControl.ItemsSource = rdg.ChildToolCommandsTemplate.Select(x => x.Clone(rd.Row));                
-
+                    toolBarControl.ItemsSource = rdg.ChildToolCommandsTemplate.Select(x => x.Clone(rd.Row));
+                
                 rd.ContentChanged += (s, e) =>
                 {
-                    if (!(rd is TreeListRowData) || (rd as TreeListRowData).Node.HasChildren || rdg.ChildToolCommandsTemplate == null)                    
-                        toolBarControl.ItemsSource = rdg.ToolCommandsTemplate.Select(x => x.Clone(rd.Row));                    
-                    else                    
-                        toolBarControl.ItemsSource = rdg.ChildToolCommandsTemplate.Select(x => x.Clone(rd.Row));                    
+                    if (!(rd is TreeListRowData) || (rd as TreeListRowData).Node.HasChildren || rdg.ChildToolCommandsTemplate == null)
+                    {
+                        if (rdg.ToolCommandsTemplate == null)
+                            return;
+                        toolBarControl.ItemsSource = rdg.ToolCommandsTemplate.Select(x => x.Clone(rd.Row));
+                    }
+                    else
+                        toolBarControl.ItemsSource = rdg.ChildToolCommandsTemplate.Select(x => x.Clone(rd.Row));
                 };
             });
         }

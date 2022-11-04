@@ -70,7 +70,7 @@ namespace NeoControls.View
             Status = TaskStatus.Stoping;
             if (ChildTasks != null)
                 ChildTasks.Select(_ => _.StopTask());
-           // Thread.Sleep(1000);
+            
             Status = TaskStatus.Stop;
 
             return 1;
@@ -85,7 +85,6 @@ namespace NeoControls.View
         {
             Progress -= 10;
         }
-
     }
 
     public class TreeListViewDemoVm: BindableBase
