@@ -89,8 +89,7 @@ namespace NeoDataGrid.Control
 
             RRowDoubleClickCommand = new DelegateCommand<TreeListRowData>((rd) => 
             {
-                rd.Node.IsExpanded = !rd.IsExpanded;
-                
+                rd.Node.IsExpanded = !rd.IsExpanded;                
             });
         }
 

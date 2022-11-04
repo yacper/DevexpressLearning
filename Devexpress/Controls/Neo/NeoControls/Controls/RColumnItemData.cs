@@ -17,9 +17,10 @@ namespace NeoTrader.UI.Controls
         //public DataTemplate CellTemplate { get; set; }
         public GridColumnWidth Width { get; set; }
 
-        public RColumnItemData()
+        public RColumnItemData(string fieldName)
         {
             AllowSorting = true;
+            FieldName = fieldName;            
             Width = new GridColumnWidth(0, GridColumnUnitType.Auto);
         }
     }

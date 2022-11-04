@@ -35,7 +35,8 @@ namespace NeoTrader{
 
         public const string ConnectedStatus = ImageFloder + "Panel/ConnectedStatus.svg";
         public const string ConnectingStatus = ImageFloder + "Panel/ConnectingStatus.svg";
-       
+        public const string SortDsec = DxFloder + "SvgImages/XAF/Action_Sorting_Descending.svg";
+
     }
 
     public static class Images
@@ -47,6 +48,7 @@ namespace NeoTrader{
         public static ImageSource Account { get { return GetSvgImage(ImagePaths.Account); } }
         public static ImageSource Link { get { return GetSvgImage(ImagePaths.Link); } }
         public static ImageSource VMore { get { return GetSvgImage(ImagePaths.VMore); } }
+        public static ImageSource SortDsec { get { return GetSvgImage(ImagePaths.SortDsec); } }
 
 
         public static ImageSource ConnectedStatus { get { return GetSvgImage(ImagePaths.ConnectedStatus); } }

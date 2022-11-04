@@ -4,18 +4,20 @@
                     xmlns:neoTrader="clr-namespace:NeoTrader"
                     xmlns:neoTraderControls="clr-namespace:NeoTrader.UI.Controls"
                     xmlns:local="clr-namespace:NeoControls"
+                    xmlns:root="clr-namespace:NeoTrader"
                     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
                     xmlns:system="clr-namespace:System;assembly=System.Runtime"
                     xmlns:dxdot="http://schemas.devexpress.com/winfx/2008/xaml/docking/themekeys" 
                     xmlns:dxgt="http://schemas.devexpress.com/winfx/2008/xaml/grid/themekeys"
                     xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
-                    xmlns:dxbt="http://schemas.devexpress.com/winfx/2008/xaml/bars/themekeys"
-                    xmlns:dxwuit="http://schemas.devexpress.com/winfx/2008/xaml/windowsui/themekeys"
+                    xmlns:dxbt="http://schemas.devexpress.com/winfx/2008/xaml/bars/themekeys"                    
                     xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" 
                     xmlns:dxi="http://schemas.devexpress.com/winfx/2008/xaml/core/internal"                    
                     xmlns:themes="http://schemas.devexpress.com/winfx/2008/xaml/core/themekeys"
                     xmlns:dxt="http://schemas.devexpress.com/winfx/2008/xaml/core/themekeys"
-                    xmlns:dxcn="http://schemas.devexpress.com/winfx/2008/xaml/core/internal" xmlns:dxbc="http://schemas.devexpress.com/winfx/2008/xaml/bars/internal">
+                    xmlns:dxcn="http://schemas.devexpress.com/winfx/2008/xaml/core/internal" 
+                    xmlns:dxbc="http://schemas.devexpress.com/winfx/2008/xaml/bars/internal" 
+                    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm">
     <system:Double x:Key="TableRowHeight">22</system:Double>
     <DataTemplate x:Key="BarItemContentDataTemplate">
         <Border x:Name="PART_BAR_Border" Padding="0" Margin="0">
@@ -75,7 +77,7 @@
                                BarItemDisplayMode="{Binding DisplayMode}"   
                                Content="{Binding}" 
                                Margin="0,-1,0,0"
-                               Padding="0"
+                               Padding="0"                               
                                ContentTemplate="{StaticResource BarItemContentDataTemplate}">
             </dxb:BarButtonItem>
         </ContentControl>
@@ -107,6 +109,7 @@
                               CommandParameter="{Binding RelativeSource={RelativeSource Mode=Self}}"
                               Alignment="{Binding Alignment}"
                               Glyph="{Binding Glyph}"
+                              Margin="0,-1,0,0"
                               ShowKeyGesture="True"
                               IsChecked="{Binding IsChecked}"
                               IsEnabled="{Binding IsEnabled}"                               
@@ -120,10 +123,11 @@
     <DataTemplate x:Key="LinkItemDataTemplate">
         <ContentControl>
             <dxb:BarButtonItem KeyGesture="{Binding KeyGesture}"
-                               Command="{Binding Command}"                                                              
+                               Command="{Binding Command}"                                                      
                                Alignment="{Binding Alignment}"                                 
                                GlyphTemplate="{StaticResource GlyphDataTemplate}"
                                ShowKeyGesture="True"
+                               Margin="0,-1,0,0"
                                IsEnabled="{Binding IsEnabled}"                               
                                BarItemDisplayMode="{Binding DisplayMode}"   
                                Content="{Binding}" 
@@ -275,22 +279,21 @@
 
     <local:RGridControlToVmValueConverter x:Key="RDataGrid_RowToolCommandsValueConverter"></local:RGridControlToVmValueConverter>
     <ControlTemplate x:Key="RDataGrid_RowCommonToolsTemplate">
-        <dxb:BarContainerControl HorizontalAlignment="Right" Margin="0,0,-1,1" Padding="0">
-            <dxb:ToolBarControl RotateWhenVertical="True"                                 
+        <dxb:BarContainerControl HorizontalAlignment="Right" Margin="0,0,-1,1" Padding="0" >
+            <dxb:ToolBarControl RotateWhenVertical="True"                                                                 
                                 ShowDragWidget="False"                       
                                 Margin="0,0,0,0" Padding="0,0,0,0"
-                                AllowCustomizationMenu="False"
-                                AllowQuickCustomization="False" 
+                                AllowCustomizationMenu="False" 
+                                AllowQuickCustomization="False"  
                                 Background="{dxi:ThemeResource {themes:PaletteBrushThemeKey ResourceKey=SelectionBackground}}"
                                 ItemTemplateSelector="{DynamicResource BarItemDataTemplateSelector}">
-                <dxb:ToolBarControl.ItemsSource>
+                <!--<dxb:ToolBarControl.ItemsSource>
                     <MultiBinding Converter="{StaticResource RDataGrid_RowToolCommandsValueConverter}">
                         <Binding Path="DataContext" RelativeSource="{RelativeSource AncestorLevel=1, AncestorType=dxg:RowControl,Mode=FindAncestor}"></Binding>
-                        <Binding Path="ToolCommandsTemplate"></Binding>
+                        <Binding Path=""></Binding>
                         <Binding Path="Visibility" RelativeSource="{RelativeSource AncestorLevel=1, AncestorType=dxg:RowControl,Mode=FindAncestor}"></Binding>
-                        <Binding Path="ItemsSource"></Binding>
                     </MultiBinding>
-                </dxb:ToolBarControl.ItemsSource>
+                </dxb:ToolBarControl.ItemsSource>-->
             </dxb:ToolBarControl>
         </dxb:BarContainerControl>
         <!--<controls:RToolsControl RItemsSource="{Binding ToolVms}"
@@ -316,24 +319,41 @@
 
     <local:TableRowToolsVisibleConverter x:Key="RDataGrid_RowToolsVisibilityConverter"></local:TableRowToolsVisibleConverter>
     <ControlTemplate x:Key="RDataGrid_RowControlTemplate" TargetType="dxg:RowControl" >
-        <Grid Height="{StaticResource TableRowHeight}" Background="Transparent" >
-            <Border x:Name="Background" Background="{TemplateBinding Background}" />
-            <Border x:Name="BottomLine" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,0,0,1" VerticalAlignment="Bottom" />
-            <Grid x:Name="PART_LayoutPanel"/>
-            <ContentControl x:Name="PART_TOOLS"                            
+        <ContentControl Background="Green" x:Name="PART_ROOT">
+            <Grid Height="{StaticResource TableRowHeight}" x:Name="Root_Grid" Background="Transparent" >
+                <Border x:Name="Background" Background="{TemplateBinding Background}"/>
+                <Border x:Name="BottomLine" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,0,0,1" VerticalAlignment="Bottom" />
+                <Grid x:Name="PART_LayoutPanel"/>
+                <ContentControl x:Name="PART_TOOLS"                            
                             DataContext="{Binding RelativeSource={RelativeSource AncestorLevel=1,AncestorType=controls:RDataGrid,Mode=FindAncestor}}"
                             Template="{StaticResource RDataGrid_RowCommonToolsTemplate}">
-                <ContentControl.Visibility>
-                    <MultiBinding Converter="{StaticResource RDataGrid_RowToolsVisibilityConverter}">
-                        <Binding Path="AlwaysShowToolBar"></Binding>
-                        <Binding RelativeSource="{RelativeSource AncestorLevel=1,AncestorType=dxg:RowControl,Mode=FindAncestor}" Path="IsMouseOver"></Binding>
-                    </MultiBinding>
-                </ContentControl.Visibility>
-            </ContentControl>
-            <!--<Grid.ContextMenu>
-                <Binding Path="DataContext.ToolVms" ElementName="PART_TOOLS" Converter="{StaticResource RowControlContextMenuConverter}"></Binding>
-            </Grid.ContextMenu>-->
-        </Grid>
+                    <ContentControl.Visibility>
+                        <MultiBinding Converter="{StaticResource RDataGrid_RowToolsVisibilityConverter}">
+                            <Binding Path="AlwaysShowToolBar"></Binding>
+                            <Binding RelativeSource="{RelativeSource AncestorLevel=1,AncestorType=dxg:RowControl,Mode=FindAncestor}" Path="IsMouseOver"></Binding>
+                        </MultiBinding>
+                    </ContentControl.Visibility>
+                </ContentControl>
+                <dxmvvm:Interaction.Behaviors>
+                    <dxmvvm:EventToCommand EventName="MouseDoubleClick" 
+                                       SourceName="PART_ROOT"
+                                       Command="{Binding RMouseDoubleClickCommand, RelativeSource={RelativeSource Mode=FindAncestor,AncestorLevel=1,AncestorType=neoTraderControls:RDataGrid}}" 
+                                       CommandParameter="{Binding RelativeSource={RelativeSource AncestorLevel=1, AncestorType=dxg:RowControl,Mode=FindAncestor}}">
+                    </dxmvvm:EventToCommand>
+                    <dxmvvm:EventToCommand EventName="Loaded" 
+                                       SourceName="PART_LayoutPanel"
+                                       Command="{Binding CellsControlParentPannelLoadCommand, RelativeSource={RelativeSource Mode=FindAncestor,AncestorLevel=1,AncestorType=neoTraderControls:RDataGrid}}" 
+                                       CommandParameter="{Binding ElementName=PART_LayoutPanel}">
+                    </dxmvvm:EventToCommand>
+                    
+                    <dxmvvm:EventToCommand EventName="Loaded"                                            
+                                           SourceObject="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorLevel=1,AncestorType=dxg:RowControl}}"
+                                           Command="{Binding RowControlLoadCommand, RelativeSource={RelativeSource Mode=FindAncestor,AncestorLevel=1,AncestorType=neoTraderControls:RDataGrid}}" 
+                                           CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorLevel=1,AncestorType=dxg:RowControl}}">
+                    </dxmvvm:EventToCommand>
+                </dxmvvm:Interaction.Behaviors>
+            </Grid>
+        </ContentControl>
         <ControlTemplate.Triggers>
             <Trigger Property="ShowHorizontalLine" Value="False">
                 <Setter Property="Visibility" TargetName="BottomLine" Value="Collapsed" />
@@ -362,6 +382,17 @@
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="{dxi:ThemeResource {themes:PaletteBrushThemeKey ResourceKey=HoverBackground}}" />
             </Trigger>
+            <!--<MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding View,RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1,AncestorType=neoTraderControls:RDataGrid}}" Value="TreeListView"></Condition>
+                    <Condition Binding="{Binding DataContext.IsExpanded,RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1,AncestorType=dx:RowControl}}" Value="False"></Condition>
+                    <Condition Binding="{Binding DataContext.Node.HasChildren,RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1,AncestorType=dx:RowControl}}" Value="True"></Condition>
+                </MultiDataTrigger.Conditions>
+                <Setter TargetName="PART_ExpandedTips" Property="Visibility" Value="Visible"></Setter>
+            </MultiDataTrigger>
+            <DataTrigger Binding="{Binding DataContext.IsExpanded,RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1,AncestorType=dx:RowControl}}" Value="True">
+                <Setter TargetName="PART_ExpandedTips" Property="Visibility" Value="Collapsed"></Setter>
+            </DataTrigger>-->
         </ControlTemplate.Triggers>
         
     </ControlTemplate>

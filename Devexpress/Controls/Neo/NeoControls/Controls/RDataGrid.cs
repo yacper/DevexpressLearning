@@ -1,5 +1,8 @@
-﻿using DevExpress.Xpf.Core;
+﻿using DevExpress.Mvvm;
+using DevExpress.Xpf.Bars;
+using DevExpress.Xpf.Core;
 using DevExpress.Xpf.Grid;
+using DevExpress.Xpf.Grid.TreeList;
 using Neo.Api.Attributes;
 using NeoControls;
 using NeoTrader;
@@ -14,19 +17,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace NeoTrader.UI.Controls
 {    
     public class RDataGrid : GridControl
     {
-        //public static DependencyProperty ToolsBgBrushProperty = DependencyProperty.Register("ToolsBgBrush", typeof(Brush), typeof(RDataGrid), new PropertyMetadata(Brushes.Blue));
-        //public Brush ToolsBgBrush
-        //{
-        //    get => (Brush)GetValue(ToolsBgBrushProperty);
-        //    set => SetValue(ToolsBgBrushProperty, value);
-        //}
-
         public static DependencyProperty AlwaysShowToolBarProperty = DependencyProperty.Register(nameof(AlwaysShowToolBar), typeof(bool), typeof(RDataGrid), new PropertyMetadata(false));
         public bool AlwaysShowToolBar
         {
@@ -34,26 +31,19 @@ namespace NeoTrader.UI.Controls
             set => SetValue(AlwaysShowToolBarProperty, value);
         }
 
-        // Tools 数据
-        //public static DependencyProperty RowToolsProperty = DependencyProperty.Register("RowTools", typeof(IEnumerable<CommandVm>), typeof(RGridControl), 
-        //    new PropertyMetadata(null, (d,e) => 
-        //    {
-        //        //var rc = d as RGridControl;
-        //        //rc!.RowTools = (IEnumerable<IRowTools>)e.NewValue;
-        //    }));
-
-        //public IEnumerable<CommandVm> RowTools 
-        //{
-        //    get => (IEnumerable<CommandVm>)GetValue(RowToolsProperty);
-        //    set => SetValue(RowToolsProperty, value);            
-        //}
-
         public static DependencyProperty ToolCommandsTemplateProperty = DependencyProperty.Register(nameof(ToolCommandsTemplate), typeof(ObservableCollection<CommandVm>), typeof(RDataGrid));
 
         public ObservableCollection<CommandVm> ToolCommandsTemplate 
         { 
             get => (ObservableCollection<CommandVm>)GetValue(ToolCommandsTemplateProperty); 
             set => SetValue(ToolCommandsTemplateProperty, value);
+        }
+
+        public static DependencyProperty ChildToolCommandsTemplateProperty = DependencyProperty.Register(nameof(ChildToolCommandsTemplate), typeof(ObservableCollection<CommandVm>), typeof(RDataGrid));
+        public ObservableCollection<CommandVm> ChildToolCommandsTemplate
+        {
+            get => (ObservableCollection<CommandVm>)GetValue(ChildToolCommandsTemplateProperty);
+            set => SetValue(ChildToolCommandsTemplateProperty, value);
         }
 
         public static DependencyProperty CellTemplateSelectorProperty = DependencyProperty.Register(nameof(CellTemplateSelector), typeof(DataTemplateSelector), typeof(RDataGrid),
@@ -68,6 +58,10 @@ namespace NeoTrader.UI.Controls
             set=>SetValue(CellTemplateSelectorProperty, value);
         }
 
+        public ICommand RowControlLoadCommand { get; private set; }
+        public ICommand RMouseDoubleClickCommand { get; private set; }
+        public ICommand CellsControlParentPannelLoadCommand { get; private set; }
+
         public RDataGrid(): base()
         {
             SelectionMode = MultiSelectMode.Row;
@@ -75,7 +69,15 @@ namespace NeoTrader.UI.Controls
             if (View == null)
                 View = CreateTableView();
 
-            Loaded += RGridControl_Loaded;            
+            InitCommand();
+            Loaded += RGridControl_Loaded;
+        }
+
+        private void InitCommand()
+        {
+            InitRowControlLoadCommand();
+            InitRMouseDoubleClickCommand();
+            InitCellsControlParentPannelLoadCommand();
         }
 
         private void RGridControl_Loaded(object sender, RoutedEventArgs e)
@@ -99,9 +101,9 @@ namespace NeoTrader.UI.Controls
 
             tv.HighlightItemOnHover = true;
             tv.ColumnSortClearMode = ColumnSortClearMode.Click;
-            
+
             tv.RowStyle = new Style(typeof(RowControl));
-            tv.RowStyle.Setters.Add(new Setter() 
+            tv.RowStyle.Setters.Add(new Setter()
             {
                 Property = RowControl.TemplateProperty,
                 Value = App.Current.FindResource("RDataGrid_RowControlTemplate")
@@ -116,12 +118,65 @@ namespace NeoTrader.UI.Controls
             Type type = (ItemsSource as IList)[0].GetType();
             foreach (var p in type.GetProperties().Where(_=> { return _.GetCustomAttribute(typeof(StatAttribute)) != null; }))
             {
-                RColumnItemData rcid = new RColumnItemData();
-                rcid.FieldName = p.Name;
+                RColumnItemData rcid = new RColumnItemData(p.Name);                
                 columns.Add(rcid);
             }
 
             return columns;
+        }
+
+        private void InitCellsControlParentPannelLoadCommand()
+        {
+            CellsControlParentPannelLoadCommand = new DelegateCommand<Grid>((g) =>
+            {
+                return;
+                var rd = UiUtils.UIUtils.GetParentObject<RDataGrid>(g);
+                if (rd.View is TableView)
+                    return;
+
+                DXImage dXImage = new DXImage();
+                dXImage.Name = "PART_ExpandedTips";
+                dXImage.Source = Images.SortDsec;
+                dXImage.Width = 10;
+                dXImage.Height = 10;
+                dXImage.Margin = new Thickness(10, 0, 0, 0);
+
+                var border = UiUtils.UIUtils.GetChildObject<RowFitBorder>(g, typeof(RowFitBorder));
+
+                int c = Grid.GetColumn(border);
+                g.ColumnDefinitions.Insert(c, new System.Windows.Controls.ColumnDefinition() { Width = new GridLength(30, GridUnitType.Pixel) });
+
+                Grid.SetColumn(dXImage, c);
+                g.Children.Add(dXImage);
+            });
+        }
+
+        private void InitRowControlLoadCommand()
+        {
+            RowControlLoadCommand = new DelegateCommand<RowControl>(rc =>
+            {
+                RowData rd = rc.DataContext as RowData;
+                var rdg = UiUtils.UIUtils.GetParentObject<RDataGrid>(rc);
+                var toolBarControl = UiUtils.UIUtils.GetChildObject<ToolBarControl>(rc, typeof(ToolBarControl));
+                toolBarControl.ItemsSource = rdg.ToolCommandsTemplate.Select(x => x.Clone(rd.Row));
+
+                rd.ContentChanged += (s, e) =>
+                {
+                    toolBarControl.ItemsSource = rdg.ToolCommandsTemplate.Select(x => x.Clone(rd.Row));   // TODO: 優化
+                };
+            });
+        }
+
+        private void InitRMouseDoubleClickCommand()
+        {
+            RMouseDoubleClickCommand = new DelegateCommand<RowControl>((rc) =>
+            {
+                if (!(rc.DataContext is TreeListRowData))
+                    return;
+
+                var rowData = rc.DataContext as TreeListRowData;
+                rowData.Node.IsExpanded = !rowData.IsExpanded;
+            });
         }
     }
 }

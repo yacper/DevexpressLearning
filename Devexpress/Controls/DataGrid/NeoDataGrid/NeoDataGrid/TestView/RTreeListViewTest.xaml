@@ -15,7 +15,8 @@
         <control:RGridControl ItemsSource="{Binding Persions}">
             <dxg:GridColumn FieldName="Name" Width="*"></dxg:GridColumn>
             <control:RGridControl.View>
-                <control:RTreeListView TreeDerivationMode="ChildNodesSelector" ChildNodesPath="Childs" RRowTemplate="{StaticResource RowTemplate}"  DropLimtEnum="ParentNoAppend" AllowDragDrop="True" AllowEditing="False">
+                <control:RTreeListView TreeDerivationMode="ChildNodesSelector" ChildNodesPath="Childs" 
+                                       RRowTemplate="{StaticResource RowTemplate}"  DropLimtEnum="ParentNoAppend" AllowDragDrop="True" AllowEditing="False">
                     <control:RTreeListView.RowStyle>
                         <Style TargetType="dxg:RowControl">
                             <Setter Property="Template" Value="{StaticResource RowControlTest}"></Setter>

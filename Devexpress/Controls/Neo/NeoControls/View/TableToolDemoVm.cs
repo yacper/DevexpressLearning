@@ -199,16 +199,14 @@ namespace NeoControls.View
             Columns = new ObservableCollection<RColumnItemData>();
             foreach (var p in typeof(Person).GetProperties().Where(_ => { return _.GetCustomAttribute(typeof(StatAttribute)) != null; }))
             {
-                RColumnItemData rcid = new RColumnItemData();
-                rcid.FieldName = p.Name;
+                RColumnItemData rcid = new RColumnItemData(p.Name);                
                 Columns.Add(rcid);
             }
         }
 
         private void AddColumn(string name, bool isFixed = false)
         {
-            RColumnItemData rcid = new RColumnItemData();
-            rcid.FieldName = name;
+            RColumnItemData rcid = new RColumnItemData(name);            
             rcid.IsFixed = isFixed;
             Columns.Add(rcid);
         }

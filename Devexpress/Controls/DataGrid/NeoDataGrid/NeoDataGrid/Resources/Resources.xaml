@@ -301,7 +301,7 @@
                     <ColumnDefinition Width="5"></ColumnDefinition>
                     <ColumnDefinition Width="Auto"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <ContentControl x:Name="PART_ContentControl" 
+                <ContentControl x:Name="PART_ContentControl"                                 
                                 Grid.Column="0">
                     <ContentControl.Template>
                         <MultiBinding Converter="{StaticResource RowHandleToRowTemplarteConverter}">

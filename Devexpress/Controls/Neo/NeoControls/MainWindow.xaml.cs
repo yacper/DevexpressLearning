@@ -23,6 +23,7 @@ using DevExpress.Xpf.Grid;
 using System.ComponentModel;
 using System.Collections;
 using System.Collections.ObjectModel;
+using NeoControls.View;
 
 namespace NeoControls
 {
@@ -85,6 +86,17 @@ namespace NeoControls
             };
 
             w.Content = new SiginTools();
+            w.Show();
+        }
+
+        private void MenuItem_Click_3(object sender, RoutedEventArgs e)
+        {
+            Window w = new Window()
+            {
+                Name = "TreeListView"
+            };
+
+            w.Content = new TreeListViewDemo();
             w.Show();
         }
     }
@@ -251,26 +263,27 @@ namespace NeoControls
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            if(values.Length != 4 || !(values[0] is RowData) || !(values[1] is ObservableCollection<CommandVm>) || !(values[2] is Visibility) || !(values[3] is IList))
+            if(values.Length != 3 || !(values[0] is RowData) || !(values[1] is RDataGrid) || !(values[2] is Visibility))
                 return null;
             
 
-            var rowData = (RowData)values[0];            
-            var visibility = (Visibility)values[2];
-            var itemsSource = (IList)values[3];
-            var defaultVm = (ObservableCollection<CommandVm>)values[1];
-
-            if (visibility == Visibility.Hidden)
+            var rowData = (RowData)values[0];
+            var rdg = (RDataGrid)values[1];
+            var visibility = (Visibility)values[2];            
+            if (visibility == Visibility.Hidden)            
                 return null;
-
-            int handle = rowData.RowHandle.Value;
             
-            if (handle >= itemsSource.Count)
-                return null;
+            if(rdg.View is TableView)
+                return rdg.ToolCommandsTemplate.Select(_ => _.Clone(rowData.Row));
 
-            object owner = itemsSource[handle];
+            var tlrd = rowData as TreeListRowData;
+            if(tlrd.Node.ParentNode == null)  // 根
+                return rdg.ToolCommandsTemplate.Select(_ => _.Clone(rowData.Row));
             
-            return defaultVm.Select(_ => _.Clone(owner)); 
+            if(tlrd.Node.HasChildren || rdg.ChildToolCommandsTemplate == null)       // has  child 
+                return rdg.ToolCommandsTemplate.Select(_ => _.Clone(rowData.Row));
+            
+            return rdg.ChildToolCommandsTemplate.Select(_=>_.Clone(rowData.Row)); 
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
