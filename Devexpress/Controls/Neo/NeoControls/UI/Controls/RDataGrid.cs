@@ -119,6 +119,7 @@ namespace NeoTrader.UI.Controls
         {
             CellsControlParentPannelLoadCommand = new DelegateCommand<Grid>((g) =>
             {
+                return;
                 var rd = UiUtils.UIUtils.GetParentObject<RDataGrid>(g);
                 if (rd.View is TableView)
                     return;
