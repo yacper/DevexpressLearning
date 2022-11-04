@@ -19,7 +19,7 @@ using DevExpress.Mvvm;
 
 namespace NeoTrader.UI.ViewModels
 {
-	public abstract class ViewModelBase : DevExpress.Mvvm.ViewModelBase, IDisposable
+	public abstract class VmBase : DevExpress.Mvvm.ViewModelBase, IDisposable
 	{
 		public string BindableName
 		{
@@ -56,7 +56,7 @@ namespace NeoTrader.UI.ViewModels
 		{
 		}
 #if DEBUG
-		~ViewModelBase()
+		~VmBase()
         {
             Dispose();
 

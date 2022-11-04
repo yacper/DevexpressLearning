@@ -3,7 +3,6 @@
                     xmlns:controls="clr-namespace:NeoTrader.UI.Controls"
                     xmlns:neoTrader="clr-namespace:NeoTrader"
                     xmlns:neoTraderControls="clr-namespace:NeoTrader.UI.Controls"
-                    xmlns:local="clr-namespace:NeoControls"
                     xmlns:root="clr-namespace:NeoTrader"
                     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
                     xmlns:system="clr-namespace:System;assembly=System.Runtime"
@@ -18,7 +17,8 @@
                     xmlns:dxcn="http://schemas.devexpress.com/winfx/2008/xaml/core/internal" 
                     xmlns:dxbc="http://schemas.devexpress.com/winfx/2008/xaml/bars/internal" 
                     xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
-                    xmlns:viewModels="clr-namespace:NeoTrader.UI.ViewModels">
+                    xmlns:viewModels="clr-namespace:NeoTrader.UI.ViewModels"
+                    >
     <system:Double x:Key="TableRowHeight">22</system:Double>
     <DataTemplate x:Key="BarItemContentDataTemplate">
         <Border x:Name="PART_BAR_Border" Padding="0" Margin="0">
@@ -48,8 +48,8 @@
         </DataTemplate.Triggers>
     </DataTemplate>
 
-    <local:LinkStatusToBrushConverter x:Key="LinkStatusToBrushConverter"></local:LinkStatusToBrushConverter>
-    <local:ELinkStatusToColorTextConverter x:Key="ELinkStatusToColorTextConverter"></local:ELinkStatusToColorTextConverter>
+    <controls:LinkStatusToBrushConverter x:Key="LinkStatusToBrushConverter"></controls:LinkStatusToBrushConverter>
+    <controls:ELinkStatusToColorTextConverter x:Key="ELinkStatusToColorTextConverter"></controls:ELinkStatusToColorTextConverter>
     <DataTemplate x:Key="GlyphDataTemplate" DataType="{x:Type viewModels:CommandVm}">
         <ContentControl>
             <Grid>
@@ -144,14 +144,14 @@
     </DataTemplate>
 
 
-    <local:BarItemDataTemplateSelector x:Key="BarItemDataTemplateSelector" 
+    <controls:BarItemDataTemplateSelector x:Key="BarItemDataTemplateSelector" 
                                        LinkItemTemplate="{StaticResource LinkItemDataTemplate}"
                                        BarCheckItemTemplate="{StaticResource BarCheckItemDataTemplate}"
                                        BarButtonItemTemplate="{StaticResource BarButtonItemDataTemplate}" 
                                        BarSubItemTemplate="{StaticResource BarSubItemDataTemplate}"
                                        BarItemSeparatorTemplate="{StaticResource RBarItemSeparatorTemplate}"
                                        
-                                       ></local:BarItemDataTemplateSelector>
+                                       ></controls:BarItemDataTemplateSelector>
 
     <!--<DataTemplate x:Key="CommandTemplate">
         <Border x:Name="_Border" >
@@ -278,7 +278,7 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>-->
 
-    <local:RGridControlToVmValueConverter x:Key="RDataGrid_RowToolCommandsValueConverter"></local:RGridControlToVmValueConverter>
+    <controls:RGridControlToVmValueConverter x:Key="RDataGrid_RowToolCommandsValueConverter"></controls:RGridControlToVmValueConverter>
     <ControlTemplate x:Key="RDataGrid_RowCommonToolsTemplate">
         <dxb:BarContainerControl HorizontalAlignment="Right" Margin="0,0,-1,1" Padding="0" >
             <dxb:ToolBarControl RotateWhenVertical="True"                                                                 
@@ -307,7 +307,7 @@
         </controls:RToolsControl>-->
     </ControlTemplate>
 
-    <local:BoolToFixedConverter x:Key="BoolToFixedConverter"></local:BoolToFixedConverter>
+    <controls:BoolToFixedConverter x:Key="BoolToFixedConverter"></controls:BoolToFixedConverter>
     <DataTemplate x:Key="DefaultColumnTemplate">
         <ContentControl>
             <dxg:GridColumn AllowSorting="{Binding AllowSorting}" 
@@ -320,7 +320,7 @@
         </ContentControl>
     </DataTemplate>
 
-    <local:TableRowToolsVisibleConverter x:Key="RDataGrid_RowToolsVisibilityConverter"></local:TableRowToolsVisibleConverter>
+    <controls:TableRowToolsVisibleConverter x:Key="RDataGrid_RowToolsVisibilityConverter"></controls:TableRowToolsVisibleConverter>
     <ControlTemplate x:Key="RDataGrid_RowControlTemplate" TargetType="dxg:RowControl" >
         <ContentControl Background="Green" x:Name="PART_ROOT">
             <Grid Height="{StaticResource TableRowHeight}" x:Name="Root_Grid" Background="Transparent" >

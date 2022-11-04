@@ -15,11 +15,10 @@ using DevExpress.Mvvm.POCO;
 using DevExpress.Xpf.Bars;
 using NeoTrader;
 using NeoTrader.UI.ViewModels;
-using ViewModelBase = NeoTrader.UI.ViewModels.ViewModelBase;
 
 namespace NeoControls;
 
-public class MainWindowVm : ViewModelBase
+public class MainWindowVm : VmBase
 {
     public MainWindowVm()
     {

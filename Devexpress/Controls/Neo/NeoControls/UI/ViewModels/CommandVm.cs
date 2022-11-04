@@ -31,7 +31,7 @@ using PropertyInfo = System.Reflection.PropertyInfo;
 
 namespace NeoTrader.UI.ViewModels;
 
-public class CommandVm : ViewModelBase
+public class CommandVm : VmBase
 {
     public override string ToString() => $"Command:{DisplayName}";
 
