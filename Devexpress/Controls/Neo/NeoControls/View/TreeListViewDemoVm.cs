@@ -109,7 +109,7 @@ namespace NeoControls.View
         private void InitTasks()
         {
             Tasks = new ObservableCollection<Task>();
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 3; i++)
             {
                 Task task = new Task() 
                 {
@@ -120,8 +120,8 @@ namespace NeoControls.View
                     {
                         new Task(){ TaskId= Guid.NewGuid(),   Progress = 0, TaskName = $"Task{i} ==> Child Task 1"},
                         new Task(){ TaskId= Guid.NewGuid(),   Progress = 0, TaskName = $"Task{i} ==> Child Task 2"},
-                        new Task(){ TaskId= Guid.NewGuid(),   Progress = 0, TaskName = $"Task{i} ==> Child Task 3"},
-                        new Task(){ TaskId= Guid.NewGuid(),   Progress = 0, TaskName = $"Task{i} ==> Child Task 4"},
+                        //new Task(){ TaskId= Guid.NewGuid(),   Progress = 0, TaskName = $"Task{i} ==> Child Task 3"},
+                        //new Task(){ TaskId= Guid.NewGuid(),   Progress = 0, TaskName = $"Task{i} ==> Child Task 4"},
                     }
                 };
 

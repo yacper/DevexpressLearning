@@ -158,8 +158,8 @@ namespace NeoTrader.UI.Controls
                 RowData rd = rc.DataContext as RowData;
                 var rdg = UiUtils.UIUtils.GetParentObject<RDataGrid>(rc);
                 var toolBarControl = UiUtils.UIUtils.GetChildObject<ToolBarControl>(rc, typeof(ToolBarControl));
-
-                if (!(rd is TreeListRowData) || (rd as TreeListRowData).Node.HasChildren || rdg.ChildToolCommandsTemplate == null)
+                bool isRoot = !(rd is TreeListRowData) || (rd as TreeListRowData).Node.ParentNode == null;
+                if (isRoot || rdg.ChildToolCommandsTemplate == null)
                 {
                     if (rdg.ToolCommandsTemplate == null)
                         return;
@@ -167,18 +167,44 @@ namespace NeoTrader.UI.Controls
                 }
                 else                
                     toolBarControl.ItemsSource = rdg.ChildToolCommandsTemplate.Select(x => x.Clone(rd.Row));
-                
-                rd.ContentChanged += (s, e) =>
+
+                rd.PropertyChanged += (s, e) => 
                 {
-                    if (!(rd is TreeListRowData) || (rd as TreeListRowData).Node.HasChildren || rdg.ChildToolCommandsTemplate == null)
+                    if(e.PropertyName == nameof(RowData.Row))  // 有可能的問題： Row 發生變化 但是Node 沒有發生變化
                     {
-                        if (rdg.ToolCommandsTemplate == null)
+                        if (rd.Row == null)
                             return;
-                        toolBarControl.ItemsSource = rdg.ToolCommandsTemplate.Select(x => x.Clone(rd.Row));
+
+                        bool isNowRoot = !(rd is TreeListRowData) || (rd as TreeListRowData).Node.ParentNode == null;
+                        if(isNowRoot == isRoot)
+                        {
+                            var barItems = UiUtils.UIUtils.GetChildObjects<LightweightBarItemLinkControl>(rc, typeof(LightweightBarItemLinkControl));
+                            barItems.ForEach(x =>
+                            {
+                                if(x.DataContext is CommandVm)
+                                    (x.DataContext as CommandVm).SetOwner(rd.Row);
+                            });
+
+                            return;
+                        }
+
+                        // level change
+                        if (isNowRoot || rdg.ChildToolCommandsTemplate == null)
+                        {
+                            if (rdg.ToolCommandsTemplate == null)
+                                return;
+                            toolBarControl.ItemsSource = rdg.ToolCommandsTemplate.Select(x => x.Clone(rd.Row));
+                        }
+                        else
+                            toolBarControl.ItemsSource = rdg.ChildToolCommandsTemplate.Select(x => x.Clone(rd.Row));
+                        // level 
+
+                        // TODO: level Changed 
+                        //toolBarControl.ItemsSource = (toolBarControl.ItemsSource as IEnumerable<CommandVm>).Select(_ => _.SetOwner(rd.Row));
+                        //toolBarControl.ItemsSource = ();
                     }
-                    else
-                        toolBarControl.ItemsSource = rdg.ChildToolCommandsTemplate.Select(x => x.Clone(rd.Row));
-                };
+
+                };               
             });
         }
 

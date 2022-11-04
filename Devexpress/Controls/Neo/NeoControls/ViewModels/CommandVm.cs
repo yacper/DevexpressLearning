@@ -35,7 +35,22 @@ public class CommandVm : ViewModelBase
 {
     public override string ToString() => $"Command:{DisplayName}";
 
-    public object Owner { get; set; } // 
+    public virtual object Owner { get; set; } // 
+
+    public CommandVm SetOwner(object newOwner)
+    {
+        Owner = newOwner;
+        Bindings.ForEach(b => 
+        {
+            BindingEngine.ClearBinding(b.Target);
+            if (newOwner != null)                
+                b.Apply();
+        });
+        
+        Commands = Commands?.Select(p => p.SetOwner(newOwner)).ToObservableCollection();
+
+        return this;
+    }
 
     public CommandVm Clone(object owner)
     {
