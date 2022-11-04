@@ -55,7 +55,7 @@ namespace NeoTrader.UI.Controls
             SelectionMode = MultiSelectMode.Row;
             ToolCommandsTemplate  = new();
             if (View == null)
-                View = CreateTableView();
+                View = CreateTreeListView();
 
             InitCommand();
             Loaded += RGridControl_Loaded;
@@ -80,24 +80,24 @@ namespace NeoTrader.UI.Controls
                 ColumnGeneratorTemplate = (DataTemplate)App.Current.FindResource("DefaultColumnTemplate");          // 指定默认Column模板
         }
 
-        private TableView CreateTableView()
+        private RTreeListView CreateTreeListView()
         {
-            var tv = new TableView();            
-            tv.ShowIndicator = false;
-            tv.ShowGroupPanel = false;
-            tv.AllowDragDrop = true;
+            var tlv = new RTreeListView();            
+            tlv.ShowIndicator = false;            
+            tlv.AllowDragDrop = true;
+            
+            tlv.HighlightItemOnHover = true;
+            tlv.DropLimtEnum = TLVDragDropLimtEnum.TableView;
+            tlv.ColumnSortClearMode = ColumnSortClearMode.Click;
 
-            tv.HighlightItemOnHover = true;
-            tv.ColumnSortClearMode = ColumnSortClearMode.Click;
-
-            tv.RowStyle = new Style(typeof(RowControl));
-            tv.RowStyle.Setters.Add(new Setter()
+            tlv.RowStyle = new Style(typeof(RowControl));
+            tlv.RowStyle.Setters.Add(new Setter()
             {
                 Property = RowControl.TemplateProperty,
                 Value = App.Current.FindResource("RDataGrid_RowControlTemplate")
             });
 
-            return tv;
+            return tlv;
         }
 
         private IEnumerable<RColumnItemData> CreateColumns()
