@@ -22,6 +22,7 @@ namespace NeoTrader.UI.Controls
     public enum TLVDragDropLimtEnum
     {
         None,                                  // 可以随意拖拽
+        TableView,                             // 類似TalbeView拖拽 只能有一层，相同层之前不能添加為子結點
         ParentNoAppend                         // 相同的父节点可以拖拽，并不改变拖拽元素的层级
     }
 
@@ -38,6 +39,13 @@ namespace NeoTrader.UI.Controls
         {
             get => (TLVDragDropLimtEnum)GetValue(DropLimtEnumProperty);
             set => SetValue(DropLimtEnumProperty, value);
+        }
+
+        public static DependencyProperty ChildToolCommandsTemplateProperty = DependencyProperty.Register(nameof(ChildToolCommandsTemplate), typeof(ObservableCollection<CommandVm>), typeof(RTreeListView));
+        public ObservableCollection<CommandVm> ChildToolCommandsTemplate
+        {
+            get => (ObservableCollection<CommandVm>)GetValue(ChildToolCommandsTemplateProperty);
+            set => SetValue(ChildToolCommandsTemplateProperty, value);
         }
 
         public ICommand RMouseDoubleClickCommand { get; private set; }
@@ -70,7 +78,7 @@ namespace NeoTrader.UI.Controls
         }
 
         #region Drag
-        private void RTreeListView_StartRecordDrag(object? sender, StartRecordDragEventArgs e)
+        private void RTreeListView_StartRecordDrag(object sender, StartRecordDragEventArgs e)
         {
             dragNodes = new List<TreeListNode>();
             int[] rowHandles = GetSelectedRowHandles();
@@ -80,7 +88,7 @@ namespace NeoTrader.UI.Controls
             }
         }
 
-        private void RTreeListView_DragRecordOver(object? sender, DragRecordOverEventArgs e)   // TODO： IsFromOutside = true 情况
+        private void RTreeListView_DragRecordOver(object sender, DragRecordOverEventArgs e)   // TODO： IsFromOutside = true 情况
         {
             var overNode = GetRowControlNodeByHandle(e.TargetRowHandle);
             if (overNode == null)
@@ -108,12 +116,23 @@ namespace NeoTrader.UI.Controls
                     return;
                 }
 
-                if(e.DropPosition == DropPosition.Append)                           // 兄弟节点直接不能是 Append 模式
+                if(e.DropPosition == DropPosition.Append || e.DropPosition == DropPosition.Inside)                           // 兄弟节点直接不能是 Append 模式
                 {
                     e.Effects = DragDropEffects.None;
                     return;
                 }
             }
+
+            if(DropLimtEnum == TLVDragDropLimtEnum.TableView)
+            {
+                System.Diagnostics.Debug.WriteLine(e.DropPosition);
+                if (e.DropPosition == DropPosition.Append || e.DropPosition == DropPosition.Inside) 
+                {
+                    e.Effects = DragDropEffects.None;
+                    return;
+                }
+            }
+
         }
         #endregion
 

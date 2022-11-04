@@ -279,11 +279,12 @@ namespace NeoControls
             var tlrd = rowData as TreeListRowData;
             if(tlrd.Node.ParentNode == null)  // 根
                 return rdg.ToolCommandsTemplate.Select(_ => _.Clone(rowData.Row));
-            
-            if(tlrd.Node.HasChildren || rdg.ChildToolCommandsTemplate == null)       // has  child 
-                return rdg.ToolCommandsTemplate.Select(_ => _.Clone(rowData.Row));
-            
-            return rdg.ChildToolCommandsTemplate.Select(_=>_.Clone(rowData.Row)); 
+
+            //if(tlrd.Node.HasChildren || rdg.ChildToolCommandsTemplate == null)       // has  child 
+            //    return rdg.ToolCommandsTemplate.Select(_ => _.Clone(rowData.Row));
+
+            //return rdg.ChildToolCommandsTemplate.Select(_=>_.Clone(rowData.Row)); 
+            return null;
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
