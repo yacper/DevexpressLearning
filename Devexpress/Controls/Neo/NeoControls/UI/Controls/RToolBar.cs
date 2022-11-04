@@ -6,8 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using NeoControls;
 
-namespace NeoControls.Controls
+namespace  NeoTrader.UI.Controls
 {
     public class RToolBar : ToolBarControl
     {

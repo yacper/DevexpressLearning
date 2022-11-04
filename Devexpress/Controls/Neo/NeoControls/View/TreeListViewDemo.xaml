@@ -10,7 +10,7 @@
     <Grid>
         <TabControl>
             <TabItem Header="ChildNodePath_OneTools">
-                <controls:RDataGrid ItemsSource="{Binding Tasks}" ToolCommandsTemplate="{Binding DefaultTools}">
+                <controls:RDataGrid ItemsSource="{Binding Tasks}" ToolCommandsTemplate="{Binding DefaultTools}" AlwaysShowToolBar="True">
                     <controls:RDataGrid.View>
                         <controls:RTreeListView ChildNodesPath="ChildTasks" TreeDerivationMode="ChildNodesSelector" DropLimtEnum="ParentNoAppend" AllowDragDrop="True" AllowEditing="False"></controls:RTreeListView>
                     </controls:RDataGrid.View>

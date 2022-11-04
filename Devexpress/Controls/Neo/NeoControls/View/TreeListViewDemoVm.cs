@@ -9,6 +9,7 @@ using System.Windows;
 using DevExpress.Mvvm;
 using Neo.Api.Attributes;
 using NeoTrader;
+using NeoTrader.UI.ViewModels;
 
 namespace NeoControls.View
 {

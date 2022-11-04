@@ -14,7 +14,8 @@ using DevExpress.Mvvm;
 using DevExpress.Mvvm.POCO;
 using DevExpress.Xpf.Bars;
 using NeoTrader;
-using ViewModelBase = NeoTrader.ViewModelBase;
+using NeoTrader.UI.ViewModels;
+using ViewModelBase = NeoTrader.UI.ViewModels.ViewModelBase;
 
 namespace NeoControls;
 
