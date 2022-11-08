@@ -30,6 +30,6 @@
             </TabItem>
         </TabControl>
         <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></GridSplitter>
-        <TextBox Grid.Column="2" Text="{Binding CollectionChangedInfo}"></TextBox>
+        <TextBox Grid.Column="2" Text="{Binding CollectionChangedInfo}" TextWrapping="Wrap"></TextBox>
     </Grid>
 </UserControl>

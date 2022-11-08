@@ -143,7 +143,7 @@ namespace NeoTrader.UI.Controls
 
         private void RTreeListView_CompleteRecordDragDrop(object sender, CompleteRecordDragDropEventArgs e)
         {
-            if (DropLimtEnum == TLVDragDropLimtEnum.None)  
+            if (DropLimtEnum == TLVDragDropLimtEnum.None || e.Effects == DragDropEffects.None)  
                 return;
 
             var rtlv = sender as RTreeListView;
@@ -158,7 +158,6 @@ namespace NeoTrader.UI.Controls
                 e.Handled = true;
                 return;
             }
-            
             
             if (!EParentNoAppendDragDrop(rdg, method, e.Records))          // ParentNoAppend
                 return;
