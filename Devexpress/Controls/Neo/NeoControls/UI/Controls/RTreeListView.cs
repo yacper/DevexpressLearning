@@ -171,7 +171,7 @@ namespace NeoTrader.UI.Controls
             foreach (var item in e.Records)
             {
                 int sidx = source.IndexOf(item);
-                if (sidx != -1)
+                if (sidx < 0)
                     return;
                 method.Invoke(rdg.ItemsSource, new object[] { sidx, tidx });
             }
