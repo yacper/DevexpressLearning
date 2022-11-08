@@ -121,7 +121,7 @@ namespace NeoTrader.UI.Controls
                     return;
                 }
 
-                if(e.DropPosition == DropPosition.Append || e.DropPosition == DropPosition.Inside)                           // 兄弟节点直接不能是 Append 模式
+                if(e.DropPosition == DropPosition.Inside)                           // 兄弟节点直接不能是 Append 模式
                 {
                     e.Effects = DragDropEffects.None;
                     return;
@@ -131,7 +131,7 @@ namespace NeoTrader.UI.Controls
             if(DropLimtEnum == TLVDragDropLimtEnum.TableView)
             {
                 //System.Diagnostics.Debug.WriteLine(e.DropPosition);
-                if (e.DropPosition == DropPosition.Append || e.DropPosition == DropPosition.Inside) 
+                if (e.DropPosition == DropPosition.Inside) 
                 {
                     e.Effects = DragDropEffects.None;
                     return;
@@ -150,10 +150,29 @@ namespace NeoTrader.UI.Controls
 
             List<int> idxs = new List<int>();
             var source = rdg.ItemsSource as IList;
-            int tidx = overEventArgs.TargetRowHandle - 1;
+
+            int tidx = overEventArgs.TargetRowHandle;
+            var dropPosition = overEventArgs.DropPosition;            
+            switch (dropPosition)
+            {
+                case DropPosition.Append:
+                    tidx = source.Count - 1;
+                    break;
+                case DropPosition.Inside:
+                    break;
+                case DropPosition.After:
+                    tidx++;
+                    break;
+                case DropPosition.Before:
+                    tidx--;
+                    break;
+            }
+            
             foreach (var item in e.Records)
             {
                 int sidx = source.IndexOf(item);
+                if (sidx != -1)
+                    return;
                 method.Invoke(rdg.ItemsSource, new object[] { sidx, tidx });
             }
             
