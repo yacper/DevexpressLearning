@@ -161,10 +161,10 @@ namespace NeoTrader.UI.Controls
                 case DropPosition.Inside:
                     break;
                 case DropPosition.After:
-                    tidx++;
+                    tidx = ++tidx > source.Count -1 ? source.Count - 1 : tidx;
                     break;
                 case DropPosition.Before:
-                    tidx--;
+                    tidx = --tidx < 0 ? 0 : tidx;                    
                     break;
             }
             
