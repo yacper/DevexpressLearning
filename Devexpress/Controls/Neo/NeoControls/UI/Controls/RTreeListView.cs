@@ -143,13 +143,13 @@ namespace NeoTrader.UI.Controls
 
         private void RTreeListView_CompleteRecordDragDrop(object sender, CompleteRecordDragDropEventArgs e)
         {
-            if (DropLimtEnum == TLVDragDropLimtEnum.None || e.Effects == DragDropEffects.None)  
+            if (e.Effects == DragDropEffects.None || DropLimtEnum == TLVDragDropLimtEnum.None || overEventArgs == null)
                 return;
 
             var rtlv = sender as RTreeListView;
             var rdg = UiUtils.UIUtils.GetParentObject<RDataGrid>(rtlv);
             var method = rdg.ItemsSource.GetType().GetMethod("Move");
-            if (overEventArgs == null || rdg == null || rdg.ItemsSource == null || method == null)       // 沒有其他好的方法，通過 Move 方法來判斷當前是 ObservableCollection
+            if (rdg == null || rdg.ItemsSource == null || method == null)       // 沒有其他好的方法，通過 Move 方法來判斷當前是 ObservableCollection
                 return;
 
             if (DropLimtEnum == TLVDragDropLimtEnum.TableView)           // TableView
