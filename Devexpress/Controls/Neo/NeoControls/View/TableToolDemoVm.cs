@@ -230,7 +230,7 @@ namespace NeoControls.View
                     CollectionChangedInfo += $"oldIdx: {e.OldStartingIndex}, Data: {e.OldItems}--   newIdx: {e.NewStartingIndex}, Data: {e.NewItems}\n";
                     break;
                 case System.Collections.Specialized.NotifyCollectionChangedAction.Move:
-                    CollectionChangedInfo += $"oldIdx: {e.OldStartingIndex}, Data: {e.OldItems}--   newIdx: {e.NewStartingIndex}, Data: {e.NewItems}\n";
+                    CollectionChangedInfo += $"oldIdx: {e.OldStartingIndex}, Data: {e.OldItems[0]}--   newIdx: {e.NewStartingIndex}, Data: {e.NewItems[0]}\n";
                     break;
                 case System.Collections.Specialized.NotifyCollectionChangedAction.Reset:
                     CollectionChangedInfo += $"oldIdx: {e.OldStartingIndex}, Data: {e.OldItems}--   newIdx: {e.NewStartingIndex}, Data: {e.NewItems}\n";
