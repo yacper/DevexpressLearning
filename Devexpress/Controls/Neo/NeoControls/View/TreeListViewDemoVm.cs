@@ -26,6 +26,10 @@ namespace NeoControls.View
 
     public class Task: BindableBase
     {
+        public override string ToString()
+        {
+            return $" TaskId: {TaskId}, Name: {TaskName}, Progress: {Progress}, Status：{Status}";
+        }
         public Guid TaskId { get; set; }
         [Stat]
         public string TaskName { get=>GetProperty(()=>TaskName); set=>SetProperty(()=>TaskName, value); }
@@ -92,6 +96,8 @@ namespace NeoControls.View
     {
         public ObservableCollection<Task> Tasks { get; set; }
 
+        public string CollectionChangedInfo { get => GetProperty(() => CollectionChangedInfo); set => SetProperty(() => CollectionChangedInfo, value); }
+
         public ObservableCollection<CommandVm> DefaultTools { get; set; }
         public ObservableCollection<CommandVm> ChildToolsTemplate { get; set; }
 
@@ -124,9 +130,67 @@ namespace NeoControls.View
                         //new Task(){ TaskId= Guid.NewGuid(),   Progress = 0, TaskName = $"Task{i} ==> Child Task 3"},
                         //new Task(){ TaskId= Guid.NewGuid(),   Progress = 0, TaskName = $"Task{i} ==> Child Task 4"},
                     }
+                    
                 };
+                task.ChildTasks.CollectionChanged += ChildTasks_CollectionChanged;
 
                 Tasks.Add(task);
+            }
+
+            Tasks.CollectionChanged += Tasks_CollectionChanged;            
+        }
+
+        private void ChildTasks_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            CollectionChangedInfo += $"****ChildTasks**** Action:  {e.Action} --- ";
+            switch (e.Action)
+            {
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
+                    foreach (var item in e.NewItems)
+                        CollectionChangedInfo += $"newIdx: {e.NewStartingIndex}, Data: {item} \n";
+                    break;
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Remove:
+                    foreach (var item in e.OldItems)
+                        CollectionChangedInfo += $"oldIdx: {e.OldStartingIndex}, Data: {item} \n";
+                    break;
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Replace:
+                    CollectionChangedInfo += $"oldIdx: {e.OldStartingIndex}, Data: {e.OldItems} ---->  newIdx: {e.NewStartingIndex}, Data: {e.NewItems}\n";
+                    break;
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Move:
+                    CollectionChangedInfo += $"oldIdx: {e.OldStartingIndex}, Data: {e.OldItems[0]} ---->   newIdx: {e.NewStartingIndex}, Data: {e.NewItems[0]}\n";
+                    break;
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Reset:
+                    CollectionChangedInfo += $"oldIdx: {e.OldStartingIndex}, Data: {e.OldItems} ---->   newIdx: {e.NewStartingIndex}, Data: {e.NewItems}\n";
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void Tasks_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            CollectionChangedInfo += $"****RootTasks**** Action:  {e.Action} --- ";
+            switch (e.Action)
+            {
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
+                    foreach (var item in e.NewItems)
+                        CollectionChangedInfo += $"newIdx: {e.NewStartingIndex}, Data: {item} \n";
+                    break;
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Remove:
+                    foreach (var item in e.OldItems)
+                        CollectionChangedInfo += $"oldIdx: {e.OldStartingIndex}, Data: {item} \n";
+                    break;
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Replace:
+                    CollectionChangedInfo += $"oldIdx: {e.OldStartingIndex}, Data: {e.OldItems} ---->  newIdx: {e.NewStartingIndex}, Data: {e.NewItems}\n";
+                    break;
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Move:
+                    CollectionChangedInfo += $"oldIdx: {e.OldStartingIndex}, Data: {e.OldItems[0]} ---->   newIdx: {e.NewStartingIndex}, Data: {e.NewItems[0]}\n";
+                    break;
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Reset:
+                    CollectionChangedInfo += $"oldIdx: {e.OldStartingIndex}, Data: {e.OldItems} ---->   newIdx: {e.NewStartingIndex}, Data: {e.NewItems}\n";
+                    break;
+                default:
+                    break;
             }
         }
 

@@ -8,7 +8,12 @@
              Background="Black"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TabControl>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="10"></ColumnDefinition>
+            <ColumnDefinition MinWidth="200"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TabControl Grid.Column="0">
             <TabItem Header="ChildNodePath_OneTools">
                 <controls:RDataGrid ItemsSource="{Binding Tasks}" ToolCommandsTemplate="{Binding DefaultTools}" AlwaysShowToolBar="True">
                     <controls:RDataGrid.View>
@@ -24,6 +29,7 @@
                 </controls:RDataGrid>
             </TabItem>
         </TabControl>
-        
+        <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></GridSplitter>
+        <TextBox Grid.Column="2" Text="{Binding CollectionChangedInfo}"></TextBox>
     </Grid>
 </UserControl>
