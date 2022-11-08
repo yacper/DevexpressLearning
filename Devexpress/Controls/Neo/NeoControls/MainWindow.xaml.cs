@@ -100,6 +100,17 @@ namespace NeoControls
             w.Content = new TreeListViewDemo();
             w.Show();
         }
+
+        private void MenuItem_Click_4(object sender, RoutedEventArgs e)
+        {
+            Window w = new Window()
+            {
+                Name = "DragDrop"
+            };
+
+            w.Content = new DropDragTest();
+            w.Show();
+        }
     }
 
     public class BarItemDataTemplateSelector : DataTemplateSelector

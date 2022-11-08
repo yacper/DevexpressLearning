@@ -66,10 +66,10 @@
                 <StackPanel HorizontalAlignment="Right" Grid.Row="1">
                     <dxb:BarContainerControl >
                         <dxb:ToolBarControl RotateWhenVertical="True" 
-                                    ShowDragWidget="False" 
-                                    AllowCustomizationMenu="False"
-                                    ItemsSource="{Binding TextBoxOpVms}"                                 
-                                    ItemTemplateSelector="{DynamicResource BarItemDataTemplateSelector}">
+                                            ShowDragWidget="False" 
+                                            AllowCustomizationMenu="False"
+                                            ItemsSource="{Binding TextBoxOpVms}"                                 
+                                            ItemTemplateSelector="{DynamicResource BarItemDataTemplateSelector}">
                         </dxb:ToolBarControl>
                     </dxb:BarContainerControl>
                 </StackPanel>
