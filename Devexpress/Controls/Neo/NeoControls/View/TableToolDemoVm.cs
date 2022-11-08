@@ -68,7 +68,7 @@ namespace NeoControls.View
         private void InitPeople()
         {
             People = new ObservableCollection<Person>();
-            for (int i = 0; i < 500; i++)
+            for (int i = 0; i < 10; i++)
             {
                 People.Add(new Person() { Name = $" 张三{i}", Age = i });
             }

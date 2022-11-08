@@ -68,7 +68,19 @@ public class MainWindowVm : VmBase
                 w.Content = new TableToolsDemo();
                 w.Show();
 
+            })),
+  new CommandVm("DragDrop",new DelegateCommand(() =>
+            {
+                Window w = new Window()
+            {
+                Name = "DragDrop"
+            };
+
+            w.Content = new DropDragTest();
+            w.Show();
+
             }))
+
 
         };
 

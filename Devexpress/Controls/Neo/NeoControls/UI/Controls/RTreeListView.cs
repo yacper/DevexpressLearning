@@ -60,6 +60,8 @@ namespace NeoTrader.UI.Controls
 
             DragRecordOver += RTreeListView_DragRecordOver;
             StartRecordDrag += RTreeListView_StartRecordDrag;
+            CompleteRecordDragDrop += RTreeListView_CompleteRecordDragDrop;
+
 
             RMouseDoubleClickCommand = new DelegateCommand<TreeListRowData>(tlr => 
             {
@@ -98,7 +100,9 @@ namespace NeoTrader.UI.Controls
                 return;
             }
 
-            if(DropLimtEnum == TLVDragDropLimtEnum.ParentNoAppend)           // 只能在相同的父节点中拖拽
+            overEventArgs = e;
+
+            if (DropLimtEnum == TLVDragDropLimtEnum.ParentNoAppend)           // 只能在相同的父节点中拖拽
             {
                 int level = dragNodes[0].ActualLevel;
                 var pNode = dragNodes[0].ParentNode;
@@ -117,7 +121,7 @@ namespace NeoTrader.UI.Controls
                     return;
                 }
 
-                if(e.DropPosition == DropPosition.Append || e.DropPosition == DropPosition.Inside)                           // 兄弟节点直接不能是 Append 模式
+                if(e.DropPosition == DropPosition.Inside)                           // 兄弟节点直接不能是 Append 模式
                 {
                     e.Effects = DragDropEffects.None;
                     return;
@@ -127,13 +131,53 @@ namespace NeoTrader.UI.Controls
             if(DropLimtEnum == TLVDragDropLimtEnum.TableView)
             {
                 //System.Diagnostics.Debug.WriteLine(e.DropPosition);
-                if (e.DropPosition == DropPosition.Append || e.DropPosition == DropPosition.Inside) 
+                if (e.DropPosition == DropPosition.Inside) 
                 {
                     e.Effects = DragDropEffects.None;
                     return;
                 }
             }
 
+        }
+
+        private void RTreeListView_CompleteRecordDragDrop(object sender, CompleteRecordDragDropEventArgs e)
+        {
+            var rtlv = sender as RTreeListView;
+            var rdg = UiUtils.UIUtils.GetParentObject<RDataGrid>(rtlv);
+            var method = rdg.ItemsSource.GetType().GetMethod("Move");
+            if (rdg == null || rdg.ItemsSource == null || method == null)       // 沒有其他好的方法，通過 Move 方法來判斷當前是 ObservableCollection
+                return;
+
+            List<int> idxs = new List<int>();
+            var source = rdg.ItemsSource as IList;
+
+            int tidx = overEventArgs.TargetRowHandle;
+            var dropPosition = overEventArgs.DropPosition;            
+            switch (dropPosition)
+            {
+                case DropPosition.Append:
+                    tidx = source.Count - 1;
+                    break;
+                case DropPosition.Inside:
+                    break;
+                case DropPosition.After:
+                    tidx++;
+                    break;
+                case DropPosition.Before:
+                    tidx--;
+                    break;
+            }
+            
+            foreach (var item in e.Records)
+            {
+                int sidx = source.IndexOf(item);
+                if (sidx != -1)
+                    return;
+                method.Invoke(rdg.ItemsSource, new object[] { sidx, tidx });
+            }
+            
+            e.Handled = true;
+            
         }
         #endregion
 
@@ -147,5 +191,6 @@ namespace NeoTrader.UI.Controls
 
 
         private List<TreeListNode> dragNodes;
+        private DragRecordOverEventArgs overEventArgs;
     }
 }
