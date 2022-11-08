@@ -47,11 +47,11 @@ public class Provider : BindableBase
 /// <summary>
 /// SiginTools.xaml 的交互逻辑
 /// </summary>
-public partial class SiginTools : UserControl
+public partial class BarItems : UserControl
 {
     public ObservableCollection<CommandVm> PVms { get; set; }
 
-    public SiginTools()
+    public BarItems()
     {
         InitializeComponent();
         this.DataContext = this;
@@ -82,7 +82,11 @@ public partial class SiginTools : UserControl
 
         CommandVm vmSep1 = new CommandVm() { IsSeparator = true };
 
-        CommandVm vm2 = vm.Clone(new Provider() { Name = "p2",  }).WithProperty(p=>p.BadgeContent, Images.ConnectedStatus);
+        CommandVm vm2 = vm.Clone(new Provider() { Name = "p2", }).WithProperty(p => p.KeyGesture, new KeyGesture(Key.D2, ModifierKeys.Control));
+
+
+            //.WithProperty(p=>p.BadgeContent, Images.ConnectedStatus);
+            ;
         vm2.KeyGesture = new KeyGesture(Key.D2, ModifierKeys.Control);
 
 

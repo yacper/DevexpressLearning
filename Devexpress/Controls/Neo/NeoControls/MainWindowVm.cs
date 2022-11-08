@@ -13,6 +13,8 @@ using System.Windows.Input;
 using DevExpress.Mvvm;
 using DevExpress.Mvvm.POCO;
 using DevExpress.Xpf.Bars;
+using DevExpress.Xpf.Core;
+using NeoControls.View;
 using NeoTrader;
 using NeoTrader.UI.ViewModels;
 
@@ -20,8 +22,57 @@ namespace NeoControls;
 
 public class MainWindowVm : VmBase
 {
+    public ObservableCollection<CommandVm> MenuVms { get; set; } 
+
+    public ObservableCollection<int> Ints { get; set; } 
+
     public MainWindowVm()
     {
+        Ints = new() { 1, 2, 3, 4 };
+        Ints.CollectionChanged += (s, e) =>
+        {
+
+        };
+        Ints.Move(2, 1);
+
+
+
+
+        MenuVms = new()
+        {
+            new CommandVm("ThemeTest",new DelegateCommand(() =>
+            {
+                Window w = new ThemeTest();            
+                w.Show();
+            })),
+
+
+            new CommandVm("BarItems",new DelegateCommand(() =>
+            {
+                Window w = new Window()
+                {
+                    Name = "BarItems"
+                };
+
+                w.Content = new BarItems();
+                w.Show();
+
+            })),
+            new CommandVm("TableTool",new DelegateCommand(() =>
+            {
+                Window w = new Window()
+                {
+                    Name = "TableTool"
+                };
+
+                w.Content = new TableToolsDemo();
+                w.Show();
+
+            }))
+
+        };
+
+
         DisplayName = "hello";
 
 

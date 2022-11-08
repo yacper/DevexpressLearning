@@ -1,0 +1,9 @@
+﻿<!--基本Theme设置-->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:themes="http://schemas.devexpress.com/winfx/2008/xaml/core/themekeys">
+    <ResourceDictionary.MergedDictionaries>
+        <themes:ResourceDictionaryEx Source="/DevExpress.Xpf.Themes.VS2019Dark.v22.1;component/Core/Core/Themes/VS2019Dark/Palettes_Base.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    <SolidColorBrush x:Key="{themes:PaletteBrushThemeKey ResourceKey=Bull}">$Bull</SolidColorBrush>
+</ResourceDictionary>

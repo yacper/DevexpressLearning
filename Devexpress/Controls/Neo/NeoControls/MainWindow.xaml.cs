@@ -86,7 +86,7 @@ namespace NeoControls
                 Name = "单个Tools"
             };
 
-            w.Content = new SiginTools();
+            w.Content = new BarItems();
             w.Show();
         }
 
