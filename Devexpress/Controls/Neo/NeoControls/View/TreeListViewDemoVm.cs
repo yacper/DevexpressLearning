@@ -28,7 +28,7 @@ namespace NeoControls.View
     {
         public override string ToString()
         {
-            return $" TaskId: {TaskId}, Name: {TaskName}, Progress: {Progress}, Status：{Status}";
+            return $"Task Name: {TaskName}";
         }
         public Guid TaskId { get; set; }
         [Stat]
