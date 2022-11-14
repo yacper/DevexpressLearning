@@ -29,5 +29,6 @@
         <MenuItem Header="单个 Tool" Click="MenuItem_Click_2"></MenuItem>
         <MenuItem Header="TreeListView" Click="MenuItem_Click_3"></MenuItem>
         <MenuItem Header="DragDrop" Click="MenuItem_Click_4"></MenuItem>
+        <MenuItem Header="TabControlTest" Click="MenuItem_Click_5"></MenuItem>
     </Menu>
 </Window>

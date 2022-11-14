@@ -82,7 +82,7 @@ public partial class SiginTools : UserControl
 
         CommandVm vmSep1 = new CommandVm() { IsSeparator = true };
 
-        CommandVm vm2 = vm.Clone(new Provider() { Name = "p2",  }).WithProperty(p=>p.BadgeContent, Images.ConnectedStatus);
+        CommandVm vm2 = vm.Clone(new Provider() { Name = "p2",  });
         vm2.KeyGesture = new KeyGesture(Key.D2, ModifierKeys.Control);
 
 
@@ -96,9 +96,11 @@ public partial class SiginTools : UserControl
         vm4.Alignment = BarItemAlignment.Far;
 
         CommandVm vmSep3 = new CommandVm() { IsSeparator = true, Alignment = BarItemAlignment.Far };
-        CommandVm vm5    = vm.Clone(new Provider() { Name = "p5" });
+        CommandVm vm5    = vm.Clone(new Provider() { Name = "p5", });
         vm5.KeyGesture = new KeyGesture(Key.D5, ModifierKeys.Control);
         vm5.Alignment = BarItemAlignment.Far;
+        vm5.IsCheckBox = true;
+        vm5.IsChecked = false;
 
 
         var otherTools = new CommandVm()

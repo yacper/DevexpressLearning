@@ -16,6 +16,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using NeoTrader.UI.ViewModels;
+using System.Windows.Controls.Primitives;
 
 namespace NeoTrader.UI.Controls
 {
@@ -48,9 +49,12 @@ namespace NeoTrader.UI.Controls
             set=>SetValue(CellTemplateSelectorProperty, value);
         }
 
+        protected ObservableCollection<UI.ViewModels.CommandVm> ContextMenuVms { get; set; }           // 存储右键的VMS
+
         public ICommand RowControlLoadCommand { get; private set; }
         public ICommand RMouseDoubleClickCommand { get; private set; }
         public ICommand CellsControlParentPannelLoadCommand { get; private set; }
+        public ICommand RMouseRightClickCommand { get; private set; }
 
         public RDataGrid(): base()
         {
@@ -66,20 +70,22 @@ namespace NeoTrader.UI.Controls
         private void InitCommand()
         {
             InitRowControlLoadCommand();
-            InitRMouseDoubleClickCommand();
+            InitRMouseRightClickCommand();
+            InitRMouseDoubleClickCommand();            
             InitCellsControlParentPannelLoadCommand();
         }
 
         private void RGridControl_Loaded(object sender, RoutedEventArgs e)
         {
-            if (ItemsSource == null)
-                return;
-
             if(Columns.Count() == 0 && ColumnsSource == null)            
                 ColumnsSource = CreateColumns();                
             
             if(ColumnGeneratorTemplate == null && ColumnsSource != null)
                 ColumnGeneratorTemplate = (DataTemplate)App.Current.FindResource("DefaultColumnTemplate");          // 指定默认Column模板
+
+
+            
+
         }
 
         private RTreeListView CreateTreeListView()
@@ -240,6 +246,32 @@ namespace NeoTrader.UI.Controls
 
                 var rowData = rc.DataContext as TreeListRowData;
                 rowData.Node.IsExpanded = !rowData.IsExpanded;
+            });
+        }
+
+        private void InitRMouseRightClickCommand()
+        {
+            RMouseRightClickCommand = new DelegateCommand<RowControl>((rc) =>
+            {
+                if (!(rc.DataContext is TreeListRowData))
+                    return;
+
+                var rdg = UiUtils.UIUtils.GetParentObject<RDataGrid>(rc);
+                var toolBarControl = UiUtils.UIUtils.GetChildObject<ToolBarControl>(rc, typeof(ToolBarControl));
+                var vms = toolBarControl.ItemsSource as IEnumerable<UI.ViewModels.CommandVm>;
+
+
+                PopupMenu popup = new PopupMenu();
+                popup.StaysOpen = false;
+                popup.PlacementTarget = rc;
+                popup.Placement = PlacementMode.MousePoint;
+
+                popup.ItemLinksSource = vms;
+                popup.ItemTemplateSelector = (DataTemplateSelector)App.Current.FindResource("BarItemDataTemplateSelector");
+                
+
+                popup.IsOpen = true;
+
             });
         }
     }

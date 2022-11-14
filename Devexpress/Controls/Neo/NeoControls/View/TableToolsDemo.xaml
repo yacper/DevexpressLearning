@@ -23,7 +23,7 @@
 
             <TabControl Grid.Column="0">
                 <TabItem Header="TableView">
-                    <controls:RDataGrid ItemsSource="{Binding People}" ToolCommandsTemplate="{Binding DefaultTools}"  AlwaysShowToolBar="True">
+                    <controls:RDataGrid ItemsSource="{Binding People}" ToolCommandsTemplate="{Binding DefaultTools}"  AlwaysShowToolBar="True" >
                         <dxg:GridControl.Columns>
                             <dxg:GridColumn Header="Name" FieldName="Name"  ></dxg:GridColumn>
                             <dxg:GridColumn Header="Age" FieldName="Age" ></dxg:GridColumn>
