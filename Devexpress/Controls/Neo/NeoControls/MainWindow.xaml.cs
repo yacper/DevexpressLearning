@@ -111,6 +111,17 @@ namespace NeoControls
             w.Content = new DropDragTest();
             w.Show();
         }
+
+        private void MenuItem_Click_5(object sender, RoutedEventArgs e)
+        {
+            Window w = new Window()
+            {
+                Name = "TabControl"
+            };
+
+            w.Content = new TabViewTest();
+            w.Show();
+        }
     }
 
   

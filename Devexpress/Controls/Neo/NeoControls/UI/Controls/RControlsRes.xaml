@@ -327,7 +327,7 @@
                 <Border x:Name="Background" Background="{TemplateBinding Background}"/>
                 <Border x:Name="BottomLine" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,0,0,1" VerticalAlignment="Bottom" />
                 <Grid x:Name="PART_LayoutPanel"/>
-                <ContentControl x:Name="PART_TOOLS"                            
+                <ContentControl x:Name="PART_TOOLS" 
                             DataContext="{Binding RelativeSource={RelativeSource AncestorLevel=1,AncestorType=controls:RDataGrid,Mode=FindAncestor}}"
                             Template="{StaticResource RDataGrid_RowCommonToolsTemplate}">
                     <ContentControl.Visibility>
@@ -343,19 +343,24 @@
                                        Command="{Binding RMouseDoubleClickCommand, RelativeSource={RelativeSource Mode=FindAncestor,AncestorLevel=1,AncestorType=neoTraderControls:RDataGrid}}" 
                                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorLevel=1, AncestorType=dxg:RowControl,Mode=FindAncestor}}">
                     </dxmvvm:EventToCommand>
+                    <dxmvvm:EventToCommand EventName="MouseRightButtonUp" 
+                                       SourceName="PART_ROOT"
+                                       Command="{Binding RMouseRightClickCommand, RelativeSource={RelativeSource Mode=FindAncestor,AncestorLevel=1,AncestorType=neoTraderControls:RDataGrid}}" 
+                                       CommandParameter="{Binding RelativeSource={RelativeSource AncestorLevel=1, AncestorType=dxg:RowControl,Mode=FindAncestor}}">
+                    </dxmvvm:EventToCommand>
                     <dxmvvm:EventToCommand EventName="Loaded" 
                                        SourceName="PART_LayoutPanel"
                                        Command="{Binding CellsControlParentPannelLoadCommand, RelativeSource={RelativeSource Mode=FindAncestor,AncestorLevel=1,AncestorType=neoTraderControls:RDataGrid}}" 
                                        CommandParameter="{Binding ElementName=PART_LayoutPanel}">
                     </dxmvvm:EventToCommand>
-                    
+
                     <dxmvvm:EventToCommand EventName="Loaded"                                            
                                            SourceObject="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorLevel=1,AncestorType=dxg:RowControl}}"
                                            Command="{Binding RowControlLoadCommand, RelativeSource={RelativeSource Mode=FindAncestor,AncestorLevel=1,AncestorType=neoTraderControls:RDataGrid}}" 
                                            CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorLevel=1,AncestorType=dxg:RowControl}}">
                     </dxmvvm:EventToCommand>
                 </dxmvvm:Interaction.Behaviors>
-            </Grid>
+            </Grid>            
         </ContentControl>
         <ControlTemplate.Triggers>
             <Trigger Property="ShowHorizontalLine" Value="False">

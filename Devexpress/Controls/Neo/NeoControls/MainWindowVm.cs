@@ -22,32 +22,27 @@ namespace NeoControls;
 
 public class MainWindowVm : VmBase
 {
-    public ObservableCollection<CommandVm> MenuVms { get; set; } 
+    public ObservableCollection<CommandVm> MenuVms { get; set; }
 
-    public ObservableCollection<int> Ints { get; set; } 
+    public ObservableCollection<int> Ints { get; set; }
 
     public MainWindowVm()
     {
-        Ints = new() { 1, 2, 3, 4 };
-        Ints.CollectionChanged += (s, e) =>
-        {
-
-        };
+        Ints                   =  new() { 1, 2, 3, 4 };
+        Ints.CollectionChanged += (s, e) => { };
         Ints.Move(2, 1);
-
-
 
 
         MenuVms = new()
         {
-            new CommandVm("ThemeTest",new DelegateCommand(() =>
+            new CommandVm("ThemeTest", new DelegateCommand(() =>
             {
-                Window w = new ThemeTest();            
+                Window w = new ThemeTest();
                 w.Show();
             })),
 
 
-            new CommandVm("BarItems",new DelegateCommand(() =>
+            new CommandVm("BarItems", new DelegateCommand(() =>
             {
                 Window w = new Window()
                 {
@@ -56,9 +51,8 @@ public class MainWindowVm : VmBase
 
                 w.Content = new BarItems();
                 w.Show();
-
             })),
-            new CommandVm("TableTool",new DelegateCommand(() =>
+            new CommandVm("TableTool", new DelegateCommand(() =>
             {
                 Window w = new Window()
                 {
@@ -67,35 +61,42 @@ public class MainWindowVm : VmBase
 
                 w.Content = new TableToolsDemo();
                 w.Show();
-
             })),
-  new CommandVm("DragDrop",new DelegateCommand(() =>
+            new CommandVm("TreeListViewDemo", new DelegateCommand(() =>
             {
                 Window w = new Window()
+                {
+                    Name = "DragDrop"
+                };
+
+                w.Content = new TreeListViewDemo();
+                w.Show();
+            })),
+
+
+            new CommandVm("DragDrop", new DelegateCommand(() =>
             {
-                Name = "DragDrop"
-            };
+                Window w = new Window()
+                {
+                    Name = "DragDrop"
+                };
 
-            w.Content = new DropDragTest();
-            w.Show();
-
+                w.Content = new DropDragTest();
+                w.Show();
             }))
-
-
         };
 
 
         DisplayName = "hello";
 
 
-        ToolButtonVm =new CommandVm("null", new DelegateCommand(() => { Debug.WriteLine(DisplayName); }))
-        {
-            Glyph = Images.Account,
-            DisplayMode = BarItemDisplayMode.ContentAndGlyph
-        }
-                                                              .WithPropertyBinding(p => DisplayName, this, n => DisplayName).
-                                                              WithPropertyBinding(p => BadgeContent, this, n => BadgeContent)
-                                                        ;
+        ToolButtonVm = new CommandVm("null", new DelegateCommand(() => { Debug.WriteLine(DisplayName); }))
+                       {
+                           Glyph       = Images.Account,
+                           DisplayMode = BarItemDisplayMode.ContentAndGlyph
+                       }
+                       .WithPropertyBinding(p => DisplayName, this, n => DisplayName).WithPropertyBinding(p => BadgeContent, this, n => BadgeContent)
+            ;
 
         this.PropertyChanged += (s, e) => { Debug.WriteLine(e.PropertyName + " Changed"); };
     }
@@ -131,27 +132,34 @@ public class MainWindowVm : VmBase
 
     public KeyGesture KeyGesture { get; set; } = new KeyGesture(Key.F, ModifierKeys.Alt);
 
-    public virtual ObservableCollection<CommandVm> ToolBarsVms { get; set; } = new ObservableCollection<CommandVm>() 
+    public virtual ObservableCollection<CommandVm> ToolBarsVms { get; set; } = new ObservableCollection<CommandVm>()
     {
         new CommandVm("ContentAndGlyph", new DelegateCommand(() => { }))
-        {Glyph = Images.Account, DisplayMode=BarItemDisplayMode.ContentAndGlyph, KeyGesture=new KeyGesture(Key.A, ModifierKeys.Control), Commands = new ObservableCollection<CommandVm>()
         {
-            new CommandVm("Content", new DelegateCommand(() => { }))
-            { DisplayMode=BarItemDisplayMode.Content, KeyGesture=new KeyGesture(Key.A, ModifierKeys.Control)},
-            new CommandVm("ContentAndGlyph", new DelegateCommand(() => { }))
-            { DisplayMode=BarItemDisplayMode.ContentAndGlyph, Glyph=Images.Trading},
-            new CommandVm("ContentAndGlyphAndState", new DelegateCommand(() => { }))
-            { DisplayMode=BarItemDisplayMode.ContentAndGlyph,Glyph=Images.Trading, StateImg = Images.ConnectingStatus, KeyGesture=new KeyGesture(Key.A, ModifierKeys.Control)},
-            new CommandVm("ContentAndGlyphAndStateAddBage", new DelegateCommand(() => { }))
-            { DisplayMode=BarItemDisplayMode.ContentAndGlyph,Glyph=Images.Trading, StateImg = Images.ConnectingStatus, BadgeContent="F",KeyGesture=new KeyGesture(Key.A, ModifierKeys.Control)},
-        } },
-        new CommandVm("Content", new DelegateCommand(() => {  }))
-        {DisplayMode=BarItemDisplayMode.Content},
+            Glyph = Images.Account, DisplayMode = BarItemDisplayMode.ContentAndGlyph, KeyGesture = new KeyGesture(Key.A, ModifierKeys.Control), Commands = new ObservableCollection<CommandVm>()
+            {
+                new CommandVm("Content", new DelegateCommand(() => { }))
+                    { DisplayMode = BarItemDisplayMode.Content, KeyGesture = new KeyGesture(Key.A, ModifierKeys.Control) },
+                new CommandVm("ContentAndGlyph", new DelegateCommand(() => { }))
+                    { DisplayMode = BarItemDisplayMode.ContentAndGlyph, Glyph = Images.Trading },
+                new CommandVm("ContentAndGlyphAndState", new DelegateCommand(() => { }))
+                    { DisplayMode = BarItemDisplayMode.ContentAndGlyph, Glyph = Images.Trading, StateImg = Images.ConnectingStatus, KeyGesture = new KeyGesture(Key.A, ModifierKeys.Control) },
+                new CommandVm("ContentAndGlyphAndStateAddBage", new DelegateCommand(() => { }))
+                {
+                    DisplayMode = BarItemDisplayMode.ContentAndGlyph, Glyph = Images.Trading, StateImg = Images.ConnectingStatus, BadgeContent = "F",
+                    KeyGesture  = new KeyGesture(Key.A, ModifierKeys.Control)
+                },
+            }
+        },
+        new CommandVm("Content", new DelegateCommand(() => { }))
+            { DisplayMode = BarItemDisplayMode.Content },
         new CommandVm("Glyph", new DelegateCommand(() => { }))
-        {Glyph = Images.Account},
+            { Glyph = Images.Account },
         new CommandVm("ContentAndGlyphAndState", new DelegateCommand(() => { }))
-        {DisplayMode=BarItemDisplayMode.ContentAndGlyph,Glyph=Images.Trading, StateImg = Images.ConnectingStatus},
+            { DisplayMode = BarItemDisplayMode.ContentAndGlyph, Glyph = Images.Trading, StateImg = Images.ConnectingStatus },
         new CommandVm("ContentAndGlyphAndStateAndBadge", new DelegateCommand(() => { }))
-        {DisplayMode=BarItemDisplayMode.ContentAndGlyph,Glyph=Images.Trading, StateImg = Images.ConnectingStatus, BadgeContent="F",KeyGesture=new KeyGesture(Key.A, ModifierKeys.Control)},
+        {
+            DisplayMode = BarItemDisplayMode.ContentAndGlyph, Glyph = Images.Trading, StateImg = Images.ConnectingStatus, BadgeContent = "F", KeyGesture = new KeyGesture(Key.A, ModifierKeys.Control)
+        },
     };
 }
