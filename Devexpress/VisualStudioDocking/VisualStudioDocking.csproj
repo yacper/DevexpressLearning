@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0-windows</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <RootNamespace>VisualStudioDocking</RootNamespace>
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
@@ -298,9 +298,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-     <PackageReference Include="DevExpress.Wpf.Demos" Version="21.*" />
-    <PackageReference Include="DevExpress.Wpf" Version="21.*" />
-    <PackageReference Include="DevExpress.Wpf.Themes.All" Version="21.*" />
-  </ItemGroup>
+	<ItemGroup>
+	
+    <PackageReference Include="DevExpress.Wpf.Demos" Version="22.2.4" />
+    <PackageReference Include="DevExpress.Wpf" Version="22.2.4" />
+    <PackageReference Include="DevExpress.Wpf.Themes.All" Version="22.2.4" />
+	</ItemGroup>
 </Project>
