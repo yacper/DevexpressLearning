@@ -5,7 +5,18 @@
 // purpose:
 // modifiers:
 
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
+using System.Windows.Media;
+using DevExpress.Mvvm;
+using DevExpress.Mvvm.Native;
+using DevExpress.Mvvm.POCO;
+using DevExpress.Xpf.Accordion;
 using DevExpress.Xpf.Docking;
+using DevExpress.Xpf.PropertyGrid;
 
 namespace VisualStudioDocking.ViewModels;
 
@@ -23,3 +34,4 @@ abstract public class PanelWorkspaceViewModel : WorkspaceViewModel, IMVVMDocking
 
     }
 }
+
