@@ -14,7 +14,7 @@
                  mc:Ignorable="d"
                  Title="Visual Studio Inspired UI"
                  TitleAlignment="Center"
-                 Icon="/Images/AppIcon.ico"
+                 Icon="/Resources/Images/AppIcon.ico"
                  UseLayoutRounding="True"
                  dx:ThemeManager.ThemeName="VS2019Light"
                  Padding="0"
@@ -26,6 +26,7 @@
         <dxb:MainMenuControl VerticalAlignment="Center"/>
         <dxe:SearchControl NullText="Quick Launch" ShowMRUButton="False" ShowFindButton="True" Height="22" Margin="4,0,6,0" Width="200"/>
     </dx:ThemedWindow.ToolbarItems>
+
     <dx:ThemedWindow.HeaderItems>
         <dx:HeaderItemControl dxb:BarManager.MenuShowMouseButton="LeftButton" >
             <dxb:BarManager.DXContextMenu>
@@ -54,7 +55,7 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/VisualStudioDocking;component/Resources.xaml" />
+                <ResourceDictionary Source="/VisualStudioDocking;component/Resources/Panels.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -67,8 +68,11 @@
                 <RowDefinition />
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <dxdo:DockLayoutManager x:Name="DemoDockContainer" FloatingMode="Desktop" ItemsSource="{Binding Workspaces}"
-                                    DockingStyle="Default" FloatingDocumentContainer="DocumentHost">
+            <dxdo:DockLayoutManager x:Name="DemoDockContainer"
+                                    FloatingMode="Desktop"
+                                    ItemsSource="{Binding Workspaces}"
+                                    DockingStyle="Default"
+                                    FloatingDocumentContainer="DocumentHost">
                 <dxmvvm:Interaction.Behaviors>
                     <local:DockingSerializationDialogService/>
                 </dxmvvm:Interaction.Behaviors>

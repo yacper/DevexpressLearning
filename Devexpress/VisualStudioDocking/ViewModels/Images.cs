@@ -94,8 +94,8 @@ namespace VisualStudioDocking.ViewModels
 		public const string Toolbox = folderSvg + "Toolbox.svg";
 		public const string Undo = folderSvg + "Undo.svg";
 		public const string Warning = folderSvg + "Warning.svg";
-		const string folderSvg = "pack://application:,,,/VisualStudioDocking;component/Images/Docking/";
-		const string folder = "/VisualStudioDocking;component/Images/Docking/";
+		const string folderSvg = "pack://application:,,,/VisualStudioDocking;component/Resources/Images/Docking/";
+		const string folder = "/VisualStudioDocking;component/Resources/Images/Docking/";
 	}
 
 

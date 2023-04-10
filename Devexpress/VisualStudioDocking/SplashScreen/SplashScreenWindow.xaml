@@ -17,7 +17,7 @@
         <dx:DXImage
             Width="600"
             Height="400"
-            Source="/VisualStudioDocking;component/Images/Docking/SplashScreenBackground.png" />
+            Source="/VisualStudioDocking;component/Resources/Images/Docking/SplashScreenBackground.png" />
         <StackPanel VerticalAlignment="Top" Orientation="Vertical">
             <dx:DXImage
                 x:Name="PART_Logo"

@@ -27,59 +27,59 @@ using DevExpress.Xpf.DemoBase.Helpers.TextColorizer;
 using DevExpress.Xpf.Docking;
 using DevExpress.Xpf.PropertyGrid;
 using Microsoft.Win32;
-namespace VisualStudioDocking.ViewModels
+
+namespace VisualStudioDocking.ViewModels;
+
+public class DocumentViewModel : PanelWorkspaceViewModel
 {
-	public class DocumentViewModel : PanelWorkspaceViewModel
-	{
-		public DocumentViewModel()
-		{
-			IsClosed = false;
-		}
-		public DocumentViewModel(string displayName, string text) : this()
-		{
-			DisplayName = displayName;
-			CodeLanguageText = new CodeLanguageText(CodeLanguage.CS, text);
-		}
+    public DocumentViewModel() { IsClosed = false; }
 
-		public CodeLanguage ModelCodeLanguage { get; private set; }
-		public CodeLanguageText CodeLanguageText { get; private set; }
-		public string Description { get; protected set; }
-		public string FilePath { get; protected set; }
-		public string Footer { get; protected set; }
-		protected override string WorkspaceName { get { return "DocumentHost"; } }
+    public DocumentViewModel(string displayName, string text) : this()
+    {
+        DisplayName      = displayName;
+        CodeLanguageText = new CodeLanguageText(CodeLanguage.CS, text);
+    }
 
-		public bool OpenFile()
-		{
-			OpenFileDialog openFileDialog = new OpenFileDialog();
-			openFileDialog.Filter = "Visual C# Files (*.cs)|*.cs|XAML Files (*.xaml)|*.xaml";
-			openFileDialog.FilterIndex = 1;
-			bool? dialogResult = openFileDialog.ShowDialog();
-			bool dialogResultOK = dialogResult.HasValue && dialogResult.Value;
-			if (dialogResultOK)
-			{
-				DisplayName = openFileDialog.SafeFileName;
-				FilePath = openFileDialog.FileName;
-				SetCodeLanguageProperties(Path.GetExtension(openFileDialog.SafeFileName));
-				Stream fileStream = File.OpenRead(openFileDialog.FileName);
-				using (StreamReader reader = new StreamReader(fileStream))
-				{
-					CodeLanguageText = new CodeLanguageText(ModelCodeLanguage, reader.ReadToEnd());
-				}
-				fileStream.Close();
-			}
-			return dialogResultOK;
-		}
-		public override void OpenItemByPath(string path)
-		{
-			DisplayName = Path.GetFileName(path);
-			FilePath = path;
-			SetCodeLanguageProperties(Path.GetExtension(path));
-			CodeLanguageText = new CodeLanguageText(ModelCodeLanguage, () => { return GetCodeTextByPath(path); });
-			IsActive = true;
-		}
-		string GenerateClassText(string className)
-		{
-			string text = @"
+    public             CodeLanguage     ModelCodeLanguage { get; private set; }
+    public             CodeLanguageText CodeLanguageText  { get; private set; }
+    public             string           Description       { get; protected set; }
+    public             string           FilePath          { get; protected set; }
+    public             string           Footer            { get; protected set; }
+    protected override string           WorkspaceName     { get { return "DocumentHost"; } }
+
+    public bool OpenFile()
+    {
+        OpenFileDialog openFileDialog = new OpenFileDialog();
+        openFileDialog.Filter      = "Visual C# Files (*.cs)|*.cs|XAML Files (*.xaml)|*.xaml";
+        openFileDialog.FilterIndex = 1;
+        bool? dialogResult   = openFileDialog.ShowDialog();
+        bool  dialogResultOK = dialogResult.HasValue && dialogResult.Value;
+        if (dialogResultOK)
+        {
+            DisplayName = openFileDialog.SafeFileName;
+            FilePath    = openFileDialog.FileName;
+            SetCodeLanguageProperties(Path.GetExtension(openFileDialog.SafeFileName));
+            Stream fileStream = File.OpenRead(openFileDialog.FileName);
+            using (StreamReader reader = new StreamReader(fileStream)) { CodeLanguageText = new CodeLanguageText(ModelCodeLanguage, reader.ReadToEnd()); }
+
+            fileStream.Close();
+        }
+
+        return dialogResultOK;
+    }
+
+    public override void OpenItemByPath(string path)
+    {
+        DisplayName = Path.GetFileName(path);
+        FilePath    = path;
+        SetCodeLanguageProperties(Path.GetExtension(path));
+        CodeLanguageText = new CodeLanguageText(ModelCodeLanguage, () => { return GetCodeTextByPath(path); });
+        IsActive         = true;
+    }
+
+    string GenerateClassText(string className)
+    {
+        string text = @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -89,45 +89,48 @@ namespace VisualStudioDocking {{
     class {0} {{
     }}
 }}";
-			return string.Format(text, className);
-		}
-		CodeLanguage GetCodeLanguage(string fileExtension)
-		{
-			switch (fileExtension)
-			{
-				case ".cs": return CodeLanguage.CS;
-				case ".vb": return CodeLanguage.VB;
-				case ".xaml": return CodeLanguage.XAML;
-				default: return CodeLanguage.Plain;
-			}
-		}
-		string GetCodeTextByPath(string path)
-		{
-			Assembly assembly = typeof(DocumentViewModel).Assembly;
-			using (Stream stream = AssemblyHelper.GetResourceStream(assembly, path, true))
-			{
-				if (stream == null)
-					return GenerateClassText(Path.GetFileNameWithoutExtension(path));
-				using (StreamReader reader = new StreamReader(stream))
-					return reader.ReadToEnd();
-			}
-		}
-		string GetDescription(CodeLanguage codeLanguage)
-		{
-			switch (codeLanguage)
-			{
-				case CodeLanguage.CS: return "Visual C# Source file";
-				case CodeLanguage.VB: return "Visual Basic Source file";
-				case CodeLanguage.XAML: return "Windows Markup File";
-				default: return "Other file";
-			}
-		}
-		void SetCodeLanguageProperties(string fileExtension)
-		{
-			ModelCodeLanguage = GetCodeLanguage(fileExtension);
-			Description = GetDescription(ModelCodeLanguage);
-			Footer = DisplayName;
-			Glyph = ModelCodeLanguage.Equals(CodeLanguage.XAML) ? Images.FileXaml : ModelCodeLanguage.Equals(CodeLanguage.CS) ? Images.FileCS : null;
-		}
-	}
+        return string.Format(text, className);
+    }
+
+    CodeLanguage GetCodeLanguage(string fileExtension)
+    {
+        switch (fileExtension)
+        {
+            case ".cs":   return CodeLanguage.CS;
+            case ".vb":   return CodeLanguage.VB;
+            case ".xaml": return CodeLanguage.XAML;
+            default:      return CodeLanguage.Plain;
+        }
+    }
+
+    string GetCodeTextByPath(string path)
+    {
+        Assembly assembly = typeof(DocumentViewModel).Assembly;
+        using (Stream stream = AssemblyHelper.GetResourceStream(assembly, path, true))
+        {
+            if (stream == null)
+                return GenerateClassText(Path.GetFileNameWithoutExtension(path));
+            using (StreamReader reader = new StreamReader(stream))
+                return reader.ReadToEnd();
+        }
+    }
+
+    string GetDescription(CodeLanguage codeLanguage)
+    {
+        switch (codeLanguage)
+        {
+            case CodeLanguage.CS:   return "Visual C# Source file";
+            case CodeLanguage.VB:   return "Visual Basic Source file";
+            case CodeLanguage.XAML: return "Windows Markup File";
+            default:                return "Other file";
+        }
+    }
+
+    void SetCodeLanguageProperties(string fileExtension)
+    {
+        ModelCodeLanguage = GetCodeLanguage(fileExtension);
+        Description       = GetDescription(ModelCodeLanguage);
+        Footer            = DisplayName;
+        Glyph             = ModelCodeLanguage.Equals(CodeLanguage.XAML) ? Images.FileXaml : ModelCodeLanguage.Equals(CodeLanguage.CS) ? Images.FileCS : null;
+    }
 }
