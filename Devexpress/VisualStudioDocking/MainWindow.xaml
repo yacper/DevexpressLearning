@@ -11,6 +11,7 @@
                  xmlns:dxdbi="http://schemas.devexpress.com/winfx/2008/xaml/demobase/internal"
                  xmlns:viewModels="clr-namespace:VisualStudioDocking.ViewModels"
                  xmlns:local="clr-namespace:VisualStudioDocking"
+                 xmlns:services="clr-namespace:VisualStudioDocking.Services"
                  mc:Ignorable="d"
                  Title="Visual Studio Inspired UI"
                  TitleAlignment="Center"
@@ -20,7 +21,7 @@
                  Padding="0"
                  Height="650"
                  Width="1000"
-                 DataContext="{dxmvvm:ViewModelSource Type=viewModels:MainViewModel}">
+                 DataContext="{dxmvvm:ViewModelSource Type=local:MainViewModel}">
 
 	<dx:ThemedWindow.ToolbarItems>
         <dxb:MainMenuControl VerticalAlignment="Center"/>
@@ -74,7 +75,7 @@
                                     DockingStyle="Default"
                                     FloatingDocumentContainer="DocumentHost">
                 <dxmvvm:Interaction.Behaviors>
-                    <local:DockingSerializationDialogService/>
+                    <services:DockingSerializationDialogService/>
                 </dxmvvm:Interaction.Behaviors>
                 <dxdo:LayoutGroup Name="Root">
                     <dxdo:LayoutGroup Orientation="Vertical" ItemWidth="3*">

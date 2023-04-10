@@ -19,29 +19,13 @@ using DevExpress.Xpf.Bars.Native;
 using DevExpress.Xpf.Core;
 using DevExpress.Xpf.Docking;
 using DevExpress.Xpf.PropertyGrid;
+using VisualStudioDocking.Services;
+using VisualStudioDocking.ViewModels;
 
-namespace VisualStudioDocking.ViewModels;
+namespace VisualStudioDocking;
 
 public class MainViewModel
 {
-    CommandViewModel                         errorList;
-    PanelWorkspaceViewModel                  lastOpenedItem;
-    CommandViewModel                         loadLayout;
-    CommandViewModel                         newFile;
-    CommandViewModel                         newProject;
-    CommandViewModel                         openFile;
-    CommandViewModel                         openProject;
-    CommandViewModel                         output;
-    CommandViewModel                         properties;
-    CommandViewModel                         save;
-    CommandViewModel                         saveAll;
-    CommandViewModel                         saveLayout;
-    CommandViewModel                         searchResults;
-    CommandViewModel                         solutionExplorer;
-    SolutionExplorerViewModel                solutionExplorerViewModel;
-    CommandViewModel                         toolbox;
-    ObservableCollection<WorkspaceViewModel> workspaces;
-
     public MainViewModel()
     {
         ErrorListViewModel     = CreatePanelWorkspaceViewModel<ErrorListViewModel>();
@@ -49,7 +33,14 @@ public class MainViewModel
         PropertiesViewModel    = CreatePanelWorkspaceViewModel<PropertiesViewModel>();
         SearchResultsViewModel = CreatePanelWorkspaceViewModel<SearchResultsViewModel>();
         ToolboxViewModel       = CreatePanelWorkspaceViewModel<ToolboxViewModel>();
-        Bars                   = new ReadOnlyCollection<BarModel>(CreateBars());
+
+        Bars = new ReadOnlyCollection<BarModel>(new List<BarModel>()
+        {
+            new BarModel("Main") { IsMainMenu   = true, Commands = CreateCommands() },
+            new BarModel("Standard") { Commands = CreateToolbarCommands() }
+        });
+
+
         InitDefaultLayout();
     }
 
@@ -91,11 +82,27 @@ public class MainViewModel
         }
     }
 
+
     protected virtual IDockingSerializationDialogService SaveLoadLayoutService { get { return null; } }
+
+#region Commands
+
+    List<CommandViewModel> CreateCommands()
+    {
+        return new List<CommandViewModel>
+        {
+            new CommandViewModel("File", CreateFileCommands()),
+            new CommandViewModel("Edit", CreateEditCommands()),
+            new CommandViewModel("Layouts", CreateLayoutCommands()),
+            new CommandViewModel("View", CreateViewCommands()),
+            new CommandViewModel("Help", CreateAboutCommands()),
+            new CommandViewModel("Themes", CreateThemesCommands())
+        };
+    }
 
     protected virtual List<CommandViewModel> CreateAboutCommands()
     {
-        var showAboutCommnad = new DelegateCommand(ShowAbout);
+        var showAboutCommnad = new DelegateCommand(() => { About.ShowAbout(ProductKind.DXperienceWPF); });
         return new List<CommandViewModel>() { new CommandViewModel("About", showAboutCommnad) { Glyph = Images.About } };
     }
 
@@ -122,7 +129,6 @@ public class MainViewModel
         return new List<CommandViewModel>() { loadLayout, saveLayout };
     }
 
-    protected T CreatePanelWorkspaceViewModel<T>() where T : PanelWorkspaceViewModel { return ViewModelSource<T>.Create(); }
 
     protected virtual List<CommandViewModel> CreateViewCommands()
     {
@@ -180,66 +186,6 @@ public class MainViewModel
         return themesCommands;
     }
 
-    void SetTheme(Theme theme) { ThemeManager.SetTheme(Application.Current.Windows.OfType<Window>().FirstOrDefault(x => x.IsActive), theme); }
-
-    IEnumerable<PredefinedThemePalette> GetPalettes(Theme theme)
-    {
-        switch (theme.Name)
-        {
-            case Theme.VS2019LightName:
-                return PredefinedThemePalettes.VS2019LightPalettes;
-            case Theme.VS2019DarkName:
-                return PredefinedThemePalettes.VS2019DarkPalettes;
-            default:
-                return PredefinedThemePalettes.VS2019BluePalettes;
-        }
-    }
-
-    protected void OpenOrCloseWorkspace(PanelWorkspaceViewModel workspace, bool activateOnOpen = true)
-    {
-        if (Workspaces.Contains(workspace)) { workspace.IsClosed = !workspace.IsClosed; }
-        else
-        {
-            Workspaces.Add(workspace);
-            workspace.IsClosed = false;
-        }
-
-        if (activateOnOpen && workspace.IsOpened)
-            SetActiveWorkspace(workspace);
-    }
-
-    bool ActivateDocument(string path)
-    {
-        var  document                  = GetDocument(path);
-        bool isFound                   = document != null;
-        if (isFound) document.IsActive = true;
-        return isFound;
-    }
-
-    List<BarModel> CreateBars()
-    {
-        return new List<BarModel>()
-        {
-            new BarModel("Main") { IsMainMenu   = true, Commands = CreateCommands() },
-            new BarModel("Standard") { Commands = CreateToolbarCommands() }
-        };
-    }
-
-    List<CommandViewModel> CreateCommands()
-    {
-        return new List<CommandViewModel>
-        {
-            new CommandViewModel("File", CreateFileCommands()),
-            new CommandViewModel("Edit", CreateEditCommands()),
-            new CommandViewModel("Layouts", CreateLayoutCommands()),
-            new CommandViewModel("View", CreateViewCommands()),
-            new CommandViewModel("Help", CreateAboutCommands()),
-            new CommandViewModel("Themes", CreateThemesCommands())
-        };
-    }
-
-    DocumentViewModel CreateDocumentViewModel() { return CreatePanelWorkspaceViewModel<DocumentViewModel>(); }
-
     List<CommandViewModel> CreateFileCommands()
     {
         var fileExecutedCommand = new DelegateCommand<object>(OnNewFileExecuted);
@@ -296,37 +242,54 @@ public class MainViewModel
         };
     }
 
-    DocumentViewModel GetDocument(string filePath)                      { return Workspaces.OfType<DocumentViewModel>().FirstOrDefault(x => x.FilePath == filePath); }
-    CommandViewModel  GetSeparator()                                    { return new CommandViewModel() { IsSeparator = true }; }
-    CommandViewModel  GetShowCommand(PanelWorkspaceViewModel viewModel) { return new CommandViewModel(viewModel, new DelegateCommand(() => OpenOrCloseWorkspace(viewModel))); }
+    CommandViewModel GetSeparator()                                    { return new CommandViewModel() { IsSeparator = true }; }
+    CommandViewModel GetShowCommand(PanelWorkspaceViewModel viewModel) { return new CommandViewModel(viewModel, new DelegateCommand(() => OpenOrCloseWorkspace(viewModel))); }
 
-    void InitDefaultLayout()
+#endregion
+
+#region Theme
+
+    void SetTheme(Theme theme) { ThemeManager.SetTheme(Application.Current.Windows.OfType<Window>().FirstOrDefault(x => x.IsActive), theme); }
+
+    IEnumerable<PredefinedThemePalette> GetPalettes(Theme theme)
     {
-        var panels = new List<PanelWorkspaceViewModel> { ToolboxViewModel, SolutionExplorerViewModel, PropertiesViewModel, ErrorListViewModel };
-        foreach (var panel in panels) { OpenOrCloseWorkspace(panel, false); }
+        switch (theme.Name)
+        {
+            case Theme.VS2019LightName:
+                return PredefinedThemePalettes.VS2019LightPalettes;
+            case Theme.VS2019DarkName:
+                return PredefinedThemePalettes.VS2019DarkPalettes;
+            default:
+                return PredefinedThemePalettes.VS2019BluePalettes;
+        }
     }
 
-    void OnFileOpenExecuted(object param)
+#endregion
+
+#region Workspace
+
+    protected T CreatePanelWorkspaceViewModel<T>() where T : PanelWorkspaceViewModel { return ViewModelSource<T>.Create(); }
+
+    protected void OpenOrCloseWorkspace(PanelWorkspaceViewModel workspace, bool activateOnOpen = true)
     {
-        var document = CreateDocumentViewModel();
-        if (!document.OpenFile() || ActivateDocument(document.FilePath))
+        if (Workspaces.Contains(workspace)) { workspace.IsClosed = !workspace.IsClosed; }
+        else
         {
-            document.Dispose();
-            return;
+            Workspaces.Add(workspace);
+            workspace.IsClosed = false;
         }
 
-        OpenOrCloseWorkspace(document);
+        if (activateOnOpen && workspace.IsOpened)
+            SetActiveWorkspace(workspace);
     }
 
-    void OnLoadLayout() { SaveLoadLayoutService.LoadLayout(); }
-
-    void OnNewFileExecuted(object param)
+    bool ActivateDocument(string path)
     {
-        string newItemName = solutionExplorerViewModel.Solution.AddNewItemToRoot();
-        OpenItem(newItemName);
+        var  document                  = GetDocument(path);
+        bool isFound                   = document != null;
+        if (isFound) document.IsActive = true;
+        return isFound;
     }
-
-    void OnSaveLayout() { SaveLoadLayoutService.SaveLayout(); }
 
     void OnWorkspaceRequestClose(object sender, EventArgs e)
     {
@@ -360,7 +323,70 @@ public class MainViewModel
         OpenOrCloseWorkspace(lastOpenedItem);
     }
 
-    void SetActiveWorkspace(WorkspaceViewModel workspace)                                     { workspace.IsActive = true; }
-    void ShowAbout()                                                                          { About.ShowAbout(ProductKind.DXperienceWPF); }
+    void SetActiveWorkspace(WorkspaceViewModel workspace) { workspace.IsActive = true; }
+
+#endregion
+
+#region Layout
+
+    void InitDefaultLayout()
+    {
+        var panels = new List<PanelWorkspaceViewModel> { ToolboxViewModel, SolutionExplorerViewModel, PropertiesViewModel, ErrorListViewModel };
+        foreach (var panel in panels) { OpenOrCloseWorkspace(panel, false); }
+    }
+
+    void OnLoadLayout() { SaveLoadLayoutService.LoadLayout(); }
+
+
+    void OnSaveLayout() { SaveLoadLayoutService.SaveLayout(); }
+
+#endregion
+
+#region Document & file
+
+    DocumentViewModel CreateDocumentViewModel() { return CreatePanelWorkspaceViewModel<DocumentViewModel>(); }
+
+    DocumentViewModel GetDocument(string filePath) { return Workspaces.OfType<DocumentViewModel>().FirstOrDefault(x => x.FilePath == filePath); }
+
+    void OnFileOpenExecuted(object param)
+    {
+        var document = CreateDocumentViewModel();
+        if (!document.OpenFile() || ActivateDocument(document.FilePath))
+        {
+            document.Dispose();
+            return;
+        }
+
+        OpenOrCloseWorkspace(document);
+    }
+
+    void OnNewFileExecuted(object param)
+    {
+        string newItemName = solutionExplorerViewModel.Solution.AddNewItemToRoot();
+        OpenItem(newItemName);
+    }
+
     void SolutionExplorerViewModel_ItemOpening(object sender, SolutionItemOpeningEventArgs e) { OpenItem(e.SolutionItem.FilePath); }
+
+#endregion
+
+#region Members
+    CommandViewModel                         errorList;
+    PanelWorkspaceViewModel                  lastOpenedItem;
+    CommandViewModel                         loadLayout;
+    CommandViewModel                         newFile;
+    CommandViewModel                         newProject;
+    CommandViewModel                         openFile;
+    CommandViewModel                         openProject;
+    CommandViewModel                         output;
+    CommandViewModel                         properties;
+    CommandViewModel                         save;
+    CommandViewModel                         saveAll;
+    CommandViewModel                         saveLayout;
+    CommandViewModel                         searchResults;
+    CommandViewModel                         solutionExplorer;
+    SolutionExplorerViewModel                solutionExplorerViewModel;
+    CommandViewModel                         toolbox;
+    ObservableCollection<WorkspaceViewModel> workspaces;
+#endregion
 }
