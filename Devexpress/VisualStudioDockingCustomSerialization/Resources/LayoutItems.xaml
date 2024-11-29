@@ -18,9 +18,10 @@
         <Setter Property="dxdo:DocumentGroup.ShowPinButton" Value="False" />
         <!--指定Tooltip-->
         <Setter Property="dxdo:BaseLayoutItem.ToolTip" Value="{Binding DisplayName}" />
-        <!--没有用，还没找到原因     指定Tag属性，可以序列化到layout-->
-        <Setter Property="Tag" Value="{Binding Tag}" />
-        <Setter Property="dx:DXSerializer.SerializationID" Value="{Binding Tag}" />
+        <!--没用 指定Tag属性，可以序列化到layout-->
+        <!--<Setter Property="Tag" Value="{Binding Tag}" />-->
+        <!--没用-->
+        <!--<Setter Property="dx:DXSerializer.SerializationID" Value="{Binding Tag}" />-->
     </Style>
 
     <Style TargetType="{x:Type dxdo:LayoutPanel}" BasedOn="{StaticResource LayoutPanelStyleBase}" />

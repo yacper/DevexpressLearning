@@ -285,8 +285,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Layouts", "Devexpress\Contr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MIF.Main", "Devexpress\MVVM\MIF\MIF.Main\MIF.Main.csproj", "{CB18FB40-D79F-49E7-913D-31CE7A269923}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisualStudioDocking", "Devexpress\VisualStudioDocking\VisualStudioDocking.csproj", "{57490D0A-67B4-4E2D-B5ED-FEF0B7D9505D}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GdiplusWriteableBitmap", "Wpf\Drawing\GdiplusWriteableBitmap\GdiplusWriteableBitmap.csproj", "{7AF6B299-57EC-4B3C-A0CD-1421603F32B4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotEx.UI.Drawing", "DotEx\DotEx.UI.Drawing\DotEx.UI.Drawing.csproj", "{5B04CFEF-2AD8-4441-87C2-62A6834F3470}"
@@ -339,17 +337,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfPrism", "WpfPrism\WpfPrism.csproj", "{FF102358-36D2-48D6-826B-BEBB119AE095}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismFullApp", "Framework\PrismFullApp\PrismFullApp\PrismFullApp.csproj", "{8C65CB17-2712-4933-9782-6D3EAA73F066}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrismFullApp", "Framework\PrismFullApp\PrismFullApp\PrismFullApp.csproj", "{8C65CB17-2712-4933-9782-6D3EAA73F066}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismFullApp.Core", "Framework\PrismFullApp\PrismFullApp.Core\PrismFullApp.Core.csproj", "{4A0DF5B1-8C35-4925-B4D3-CA0A0E9C50C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrismFullApp.Core", "Framework\PrismFullApp\PrismFullApp.Core\PrismFullApp.Core.csproj", "{4A0DF5B1-8C35-4925-B4D3-CA0A0E9C50C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismFullApp.Modules.ModuleName", "Framework\PrismFullApp\Modules\PrismFullApp.Modules.ModuleName\PrismFullApp.Modules.ModuleName.csproj", "{5B512A99-C546-478A-989E-D8C62F0D6C67}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrismFullApp.Modules.ModuleName", "Framework\PrismFullApp\Modules\PrismFullApp.Modules.ModuleName\PrismFullApp.Modules.ModuleName.csproj", "{5B512A99-C546-478A-989E-D8C62F0D6C67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismFullApp.Services", "Framework\PrismFullApp\Services\PrismFullApp.Services\PrismFullApp.Services.csproj", "{5AEEE474-B613-4285-9372-37BBCA467100}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrismFullApp.Services", "Framework\PrismFullApp\Services\PrismFullApp.Services\PrismFullApp.Services.csproj", "{5AEEE474-B613-4285-9372-37BBCA467100}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismFullApp.Services.Interfaces", "Framework\PrismFullApp\Services\PrismFullApp.Services.Interfaces\PrismFullApp.Services.Interfaces.csproj", "{905F51A5-B4DA-4937-979E-9771699F8053}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrismFullApp.Services.Interfaces", "Framework\PrismFullApp\Services\PrismFullApp.Services.Interfaces\PrismFullApp.Services.Interfaces.csproj", "{905F51A5-B4DA-4937-979E-9771699F8053}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrismFullApp.Modules.ModuleName.Tests", "Framework\PrismFullApp\Tests\PrismFullApp.Modules.ModuleName.Tests\PrismFullApp.Modules.ModuleName.Tests.csproj", "{92F0C056-51F8-44CC-B69C-E52F1E12D609}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PrismFullApp.Modules.ModuleName.Tests", "Framework\PrismFullApp\Tests\PrismFullApp.Modules.ModuleName.Tests\PrismFullApp.Modules.ModuleName.Tests.csproj", "{92F0C056-51F8-44CC-B69C-E52F1E12D609}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisualStudioDocking", "Devexpress\VisualStudioDocking\VisualStudioDocking.csproj", "{B498BDFC-D869-4470-8554-85D87370874C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisualStudioDockingCustomSerialization", "Devexpress\VisualStudioDockingCustomSerialization\VisualStudioDockingCustomSerialization.csproj", "{8DFF4358-8A6A-4A65-A343-C5822CD5AD42}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1109,18 +1111,6 @@ Global
 		{CB18FB40-D79F-49E7-913D-31CE7A269923}.Release|x64.Build.0 = Release|Any CPU
 		{CB18FB40-D79F-49E7-913D-31CE7A269923}.Release|x86.ActiveCfg = Release|Any CPU
 		{CB18FB40-D79F-49E7-913D-31CE7A269923}.Release|x86.Build.0 = Release|Any CPU
-		{57490D0A-67B4-4E2D-B5ED-FEF0B7D9505D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{57490D0A-67B4-4E2D-B5ED-FEF0B7D9505D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{57490D0A-67B4-4E2D-B5ED-FEF0B7D9505D}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{57490D0A-67B4-4E2D-B5ED-FEF0B7D9505D}.Debug|x64.Build.0 = Debug|Any CPU
-		{57490D0A-67B4-4E2D-B5ED-FEF0B7D9505D}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{57490D0A-67B4-4E2D-B5ED-FEF0B7D9505D}.Debug|x86.Build.0 = Debug|Any CPU
-		{57490D0A-67B4-4E2D-B5ED-FEF0B7D9505D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{57490D0A-67B4-4E2D-B5ED-FEF0B7D9505D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{57490D0A-67B4-4E2D-B5ED-FEF0B7D9505D}.Release|x64.ActiveCfg = Release|Any CPU
-		{57490D0A-67B4-4E2D-B5ED-FEF0B7D9505D}.Release|x64.Build.0 = Release|Any CPU
-		{57490D0A-67B4-4E2D-B5ED-FEF0B7D9505D}.Release|x86.ActiveCfg = Release|Any CPU
-		{57490D0A-67B4-4E2D-B5ED-FEF0B7D9505D}.Release|x86.Build.0 = Release|Any CPU
 		{7AF6B299-57EC-4B3C-A0CD-1421603F32B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7AF6B299-57EC-4B3C-A0CD-1421603F32B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7AF6B299-57EC-4B3C-A0CD-1421603F32B4}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -1409,6 +1399,30 @@ Global
 		{92F0C056-51F8-44CC-B69C-E52F1E12D609}.Release|x64.Build.0 = Release|Any CPU
 		{92F0C056-51F8-44CC-B69C-E52F1E12D609}.Release|x86.ActiveCfg = Release|Any CPU
 		{92F0C056-51F8-44CC-B69C-E52F1E12D609}.Release|x86.Build.0 = Release|Any CPU
+		{B498BDFC-D869-4470-8554-85D87370874C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B498BDFC-D869-4470-8554-85D87370874C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B498BDFC-D869-4470-8554-85D87370874C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B498BDFC-D869-4470-8554-85D87370874C}.Debug|x64.Build.0 = Debug|Any CPU
+		{B498BDFC-D869-4470-8554-85D87370874C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B498BDFC-D869-4470-8554-85D87370874C}.Debug|x86.Build.0 = Debug|Any CPU
+		{B498BDFC-D869-4470-8554-85D87370874C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B498BDFC-D869-4470-8554-85D87370874C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B498BDFC-D869-4470-8554-85D87370874C}.Release|x64.ActiveCfg = Release|Any CPU
+		{B498BDFC-D869-4470-8554-85D87370874C}.Release|x64.Build.0 = Release|Any CPU
+		{B498BDFC-D869-4470-8554-85D87370874C}.Release|x86.ActiveCfg = Release|Any CPU
+		{B498BDFC-D869-4470-8554-85D87370874C}.Release|x86.Build.0 = Release|Any CPU
+		{8DFF4358-8A6A-4A65-A343-C5822CD5AD42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DFF4358-8A6A-4A65-A343-C5822CD5AD42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DFF4358-8A6A-4A65-A343-C5822CD5AD42}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8DFF4358-8A6A-4A65-A343-C5822CD5AD42}.Debug|x64.Build.0 = Debug|Any CPU
+		{8DFF4358-8A6A-4A65-A343-C5822CD5AD42}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8DFF4358-8A6A-4A65-A343-C5822CD5AD42}.Debug|x86.Build.0 = Debug|Any CPU
+		{8DFF4358-8A6A-4A65-A343-C5822CD5AD42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DFF4358-8A6A-4A65-A343-C5822CD5AD42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DFF4358-8A6A-4A65-A343-C5822CD5AD42}.Release|x64.ActiveCfg = Release|Any CPU
+		{8DFF4358-8A6A-4A65-A343-C5822CD5AD42}.Release|x64.Build.0 = Release|Any CPU
+		{8DFF4358-8A6A-4A65-A343-C5822CD5AD42}.Release|x86.ActiveCfg = Release|Any CPU
+		{8DFF4358-8A6A-4A65-A343-C5822CD5AD42}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1544,7 +1558,6 @@ Global
 		{8034F662-150D-4B76-B3BE-677D3D7297C4} = {1C482C49-47F9-478D-BEBF-6CA2397A03AE}
 		{A09CD85E-EA7C-438D-B3E9-AD451AEDE1AD} = {B6AFCA45-650E-4141-94D2-8C283219A4D3}
 		{CB18FB40-D79F-49E7-913D-31CE7A269923} = {437371A7-0B6A-472D-9B42-3E61BB39F883}
-		{57490D0A-67B4-4E2D-B5ED-FEF0B7D9505D} = {4D11C6A8-05E6-46F1-861A-FD8B1DB66FCD}
 		{7AF6B299-57EC-4B3C-A0CD-1421603F32B4} = {2FF27569-3CD8-437D-B3FA-1A2290341903}
 		{AC2BCC91-FEFD-44E3-9286-D3F5F39AF608} = {2FF27569-3CD8-437D-B3FA-1A2290341903}
 		{74178C7C-19A0-45E6-8EFB-F4DB7EE37C6F} = {2FF27569-3CD8-437D-B3FA-1A2290341903}
@@ -1576,6 +1589,8 @@ Global
 		{5AEEE474-B613-4285-9372-37BBCA467100} = {83D2EECA-C67E-416B-A8ED-323BE16F1959}
 		{905F51A5-B4DA-4937-979E-9771699F8053} = {83D2EECA-C67E-416B-A8ED-323BE16F1959}
 		{92F0C056-51F8-44CC-B69C-E52F1E12D609} = {83D2EECA-C67E-416B-A8ED-323BE16F1959}
+		{B498BDFC-D869-4470-8554-85D87370874C} = {4D11C6A8-05E6-46F1-861A-FD8B1DB66FCD}
+		{8DFF4358-8A6A-4A65-A343-C5822CD5AD42} = {4D11C6A8-05E6-46F1-861A-FD8B1DB66FCD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A26D33EA-3064-49AC-AC3B-E5AB2383890D}
