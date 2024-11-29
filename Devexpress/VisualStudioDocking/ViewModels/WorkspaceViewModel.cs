@@ -12,8 +12,6 @@ namespace VisualStudioDocking.ViewModels;
 
 public abstract class WorkspaceViewModel : ViewModel
 {
-    public override string BindableName { get { return Data; } }
-
     protected WorkspaceViewModel() { IsClosed = true; }
 
     public event EventHandler RequestClose;
@@ -25,10 +23,8 @@ public abstract class WorkspaceViewModel : ViewModel
 
     public virtual bool IsOpened { get; set; }
 
-
-    //public virtual string SerializationInfo { get; set; }
-    public virtual string Data { get; set; }
-    public virtual string Id   { get; set; } = new Guid().ToString();
+    [DevExpress.Utils.Serializing.XtraSerializableProperty] 
+    public virtual string Tag { get; set; }
 
     public void Close()
     {

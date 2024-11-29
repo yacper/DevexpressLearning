@@ -23,7 +23,10 @@ public void LoadLayout()
 {
     OpenFileDialog openFileDialog = new OpenFileDialog() { Filter = filter };
     var            openResult     = openFileDialog.ShowDialog();
-    if (openResult.HasValue && openResult.Value) { DockLayoutManager.RestoreLayoutFromXml(openFileDialog.FileName); }
+    if (openResult.HasValue && openResult.Value)
+    {
+        DockLayoutManager.RestoreLayoutFromXml(openFileDialog.FileName);
+    }
 }
 
 public void SaveLayout()
@@ -40,7 +43,7 @@ public void SaveLayout()
         //    var str = Encoding.UTF8.GetString(stream.ToArray());
         //    //if (Convert.ToInt32(str[0]) == Convert.ToInt32(0x3F))
         //    str = str.Substring(1, str.Length - 1);
-        //    //return str; // 转化成utf8后，第一位总是0x3f(?),把他去掉
+        //    //return str; // 杞寲鎴恥tf8鍚庯紝绗竴浣嶆�绘槸0x3f(?),鎶婁粬鍘绘帀
 
         //}
 

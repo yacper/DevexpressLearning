@@ -6,7 +6,9 @@ namespace VisualStudioDocking.ViewModels;
 
 public abstract class ViewModel : ViewModelBase
 {
-    public virtual string      BindableName { get { return GetBindableName(DisplayName); } }
+    // 序列化到layout时，<property name="Name">ErrorData</property>， Name即为BindableName
+    public virtual string      BindableName { get { return GetBindableName(DisplayName); } } 
+
     public virtual string      DisplayName  { get; protected set; }
     public virtual ImageSource Glyph        { get; set; }
 

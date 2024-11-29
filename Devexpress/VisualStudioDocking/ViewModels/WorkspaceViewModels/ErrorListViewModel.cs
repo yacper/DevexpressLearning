@@ -18,6 +18,7 @@ public class ErrorListViewModel : PanelWorkspaceViewModel
         Error       = Images.Error;
         Warning     = Images.Warning;
         Info        = Images.Info;
+        Tag        = "ErrorList_Tag";
     }
 
     public             ImageSource Error         { get; set; }

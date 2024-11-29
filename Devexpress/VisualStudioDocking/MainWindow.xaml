@@ -78,15 +78,15 @@
                     <services:DockingSerializationDialogService/>
                 </dxmvvm:Interaction.Behaviors>
                 <dxdo:LayoutGroup Name="Root">
-                    <dxdo:LayoutGroup Orientation="Vertical" ItemWidth="3*">
+                    <dxdo:LayoutGroup Orientation="Vertical" ItemWidth="3*" Name="LeftPart">
                         <dxdo:LayoutGroup ItemHeight="3*">
-                            <dxdo:LayoutGroup Name="Toolbox" DestroyOnClosingChildren="False" ItemWidth="190"/>
-                            <dxdo:LayoutGroup ItemWidth="3*" DestroyOnClosingChildren="False">
-                                <dxdo:LayoutGroup >
-                                    <dxdo:DocumentGroup Name="DocumentHost" DestroyOnClosingChildren="False"
-                                                        ClosePageButtonShowMode="InActiveTabPageHeader" />
-                                </dxdo:LayoutGroup>
-                            </dxdo:LayoutGroup>
+                            <dxdo:LayoutGroup Name="LeftHost" DestroyOnClosingChildren="False" ItemWidth="190" />
+                            <!--<dxdo:LayoutGroup ItemWidth="3*" DestroyOnClosingChildren="False">-->
+                            <!--<dxdo:LayoutGroup >-->
+                            <dxdo:DocumentGroup Name="DocumentHost" DestroyOnClosingChildren="False"
+                                                ClosePageButtonShowMode="InActiveTabPageHeader" />
+                            <!--</dxdo:LayoutGroup>-->
+                            <!--</dxdo:LayoutGroup>-->
                         </dxdo:LayoutGroup>
                         <dxdo:TabbedGroup Name="BottomHost" DestroyOnClosingChildren="False" />
                     </dxdo:LayoutGroup>

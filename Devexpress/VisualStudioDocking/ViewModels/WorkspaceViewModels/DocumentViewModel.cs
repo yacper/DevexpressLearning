@@ -37,6 +37,7 @@ public class DocumentViewModel : PanelWorkspaceViewModel
     public DocumentViewModel(string displayName, string text) : this()
     {
         DisplayName      = displayName;
+        Tag        = $"{displayName}_Tag";
         CodeLanguageText = new CodeLanguageText(CodeLanguage.CS, text);
     }
 

@@ -5,6 +5,8 @@
 // purpose:
 // modifiers:
 
+using DevExpress.Xpf.DemoBase.Helpers;
+
 namespace VisualStudioDocking.ViewModels;
 
 public class ToolboxViewModel : PanelWorkspaceViewModel
@@ -13,7 +15,8 @@ public class ToolboxViewModel : PanelWorkspaceViewModel
     {
         DisplayName = "Toolbox";
         Glyph       = Images.Toolbox;
+        Tag        = "Toolbox_Tag";
     }
 
-    protected override string WorkspaceName { get { return "Toolbox"; } }
+    protected override string WorkspaceName { get { return "LeftHost"; } }
 }

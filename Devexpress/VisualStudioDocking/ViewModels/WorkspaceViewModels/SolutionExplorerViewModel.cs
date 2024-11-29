@@ -26,6 +26,7 @@ public class SolutionExplorerViewModel : PanelWorkspaceViewModel
         PropertiesWindow = Images.PropertiesWindow;
         ShowAllFiles     = Images.ShowAllFiles;
         Refresh          = Images.Refresh;
+        Tag="SolutionExplorer_Tag";
     }
 
 
@@ -42,7 +43,7 @@ public class SolutionExplorerViewModel : PanelWorkspaceViewModel
         if (item != null && item.IsFile && ItemOpening != null)
         {
             ItemOpening.Invoke(this, new SolutionItemOpeningEventArgs(item));
-            Data = "hello";
+            Tag = "hello";
         }
     }
 }

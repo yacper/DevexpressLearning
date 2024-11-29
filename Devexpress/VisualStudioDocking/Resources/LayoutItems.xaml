@@ -7,16 +7,20 @@
         <Setter Property="dxdo:AutoHideGroup.IsAutoHideCenter" Value="True" />
     </Style>
 
+    <!--https://docs.devexpress.com/WPF/7059/controls-and-libraries/layout-management/dock-windows/saving-and-restoring-the-layout-of-dock-panels-and-controls-->
     <Style TargetType="dxdo:LayoutPanel" x:Key="LayoutPanelStyleBase">
-        <Setter Property="BindableName" Value="{Binding Data}" />
+        <!--唯一标识-->
+        <Setter Property="BindableName" Value="{Binding BindableName}" />
         <Setter Property="Caption" Value="{Binding DisplayName}" />
         <Setter Property="CloseCommand" Value="{Binding CloseCommand}" />
         <Setter Property="Closed" Value="{Binding IsClosed, Mode=TwoWay}" />
         <Setter Property="IsActive" Value="{Binding IsActive}" />
         <Setter Property="dxdo:DocumentGroup.ShowPinButton" Value="False" />
-        <Setter Property="dxdo:BaseLayoutItem.ToolTip" Value="{Binding Data}" />
-        <Setter Property="Tag" Value="{Binding Data}" />
-        <Setter Property="dx:DXSerializer.SerializationID" Value="{Binding Id}" />
+        <!--指定Tooltip-->
+        <Setter Property="dxdo:BaseLayoutItem.ToolTip" Value="{Binding DisplayName}" />
+        <!--指定Tag属性，可以序列化到layout-->
+        <Setter Property="Tag" Value="{Binding Tag}" />
+        <Setter Property="dx:DXSerializer.SerializationID" Value="{Binding Tag}" />
     </Style>
 
     <Style TargetType="{x:Type dxdo:LayoutPanel}" BasedOn="{StaticResource LayoutPanelStyleBase}" />
