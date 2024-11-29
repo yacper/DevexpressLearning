@@ -10,7 +10,7 @@
 
 
   <ItemGroup>
-    <PackageReference Include="DevExpress.Wpf" Version="22.2.*" />
+    <PackageReference Include="DevExpress.Wpf" Version="23.2.*" />
     <PackageReference Include="Fody" Version="6.5.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

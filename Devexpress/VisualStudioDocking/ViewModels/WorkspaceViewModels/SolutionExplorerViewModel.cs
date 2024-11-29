@@ -1,4 +1,4 @@
-﻿// created: 2023/04/10 22:32
+﻿// created: 2024/11/29 12:23
 // author:  rush
 // email:   yacper@gmail.com
 // 
@@ -14,92 +14,37 @@ using System.Windows.Media;
 using DevExpress.Mvvm;
 using DevExpress.Mvvm.Native;
 using DevExpress.Mvvm.POCO;
-using DevExpress.Xpf.Accordion;
-using DevExpress.Xpf.Docking;
-using DevExpress.Xpf.PropertyGrid;
 
 namespace VisualStudioDocking.ViewModels;
 
-
-#region Tool Panels
-
-public class ErrorListViewModel : PanelWorkspaceViewModel
+public class SolutionExplorerViewModel : PanelWorkspaceViewModel
 {
-    public ErrorListViewModel()
+    public SolutionExplorerViewModel()
     {
-        DisplayName = "Error List";
-        Glyph       = Images.TaskList;
-        Error       = Images.Error;
-        Warning     = Images.Warning;
-        Info        = Images.Info;
+        DisplayName      = "Solution Explorer";
+        Glyph            = Images.SolutionExplorer;
+        PropertiesWindow = Images.PropertiesWindow;
+        ShowAllFiles     = Images.ShowAllFiles;
+        Refresh          = Images.Refresh;
     }
 
-    public             ImageSource Error         { get; set; }
-    public             ImageSource Info          { get; set; }
-    public             ImageSource Warning       { get; set; }
-    protected override string      WorkspaceName { get { return "BottomHost"; } }
-}
 
-public class OutputViewModel : PanelWorkspaceViewModel
-{
-    public OutputViewModel()
+    public event EventHandler<SolutionItemOpeningEventArgs> ItemOpening;
+
+    public             ImageSource PropertiesWindow { get; set; }
+    public             ImageSource Refresh          { get; set; }
+    public             ImageSource ShowAllFiles     { get; set; }
+    public             Solution    Solution         { get; set; }
+    protected override string      WorkspaceName    { get { return "RightHost"; } }
+
+    public void OpenItem(SolutionItem item)
     {
-        DisplayName = "Output";
-        Glyph       = Images.Output;
-        Text = @"1>------ Build started: Project: VisualStudioInspiredUIDemo, Configuration: Debug Any CPU ------
-1>  DockingDemo -> C:\VisualStudioInspiredUIDemo.exe
-========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========";
-    }
-
-    public             string Text          { get; private set; }
-    protected override string WorkspaceName { get { return "BottomHost"; } }
-}
-
-public class PropertiesViewModel : PanelWorkspaceViewModel
-{
-    public PropertiesViewModel()
-    {
-        DisplayName  = "Properties";
-        Glyph        = Images.PropertiesWindow;
-        SelectedItem = new PropertyItem(new PropertyGridControl());
-        Items = new List<PropertyItem>
+        if (item != null && item.IsFile && ItemOpening != null)
         {
-            SelectedItem,
-            new PropertyItem(new AccordionControl()),
-            new PropertyItem(new DocumentPanel()),
-            new PropertyItem(new DocumentGroup()),
-            new PropertyItem(new DevExpress.Xpf.Docking.LayoutPanel())
-        };
+            ItemOpening.Invoke(this, new SolutionItemOpeningEventArgs(item));
+            Data = "hello";
+        }
     }
-
-    public             List<PropertyItem> Items         { get; set; }
-    public virtual     PropertyItem       SelectedItem  { get; set; }
-    protected override string             WorkspaceName { get { return "RightHost"; } }
-}
-
-public class PropertyItem
-{
-    public PropertyItem(object data)
-    {
-        Data = data;
-        Name = Data.ToString();
-    }
-
-    public object Data { get; set; }
-    public string Name { get; set; }
-}
-
-public class SearchResultsViewModel : PanelWorkspaceViewModel
-{
-    public SearchResultsViewModel()
-    {
-        DisplayName = "Search Results";
-        Glyph       = Images.FindInFilesWindow;
-        Text        = @"Matching lines: 0    Matching files: 0    Total files searched: 61";
-    }
-
-    public             string Text          { get; private set; }
-    protected override string WorkspaceName { get { return "BottomHost"; } }
 }
 
 public class Solution : BindableBase
@@ -165,36 +110,6 @@ public class Solution : BindableBase
     }
 }
 
-public class SolutionExplorerViewModel : PanelWorkspaceViewModel
-{
-    public SolutionExplorerViewModel()
-    {
-        DisplayName      = "Solution Explorer";
-        Glyph            = Images.SolutionExplorer;
-        PropertiesWindow = Images.PropertiesWindow;
-        ShowAllFiles     = Images.ShowAllFiles;
-        Refresh          = Images.Refresh;
-    }
-
-
-    public event EventHandler<SolutionItemOpeningEventArgs> ItemOpening;
-
-    public             ImageSource PropertiesWindow { get; set; }
-    public             ImageSource Refresh          { get; set; }
-    public             ImageSource ShowAllFiles     { get; set; }
-    public             Solution    Solution         { get; set; }
-    protected override string      WorkspaceName    { get { return "RightHost"; } }
-
-    public void OpenItem(SolutionItem item)
-    {
-        if (item != null && item.IsFile && ItemOpening != null)
-        {
-            ItemOpening.Invoke(this, new SolutionItemOpeningEventArgs(item));
-            Data = "hello";
-        }
-    }
-}
-
 public class SolutionItem
 {
     readonly Solution solution;
@@ -241,16 +156,3 @@ public class SolutionItemOpeningEventArgs : EventArgs
 
     public SolutionItem SolutionItem { get; set; }
 }
-
-public class ToolboxViewModel : PanelWorkspaceViewModel
-{
-    public ToolboxViewModel()
-    {
-        DisplayName = "Toolbox";
-        Glyph       = Images.Toolbox;
-    }
-
-    protected override string WorkspaceName { get { return "Toolbox"; } }
-}
-
-#endregion

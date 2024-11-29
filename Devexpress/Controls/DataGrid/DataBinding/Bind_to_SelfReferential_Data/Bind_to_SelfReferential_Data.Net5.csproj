@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net5.0-windows</TargetFramework>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Connecting_to_Hierarchical_Data</RootNamespace>
@@ -17,6 +17,6 @@
   </ItemGroup>
   <ItemGroup>
     
-		<PackageReference Include="DevExpress.Wpf" Version="22.2.*" />
+		<PackageReference Include="DevExpress.Wpf" Version="23.2.*" />
   </ItemGroup>
 </Project>

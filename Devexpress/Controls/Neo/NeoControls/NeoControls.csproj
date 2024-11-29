@@ -60,7 +60,7 @@
   <ItemGroup>
     <PackageReference Include="BindingEngine" Version="1.0.0" />
     <PackageReference Include="DeepCloner" Version="0.10.4" />
-    <PackageReference Include="DevExpress.Wpf" Version="22.2.*" />
+    <PackageReference Include="DevExpress.Wpf" Version="23.2.*" />
 	  <PackageReference Include="DevExpress.Wpf.Themes.All" Version="22.*" />
 	  <PackageReference Include="Mono.Cecil" Version="0.11.4" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />

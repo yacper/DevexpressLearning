@@ -8,7 +8,7 @@
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="DevExpress.Wpf" Version="22.2.*" />
+    <PackageReference Include="DevExpress.Wpf" Version="23.2.*" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Circular Gauges\CircularGauge_Window2.xaml.cs">

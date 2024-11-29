@@ -371,6 +371,7 @@ public class MainViewModel
 #endregion
 
 #region Members
+
     CommandViewModel                         errorList;
     PanelWorkspaceViewModel                  lastOpenedItem;
     CommandViewModel                         loadLayout;
@@ -388,5 +389,6 @@ public class MainViewModel
     SolutionExplorerViewModel                solutionExplorerViewModel;
     CommandViewModel                         toolbox;
     ObservableCollection<WorkspaceViewModel> workspaces;
+
 #endregion
 }

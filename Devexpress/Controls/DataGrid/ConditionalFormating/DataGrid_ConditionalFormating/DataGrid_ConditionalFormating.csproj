@@ -2,10 +2,10 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0-windows</TargetFramework>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="DevExpress.Wpf" Version="22.2.*" />
+    <PackageReference Include="DevExpress.Wpf" Version="23.2.*" />
   </ItemGroup>    
 </Project>
