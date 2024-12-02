@@ -8,7 +8,8 @@
                     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
                     xmlns:dxa="http://schemas.devexpress.com/winfx/2008/xaml/accordion"
                     xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
-                    xmlns:dxprg="http://schemas.devexpress.com/winfx/2008/xaml/propertygrid">
+                    xmlns:dxprg="http://schemas.devexpress.com/winfx/2008/xaml/propertygrid"
+                    xmlns:views="clr-namespace:VisualStudioDockingCustomSerialization.Views">
 
 
     <!--#region ViewModels-->
@@ -150,18 +151,28 @@
             </dxb:BarManager>
         </dx:BackgroundPanel>
     </DataTemplate>
-    
-    <DataTemplate DataType="{x:Type viewModels:OutputViewModel}">
+
+    <!--最简版本-->
+    <!--<DataTemplate DataType="{x:Type viewModels:OutputViewModel}">
         <TextBox Style="{StaticResource BottomTextStyle}" Text="{Binding Text, Mode=OneTime}" />
+    </DataTemplate>-->
+    <DataTemplate DataType="{x:Type viewModels:OutputViewModel}">
+        <!--使用自定义控件，并且可以根据viewModel自动创建view-->
+        <views:OutputView DataContext="{Binding}"/>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type viewModels:SearchResultsViewModel}">
         <TextBox Style="{StaticResource BottomTextStyle}" Text="{Binding Text, Mode=OneTime}" />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type viewModels:DocumentViewModel}">
+    <!--<DataTemplate DataType="{x:Type viewModels:DocumentViewModel}">
         <local:CodeViewPresenter CodeText="{Binding CodeLanguageText}" BorderThickness="0" />
+    </DataTemplate>-->
+    <DataTemplate DataType="{x:Type viewModels:DocumentViewModel}">
+        <!--使用自定义控件-->
+        <views:DocumentView DataContext="{Binding}"/>
     </DataTemplate>
+
 
     <DataTemplate DataType="{x:Type viewModels:ToolboxViewModel}">
         <dx:BackgroundPanel>
