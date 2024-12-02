@@ -5,10 +5,14 @@
 
 这个例子，就实现这种思路。
 
+
 另外，通过
     <DataTemplate DataType="{x:Type viewModels:OutputViewModel}">
         <!--使用自定义控件，并且可以根据viewModel自动创建view-->
         <views:OutputView DataContext="{Binding}"/>
     </DataTemplate>
 这种方式，可以根据ViewModel自动创建View，不需要在代码中手动创建View。
+
+
+另外，使用Autofac代替devexpress的mvvm。
 
