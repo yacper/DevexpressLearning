@@ -342,13 +342,13 @@ public class MainViewModel
 
     void OnLoadLayout()
     {
-        foreach (var workspace in Workspaces) { workspace.Dispose(); }
-
-        workspaces.Clear();
-
         var file = SaveLoadLayoutService.AskLoadLayout();
         if (file == null)
             return;
+
+        foreach (var workspace in Workspaces) { workspace.Dispose(); }
+
+        workspaces.Clear();
 
         var str = File.ReadAllText($"{file}.data");
 
