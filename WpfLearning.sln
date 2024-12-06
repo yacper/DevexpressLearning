@@ -333,7 +333,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Theme", "Theme", "{6A67FD3C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PalettesExample", "Devexpress\Theme\PalettesExample\PalettesExample.csproj", "{C9E2D93D-8A23-4EDA-AEBE-0B3B2395B39E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{83D2EECA-C67E-416B-A8ED-323BE16F1959}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "prism", "prism", "{83D2EECA-C67E-416B-A8ED-323BE16F1959}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfPrism", "WpfPrism\WpfPrism.csproj", "{FF102358-36D2-48D6-826B-BEBB119AE095}"
 EndProject
@@ -354,6 +354,12 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisualStudioDockingCustomSerialization", "Devexpress\VisualStudioDockingCustomSerialization\VisualStudioDockingCustomSerialization.csproj", "{EEC525DA-29E7-4023-87C2-3FB4189FD0C8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisualStudioDockingCustomSerializationAutofac", "Devexpress\VisualStudioDockingCustomSerializationAutofac\VisualStudioDockingCustomSerializationAutofac.csproj", "{9B3956FB-9162-4BFF-B90B-16FD6704EC6B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simple", "Wpf\Simple\Simple.csproj", "{B2A9B022-9950-4317-9C3A-ABB6F9230F48}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MVVM", "MVVM", "{4F9ECA39-449F-4761-B6BF-9EAD95DFD207}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmToolkitTest", "MVVM\MvvmToolkitTest\MvvmToolkitTest.csproj", "{7A711400-D3E6-439F-A696-ABECF0AD3ECF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1437,6 +1443,30 @@ Global
 		{9B3956FB-9162-4BFF-B90B-16FD6704EC6B}.Release|x64.Build.0 = Release|Any CPU
 		{9B3956FB-9162-4BFF-B90B-16FD6704EC6B}.Release|x86.ActiveCfg = Release|Any CPU
 		{9B3956FB-9162-4BFF-B90B-16FD6704EC6B}.Release|x86.Build.0 = Release|Any CPU
+		{B2A9B022-9950-4317-9C3A-ABB6F9230F48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2A9B022-9950-4317-9C3A-ABB6F9230F48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2A9B022-9950-4317-9C3A-ABB6F9230F48}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B2A9B022-9950-4317-9C3A-ABB6F9230F48}.Debug|x64.Build.0 = Debug|Any CPU
+		{B2A9B022-9950-4317-9C3A-ABB6F9230F48}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B2A9B022-9950-4317-9C3A-ABB6F9230F48}.Debug|x86.Build.0 = Debug|Any CPU
+		{B2A9B022-9950-4317-9C3A-ABB6F9230F48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2A9B022-9950-4317-9C3A-ABB6F9230F48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2A9B022-9950-4317-9C3A-ABB6F9230F48}.Release|x64.ActiveCfg = Release|Any CPU
+		{B2A9B022-9950-4317-9C3A-ABB6F9230F48}.Release|x64.Build.0 = Release|Any CPU
+		{B2A9B022-9950-4317-9C3A-ABB6F9230F48}.Release|x86.ActiveCfg = Release|Any CPU
+		{B2A9B022-9950-4317-9C3A-ABB6F9230F48}.Release|x86.Build.0 = Release|Any CPU
+		{7A711400-D3E6-439F-A696-ABECF0AD3ECF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A711400-D3E6-439F-A696-ABECF0AD3ECF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A711400-D3E6-439F-A696-ABECF0AD3ECF}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7A711400-D3E6-439F-A696-ABECF0AD3ECF}.Debug|x64.Build.0 = Debug|Any CPU
+		{7A711400-D3E6-439F-A696-ABECF0AD3ECF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7A711400-D3E6-439F-A696-ABECF0AD3ECF}.Debug|x86.Build.0 = Debug|Any CPU
+		{7A711400-D3E6-439F-A696-ABECF0AD3ECF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A711400-D3E6-439F-A696-ABECF0AD3ECF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A711400-D3E6-439F-A696-ABECF0AD3ECF}.Release|x64.ActiveCfg = Release|Any CPU
+		{7A711400-D3E6-439F-A696-ABECF0AD3ECF}.Release|x64.Build.0 = Release|Any CPU
+		{7A711400-D3E6-439F-A696-ABECF0AD3ECF}.Release|x86.ActiveCfg = Release|Any CPU
+		{7A711400-D3E6-439F-A696-ABECF0AD3ECF}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1606,6 +1636,8 @@ Global
 		{B498BDFC-D869-4470-8554-85D87370874C} = {4D11C6A8-05E6-46F1-861A-FD8B1DB66FCD}
 		{EEC525DA-29E7-4023-87C2-3FB4189FD0C8} = {4D11C6A8-05E6-46F1-861A-FD8B1DB66FCD}
 		{9B3956FB-9162-4BFF-B90B-16FD6704EC6B} = {4D11C6A8-05E6-46F1-861A-FD8B1DB66FCD}
+		{B2A9B022-9950-4317-9C3A-ABB6F9230F48} = {078F4D71-DF32-4E60-9F3C-69E67546E41A}
+		{7A711400-D3E6-439F-A696-ABECF0AD3ECF} = {4F9ECA39-449F-4761-B6BF-9EAD95DFD207}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A26D33EA-3064-49AC-AC3B-E5AB2383890D}
